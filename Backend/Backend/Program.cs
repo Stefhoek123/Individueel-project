@@ -69,14 +69,14 @@ namespace Backend
             }
 
             //Ensure database is created, not needed for development. 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var services = scope.ServiceProvider;
 
-                var context = services.GetRequiredService<BackendDbContext>();
-                context.Database.EnsureCreated();
-                DbInitializer.Initialize(context);
-            }
+            //    var context = services.GetRequiredService<BackendDbContext>();
+            //    context.Database.EnsureCreated();
+            //  //  DbInitializer.Initialize(context);
+            //}
 
             app.UseHttpsRedirection();
 

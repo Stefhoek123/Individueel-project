@@ -34,5 +34,15 @@ namespace Models
             FamilyId = familyId;
             Family = family;
         }
+
+        public User(Guid id, string firstName, string lastName, string password, string email, Guid familyId)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Password = password;
+            Email = email;
+            FamilyId = familyId;
+        }
     }
 }

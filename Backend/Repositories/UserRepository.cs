@@ -15,20 +15,12 @@ public class UserRepository : IUserRepository
 
     public IEnumerable<User> GetAllUsers()
     {
-        return _backendDbContext.Users
-            .Include(u => u.FirstName)
-            .Include(u => u.LastName)
-            .Include(u => u.Email)
-            .ToList();
+        return _backendDbContext.Users.ToList();
     }
 
     public User GetUserById(Guid Id)
     {
-        return _backendDbContext.Users
-            .Include(u => u.FirstName)
-            .Include(u => u.LastName)
-            .Include(u => u.Email)
-            .FirstOrDefault(u => u.Id == Id)!;
+        return _backendDbContext.Users.FirstOrDefault(u => u.Id == Id)!;
     }
 
     public void CreateUser(User user)
