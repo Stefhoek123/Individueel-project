@@ -91,11 +91,13 @@ namespace Backend
         private static void RegisterRepos(WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ITextPostRepository, TextPostRepository>();
         }
 
         private static void RegisterLogics(WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IUserContainer, UserContainer>();
+            builder.Services.AddScoped<ITextPostContainer, TextPostContainer>();
         }
     }
 }
