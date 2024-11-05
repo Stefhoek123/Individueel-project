@@ -18,9 +18,9 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.ToList();
     }
 
-    public User GetUserById(Guid Id)
+    public User GetUserById(Guid id)
     {
-        return _backendDbContext.Users.FirstOrDefault(u => u.Id == Id)!;
+        return _backendDbContext.Users.FirstOrDefault(u => u.Id == id)!;
     }
 
     public void CreateUser(User user)
@@ -35,9 +35,9 @@ public class UserRepository : IUserRepository
         _backendDbContext.SaveChanges();
     }
 
-    public void DeleteUserById(Guid Id)
+    public void DeleteUserById(Guid id)
     {
-        _backendDbContext.Users.Remove(GetUserById(Id));
+        _backendDbContext.Users.Remove(GetUserById(id));
         _backendDbContext.SaveChanges();
     }
 }

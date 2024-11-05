@@ -5,10 +5,10 @@ namespace Interface
     public interface IUserRepository
     {
         IEnumerable<User> GetAllUsers();
-        User GetUserById(Guid Id);
+        User GetUserById(Guid id);
         void CreateUser(User user);
         void UpdateUser(User user);
-        void DeleteUserById(Guid Id);
+        void DeleteUserById(Guid id);
 
     }
 }

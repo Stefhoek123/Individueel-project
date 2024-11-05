@@ -15,9 +15,8 @@ namespace Domain
         [Required]
         public string Password { get; set; } = null!;
         public Guid FamilyId { get; init; }
-        public FamilyDto? Family { get; set; }
 
-        public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId, FamilyDto? family)
+        public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId)
         {
             Id = id;
             FirstName = firstName;
@@ -25,7 +24,6 @@ namespace Domain
             Email = email;
             Password = password;
             FamilyId = familyId;
-            Family = family;
         }
 
         public UserDto() { }
