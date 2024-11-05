@@ -1,15 +1,17 @@
-﻿namespace Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class TextPost
+namespace Models;
+
+public class TextPost : BaseModel
 {
-    public int TextPostId { get; set; }
     public string TextContent { get; set; }
 
-    public User UserId { get; set; }
+    [ForeignKey(nameof(UserId))]
+    public Guid UserId { get; init; }
 
-    public TextPost(int textPostId, string textContent, User userId)
+    public TextPost(Guid id, string textContent, Guid userId)
     {
-        TextPostId = textPostId;
+        Id = id;
         TextContent = textContent;
         UserId = userId;
     }

@@ -75,7 +75,7 @@ namespace Backend
 
                 var context = services.GetRequiredService<BackendDbContext>();
                 context.Database.EnsureCreated();
-                // DbInitializer.Initialize(context);
+                DbInitializer.Initialize(context);
             }
 
             app.UseHttpsRedirection();

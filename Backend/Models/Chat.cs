@@ -1,25 +1,25 @@
-﻿namespace Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Models
 {
-    public class Chat
+    public class Chat : BaseModel
     {
-        public int ChatId { get; set; }
         public int ReactId { get; set; }
         public DateTime Date { get; set; }
         public string SenderName { get; set; }
         public int ChatContent { get; set; }
 
-        public User UserId { get; set; }
-        public User FirstName { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public Guid UserId { get; init; }
 
-        public Chat(int chatId, int reactId, DateTime date, string senderName, int chatContent, User userId, User firstName)
-        { 
-            ChatId = chatId;
+        public Chat(Guid id, int reactId, DateTime date, string senderName, int chatContent, Guid userId)
+        {
+            Id = id;
             ReactId = reactId;
             Date = date;
             SenderName = senderName;
             ChatContent = chatContent;
             UserId = userId;
-            FirstName = firstName;
         }
     }
 }

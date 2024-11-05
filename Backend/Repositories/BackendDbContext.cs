@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Repositories;
 
-public class BackendDbContext : DbContext
+public class BackendDbContext : DbContext, IDesignTimeDbContextFactory<BackendDbContext>
 {
     public BackendDbContext()
     {

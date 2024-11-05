@@ -1,16 +1,14 @@
-﻿namespace Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class Family
+namespace Models;
+
+public class Family : BaseModel
 {
-    public int FamilyId { get; set; }
     public string FamilyName { get; set; }
 
-    public User UserId { get; set; }
-
-    public Family (int familyId, string familyName, User userId)
+    public Family (Guid id, string familyName)
     {
-        FamilyId = familyId;
+        Id = id;
         FamilyName = familyName;
-        UserId = userId;
     }
 }

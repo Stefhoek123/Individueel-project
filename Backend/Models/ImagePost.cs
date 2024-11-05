@@ -1,17 +1,19 @@
-﻿namespace Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class ImagePost
+namespace Models;
+
+public class ImagePost : BaseModel
 {
-    public int ImagePostId { get; set; }
     public string Alt { get; set; }
     public string Url { get; set; }
     public string Description { get; set; }
 
-    public User UserId { get; set; }
+    [ForeignKey(nameof(UserId))]
+    public Guid UserId { get; init; }
 
-    public ImagePost(int imagePostId, string alt, string url, string description, User userId)
+    public ImagePost(Guid id, string alt, string url, string description, Guid userId)
     {
-        ImagePostId = imagePostId;
+        Id = id;
         Alt = alt;
         Url = url;
         Description = description;

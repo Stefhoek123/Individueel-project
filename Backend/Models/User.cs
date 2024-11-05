@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,19 @@ namespace Models
         [Required]
         public string Email { get; set; } = null!;
 
-        public User(Guid id, string firstName, string lastName, string password, string email)
+        [ForeignKey(nameof(FamilyId))]
+        public Guid FamilyId { get; init; }
+
+        public Family? Family { get; set; }
+
+        public User(Guid id, string firstName, string lastName, string password, string email, Family? family)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Password = password;
             Email = email;
+            Family = family;
         }
     }
 }
