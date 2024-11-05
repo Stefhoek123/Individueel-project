@@ -15,13 +15,16 @@ public class ChatDto
     [Required]
     public int ChatContent { get; set; }
 
-    public ChatDto(Guid id, int reactId, DateTime date, string senderName, int chatContent)
+    public Guid UserId { get; init; }
+
+    public ChatDto(Guid id, int reactId, DateTime date, string senderName, int chatContent, Guid userId)
     {
         Id = id;
         ReactId = reactId;
         Date = date;
         SenderName = senderName;
         ChatContent = chatContent;
+        UserId = userId;
     }
 
     public ChatDto() { }

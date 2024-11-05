@@ -1538,6 +1538,7 @@
           "Microsoft.EntityFrameworkCore.Analyzers": "8.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10",
+          "Models": "1.0.0",
           "Riok.Mapperly": "4.1.0"
         },
         "compile": {

@@ -9,10 +9,13 @@ public class TextPostDto
     [Required]
     public string TextContent { get; set; } = null!;
 
-    public TextPostDto(Guid id, string textContent)
+    public Guid UserId { get; init; }
+
+    public TextPostDto(Guid id, string textContent, Guid userId)
     {
         Id = id;
         TextContent = textContent;
+        UserId = userId;
     }
 
     public TextPostDto() { }

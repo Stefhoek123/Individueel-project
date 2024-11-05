@@ -14,16 +14,17 @@ namespace Domain
         public string Email { get; set; } = null!;
         [Required]
         public string Password { get; set; } = null!;
-
+        public Guid FamilyId { get; init; }
         public FamilyDto? Family { get; set; }
 
-        public UserDto(Guid id, string firstName, string lastName, string email, string password, FamilyDto? family)
+        public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId, FamilyDto? family)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
+            FamilyId = familyId;
             Family = family;
         }
 

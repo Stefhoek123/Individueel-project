@@ -24,13 +24,14 @@ namespace Models
 
         public Family? Family { get; set; }
 
-        public User(Guid id, string firstName, string lastName, string password, string email, Family? family)
+        public User(Guid id, string firstName, string lastName, string password, string email, Guid familyId, Family? family)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Password = password;
             Email = email;
+            FamilyId = familyId;
             Family = family;
         }
     }
