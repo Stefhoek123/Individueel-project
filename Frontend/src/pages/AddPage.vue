@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import HeaderComponent from "./HeaderComponent.vue";
-import FooterComponent from "./FooterComponent.vue";
-import FileButton from "./FileButton.vue";
+import HeaderComponent from "../components/HeaderComponent.vue";
+import FooterComponent from "../components/FooterComponent.vue";
+import FileButton from "../components/FileButton.vue";
 import axios from "axios";
 
 export default {

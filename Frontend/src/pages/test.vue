@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import HeaderComponent from "./HeaderComponent.vue";
-import FooterComponent from "./FooterComponent.vue";
+import HeaderComponent from "../components/HeaderComponent.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 
 import axios from "axios";
 

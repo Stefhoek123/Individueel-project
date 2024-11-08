@@ -1,10 +1,11 @@
-import HomePage from "./components/HomePage.vue";
-import SignUpPage from "./components/SignUpPage.vue";
-import LoginPage from "./components/LoginPage.vue";
-import AddPage from "./components/AddPage.vue";
-import UpdatePage from "./components/UpdatePage.vue";
-import UserPage from "./components/UserPage.vue";
-import ChatPage from "./components/ChatPage.vue";
+import HomePage from "./pages/HomePage.vue";
+import SignUpPage from "./pages/SignUpPage.vue";
+import LoginPage from "./pages/LoginPage.vue";
+import AddPage from "./pages/AddPage.vue";
+import UpdatePage from "./pages/UpdatePage.vue";
+import UserPage from "./pages/UserPage.vue";
+import ChatPage from "./pages/ChatPage.vue";
+import testPage from "./components/testPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -42,6 +43,11 @@ const routes = [
     name: "ChatPage",
     component: ChatPage,
     path: "/chat",
+  },
+  {
+    name: "testPage",
+    component: testPage,
+    path: "/test",
   },
 ];
 
