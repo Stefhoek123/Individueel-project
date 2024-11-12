@@ -1,29 +1,83 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+async function home() {
+    await router.push('/')
+  }
+  
+  async function add() {
+    await router.push('/add')
+  }
+
+  async function chat() {
+    await router.push('/chat')
+  }
+
+  async function user() {
+    await router.push('/users/:id')
+  }
+</script>
+
+
 <template>
     <nav class="mobile-nav-footer">
-      <router-link to="/" class="bloc-icon">
-              <img src="../assets/home.png" alt="">
-            </router-link>
-            <!-- <a href="#" class="bloc-icon">
-              <img src="../assets/loupe.png" alt="">
-          </a> -->
-            <router-link to="/add" class="bloc-icon">
-              <img src="../assets/add.png" alt="">
-          </router-link>
-          <router-link to="/chat" class="bloc-icon">
-              <img src="../assets/chat.png" alt="">
-          </router-link>
-          <router-link to="/user" class="bloc-icon">
-              <img src="../assets/user.png" alt="">
-          </router-link>
+      <VForm
+      validate-on="blur"
+      @submit.prevent="home"
+    >
+      <VCardActions>
+        <VBtn
+          class="bloc-icon"
+          type="home"
+        >
+        <img src="../assets/home.png" alt="">
+        </VBtn>
+      </VCardActions>
+    </VForm>
+    <VForm
+      validate-on="blur"
+      @submit.prevent="add"
+    >
+      <VCardActions>
+        <VBtn
+          class="bloc-icon"
+          type="add"
+        >
+        <img src="../assets/add.png" alt="">
+        </VBtn>
+      </VCardActions>
+    </VForm>
+    <VForm
+      validate-on="blur"
+      @submit.prevent="chat"
+    >
+      <VCardActions>
+        <VBtn
+          class="bloc-icon"
+          type="chat"
+        >
+        <img src="../assets/chat.png" alt="">
+        </VBtn>
+      </VCardActions>
+    </VForm>
+    <VForm
+      validate-on="blur"
+      @submit.prevent="user"
+    >
+      <VCardActions>
+        <VBtn
+          class="bloc-icon"
+          type="user"
+        >
+        <img src="../assets/user.png" alt="">
+        </VBtn>
+      </VCardActions>
+    </VForm>
       </nav>
   </template>
-  
-  <script>
-  export default {
-    name: "FooterComponent",
-  };
-  </script>
-  
+
   <style>
   .mobile-nav-footer {
     background: #F1F1F1;
@@ -33,6 +87,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    padding-top: 5px;
   }
   
   .bloc-icon {
