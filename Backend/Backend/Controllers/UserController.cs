@@ -35,6 +35,17 @@ namespace Backend.Controllers
             return Ok(userEmail);
         }
 
+        [HttpGet(nameof(SearchUserByEmailOrName))]
+        public ActionResult<IEnumerable<UserDto>> SearchUserByEmailOrName(string? search)
+        {
+            if (search != null)
+            {
+                return Ok(_userContainer.SearchUserByEmailOrName(search));
+            }
+
+            return Ok(_userContainer.GetAllUsers());
+        }
+
         [HttpPost(nameof(CreateUser))]
         public ActionResult CreateUser(UserDto user)
         {

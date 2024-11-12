@@ -29,6 +29,14 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.FirstOrDefault(u => u.Email == email)!;
     }
 
+    public IEnumerable<User> SearchUserByEmailOrName(string search)
+    {
+        IEnumerable<User> users = _backendDbContext.Users
+            .Where(u => u.Email.Contains(search) || u.FirstName.Contains(search))
+            .ToList();
+        return users;
+    }
+
     public void CreateUser(User user)
     {
         _backendDbContext.Users.Add(user);

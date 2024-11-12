@@ -34,6 +34,12 @@ public class UserContainer : IUserContainer
         return Mappers.UserMapper.ToDto(_userRepository.GetUserByEmail(userdto));
     }
 
+    // GET for finding a User based on his Email or Name
+    public IEnumerable<UserDto> SearchUserByEmailOrName(string search)
+    {
+        return string.IsNullOrEmpty(search) ? GetAllUsers() : _userRepository.SearchUserByEmailOrName(search).Select(Mappers.UserMapper.ToDto);
+    }
+
     // POST Creation of user
     public void CreateUser(UserDto userdto)
     {

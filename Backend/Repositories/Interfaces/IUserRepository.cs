@@ -8,6 +8,7 @@ namespace Interface
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
         User GetUserByEmail(User user);
+        IEnumerable<User> SearchUserByEmailOrName(string search);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUserById(Guid id);
