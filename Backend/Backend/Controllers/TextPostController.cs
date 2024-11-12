@@ -1,12 +1,14 @@
 ﻿using DAL.Containers;
 using DAL.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowLocalhost8080")]
     public class TextPostController : ControllerBase
     {
         private readonly ITextPostContainer _textPostContainer;

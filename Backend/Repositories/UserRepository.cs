@@ -23,6 +23,12 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.FirstOrDefault(u => u.Id == id)!;
     }
 
+    public User GetUserByEmail(User user)
+    {
+        var email = user.Email;
+        return _backendDbContext.Users.FirstOrDefault(u => u.Email == email)!;
+    }
+
     public void CreateUser(User user)
     {
         _backendDbContext.Users.Add(user);

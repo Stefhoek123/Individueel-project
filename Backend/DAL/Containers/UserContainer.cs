@@ -1,6 +1,8 @@
 ﻿using DAL.Interfaces;
 using Domain;
 using Interface;
+using Models;
+using Repositories;
 
 namespace DAL.Containers;
 
@@ -24,6 +26,12 @@ public class UserContainer : IUserContainer
     public UserDto GetUserById(Guid id)
     {
         return Mappers.UserMapper.ToDto(_userRepository.GetUserById(id));
+    }
+
+    public UserDto GetUserByEmail(UserDto user)
+    {
+        var userdto = Mappers.UserMapper.ToModel(user);
+        return Mappers.UserMapper.ToDto(_userRepository.GetUserByEmail(userdto));
     }
 
     // POST Creation of user

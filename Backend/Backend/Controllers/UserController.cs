@@ -28,6 +28,13 @@ namespace Backend.Controllers
             return Ok(user);
         }
 
+        [HttpGet(nameof(GetUserByEmail))]
+        public ActionResult<UserDto> GetUserByEmail(UserDto user)
+        {
+            UserDto userEmail = _userContainer.GetUserByEmail(user);
+            return Ok(userEmail);
+        }
+
         [HttpPost(nameof(CreateUser))]
         public ActionResult CreateUser(UserDto user)
         {

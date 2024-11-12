@@ -1,4 +1,3 @@
-
 using DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -15,77 +14,64 @@ namespace Backend
     {
         public static void Main(string[] args)
         {
-            WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<BackendDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BackendDbContext")));
 
             // Add services to the container.
-
             builder.Services.AddControllers();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
 
+            // Swagger/OpenAPI Configuration
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddOpenApiDocument(config =>
             {
                 config.Title = "Controllers API";
                 config.Version = "v1";
                 config.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT token"));
-
-                config.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT token", new List<string>(),
-                    new OpenApiSecurityScheme
-                    {
-                        Type = OpenApiSecuritySchemeType.ApiKey,
-                        Name = "Authorization",
-                        Description = "Copy 'Bearer {JWT Token}'",
-                        In = OpenApiSecurityApiKeyLocation.Header,
-                    }));
-            });
-
-            builder.Services.AddCors(setup =>
-            {
-                setup.AddDefaultPolicy(b =>
+                config.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT token", new List<string>(), new OpenApiSecurityScheme
                 {
-                    b.SetIsOriginAllowed(origin => origin == builder.Configuration.GetValue<string>("BackendUrl"));
-                    b.WithHeaders("Content-Type");
-                    // b.WithHeaders("Authorization");
-                    b.WithMethods("GET", "POST", "PUT", "DELETE");
-                });
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    Description = "Copy 'Bearer {JWT Token}'",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                }));
             });
+
+            // CORS Configuration
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:3000") // Add the frontend URL here
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            }); ;
 
             builder.Services.AddScoped<IUserContext, UserContext>();
             RegisterRepos(builder);
             RegisterLogics(builder);
 
-            WebApplication? app = builder.Build();
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseOpenApi();
-                app.UseSwaggerUI();
+                app.UseSwaggerUi();
             }
 
-            //Ensure database is created, not needed for development. 
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var services = scope.ServiceProvider;
 
-            //    var context = services.GetRequiredService<BackendDbContext>();
-            //    context.Database.EnsureCreated();
-            //  //  DbInitializer.Initialize(context);
-            //}
-
-            app.UseHttpsRedirection();
+            app.UseCors("AllowSpecificOrigin"); // CORS should be applied before authorization
 
             app.UseAuthorization();
-            app.UseCors();
             app.MapControllers();
 
             app.Run();
-
         }
 
         private static void RegisterRepos(WebApplicationBuilder builder)

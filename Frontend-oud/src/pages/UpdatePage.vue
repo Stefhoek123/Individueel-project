@@ -39,7 +39,7 @@ export default {
     async updateTextPost() {
       console.warn(this.TextPost);
       const result = await axios.put(
-        "http://localhost:3000/TextPost/" + this.$route.params.id,
+        "http://localhost:5190/api/TextPost/UpdateTextPost" + this.$route.params.id,
         {
           textContent: this.TextPost.textContent,
         }
@@ -60,7 +60,7 @@ export default {
     }
 
     const result = await axios.get(
-      "http://localhost:3000/TextPost/" + this.$route.params.id
+      "http://localhost:5190/api/TextPost/" + this.$route.params.id
     );
 
     console.warn(result.data);

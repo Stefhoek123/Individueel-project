@@ -33,7 +33,7 @@ export default {
   methods: {
     async delete(id) {
       let result = await axios.delete(
-        "http://localhost:3000/TextPost/" + id
+        "http://localhost:5190/api/TextPost/" + id
       );
       console.warn(result);
       if (result.status == 200) {
@@ -47,7 +47,7 @@ export default {
         this.$router.push({ name: "SignUpPage" });
       }
 
-      let result = await axios.get("http://localhost:3000/TextPost");
+      let result = await axios.get("http://localhost:5190/api/TextPost/GetAllTextPosts");
       console.warn(result);
       this.TextPost = result.data;
     },

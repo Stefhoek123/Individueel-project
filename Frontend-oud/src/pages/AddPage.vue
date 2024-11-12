@@ -1,44 +1,48 @@
 <template>
   <HeaderComponent />
   <FooterComponent />
-  <h1>Chat</h1>
+  <h1>Add</h1>
   <form class="add">
     <input
       type="text"
       name="name"
       placeholder="Enter"
-      v-model="AddChatWithUser.senderName"
+      v-model="TextPost.textContent"
       maxlength="300"
     />
-    <button type="button" v-on:click="addChat">Add</button>
+    <button type="button" v-on:click="addTextPost">Add</button>
   </form>
+  <br />
+  <FileButton />
 </template>
 
 <script>
 import HeaderComponent from "../components/HeaderComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import FileButton from "../components/FileButton.vue";
 import axios from "axios";
 
 export default {
-  name: "ChatPage",
+  name: "AddPage",
+  components: {
+    HeaderComponent,
+    FooterComponent,
+    FileButton,
+  },
+
   data() {
     return {
-      AddChatWithUser: {
-        senderName: ""
+      TextPost: {
+        textContent: "",
       },
     };
   },
 
-  components: {
-    HeaderComponent,
-    FooterComponent,
-  },
-
   methods: {
-    async addChat() {
-      console.warn(this.AddChatWithUser);
-      const result = await axios.post("http://localhost:3000/AddChatWithUser", {
-        senderName: this.AddChatWithUser.senderName
+    async addTextPost() {
+      console.warn(this.TextPost);
+      const result = await axios.post("http://localhost:5190/api/TextPost/", {
+        textContent: this.TextPost.textContent
       });
 
       if (result.status == 201) {
@@ -57,7 +61,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

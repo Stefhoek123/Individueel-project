@@ -25,7 +25,7 @@ export default {
   methods: {
     async login() {
       let result = await axios.get(
-        `http://localhost:3000/users?email=${this.email}&password=${this.password}`
+        `http://localhost:5190/api/User?email=${this.email}&password=${this.password}`
       );
 
       console.warn(result);

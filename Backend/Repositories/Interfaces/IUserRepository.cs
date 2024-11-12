@@ -1,4 +1,5 @@
 ﻿using Models;
+using Repositories;
 
 namespace Interface
 {
@@ -6,6 +7,7 @@ namespace Interface
     {
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
+        User GetUserByEmail(User user);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUserById(Guid id);

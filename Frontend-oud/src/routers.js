@@ -5,7 +5,6 @@ import AddPage from "./pages/AddPage.vue";
 import UpdatePage from "./pages/UpdatePage.vue";
 import UserPage from "./pages/UserPage.vue";
 import ChatPage from "./pages/ChatPage.vue";
-import testPage from "./components/testPage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -43,11 +42,6 @@ const routes = [
     name: "ChatPage",
     component: ChatPage,
     path: "/chat",
-  },
-  {
-    name: "testPage",
-    component: testPage,
-    path: "/test",
   },
 ];
 
