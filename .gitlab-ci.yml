@@ -1,7 +1,7 @@
 # .gitlab-ci.yml
 
 # Specify the default Docker image
-image: openjdk:17
+# image: openjdk:17 -- moet een C# image worden
 
 # Define stages for the pipeline
 stages:
