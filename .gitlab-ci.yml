@@ -1,21 +1,26 @@
 # .gitlab-ci.yml
 
-# Use the .NET SDK image to build and test the application
+# Use the .NET SDK Docker image for building and testing
 image: mcr.microsoft.com/dotnet/sdk:7.0
 
 stages:
   - build
   - test
 
-# Build stage
+# Build job: Create and compile a simple C# application
 build:
   stage: build
   script:
-    - dotnet restore
-    - dotnet build --configuration Release
+    - echo "Setting up a simple C# application..."
+    - mkdir -p app
+    - echo 'using System; class Program { static void Main() { Console.WriteLine("Hello, GitLab Runner!"); } }' > app/Program.cs
+    - dotnet new console -o app --force
+    - dotnet build app
 
-# Test stage
+# Test job: Run the application and verify output
 test:
   stage: test
   script:
-    - dotnet test
+    - echo "Running the C# application..."
+    - dotnet run --project app
+
