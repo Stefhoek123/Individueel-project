@@ -9,9 +9,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppLink: typeof import('./components/AppLink.vue')['default']
+    copy: typeof import('./components/HeaderComponentMobile copy.vue')['default']
     FileButton: typeof import('./components/FileButton.vue')['default']
     FooterComponent: typeof import('./components/FooterComponent.vue')['default']
+    FooterComponentMobile: typeof import('./components/FooterComponentMobile.vue')['default']
     HeaderComponent: typeof import('./components/HeaderComponent.vue')['default']
+    HeaderComponentMobile: typeof import('./components/HeaderComponentMobile.vue')['default']
+    NavigationSide: typeof import('./components/Navigation-side.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

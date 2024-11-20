@@ -9,26 +9,14 @@ async function home() {
 </script>
 
 <template>
-    <nav class="mobile-nav">
-      <VForm
-      validate-on="blur"
-      @submit.prevent="home"
-    >
-      <VCardActions>
-        <VBtn
-          class="bloc-icon"
-          type="home"
-        >
-        <img src="../assets/resto-logo.png" alt="">
-        </VBtn>
-      </VCardActions>
-    </VForm>
+    <nav class="computer-nav">
+
       </nav>
   </template>
     
   <style>
-  .mobile-nav {
-    background: #F1F1F1;
+  .computer-nav {
+    background: #212121;
     position: fixed;
     top: 0;
     height: 65px;
@@ -37,11 +25,11 @@ async function home() {
     justify-content: space-around;
     padding-top: 5px;
   }
-  
-  @media screen and (min-width: 600px) {
-    .mobile-nav {
-    display: none;
-    }
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
   }
+  
   </style>
   

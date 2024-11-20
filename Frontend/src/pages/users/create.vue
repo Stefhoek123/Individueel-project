@@ -10,7 +10,6 @@ interface User {
   lastName: string
   email: string
   password: string
-  familyId: number
 }
 
 const client = new UserClient()
@@ -20,7 +19,6 @@ const user = ref<User>({
   lastName: '',
   email: '',
   password: '',
-  familyId: 0,
 })
 
 async function submit() {
@@ -30,7 +28,6 @@ async function submit() {
       lastName: user.value.lastName,
       email: user.value.email,
       password: user.value.password,
-      familyId: user.value.familyId,
     })
 
     await client.createUser(model)

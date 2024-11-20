@@ -34,8 +34,7 @@ async function getUserData() {
 </script>
 
 <template>
-  <div>
-    <VCard title="Manage Users">
+    <VCard title="Manage Users" class="manage-users">
       <VCardText> Users </VCardText>
       <VCardText>
         <div class="wrapper">
@@ -87,7 +86,7 @@ async function getUserData() {
         </VTable>
       </VCardText>
     </VCard>
-  </div>
+
 </template>
 
 <style>
@@ -105,5 +104,13 @@ async function getUserData() {
 .inline {
   inline-size: 200px;
   max-width: 200px;
+}
+
+.manage-users {
+  margin-top: 65px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 70px;
+  width: 100%;
 }
 </style>

@@ -3,8 +3,8 @@ import { ref, onMounted } from 'vue';
 import { UserClient } from '@/api/api';
 import { UserDto } from '@/api/api';
 import { useRouter } from 'vue-router';
-import HeaderComponent from '@/components/HeaderComponent.vue';
-import FooterComponent from '@/components/FooterComponent.vue';
+import HeaderComponent from '@/components/HeaderComponentMobile.vue';
+import FooterComponent from '@/components/FooterComponentMobile.vue';
 
 interface User {
   firstName: string;

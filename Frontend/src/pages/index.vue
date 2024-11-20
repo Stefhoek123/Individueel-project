@@ -1,24 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import type { TextPostDto } from "@/api/api";
 import { TextPostClient } from "@/api/api";
-import HeaderComponent from "../components/HeaderComponent.vue";
-import FooterComponent from "../components/FooterComponent.vue";
 
 // Register components
-const textPosts = ref<TextPostDto[]>([]);
+const textPosts = ref<TextPostDto>();
 const client = new TextPostClient();
 
 // State variables
-const TextPost = ref<Array<{ id: number; textContent: string }>>([]);
-const name = ref<string>('');
 const router = useRouter();
 
 async function loadData() {
   try {
-    const allTextPosts = await client.getAllTextPosts();
-    console.log("All textposts:", allTextPosts);
+    const textPosts.value = await client.getAllTextPosts();
+    console.log("All textposts:", textPosts.value);
   } catch (error) {
     console.error("Error fetching text posts:", error);
   }
@@ -30,25 +26,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <HeaderComponent />
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Text Content</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="post in textPosts" :key="post.id">
-            <td>{{ post.id }}</td>
-            <td>{{ post.textContent }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <FooterComponent />
+  <div class="d-flex justify-center">
+    <v-col cols="6">
+      <v-card color="#1F7087">
+        <div class="d-flex flex-no-wrap justify-space-between">
+          <div  v-for="item in textPosts"
+          :key="item.id">
+            <v-card-title class="text-h5">
+              {{ item.textContent }}
+            </v-card-title>
+          </div>
+        </div>
+      </v-card>
+    </v-col>
   </div>
 </template>
 
