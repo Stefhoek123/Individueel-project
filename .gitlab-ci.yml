@@ -1,0 +1,23 @@
+# .gitlab-ci.yml
+# Use the .NET SDK Docker image
+image: mcr.microsoft.com/dotnet/sdk:7.0
+
+stages:
+  - build
+  - test
+
+# Build stage: Set up and compile a .NET console application
+build:
+  stage: build
+  script:
+    - echo "Creating a .NET application..."
+    - mkdir -p app
+    - dotnet new console -o app
+    - dotnet build app
+
+# Test stage: Run the application to verify it works
+test:
+  stage: test
+  script:
+    - echo "Running the .NET application..."
+    - dotnet run --project app
