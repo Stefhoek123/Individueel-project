@@ -5,24 +5,27 @@ import type { TextPostDto } from "@/api/api";
 import { TextPostClient } from "@/api/api";
 
 // Register components
-const textPosts = ref<TextPostDto>();
+const textPosts = ref<TextPostDto[]>([]);
 const client = new TextPostClient();
+
 
 // State variables
 const router = useRouter();
 
-async function loadData() {
-  try {
-    const textPosts.value = await client.getAllTextPosts();
-    console.log("All textposts:", textPosts.value);
-  } catch (error) {
-    console.error("Error fetching text posts:", error);
-  }
-}
-
 onMounted(() => {
   loadData();
 });
+
+async function loadData(){
+  try {
+    const textPostsData = await client.getAllTextPosts();
+    textPosts.value = textPostsData;
+  } catch (error) {
+    console.error("Failed to load text posts:", error);
+  }
+}
+
+
 </script>
 
 <template>
@@ -34,6 +37,7 @@ onMounted(() => {
           :key="item.id">
             <v-card-title class="text-h5">
               {{ item.textContent }}
+              HEllo
             </v-card-title>
           </div>
         </div>

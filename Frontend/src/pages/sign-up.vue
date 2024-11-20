@@ -3,8 +3,6 @@ import { ref, onMounted } from 'vue';
 import { UserClient } from '@/api/api';
 import { UserDto } from '@/api/api';
 import { useRouter } from 'vue-router';
-import HeaderComponent from '@/components/HeaderComponentMobile.vue';
-import FooterComponent from '@/components/FooterComponentMobile.vue';
 
 interface User {
   firstName: string;
@@ -30,6 +28,7 @@ async function submit() {
       lastName: user.value.lastName,
       email: user.value.email,
       password: user.value.password,
+      familyId: '6E051EB1-A3CC-4B9D-84DD-8C11B2704190'
     });
 
     try {
@@ -48,8 +47,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <HeaderComponent />
-  <img class="logo" src="../assets/resto-logo.png" />
+  <div class="signup">
+  <img class="logo" src="../assets/resto-logo.png" width="35px" />
   <h1>Sign Up</h1>
   <VCard title="Create user">
     <VForm
@@ -59,28 +58,28 @@ onMounted(() => {
       <VCardText>
         <VTextField
           v-model="user.firstName"
-          :rules="[required('User firstname')]"
+          :rules="[('User firstname')]"
           label="User firstname"
           class="mb-2"
         />
 
         <VTextField
           v-model="user.lastName"
-          :rules="[required('User lastname')]"
+          :rules="[('User lastname')]"
           label="User lastname"
           class="mb-2"
         />
 
         <VTextField
           v-model="user.email"
-          :rules="[required('User email')]"
+          :rules="[('User email')]"
           label="User email"
           class="mb-2"
         />
 
         <VTextField
           v-model="user.password"
-          :rules="[required('User password')]"
+          :rules="[('User password')]"
           label="User password"
           type="password"
           class="mb-2"
@@ -97,11 +96,15 @@ onMounted(() => {
       </VCardActions>
     </VForm>
   </VCard>
-  <FooterComponent />
+</div>
 </template>
 
 <style scoped>
-.logo {
+.signup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-top: 70px;
 }
 </style>
