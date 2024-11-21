@@ -8,7 +8,6 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [EnableCors("AllowLocalhost8080")]
     public class TextPostController : ControllerBase
     {
         private readonly ITextPostContainer _textPostContainer;

@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -27,7 +27,7 @@
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\textpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\domain\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\domain\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|solutionrelative:domain\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -161,15 +161,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 140,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Repositories\\UserRepository.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAD4vykAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T08:43:19.324Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -181,8 +190,7 @@
               "RelativeToolTip": "Domain\\UserDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T14:35:25.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-04T14:35:25.861Z"
             },
             {
               "$type": "Document",
@@ -206,8 +214,7 @@
               "RelativeToolTip": "Backend\\Backend.http",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-11-08T08:44:44.983Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-08T08:44:44.983Z"
             },
             {
               "$type": "Document",
@@ -219,8 +226,7 @@
               "RelativeToolTip": "Backend\\Program.cs",
               "ViewState": "AQIAABwAAAAAAAAAAAAQwDUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:22:43.34Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T09:22:43.34Z"
             },
             {
               "$type": "Document",
@@ -247,17 +253,8 @@
               "WhenOpened": "2024-11-05T08:59:14.101Z"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "Repositories\\UserRepository.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAD4vyoAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T08:43:19.324Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
@@ -269,8 +266,7 @@
               "RelativeToolTip": "Backend\\Controllers\\TextPostController.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAowAoAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:47:02.513Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T13:47:02.513Z"
             },
             {
               "$type": "Document",
@@ -282,8 +278,7 @@
               "RelativeToolTip": "DAL\\Containers\\TextPostContainer.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABsAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:41:55.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T13:41:55.615Z"
             },
             {
               "$type": "Document",
@@ -295,8 +290,7 @@
               "RelativeToolTip": "Backend\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-05T12:46:14.62Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T12:46:14.62Z"
             },
             {
               "$type": "Document",

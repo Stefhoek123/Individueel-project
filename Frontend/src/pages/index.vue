@@ -37,7 +37,6 @@ async function loadData(){
           :key="item.id">
             <v-card-title class="text-h5">
               {{ item.textContent }}
-              HEllo
             </v-card-title>
           </div>
         </div>
