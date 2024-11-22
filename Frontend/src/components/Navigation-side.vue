@@ -36,6 +36,7 @@ async function home() {
   <v-list-item link to="/family" title="Family" prepend-icon="mdi-forum"></v-list-item>
     <v-list-item to="/account" prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
     <v-list-item to="/manage-users" title="Manage users" prepend-icon="mdi-account-group-outline"></v-list-item>
+    <v-list-item to="/manage-families" title="Manage families" prepend-icon="mdi-account-group-outline"></v-list-item>
 </v-navigation-drawer>
   </template>
     
