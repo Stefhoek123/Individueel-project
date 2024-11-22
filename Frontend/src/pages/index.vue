@@ -29,28 +29,37 @@ async function loadData(){
 </script>
 
 <template>
+  <div class="outline">
   <div class="d-flex justify-center">
-    <v-col cols="6">
-      <v-card color="#1F7087">
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <div  v-for="item in textPosts"
-          :key="item.id">
+    <v-row justify="center">
+      <v-col cols="12" md="8" v-for="item in textPosts" :key="item.id">
+        <v-card color="#1F7087" class="card">
+          <div class="d-flex flex-no-wrap justify-space-between">
             <v-card-title class="text-h5">
               {{ item.textContent }}
             </v-card-title>
           </div>
-        </div>
-      </v-card>
-    </v-col>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
+</div>
 </template>
 
+
 <style scoped>
-table {
+.outline{
   margin-top: 70px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 70px;
-  border-collapse: collapse;
 }
+
+.card {
+  margin: 20px auto; /* Adds vertical spacing and ensures horizontal centering */
+  padding: 20px;
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
 </style>
