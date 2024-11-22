@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
 import type { TextPostDto } from "@/api/api";
 import { TextPostClient } from "@/api/api";
 
 // Register components
 const textPosts = ref<TextPostDto[]>([]);
 const client = new TextPostClient();
-
-
-// State variables
-const router = useRouter();
 
 onMounted(() => {
   loadData();
@@ -24,8 +19,6 @@ async function loadData(){
     console.error("Failed to load text posts:", error);
   }
 }
-
-
 </script>
 
 <template>

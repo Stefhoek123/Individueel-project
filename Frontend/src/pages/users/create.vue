@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { UserClient, UserDto } from '@/api/api'
-import { Console } from 'console';
 
 const router = useRouter()
 const isPasswordVisible = ref(false)
@@ -31,7 +30,6 @@ async function submit() {
     })
 
     await client.createUser(model)
-    Console.log("User created:", model)
 
     await router.push('/manage-users')
   }

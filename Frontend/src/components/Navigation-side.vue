@@ -1,22 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
-async function home() {
-    await router.push('/')
-  }
-
-  async function user() {
-    await router.push('/manage-users')
-  }
-
-  async function family() {
-    await router.push('/family')
-  }
-  async function account() {
-    await router.push('/account')
-  }
 </script>
 
 <template>

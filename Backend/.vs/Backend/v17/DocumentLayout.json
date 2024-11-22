@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\dal\\containers\\familycontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\familycontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -87,24 +99,12 @@
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\interfaces\\iusercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\usercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\textpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\textpostcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -194,6 +194,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Backend.http",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
+              "RelativeDocumentMoniker": "Backend\\Backend.http",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
+              "RelativeToolTip": "Backend\\Backend.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-11-08T08:44:44.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "FamilyContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\FamilyContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Containers\\FamilyContainer.cs",
@@ -206,20 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserContainer.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
-              "RelativeDocumentMoniker": "DAL\\Containers\\UserContainer.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
-              "RelativeToolTip": "DAL\\Containers\\UserContainer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:17:55.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -231,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "TextPostRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\TextPostRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\TextPostRepository.cs",
@@ -243,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "FamilyMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\FamilyMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\FamilyMapper.cs",
@@ -255,7 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "TextPostContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\TextPostContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Containers\\TextPostContainer.cs",
@@ -268,7 +268,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "UserContext.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\UserContext.cs",
+              "RelativeDocumentMoniker": "Backend\\UserContext.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\UserContext.cs",
+              "RelativeToolTip": "Backend\\UserContext.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBkAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T09:11:52.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Backend\\Program.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
+              "RelativeToolTip": "Backend\\Program.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAQwFMAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T09:22:43.34Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserContainer.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
+              "RelativeDocumentMoniker": "DAL\\Containers\\UserContainer.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
+              "RelativeToolTip": "DAL\\Containers\\UserContainer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T09:17:55.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "FamilyRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\FamilyRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FamilyRepository.cs",
@@ -280,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "UserMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\UserMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\UserMapper.cs",
@@ -292,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "IFamilyContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IFamilyContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IFamilyContainer.cs",
@@ -304,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "IUserContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IUserContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IUserContainer.cs",
@@ -316,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "FamilyDto.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\FamilyDto.cs",
               "RelativeDocumentMoniker": "Domain\\FamilyDto.cs",
@@ -328,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\UserDto.cs",
               "RelativeDocumentMoniker": "Domain\\UserDto.cs",
@@ -340,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "TextPostDto.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\TextPostDto.cs",
               "RelativeDocumentMoniker": "Domain\\TextPostDto.cs",
@@ -352,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "ChatMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\ChatMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\ChatMapper.cs",
@@ -364,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "ImagePostMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\ImagePostMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\ImagePostMapper.cs",
@@ -376,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "TextPostMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\TextPostMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\TextPostMapper.cs",
@@ -388,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IUserRepository.cs",
@@ -400,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "IFamilyRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IFamilyRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IFamilyRepository.cs",
@@ -412,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "FamilyController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\FamilyController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\FamilyController.cs",
@@ -424,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "IUserContext.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IUserContext.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IUserContext.cs",
@@ -436,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Family.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Models\\Family.cs",
               "RelativeDocumentMoniker": "Models\\Family.cs",
@@ -448,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
@@ -472,42 +511,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "UserContext.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\UserContext.cs",
-              "RelativeDocumentMoniker": "Backend\\UserContext.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\UserContext.cs",
-              "RelativeToolTip": "Backend\\UserContext.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBkAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:11:52.656Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
-              "RelativeDocumentMoniker": "Backend\\Program.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
-              "RelativeToolTip": "Backend\\Program.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAQwDUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:22:43.34Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Backend.http",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
-              "RelativeDocumentMoniker": "Backend\\Backend.http",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
-              "RelativeToolTip": "Backend\\Backend.http",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-11-08T08:44:44.983Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 26,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
@@ -520,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "TextPostController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\TextPostController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\TextPostController.cs",

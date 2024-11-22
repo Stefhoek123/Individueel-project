@@ -1,39 +1,27 @@
 <script setup lang="ts">
-import { UserClient, UserDto } from '@/api/api'
-import { Console } from 'console';
+import { FamilyClient, FamilyDto } from '@/api/api'
 
 const router = useRouter()
-const isPasswordVisible = ref(false)
 
-interface User {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
+interface Family {
+  familyName: string
 }
 
-const client = new UserClient()
+const client = new FamilyClient()
 
-const user = ref<User>({
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
+const family = ref<Family>({
+  familyName: '',
 })
 
 async function submit() {
 
-    const model = new UserDto({
-      firstName: user.value.firstName,
-      lastName: user.value.lastName,
-      email: user.value.email,
-      password: user.value.password,
+    const model = new FamilyDto({
+      familyName: family.value.familyName,
     })
 
-    await client.createUser(model)
-    Console.log("User created:", model)
+    await client.createFamily(model)
 
-    await router.push('/manage-users')
+    await router.push('/manage-families')
   }
 
 
@@ -44,37 +32,18 @@ function required(fieldName: string): (v: string) => true | string {
 
 <template>
   <HeaderComponent />
-  <VCard title="Create Users" class="vcard">
+  <VCard title="Create Families" class="vcard">
     <VForm
       validate-on="blur"
       @submit.prevent="submit"
     >
       <VCardText>
         <VTextField
-          v-model="user.firstName"
-          label="Firstname"
-          :rules="[required('Firstname')]"
+          v-model="family.familyName"
+          label="Familyname"
+          :rules="[required('Familyname')]"
           class="mb-2"
         />
-        <VTextField
-          v-model="user.lastName"
-          label="Lastname"
-          :rules="[required('Lastname')]"
-          class="mb-2"
-        />
-        <VTextField
-          v-model="user.email"
-          label="Email"
-          class="mb-2"
-        />
-        <VTextField
-                  v-model="user.password"
-                  label="Password"
-                  :rules="[required('Password')]"
-                  :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
-                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                />
       </VCardText>
       <VCardActions>
         <VBtn

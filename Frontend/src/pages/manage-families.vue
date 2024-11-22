@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { FamilyDto } from "@/api/api";
 import { FamilyClient } from "@/api/api";
-import AppLink from "@/components/AppLink.vue";
 
 const families = ref<FamilyDto[]>([]);
 const client = new FamilyClient();
@@ -59,9 +58,9 @@ async function getFamilyData() {
           <tbody>
             <tr v-for="item in families" :key="item.id">
               <td>
-                <AppLink :to="`/families/${item.id}`">
+                <router-link :to="`/families/${item.id}`">
                   {{ item.familyName }}
-                </AppLink>
+                </router-link>
               </td>
               <td class="text-right">
                 <VBtn

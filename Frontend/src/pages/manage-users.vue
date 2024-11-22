@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { UserDto } from "@/api/api";
 import { UserClient } from "@/api/api";
-import AppLink from "@/components/AppLink.vue";
 
 const users = ref<UserDto[]>([]);
 const client = new UserClient();
@@ -61,9 +60,9 @@ async function getUserData() {
           <tbody>
             <tr v-for="item in users" :key="item.id">
               <td>
-                <AppLink :to="`/users/${item.id}`">
+                <router-link :to="`/users/${item.id}`">
                   {{ item.firstName }}
-                </AppLink>
+                </router-link>
               </td>
               <td>{{ item.lastName }}</td>
               <td>{{ item.email }}</td>
