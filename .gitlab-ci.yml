@@ -1,23 +1,31 @@
 # .gitlab-ci.yml
-# Use the .NET SDK Docker image
-image: mcr.microsoft.com/dotnet/sdk:7.0
 
+# Define stages for the pipeline
 stages:
   - build
   - test
+  - deploy
 
-# Build stage: Set up and compile a .NET console application
-build:
+# Job 1: Build
+build-job:
   stage: build
   script:
-    - echo "Creating a .NET application..."
-    - mkdir -p app
-    - dotnet new console -o app
-    - dotnet build app
+    - echo "Building the project..."
+    # Add your build commands here, e.g., `npm install` or `yarn`
 
-# Test stage: Run the application to verify it works
-test:
+# Job 2: Test
+test-job:
   stage: test
   script:
-    - echo "Running the .NET application..."
-    - dotnet run --project app
+    - echo "Running tests..."
+    # Add your test commands here, e.g., `npm test`
+
+# Job 3: Deploy
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploying the project..."
+    # Add your deploy commands here, e.g., `scp` to upload files to a server
+
+  only:
+    - main  # Run deploy job only on the main branch
