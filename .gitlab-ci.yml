@@ -1,31 +1,10 @@
 # .gitlab-ci.yml
 
-# Define stages for the pipeline
 stages:
   - build
-  - test
-  - deploy
 
-# Job 1: Build
 build-job:
   stage: build
+  image: mcr.microsoft.com/dotnet/sdk:7.0
   script:
-    - echo "Building the project..."
-    # Add your build commands here, e.g., `npm install` or `yarn`
-
-# Job 2: Test
-test-job:
-  stage: test
-  script:
-    - echo "Running tests..."
-    # Add your test commands here, e.g., `npm test`
-
-# Job 3: Deploy
-deploy-job:
-  stage: deploy
-  script:
-    - echo "Deploying the project..."
-    # Add your deploy commands here, e.g., `scp` to upload files to a server
-
-  only:
-    - main  # Run deploy job only on the main branch
+    - echo "Building on Windows"
