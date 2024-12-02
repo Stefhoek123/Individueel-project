@@ -32,7 +32,7 @@ public class BackendDbContext : DbContext, IDesignTimeDbContextFactory<BackendDb
     public BackendDbContext CreateDbContext(string[] args)
     {
         // Get the DB_PASSWORD from the environment variables
-        var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+       var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
         if (string.IsNullOrEmpty(dbPassword))
         {
