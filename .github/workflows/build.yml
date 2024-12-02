@@ -48,6 +48,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          cd backend  # Navigate to the backend directory
           dotnet-sonarscanner begin /k:"Stefhoek123_Individueel-project" /o:"stefhoek123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build Backend.sln
+          dotnet build Backend.sln  # Build the solution file
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
