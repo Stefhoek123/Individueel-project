@@ -31,8 +31,21 @@ public class BackendDbContext : DbContext, IDesignTimeDbContextFactory<BackendDb
 
     public BackendDbContext CreateDbContext(string[] args)
     {
-        DbContextOptionsBuilder<BackendDbContext> optionsBuilder = new DbContextOptionsBuilder<BackendDbContext>();
-        optionsBuilder.UseSqlServer("Server=mssqlstud.fhict.local;Database=dbi533446_s3indivi;User Id=dbi533446_s3indivi;Password=semester3;Encrypt=True;TrustServerCertificate=True");
+        // Get the DB_PASSWORD from the environment variables
+        var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+        if (string.IsNullOrEmpty(dbPassword))
+        {
+            throw new InvalidOperationException("DB_PASSWORD environment variable is not set.");
+        }
+
+        // Build the connection string dynamically with the password
+        var connectionString = $"Server=mssqlstud.fhict.local;Database=dbi533446_s3indivi;User Id=dbi533446_s3indivi;Password={dbPassword};Encrypt=True;TrustServerCertificate=True";
+
+        // Configure the DbContext options with the updated connection string
+        var optionsBuilder = new DbContextOptionsBuilder<BackendDbContext>();
+        optionsBuilder.UseSqlServer(connectionString);
+
         return new BackendDbContext(optionsBuilder.Options);
     }
 }
