@@ -1,3 +1,7 @@
+using Interface;
+using Models;
+using Moq;
+
 namespace TestProject
 {
     [TestClass]
@@ -6,6 +10,9 @@ namespace TestProject
         [TestMethod]
         public void TestMethod1()
         {
+            // Arrange
+            var mock = new Mock<IFamilyRepository>();
+ 
         }
     }
 }

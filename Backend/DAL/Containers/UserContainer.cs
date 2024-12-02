@@ -41,11 +41,11 @@ public class UserContainer : IUserContainer
     }
 
     // POST Creation of user
-    public void CreateUser(UserDto userdto)
+    public void CreateUser(UserDto user)
     {
-        var user = Mappers.UserMapper.ToModel(userdto);
-        user.Id = Guid.NewGuid();
-        _userRepository.CreateUser(user);
+        var userMapper = Mappers.UserMapper.ToModel(user);
+        userMapper.Id = Guid.NewGuid();
+        _userRepository.CreateUser(userMapper);
     }
 
     // PUT for updating a user

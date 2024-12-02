@@ -6,7 +6,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FamilyController : Controller
+    public class FamilyController : ControllerBase
     {
         // Dependency Injection of family container
         private readonly IFamilyContainer _familyContainer;

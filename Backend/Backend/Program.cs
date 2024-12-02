@@ -12,6 +12,10 @@ namespace Backend
 {
     public class Program
     {
+        protected Program()
+        {
+            // Constructor logic
+        }
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -50,7 +54,7 @@ namespace Backend
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     });
-            }); ;
+            });
 
             builder.Services.AddScoped<IUserContext, UserContext>();
             RegisterRepos(builder);

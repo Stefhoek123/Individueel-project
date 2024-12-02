@@ -33,11 +33,11 @@ public class FamilyContainer : IFamilyContainer
     }
 
     // POST Creation of user
-    public void CreateFamily(FamilyDto familydto)
+    public void CreateFamily(FamilyDto family)
     {
-        var family = Mappers.FamilyMapper.ToModel(familydto);
-        family.Id = Guid.NewGuid();
-        _familyRepository.CreateFamily(family);
+        var familyMapper = Mappers.FamilyMapper.ToModel(family);
+        familyMapper.Id = Guid.NewGuid();
+        _familyRepository.CreateFamily(familyMapper);
     }
 
     // PUT for updating a user

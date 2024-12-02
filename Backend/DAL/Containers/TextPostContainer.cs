@@ -24,11 +24,11 @@ public class TextPostContainer : ITextPostContainer
         return Mappers.TextPostMapper.ToDto(_textPostRepository.GetTextPostById(id));
     }
 
-    public void CreateTextPost(TextPostDto textPostdto)
+    public void CreateTextPost(TextPostDto textPost)
     {
-        var textPost = Mappers.TextPostMapper.ToModel(textPostdto);
-        textPost.Id = Guid.NewGuid();
-        _textPostRepository.CreateTextPost(textPost);
+        var textPostMapper = Mappers.TextPostMapper.ToModel(textPost);
+        textPostMapper.Id = Guid.NewGuid();
+        _textPostRepository.CreateTextPost(textPostMapper);
     }
 
     public void UpdateTextPost(TextPostDto textPost)
