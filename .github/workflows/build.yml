@@ -43,7 +43,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          cd s3-db02t-individueel-stefanie-hoeksma\Backend
+          cd Backend
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Stefhoek123_Individueel-project" /o:"stefhoek123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
