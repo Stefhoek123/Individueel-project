@@ -20,12 +20,17 @@ namespace Backend
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            // Haal het wachtwoord op uit de omgevingsvariabele
             var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+            var dbDb = Environment.GetEnvironmentVariable("DB_DB");
+            var dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
 
-            // Configureer de connection string
-            var connectionString = builder.Configuration.GetConnectionString("BackendDbContext");
-            connectionString = connectionString.Replace("Password=;", $"Password={dbPassword};");
+            var connectionStringTemplate = builder.Configuration.GetConnectionString("BackendDbContext");
+            var connectionString = connectionStringTemplate
+                .Replace("{DB_SERVER}", dbServer)
+                .Replace("{DB_DB}", dbDb)
+                .Replace("{DB_USER}", dbUser)
+                .Replace("{DB_PASSWORD}", dbPassword);
 
             builder.Services.AddDbContext<BackendDbContext>(options =>
                 options.UseSqlServer(connectionString));
