@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import PopupModal from './PopupModal.vue'
+import PopupModal from '@/components/PopupModal.vue'
 
 const popupRef = ref<InstanceType<typeof PopupModal> | null>(null)
 
