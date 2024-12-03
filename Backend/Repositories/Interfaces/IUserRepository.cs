@@ -13,6 +13,7 @@ namespace Interface
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUserById(Guid id);
+        void DeleteUserByFamilyId(Guid id);
 
     }
 }

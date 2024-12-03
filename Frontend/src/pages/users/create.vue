@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { UserClient, UserDto, FamilyClient, FamilyDto } from "@/api/api";
+import { UserClient, UserDto, FamilyClient } from "@/api/api";
 import { useRouter } from "vue-router";
 import { SubmitEventPromise } from "vuetify";
 

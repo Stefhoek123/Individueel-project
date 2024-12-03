@@ -64,4 +64,9 @@ public class UserContainer : IUserContainer
     {
         _userRepository.DeleteUserById(id);
     }
+
+    public void DeleteUserByFamilyId(Guid id)
+    {
+        _userRepository.DeleteUserByFamilyId(id);
+    }
 }

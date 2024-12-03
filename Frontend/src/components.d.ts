@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppLink: typeof import('./components/AppLink.vue')['default']
+    ConfirmDialogue: typeof import('./components/ConfirmDialogue.vue')['default']
     copy: typeof import('./components/HeaderComponentMobile copy.vue')['default']
     FileButton: typeof import('./components/FileButton.vue')['default']
     FooterComponent: typeof import('./components/FooterComponent.vue')['default']

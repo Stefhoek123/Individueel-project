@@ -13,4 +13,5 @@ public interface IUserContainer
     void CreateUser(UserDto user);
     void UpdateUser(UserDto user);
     void DeleteUserById(Guid id);
+    void DeleteUserByFamilyId(Guid id);
 }

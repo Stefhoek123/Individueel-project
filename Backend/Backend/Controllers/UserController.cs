@@ -73,5 +73,12 @@ namespace Backend.Controllers
             _userContainer.DeleteUserById(id);
             return Ok();
         }
+
+        [HttpDelete(nameof(DeleteUserByFamilyId))]
+        public ActionResult DeleteUserByFamilyId(Guid id)
+        {
+            _userContainer.DeleteUserByFamilyId(id);
+            return Ok();
+        }
     }
 }

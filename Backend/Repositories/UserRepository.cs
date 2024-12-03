@@ -59,4 +59,10 @@ public class UserRepository : IUserRepository
         _backendDbContext.Users.Remove(GetUserById(id));
         _backendDbContext.SaveChanges();
     }
+
+    public void DeleteUserByFamilyId(Guid id)
+    {
+        _backendDbContext.Users.Remove(GetUserByFamilyId(id));
+        _backendDbContext.SaveChanges();
+    }
 }
