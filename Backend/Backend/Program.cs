@@ -26,7 +26,7 @@ namespace Backend
             var dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
 
             var connectionStringTemplate = builder.Configuration.GetConnectionString("BackendDbContext");
-            var connectionString = connectionStringTemplate
+            var connectionString = connectionStringTemplate?
                 .Replace("{DB_SERVER}", dbServer)
                 .Replace("{DB_DB}", dbDb)
                 .Replace("{DB_USER}", dbUser)

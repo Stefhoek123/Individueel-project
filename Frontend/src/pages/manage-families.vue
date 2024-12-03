@@ -33,6 +33,7 @@ async function getFamilyData() {
 </script>
 
 <template>
+  <div></div>
     <VCard title="Manage Families" class="manage-families">
       <VCardText> Families </VCardText>
       <VCardText>

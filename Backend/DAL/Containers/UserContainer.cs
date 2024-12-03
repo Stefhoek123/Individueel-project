@@ -28,6 +28,11 @@ public class UserContainer : IUserContainer
         return Mappers.UserMapper.ToDto(_userRepository.GetUserById(id));
     }
 
+    public UserDto GetUserByFamilyId(Guid id)
+    {
+        return Mappers.UserMapper.ToDto(_userRepository.GetUserByFamilyId(id));
+    }
+
     public UserDto GetUserByEmail(UserDto user)
     {
         var userdto = Mappers.UserMapper.ToModel(user);

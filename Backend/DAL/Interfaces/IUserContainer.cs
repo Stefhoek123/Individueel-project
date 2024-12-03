@@ -7,6 +7,7 @@ public interface IUserContainer
 {
     IEnumerable<UserDto> GetAllUsers();
     UserDto GetUserById(Guid id);
+    UserDto GetUserByFamilyId(Guid id);
     UserDto GetUserByEmail(UserDto user);
     IEnumerable<UserDto> SearchUserByEmailOrName(string search);
     void CreateUser(UserDto user);

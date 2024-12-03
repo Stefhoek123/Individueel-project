@@ -1,52 +1,77 @@
 <script setup lang="ts">
-import { UserClient, UserDto } from '@/api/api'
+import { ref, onMounted } from "vue";
+import { UserClient, UserDto, FamilyClient, FamilyDto } from "@/api/api";
+import { useRouter } from "vue-router";
+import { SubmitEventPromise } from "vuetify";
 
-const router = useRouter()
-const isPasswordVisible = ref(false)
+const router = useRouter();
 
 interface User {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  familyId: string;
 }
 
-const client = new UserClient()
+interface Family {
+  id: string;
+  name: string;
+}
+
+const client = new UserClient();
+const familyClient = new FamilyClient();
+const families = ref<Family[]>([]);
+const selectedFamilies = ref<string | null>(null);
 
 const user = ref<User>({
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-})
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  familyId: "",
+});
 
-async function submit() {
+onMounted(async () => {
+  families.value = await getFamilies();
+  console.log(families.value);
+});
 
+async function getFamilies() {
+  const familyDtos = await familyClient.getAllFamilies();
+  return familyDtos.map((family) => ({
+    id: family.id ?? "",
+    name: family.familyName,
+  }));
+}
+
+async function submit(event: SubmitEventPromise) {
+  const { valid } = await event;
+  console.log(selectedFamilies.value);
+
+  if (valid) {
     const model = new UserDto({
       firstName: user.value.firstName,
       lastName: user.value.lastName,
       email: user.value.email,
       password: user.value.password,
-    })
+      familyId: user.value.familyId || "",
+    });
 
-    await client.createUser(model)
-
-    await router.push('/manage-users')
+    await client.createUser(model);
+    await router.push("/manage-users");
   }
-
+}
 
 function required(fieldName: string): (v: string) => true | string {
-  return v => !!v || `${fieldName} is required`
+  return (v) => !!v || `${fieldName} is required`;
 }
 </script>
 
 <template>
   <HeaderComponent />
   <VCard title="Create Users" class="vcard">
-    <VForm
-      validate-on="blur"
-      @submit.prevent="submit"
-    >
+    <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
           v-model="user.firstName"
@@ -63,24 +88,28 @@ function required(fieldName: string): (v: string) => true | string {
         <VTextField
           v-model="user.email"
           label="Email"
+          :rules="[required('Email')]"
           class="mb-2"
         />
         <VTextField
-                  v-model="user.password"
-                  label="Password"
-                  :rules="[required('Password')]"
-                  :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
-                  @click:append-inner="isPasswordVisible = !isPasswordVisible"
-                />
+          v-model="user.password"
+          label="Password"
+          type="password"
+          :rules="[required('Password')]"
+          class="mb-2"
+        />
+        <VSelect
+          v-model="user.familyId"
+          :items="families"
+           item-title="name"
+          item-value="id"
+          label="Family"
+          :rules="[required('Family')]"
+          class="mb-2"
+        />
       </VCardText>
       <VCardActions>
-        <VBtn
-          class="me-4"
-          type="submit"
-        >
-          submit
-        </VBtn>
+        <VBtn class="me-4" type="submit"> submit </VBtn>
       </VCardActions>
     </VForm>
   </VCard>
