@@ -1,39 +1,37 @@
 <script setup lang="ts">
-import { FamilyDto, FamilyClient, UserClient, UserDto } from "@/api/api";
-import { onMounted } from "vue";
-import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { FamilyDto, UserDto } from '@/types';
+import ConfirmDialogue from '@/components/ConfirmDialogue.vue';
+import { FamilyClient, UserClient } from '@/api/api';
 
-const props = defineProps<{ id: string }>();
+
 const client = new FamilyClient();
 const userClient = new UserClient();
-const family = ref<FamilyDto>();
-const users = ref<UserDto>();
+const family = ref<FamilyDto| null>(null);
+  const users = ref<UserDto[]>([]);
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
   null
 );
 
 const route = useRoute();
-console.log('Route Params:', route.params);
 
 onMounted(() => {
-  console.log("Props " + props.id);
-  getFamilyById();
-  getUserByFamilyId();
+  console.log('Route Params:', route.params);
+  getFamilyAndMembersById();
 });
 
-async function getFamilyById() {
-  family.value = await client.getFamilyById(props.id);
-}
-
-async function getUserByFamilyId() {
-  users.value = await userClient.getUserByFamilyId(props.id);
+async function getFamilyAndMembersById() {
+  family.value = await client.getFamilyById(route.params.id);
+  users.value = await userClient.getUserByFamilyId(route.params.id);
+  console.log('Family:', family.value);
+  console.log('Users:', users.value);
 }
 
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
-    title: "Delete Person from Family",
+    title: "Delete person from family",
     message:
       "Are you sure you want to delete this person from this family? It cannot be undone.",
     okButton: "Delete Forever",
@@ -47,7 +45,7 @@ async function confirmAndDelete(id: string) {
 
 async function deleteUserByFamilyId(id: string) {
   await userClient.deleteUserByFamilyId(id);
-  getFamilyById();
+  getFamilyAndMembersById();
 }
 </script>
 
@@ -67,7 +65,7 @@ async function deleteUserByFamilyId(id: string) {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in users" :key="item?.id">
+            <tr v-for="item in users" :key="item.id">
               <td>
                 {{ item.firstName }}
                 {{ item.lastName }}
@@ -88,7 +86,3 @@ async function deleteUserByFamilyId(id: string) {
     </div>
   </div>
 </template>
-
-<style lang="ts">
-
-</style>

@@ -28,9 +28,11 @@ public class UserContainer : IUserContainer
         return Mappers.UserMapper.ToDto(_userRepository.GetUserById(id));
     }
 
-    public UserDto GetUserByFamilyId(Guid id)
+    public List<UserDto> GetUsersByFamilyId(Guid id)
     {
-        return Mappers.UserMapper.ToDto(_userRepository.GetUserByFamilyId(id));
+        var users = _userRepository.GetUsersByFamilyId(id);
+
+        return users.Select(u => Mappers.UserMapper.ToDto(u)).ToList();
     }
 
     public UserDto GetUserByEmail(UserDto user)

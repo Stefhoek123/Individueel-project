@@ -23,9 +23,9 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.FirstOrDefault(u => u.Id == id)!;
     }
 
-    public User GetUserByFamilyId(Guid id)
+    public List<User> GetUsersByFamilyId(Guid id)
     {
-        return _backendDbContext.Users.FirstOrDefault(u => u.FamilyId == id)!;
+        return _backendDbContext.Users.Where(u => u.FamilyId == id).ToList();
     }
 
     public User GetUserByEmail(User user)

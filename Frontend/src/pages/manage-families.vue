@@ -7,7 +7,9 @@ const families = ref<FamilyDto[]>([]);
 const client = new FamilyClient();
 const searchbar = ref<HTMLInputElement | null>(null);
 
-const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(null)
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
+  null
+);
 
 onMounted(() => getFamilyData());
 
@@ -35,19 +37,19 @@ async function getFamilyData() {
 
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
-    title: 'Delete family',
-    message: 'Are you sure you want to delete this family and its members? It cannot be undone.',
-    okButton: 'Delete Forever',
-    cancelButton: 'Cancel',
-  })
+    title: "Delete family",
+    message:
+      "Are you sure you want to delete this family and its members? It cannot be undone.",
+    okButton: "Delete Forever",
+    cancelButton: "Cancel",
+  });
 
-  if (confirmed)
-    await deleteFamilyById(id)
+  if (confirmed) await deleteFamilyById(id);
 }
 
 async function deleteFamilyById(id: string) {
-  await client.deleteFamilyById(id)
-  getFamilyData() 
+  await client.deleteFamilyById(id);
+  getFamilyData();
 }
 </script>
 
@@ -67,7 +69,9 @@ async function deleteFamilyById(id: string) {
             @input="getFamilies"
           />
 
-          <VBtn to="/families/create" prepend-icon="mdi-plus"> New Family </VBtn>
+          <VBtn to="/families/create" prepend-icon="mdi-plus">
+            New Family
+          </VBtn>
         </div>
         <VTable>
           <thead>
@@ -79,9 +83,9 @@ async function deleteFamilyById(id: string) {
           <tbody>
             <tr v-for="item in families" :key="item.id">
               <td>
-                <router-link :to="`/families/${item.id}`">
+                <RouterLink :to="`/families/${item.id}`">
                   {{ item.familyName }}
-                </router-link>
+                </RouterLink>
               </td>
               <td class="text-right">
                 <VBtn

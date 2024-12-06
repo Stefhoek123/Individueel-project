@@ -47,7 +47,7 @@ async function confirmAndDelete(id: string) {
 
 async function deleteUserById(id: string) {
   await client.deleteUserById(id)
-  getUserData() //
+  getUserData()
 }
 
 </script>
