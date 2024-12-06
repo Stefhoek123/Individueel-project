@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCrypt.Net;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,26 +11,40 @@ namespace Models
 {
     public class User : BaseModel
     {
+        public Guid Id { get; set; }
+
         [Required]
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
         [Required]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
         [Required]
         public string Email { get; set; }
 
         [ForeignKey(nameof(FamilyId))]
         public Guid FamilyId { get; init; }
 
-        public User(Guid id, string firstName, string lastName, string password, string email, Guid familyId)
+        public User(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            Password = password;
             Email = email;
+            PasswordHash = HashPassword(plainPassword);
             FamilyId = familyId;
+        }
+
+        // Method to verify password
+        public bool VerifyPassword(string plainPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(plainPassword, PasswordHash);
+        }
+
+        // Private method to hash the password
+        private string HashPassword(string plainPassword)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(plainPassword);
         }
     }
 }

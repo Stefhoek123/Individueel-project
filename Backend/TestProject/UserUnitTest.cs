@@ -54,14 +54,15 @@ namespace TestProject
             var familyId = Guid.NewGuid();
             var user = new User(userId, "John",
                 "Doe",
-                "John123",
                 "John@doe.nl",
+                "123",
                 familyId);
             var userDto = new UserDto(userId, "John",
                 "Doe",
-                "John123",
                 "John@doe.nl",
+                "123",
                 familyId);
+
 
             _mockUserRepository.Setup(repo => repo.GetUserById(userId)).Returns(user);
 

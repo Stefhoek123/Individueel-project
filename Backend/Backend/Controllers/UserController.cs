@@ -1,5 +1,6 @@
 using DAL.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -24,15 +25,13 @@ namespace Backend.Controllers
         [HttpGet(nameof(GetUserById))]
         public ActionResult<UserDto> GetUserById(Guid id)
         {
-            UserDto user = _userContainer.GetUserById(id);
-            return Ok(user);
+            return Ok(_userContainer.GetUserById(id));
         }
 
         [HttpGet(nameof(GetUserByFamilyId))]
         public ActionResult<UserDto> GetUserByFamilyId(Guid id)
         {
-            UserDto user = _userContainer.GetUserByFamilyId(id);
-            return Ok(user);
+            return Ok(_userContainer.GetUserByFamilyId(id));
         }
 
         [HttpGet(nameof(GetUsersByFamilyId))]
@@ -46,11 +45,26 @@ namespace Backend.Controllers
             return Ok(users);
         }
 
-        [HttpGet(nameof(GetUserByEmail))]
-        public ActionResult<UserDto> GetUserByEmail(UserDto user)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserDto loginRequest)
         {
-            UserDto userEmail = _userContainer.GetUserByEmail(user);
-            return Ok(userEmail);
+            if (await _userContainer.AuthenticateUserAsync(loginRequest.Email, loginRequest.PasswordHash))
+            {
+                return Ok(new { message = "Login successful" });
+            }
+
+            return Unauthorized(new { message = "Invalid credentials" });
+        }
+
+        [HttpPost("check-account")]
+        public async Task<IActionResult> CheckAccount([FromBody] UserDto request)
+        {
+            if (await _userContainer.IsAccountAvailableAsync(request.Email))
+            {
+                return NotFound(new { message = "Account not found. Please register." });
+            }
+
+            return Ok(new { message = "Account exists" });
         }
 
         [HttpGet(nameof(SearchUserByEmailOrName))]
@@ -98,5 +112,6 @@ namespace Backend.Controllers
             _userContainer.DeleteUserByFamilyId(id);
             return Ok();
         }
+
     }
 }

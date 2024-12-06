@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4+bofaqCbdBYgWKeko/FzmeNdCtfEpxJbpNYvpv45m4P0JCiicHz50B1YFh2Tqb6DsXBDnbvxYtHVL1mk1+KnQ==",
+  "dgSpecHash": "U0L1x5ZazmmyQF1uqhFjSCAth30oDFwX5wPaTRDPGzext15M7w16sDxnhC51hAOKOHojKeLxsJW1UdJU63Dw/A==",
   "success": true,
   "projectFilePath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stefa\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

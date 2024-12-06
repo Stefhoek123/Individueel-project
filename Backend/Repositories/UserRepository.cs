@@ -33,10 +33,10 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.Where(u => u.FamilyId == id).ToList();
     }
 
-    public User GetUserByEmail(User user)
+    public async Task<User> GetUserByEmailAsync(string email)
     {
-        var email = user.Email;
-        return _backendDbContext.Users.FirstOrDefault(u => u.Email == email)!;
+        return await _backendDbContext.Users
+            .SingleOrDefaultAsync(u => u.Email == email);
     }
 
     public IEnumerable<User> SearchUserByEmailOrName(string search)

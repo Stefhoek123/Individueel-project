@@ -9,7 +9,8 @@ public interface IUserContainer
     UserDto GetUserById(Guid id);
     UserDto GetUserByFamilyId(Guid id);
     List<UserDto> GetUsersByFamilyId(Guid id);
-    UserDto GetUserByEmail(UserDto user);
+    Task<bool> AuthenticateUserAsync(string email, string password);
+    Task<bool> IsAccountAvailableAsync(string email);
     IEnumerable<UserDto> SearchUserByEmailOrName(string search);
     void CreateUser(UserDto user);
     void UpdateUser(UserDto user);

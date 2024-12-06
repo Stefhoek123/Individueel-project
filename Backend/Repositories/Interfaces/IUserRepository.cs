@@ -9,7 +9,7 @@ namespace Interface
         User GetUserById(Guid id);
         User GetUserByFamilyId(Guid id);
         List<User> GetUsersByFamilyId(Guid id);
-        User GetUserByEmail(User user);
+        Task<User> GetUserByEmailAsync(string email);
         IEnumerable<User> SearchUserByEmailOrName(string search);
         void CreateUser(User user);
         void UpdateUser(User user);

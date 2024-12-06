@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "A7Fqm1/KPz/AcANxaJVY6NfPknFb0Cie3UkBtq6DEdKIp/t9cx95oKu97QnJpTQ7q7bPj1FRdKDD/El2HQvrOg==",
+  "dgSpecHash": "oNCO9MUSYAV9JU8Bf29WZTJOEXjWnMyn6TtvTGlsnega+aTjgCNjvA+xj7Ez3WQnJ1tA2gp4F/y9JoMF+7cZiQ==",
   "success": true,
   "projectFilePath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stefa\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\fluid.core\\2.12.0\\fluid.core.2.12.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.1.1\\microsoft.aspnetcore.cors.2.1.1.nupkg.sha512",

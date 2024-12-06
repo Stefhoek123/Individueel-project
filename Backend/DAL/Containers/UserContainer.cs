@@ -40,10 +40,25 @@ public class UserContainer : IUserContainer
         return users.Select(u => Mappers.UserMapper.ToDto(u)).ToList();
     }
 
-    public UserDto GetUserByEmail(UserDto user)
+    public async Task<bool> AuthenticateUserAsync(string email, string password)
     {
-        var userdto = Mappers.UserMapper.ToModel(user);
-        return Mappers.UserMapper.ToDto(_userRepository.GetUserByEmail(userdto));
+        var user = await _userRepository.GetUserByEmailAsync(email);
+        if (user == null) return false;
+
+        // Verify password (hashed comparison)
+        return VerifyPassword(password, user.PasswordHash);
+    }
+
+    public async Task<bool> IsAccountAvailableAsync(string email)
+    {
+        var user = await _userRepository.GetUserByEmailAsync(email);
+        return user == null; // If null, account is not registered
+    }
+
+    private bool VerifyPassword(string plainPassword, string hashedPassword)
+    {
+        // Use a secure password hashing library, e.g., BCrypt
+        return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
     }
 
     // GET for finding a User based on his Email or Name

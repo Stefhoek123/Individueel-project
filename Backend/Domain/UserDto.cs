@@ -11,9 +11,11 @@ namespace Domain
         [Required]
         public string LastName { get; set; } = null!;
         [Required]
+        [EmailAddress]
         public string Email { get; set; } = null!;
         [Required]
-        public string Password { get; set; } = null!;
+        public string PasswordHash { get; set; } = null!;
+
         public Guid FamilyId { get; set; }
 
         public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId)
@@ -22,10 +24,11 @@ namespace Domain
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            Password = password;
+            PasswordHash = password;
             FamilyId = familyId;
         }
 
         public UserDto() { }
+
     }
 }
