@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { FamilyDto, UserDto } from "@/types";
+import { FamilyDto, UserDto } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { FamilyClient, UserClient } from "@/api/api";
 
@@ -10,6 +10,7 @@ const userClient = new UserClient();
 const family = ref<FamilyDto | null>(null);
 const users = ref<UserDto[]>([]);
 const user = ref<UserDto | null>(null);
+const guid = "10000000-0000-0000-0000-000000000000";
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
   null
@@ -44,16 +45,18 @@ async function confirmAndDelete(id: string) {
 }
 
 async function deleteUserByFamilyId(id: string) {
-  const guid = "10000000-0000-0000-0000-000000000000";
+  user.value = await userClient.getUserById(id);
 
   const model = new UserDto({
-    firstname: user.value!.firstname,
-    lastname: user.value!.lastname,
-    email: user.value!.email,
-    familyId: guid,
-  });
+      id: user.value.id,
+      firstName: user.value.firstName,
+      lastName: user.value.lastName,
+      email: user.value.email,
+      password: user.value.password,
+      familyId: guid,
+    });
 
-  await userClient.updateUserById(id, model);
+  await userClient.updateUser(model);
   getFamilyAndMembersById();
 }
 </script>
