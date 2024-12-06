@@ -7,6 +7,7 @@ namespace Interface
     {
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
+        User GetUserByFamilyId(Guid id);
         List<User> GetUsersByFamilyId(Guid id);
         User GetUserByEmail(User user);
         IEnumerable<User> SearchUserByEmailOrName(string search);

@@ -24,7 +24,7 @@ onMounted(() => {
 
 async function getFamilyAndMembersById() {
   family.value = await client.getFamilyById(route.params.id);
-  users.value = await userClient.getUserByFamilyId(route.params.id);
+  users.value = await userClient.getUsersByFamilyId(route.params.id);
   console.log('Family:', family.value);
   console.log('Users:', users.value);
 }
@@ -60,7 +60,7 @@ async function deleteUserByFamilyId(id: string) {
         <VTable>
           <thead>
             <tr>
-              <th class="text-left">Persons</th>
+              <th class="text-left">Members</th>
               <th class="text-right actions-column">Actions</th>
             </tr>
           </thead>

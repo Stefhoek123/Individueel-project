@@ -28,15 +28,22 @@ namespace Backend.Controllers
             return Ok(user);
         }
 
+        [HttpGet(nameof(GetUserByFamilyId))]
+        public ActionResult<UserDto> GetUserByFamilyId(Guid id)
+        {
+            UserDto user = _userContainer.GetUserByFamilyId(id);
+            return Ok(user);
+        }
+
         [HttpGet(nameof(GetUsersByFamilyId))]
         public ActionResult<List<UserDto>> GetUsersByFamilyId(Guid id)
         {
-            List<UserDto> users = _userContainer.GetUsersByFamilyId(id); 
+            List<UserDto> users = _userContainer.GetUsersByFamilyId(id);
             if (users == null || users.Count == 0)
             {
-                return NotFound(); 
+                return NotFound();
             }
-            return Ok(users); 
+            return Ok(users);
         }
 
         [HttpGet(nameof(GetUserByEmail))]

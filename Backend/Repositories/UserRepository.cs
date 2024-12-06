@@ -33,7 +33,6 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.Where(u => u.FamilyId == id).ToList();
     }
 
-
     public User GetUserByEmail(User user)
     {
         var email = user.Email;
