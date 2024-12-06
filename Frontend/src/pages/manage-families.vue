@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { FamilyDto } from "@/api/api";
 import { FamilyClient } from "@/api/api";
+import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 
 const families = ref<FamilyDto[]>([]);
 const client = new FamilyClient();
 const searchbar = ref<HTMLInputElement | null>(null);
+
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(null)
 
 onMounted(() => getFamilyData());
 
@@ -30,10 +33,27 @@ async function getFamilyData() {
   }
 }
 
+async function confirmAndDelete(id: string) {
+  const confirmed = await confirmDialogueRef.value?.show({
+    title: 'Delete family',
+    message: 'Are you sure you want to delete this family and its members? It cannot be undone.',
+    okButton: 'Delete Forever',
+    cancelButton: 'Cancel',
+  })
+
+  if (confirmed)
+    await deleteFamilyById(id)
+}
+
+async function deleteFamilyById(id: string) {
+  await client.deleteFamilyById(id)
+  getFamilyData() 
+}
 </script>
 
 <template>
-  <div></div>
+  <div>
+    <ConfirmDialogue ref="confirmDialogueRef" />
     <VCard title="Manage Families" class="manage-families">
       <VCardText> Families </VCardText>
       <VCardText>
@@ -65,16 +85,11 @@ async function getFamilyData() {
               </td>
               <td class="text-right">
                 <VBtn
-                  icon="mdi-pen"
-                  variant="plain"
-                  color="accent"
-                  size="small"
-                />
-                <VBtn
                   icon="mdi-delete"
                   variant="plain"
                   color="accent"
                   size="small"
+                  @click="confirmAndDelete(item.id!)"
                 />
               </td>
             </tr>
@@ -82,7 +97,7 @@ async function getFamilyData() {
         </VTable>
       </VCardText>
     </VCard>
-
+  </div>
 </template>
 
 <style>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { UserDto } from "@/api/api";
 import { UserClient } from "@/api/api";
+import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 
 const users = ref<UserDto[]>([]);
 const client = new UserClient();
 const searchbar = ref<HTMLInputElement | null>(null);
+
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(null)
 
 onMounted(() => getUserData());
 
@@ -30,9 +33,29 @@ async function getUserData() {
   }
 }
 
+async function confirmAndDelete(id: string) {
+  const confirmed = await confirmDialogueRef.value?.show({
+    title: 'Delete user',
+    message: 'Are you sure you want to delete this user? It cannot be undone.',
+    okButton: 'Delete Forever',
+    cancelButton: 'Cancel',
+  })
+
+  if (confirmed)
+    await deleteUserById(id)
+}
+
+async function deleteUserById(id: string) {
+  await client.deleteUserById(id)
+  getUserData() //
+}
+
 </script>
 
 <template>
+  <div>
+    <ConfirmDialogue ref="confirmDialogueRef" />
+
     <VCard title="Manage Users" class="manage-users">
       <VCardText> Users </VCardText>
       <VCardText>
@@ -60,24 +83,17 @@ async function getUserData() {
           <tbody>
             <tr v-for="item in users" :key="item.id">
               <td>
-                <router-link :to="`/users/${item.id}`">
                   {{ item.firstName }}
-                </router-link>
               </td>
               <td>{{ item.lastName }}</td>
               <td>{{ item.email }}</td>
               <td class="text-right">
                 <VBtn
-                  icon="mdi-pen"
-                  variant="plain"
-                  color="accent"
-                  size="small"
-                />
-                <VBtn
                   icon="mdi-delete"
                   variant="plain"
                   color="accent"
                   size="small"
+                  @click="confirmAndDelete(item.id!)"
                 />
               </td>
             </tr>
@@ -85,7 +101,7 @@ async function getUserData() {
         </VTable>
       </VCardText>
     </VCard>
-
+  </div>
 </template>
 
 <style>

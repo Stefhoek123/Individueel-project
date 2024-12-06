@@ -67,20 +67,12 @@ async function deleteUserByFamilyId(id: string) {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in users" :key="item.id">
+            <tr v-for="item in users" :key="item?.id">
               <td>
                 {{ item.firstName }}
                 {{ item.lastName }}
               </td>
               <td class="text-right">
-                <router-link :to="`/families/update/${item.id}`">
-                  <VBtn
-                    icon="mdi-pen"
-                    variant="plain"
-                    color="accent"
-                    size="small"
-                  />
-                </router-link>
                 <VBtn
                   icon="mdi-delete"
                   variant="plain"
