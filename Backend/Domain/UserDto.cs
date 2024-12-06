@@ -14,7 +14,7 @@ namespace Domain
         public string Email { get; set; } = null!;
         [Required]
         public string Password { get; set; } = null!;
-        public Guid FamilyId { get; init; }
+        public Guid FamilyId { get; set; }
 
         public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId)
         {

@@ -66,6 +66,15 @@ public class UserContainer : IUserContainer
         _userRepository.UpdateUser(Mappers.UserMapper.ToModel(user));
     }
 
+    public void UpdateUserById(Guid id, UserDto user)
+    {
+        var userUpdate = GetUserById(id);
+        
+        userUpdate.FamilyId = user.FamilyId;
+
+        _userRepository.UpdateUserById(Mappers.UserMapper.ToModel(userUpdate));
+    }
+
     // DELETE of a user op basis van user ID 
     public void DeleteUserById(Guid id)
     {

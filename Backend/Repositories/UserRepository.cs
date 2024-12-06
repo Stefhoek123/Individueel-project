@@ -59,6 +59,12 @@ public class UserRepository : IUserRepository
         _backendDbContext.SaveChanges();
     }
 
+    public void UpdateUserById(User user)
+    {
+        _backendDbContext.Users.Update(user);
+        _backendDbContext.SaveChanges();
+    }
+
     public void DeleteUserById(Guid id)
     {
         _backendDbContext.Users.Remove(GetUserById(id));

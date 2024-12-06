@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { FamilyDto, UserDto } from '@/types';
-import ConfirmDialogue from '@/components/ConfirmDialogue.vue';
-import { FamilyClient, UserClient } from '@/api/api';
-
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { FamilyDto, UserDto } from "@/types";
+import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
+import { FamilyClient, UserClient } from "@/api/api";
 
 const client = new FamilyClient();
 const userClient = new UserClient();
-const family = ref<FamilyDto| null>(null);
-  const users = ref<UserDto[]>([]);
+const family = ref<FamilyDto | null>(null);
+const users = ref<UserDto[]>([]);
+const user = ref<UserDto | null>(null);
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
   null
@@ -18,15 +18,15 @@ const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
 const route = useRoute();
 
 onMounted(() => {
-  console.log('Route Params:', route.params);
+  console.log("Route Params:", route.params);
   getFamilyAndMembersById();
 });
 
 async function getFamilyAndMembersById() {
   family.value = await client.getFamilyById(route.params.id);
   users.value = await userClient.getUsersByFamilyId(route.params.id);
-  console.log('Family:', family.value);
-  console.log('Users:', users.value);
+  console.log("Family:", family.value);
+  console.log("Users:", users.value);
 }
 
 async function confirmAndDelete(id: string) {
@@ -44,7 +44,16 @@ async function confirmAndDelete(id: string) {
 }
 
 async function deleteUserByFamilyId(id: string) {
-  await userClient.deleteUserByFamilyId(id);
+  const guid = "10000000-0000-0000-0000-000000000000";
+
+  const model = new UserDto({
+    firstname: user.value!.firstname,
+    lastname: user.value!.lastname,
+    email: user.value!.email,
+    familyId: guid,
+  });
+
+  await userClient.updateUserById(id, model);
   getFamilyAndMembersById();
 }
 </script>

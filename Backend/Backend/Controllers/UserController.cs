@@ -78,6 +78,13 @@ namespace Backend.Controllers
             return Ok();
         }
 
+        [HttpPut(nameof(UpdateUserById))]
+        public ActionResult UpdateUserById(Guid id, UserDto user)
+        {
+            _userContainer.UpdateUserById(id, user);
+            return Ok();
+        }
+
         [HttpDelete(nameof(DeleteUserById))]
         public ActionResult DeleteUserById(Guid id)
         {

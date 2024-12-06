@@ -13,6 +13,7 @@ public interface IUserContainer
     IEnumerable<UserDto> SearchUserByEmailOrName(string search);
     void CreateUser(UserDto user);
     void UpdateUser(UserDto user);
+    void UpdateUserById(Guid id, UserDto user);
     void DeleteUserById(Guid id);
     void DeleteUserByFamilyId(Guid id);
 }

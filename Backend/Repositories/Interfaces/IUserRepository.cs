@@ -13,6 +13,7 @@ namespace Interface
         IEnumerable<User> SearchUserByEmailOrName(string search);
         void CreateUser(User user);
         void UpdateUser(User user);
+        void UpdateUserById(User user);
         void DeleteUserById(Guid id);
         void DeleteUserByFamilyId(Guid id);
 
