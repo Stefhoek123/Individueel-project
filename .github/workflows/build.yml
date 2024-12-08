@@ -44,7 +44,7 @@ jobs:
           Get-ChildItem -Path .\.sonar\scanner
       - name: Run Unit Tests
         run: |
-          dotnet test ./TestProject/TestProject.csproj --logger:trx --results-directory:./test-results
+          dotnet test .\TestProject\TestProject.csproj --logger:trx --results-directory:./test-results
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
