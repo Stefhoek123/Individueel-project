@@ -37,14 +37,14 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool install --global dotnet-sonarscanner
-          # dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Verify SonarScanner Installation
         shell: powershell
         run: |
           Get-ChildItem -Path .\.sonar\scanner
       - name: Run Unit Tests
         run: |
-          dotnet test .\TestProject\TestProject.csproj --logger:trx --results-directory:./test-results
+          cd backend\testproject
+          dotnet test .\TestProject.csproj --logger:trx --results-directory:./test-results
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
