@@ -46,7 +46,7 @@ public class UserContainer : IUserContainer
         if (user == null) return false;
 
         // Verify password (hashed comparison)
-        return VerifyPassword(password, user.PasswordHash);
+        return VerifyPassword(password, user.PasswordHash ?? string.Empty);
     }
 
     public async Task<bool> IsAccountAvailableAsync(string email)

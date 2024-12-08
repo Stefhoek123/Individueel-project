@@ -4,7 +4,7 @@ using DAL.Interfaces;
 
 namespace Backend
 {
-    public class SessionVariables 
+    public static class SessionVariables 
     {
        public const string SessionKeyUsername = "SessionKeyUsername";
        public const string SessionKeySessionId = "SessionKeySessionId";
