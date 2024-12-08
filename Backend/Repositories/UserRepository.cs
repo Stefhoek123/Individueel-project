@@ -33,7 +33,7 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.Where(u => u.FamilyId == id).ToList();
     }
 
-    public async Task<User> GetUserByEmailAsync(string email)
+    public async Task<User?> GetUserByEmailAsync(string email)
     {
         return await _backendDbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
     }
@@ -53,12 +53,6 @@ public class UserRepository : IUserRepository
     }
 
     public void UpdateUser(User user)
-    {
-        _backendDbContext.Users.Update(user);
-        _backendDbContext.SaveChanges();
-    }
-
-    public void UpdateUserById(User user)
     {
         _backendDbContext.Users.Update(user);
         _backendDbContext.SaveChanges();

@@ -10,7 +10,7 @@ namespace Backend
        public const string SessionKeySessionId = "SessionKeySessionId";
     }
 
-    public enum SessionKeyEnum
+    public enum SessionKey
     {
         SessionKeyUsername = 0,
         SessionKeySessionId = 1

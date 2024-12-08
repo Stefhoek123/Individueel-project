@@ -11,16 +11,14 @@ namespace Models
 {
     public class User : BaseModel
     {
-        public Guid Id { get; set; }
-
         [Required]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
         [Required]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
         [Required]
-        public string PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [ForeignKey(nameof(FamilyId))]
         public Guid FamilyId { get; set; }
@@ -43,7 +41,7 @@ namespace Models
         }
 
         // Private method to hash the password
-        private string HashPassword(string plainPassword)
+        private static string HashPassword(string plainPassword)
         {
             return BCrypt.Net.BCrypt.HashPassword(plainPassword);
         }

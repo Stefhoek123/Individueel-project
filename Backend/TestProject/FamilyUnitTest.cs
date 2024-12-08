@@ -10,8 +10,8 @@ namespace TestProject;
 public class FamilyUnitTest
 {
 
-    private Mock<IFamilyRepository> _mockFamilyRepository;
-    private FamilyContainer _familyContainer;
+    private Mock<IFamilyRepository>? _mockFamilyRepository;
+    private FamilyContainer? _familyContainer;
 
     [TestInitialize]
     public void SetUp()
@@ -36,10 +36,10 @@ public class FamilyUnitTest
             FamilyName = f.FamilyName,
         }).ToList();
 
-        _mockFamilyRepository.Setup(repo => repo.GetAllFamilies()).Returns(families);
+        _mockFamilyRepository?.Setup(repo => repo.GetAllFamilies()).Returns(families);
 
         // Act
-        var result = _familyContainer.GetAllFamilies().ToList();
+        var result = _familyContainer?.GetAllFamilies().ToList();
 
         // Assert
         Assert.AreEqual(expectedDtos.Count, result.Count);
@@ -64,13 +64,13 @@ public class FamilyUnitTest
             FamilyName = family.FamilyName,
         };
 
-        _mockFamilyRepository.Setup(repo => repo.GetFamilyById(familyId)).Returns(family);
+        _mockFamilyRepository?.Setup(repo => repo.GetFamilyById(familyId)).Returns(family);
 
         // Act
-        var result = _familyContainer.GetFamilyById(familyId);
+        var result = _familyContainer?.GetFamilyById(familyId);
 
         // Assert
-        _mockFamilyRepository.Verify(repo => repo.GetFamilyById(familyId), Times.Once);
+        _mockFamilyRepository?.Verify(repo => repo.GetFamilyById(familyId), Times.Once);
         Assert.IsNotNull(result);
         Assert.AreEqual(expectedDto.Id, result.Id);
         Assert.AreEqual(expectedDto.FamilyName, result.FamilyName);
@@ -94,10 +94,10 @@ public class FamilyUnitTest
                 FamilyName = f.FamilyName,
             }).ToList();
 
-        _mockFamilyRepository.Setup(repo => repo.SearchFamilyByName(search)).Returns(families.Where(f => f.FamilyName.Contains(search)));
+        _mockFamilyRepository?.Setup(repo => repo.SearchFamilyByName(search)).Returns(families.Where(f => f.FamilyName.Contains(search)));
 
         // Act
-        var result = _familyContainer.SearchFamilyByName(search).ToList();
+        var result = _familyContainer?.SearchFamilyByName(search).ToList();
 
         // Assert
         Assert.AreEqual(expectedDtos.Count, result.Count);
@@ -124,17 +124,17 @@ public class FamilyUnitTest
             FamilyName = f.FamilyName,
         }).ToList();
 
-        _mockFamilyRepository.Setup(repo => repo.GetAllFamilies()).Returns(families);
+        _mockFamilyRepository?.Setup(repo => repo.GetAllFamilies()).Returns(families);
 
         // Act
-        var result = _familyContainer.SearchFamilyByName(string.Empty).ToList();
+        var result = _familyContainer?.SearchFamilyByName(string.Empty).ToList();
 
         // Assert
-        Assert.AreEqual(expectedDtos.Count, result.Count);
+        Assert.AreEqual(expectedDtos.Count, result?.Count);
         for (int i = 0; i < expectedDtos.Count; i++)
         {
-            Assert.AreEqual(expectedDtos[i].Id, result[i].Id);
-            Assert.AreEqual(expectedDtos[i].FamilyName, result[i].FamilyName);
+            Assert.AreEqual(expectedDtos[i].Id, result?[i].Id);
+            Assert.AreEqual(expectedDtos[i].FamilyName, result?[i].FamilyName);
         }
     }
 
@@ -149,13 +149,13 @@ public class FamilyUnitTest
 
         var familyModel = new Family(Guid.NewGuid(), familyDto.FamilyName);
 
-        _mockFamilyRepository.Setup(repo => repo.CreateFamily(It.IsAny<Family>()));
+        _mockFamilyRepository?.Setup(repo => repo.CreateFamily(It.IsAny<Family>()));
 
         // Act
-        _familyContainer.CreateFamily(familyDto);
+        _familyContainer?.CreateFamily(familyDto);
 
         // Assert
-        _mockFamilyRepository.Verify(repo => repo.CreateFamily(It.Is<Family>(f =>
+        _mockFamilyRepository?.Verify(repo => repo.CreateFamily(It.Is<Family>(f =>
             f.FamilyName == familyModel.FamilyName && f.Id != Guid.Empty)), Times.Once);
     }
 
@@ -169,16 +169,16 @@ public class FamilyUnitTest
             FamilyName = "Updated Family",
         };
 
-        _mockFamilyRepository.Setup(repo => repo.UpdateFamily(It.Is<Family>(f =>
+        _mockFamilyRepository?.Setup(repo => repo.UpdateFamily(It.Is<Family>(f =>
             f.Id == familyDto.Id &&
             f.FamilyName == familyDto.FamilyName 
         )));
 
         // Act
-        _familyContainer.UpdateFamily(familyDto);
+        _familyContainer?.UpdateFamily(familyDto);
 
         // Assert
-        _mockFamilyRepository.Verify(repo => repo.UpdateFamily(It.Is<Family>(f =>
+        _mockFamilyRepository?.Verify(repo => repo.UpdateFamily(It.Is<Family>(f =>
                 f.Id == familyDto.Id &&
                 f.FamilyName == familyDto.FamilyName
         )), Times.Once);
@@ -190,13 +190,13 @@ public class FamilyUnitTest
         // Arrange
         var familyId = Guid.NewGuid(); 
 
-        _mockFamilyRepository.Setup(repo => repo.DeleteFamilyById(It.Is<Guid>(id => id == familyId)));
+        _mockFamilyRepository?.Setup(repo => repo.DeleteFamilyById(It.Is<Guid>(id => id == familyId)));
 
         // Act
-        _familyContainer.DeleteFamilyById(familyId);
+        _familyContainer?.DeleteFamilyById(familyId);
 
         // Assert
-        _mockFamilyRepository.Verify(repo => repo.DeleteFamilyById(familyId), Times.Once, "DeleteFamilyById was not called with the expected ID.");
+        _mockFamilyRepository?.Verify(repo => repo.DeleteFamilyById(familyId), Times.Once, "DeleteFamilyById was not called with the expected ID.");
     }
 
 }   

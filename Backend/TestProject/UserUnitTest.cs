@@ -12,8 +12,8 @@ namespace TestProject
     [TestClass]
     public class UserUnitTest
     {
-        private Mock<IUserRepository> _mockUserRepository;
-        private UserContainer _userContainer;
+        private Mock<IUserRepository>? _mockUserRepository;
+        private UserContainer? _userContainer;
 
         [TestInitialize]
         public void SetUp()
@@ -35,17 +35,17 @@ namespace TestProject
             var expectedDtos = users.Select(u => new UserDto
             {
                 Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Email = u.Email,
-                PasswordHash = u.PasswordHash,
+                FirstName = u.FirstName ?? string.Empty,
+                LastName = u.LastName ?? string.Empty,
+                Email = u.Email ?? string.Empty,
+                PasswordHash = u.PasswordHash ?? string.Empty,
                 FamilyId = u.FamilyId
             }).ToList();
 
-            _mockUserRepository.Setup(repo => repo.GetAllUsers()).Returns(users);
+            _mockUserRepository?.Setup(repo => repo.GetAllUsers()).Returns(users);
 
             // Act
-            var result = _userContainer.GetAllUsers().ToList();
+            var result = _userContainer?.GetAllUsers().ToList();
 
             // Assert
             Assert.IsNotNull(result);
@@ -60,7 +60,7 @@ namespace TestProject
                 Assert.AreEqual(expectedDtos[i].FamilyId, result[i].FamilyId);
             }
 
-            _mockUserRepository.Verify(repo => repo.GetAllUsers(), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetAllUsers(), Times.Once);
         }
 
         [TestMethod]
@@ -80,17 +80,17 @@ namespace TestProject
                 "Doe123",
                 familyId);
 
-            _mockUserRepository.Setup(repo => repo.GetUserById(userId)).Returns(user);
+            _mockUserRepository?.Setup(repo => repo.GetUserById(userId)).Returns(user);
 
             // Act
-            var result = _userContainer.GetUserById(userId);
+            var result = _userContainer?.GetUserById(userId);
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(userId, result.Id);
             Assert.AreEqual("John", result.FirstName);
 
-            _mockUserRepository.Verify(repo => repo.GetUserById(userId), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserById(userId), Times.Once);
         }
 
         [TestMethod]
@@ -110,17 +110,17 @@ namespace TestProject
                 "Doe123",
                 familyId);
 
-            _mockUserRepository.Setup(repo => repo.GetUserByFamilyId(userId)).Returns(user);
+            _mockUserRepository?.Setup(repo => repo.GetUserByFamilyId(userId)).Returns(user);
 
             // Act
-            var result = _userContainer.GetUserByFamilyId(userId);
+            var result = _userContainer?.GetUserByFamilyId(userId);
 
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(familyId, result.FamilyId);
             Assert.AreEqual("John", result.FirstName);
 
-            _mockUserRepository.Verify(repo => repo.GetUserByFamilyId(userId), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByFamilyId(userId), Times.Once);
         }
 
         [TestMethod]
@@ -134,22 +134,22 @@ namespace TestProject
                 new Models.User(Guid.NewGuid(), "Jane", "Doe", "jane@doe.nl", "Jane123", familyId)
             };
 
-            _mockUserRepository.Setup(repo => repo.GetUsersByFamilyId(familyId)).Returns(users);
+            _mockUserRepository?.Setup(repo => repo.GetUsersByFamilyId(familyId)).Returns(users);
 
             var expectedDtos = users.Select(u => new UserDto
             {
                 Id = u.Id,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                Email = u.Email,
-                PasswordHash = u.PasswordHash,
+                FirstName = u.FirstName ?? string.Empty,
+                LastName = u.LastName ?? string.Empty,
+                Email = u.Email ?? string.Empty,
+                PasswordHash = u.PasswordHash ?? string.Empty,
                 FamilyId = u.FamilyId
             }).ToList();
 
-            _mockUserRepository.Setup(repo => repo.GetUsersByFamilyId(familyId)).Returns(users);
+            _mockUserRepository?.Setup(repo => repo.GetUsersByFamilyId(familyId)).Returns(users);
 
             // Act
-            var result = _userContainer.GetUsersByFamilyId(familyId);
+            var result = _userContainer?.GetUsersByFamilyId(familyId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -164,7 +164,7 @@ namespace TestProject
                 Assert.AreEqual(expectedDtos[i].FamilyId, result[i].FamilyId);
             }
 
-            _mockUserRepository.Verify(repo => repo.GetUsersByFamilyId(familyId), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUsersByFamilyId(familyId), Times.Once);
         }
 
         [TestMethod]
@@ -180,14 +180,15 @@ namespace TestProject
                 PasswordHash = hashedPassword
             };
 
-            _mockUserRepository.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
 
             // Act
             var result = await _userContainer.AuthenticateUserAsync(email, password);
 
             // Assert
+            
             Assert.IsTrue(result);
-            _mockUserRepository.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
         }
 
         [TestMethod]
@@ -197,14 +198,14 @@ namespace TestProject
             var email = "nonexistent@example.com";
             var password = "anyPassword";
 
-            _mockUserRepository.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
 
             // Act
-            var result = await _userContainer.AuthenticateUserAsync(email, password);
+            var result = await _userContainer?.AuthenticateUserAsync(email, password);
 
             // Assert
             Assert.IsFalse(result);
-            _mockUserRepository.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
         }
 
         [TestMethod]
@@ -221,14 +222,14 @@ namespace TestProject
                 PasswordHash = hashedPassword
             };
 
-            _mockUserRepository.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
 
             // Act
             var result = await _userContainer.AuthenticateUserAsync(email, password);
 
             // Assert
             Assert.IsFalse(result);
-            _mockUserRepository.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
         }
 
         [TestMethod]
@@ -237,14 +238,14 @@ namespace TestProject
             // Arrange
             var email = "newuser@example.com";
 
-            _mockUserRepository.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
 
             // Act
             var result = await _userContainer.IsAccountAvailableAsync(email);
 
             // Assert
             Assert.IsTrue(result);
-            _mockUserRepository.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
         }
 
         [TestMethod]
@@ -254,14 +255,14 @@ namespace TestProject
             var email = "existinguser@example.com";
 
             var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid());
-            _mockUserRepository.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
 
             // Act
             var result = await _userContainer.IsAccountAvailableAsync(email);
 
             // Assert
             Assert.IsFalse(result);
-            _mockUserRepository.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
         }
 
         [TestMethod]
@@ -276,21 +277,21 @@ namespace TestProject
 
             var expectedDtos = users.Select(u => new UserDto { Id = u.Id, FirstName = u.FirstName }).ToList();
 
-            _mockUserRepository.Setup(repo => repo.GetAllUsers()).Returns(users);
+            _mockUserRepository?.Setup(repo => repo.GetAllUsers()).Returns(users);
 
             // Act
-            var result = _userContainer.SearchUserByEmailOrName(string.Empty).ToList();
+            var result = _userContainer?.SearchUserByEmailOrName(string.Empty).ToList();
 
             // Assert
-            Assert.AreEqual(expectedDtos.Count, result.Count);
+            Assert.AreEqual(expectedDtos.Count, result?.Count);
             for (int i = 0; i < expectedDtos.Count; i++)
             {
-                Assert.AreEqual(expectedDtos[i].Id, result[i].Id);
-                Assert.AreEqual(expectedDtos[i].FirstName, result[i].FirstName);
+                Assert.AreEqual(expectedDtos[i].Id, result?[i].Id);
+                Assert.AreEqual(expectedDtos[i].FirstName, result?[i].FirstName);
             }
 
-            _mockUserRepository.Verify(repo => repo.GetAllUsers(), Times.Once);
-            _mockUserRepository.Verify(repo => repo.SearchUserByEmailOrName(It.IsAny<string>()), Times.Never);
+            _mockUserRepository?.Verify(repo => repo.GetAllUsers(), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.SearchUserByEmailOrName(It.IsAny<string>()), Times.Never);
         }
 
         [TestMethod]
@@ -303,23 +304,23 @@ namespace TestProject
         new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", Guid.NewGuid())
     };
 
-            var expectedDtos = users.Select(u => new UserDto { Id = u.Id, FirstName = u.FirstName }).ToList();
+            var expectedDtos = users.Select(u => new UserDto { Id = u.Id, FirstName = u.FirstName ?? string.Empty }).ToList();
 
-            _mockUserRepository.Setup(repo => repo.SearchUserByEmailOrName(search)).Returns(users);
+            _mockUserRepository?.Setup(repo => repo.SearchUserByEmailOrName(search)).Returns(users);
 
             // Act
-            var result = _userContainer.SearchUserByEmailOrName(search).ToList();
+            var result = _userContainer?.SearchUserByEmailOrName(search).ToList();
 
             // Assert
-            Assert.AreEqual(expectedDtos.Count, result.Count);
+            Assert.AreEqual(expectedDtos.Count, result?.Count);
             for (int i = 0; i < expectedDtos.Count; i++)
             {
-                Assert.AreEqual(expectedDtos[i].Id, result[i].Id);
-                Assert.AreEqual(expectedDtos[i].FirstName, result[i].FirstName);
+                Assert.AreEqual(expectedDtos[i].Id, result?[i].Id);
+                Assert.AreEqual(expectedDtos[i].FirstName, result?[i].FirstName);
             }
 
-            _mockUserRepository.Verify(repo => repo.SearchUserByEmailOrName(search), Times.Once);
-            _mockUserRepository.Verify(repo => repo.GetAllUsers(), Times.Never);
+            _mockUserRepository?.Verify(repo => repo.SearchUserByEmailOrName(search), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.GetAllUsers(), Times.Never);
         }
 
         [TestMethod]
@@ -346,10 +347,10 @@ namespace TestProject
             );
 
             // Act
-            _userContainer.CreateUser(userDto);
+            _userContainer?.CreateUser(userDto);
 
             // Assert
-            _mockUserRepository.Verify(repo => repo.CreateUser(It.Is<Models.User>(u => u.Email == userDto.Email && u.FirstName == userDto.FirstName)), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.CreateUser(It.Is<Models.User>(u => u.Email == userDto.Email && u.FirstName == userDto.FirstName)), Times.Once);
         }
 
         [TestMethod]
@@ -376,10 +377,10 @@ namespace TestProject
             );
 
             // Act
-            _userContainer.UpdateUser(userDto);
+            _userContainer?.UpdateUser(userDto);
 
             // Assert
-            _mockUserRepository.Verify(repo => repo.UpdateUser(It.Is<Models.User>(u => u.Id == userDto.Id && u.Email == userDto.Email)), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.UpdateUser(It.Is<Models.User>(u => u.Id == userDto.Id && u.Email == userDto.Email)), Times.Once);
         }
 
         [TestMethod]
@@ -408,20 +409,20 @@ namespace TestProject
 
             var expectedUser = new Models.User(
                 userDto.Id,
-                existingUser.FirstName, 
-                existingUser.LastName,
-                existingUser.Email,
-                existingUser.PasswordHash,
+                existingUser.FirstName ?? string.Empty, 
+                existingUser.LastName ?? string.Empty,
+                existingUser.Email ?? string.Empty,
+                existingUser.PasswordHash ?? string.Empty,
                 userDto.FamilyId 
             );
 
-            _mockUserRepository.Setup(repo => repo.GetUserById(userId)).Returns(existingUser);
+            _mockUserRepository?.Setup(repo => repo.GetUserById(userId)).Returns(existingUser);
 
             // Act
-            _userContainer.UpdateUserById(userId, userDto);
+            _userContainer?.UpdateUserById(userId, userDto);
 
             // Assert
-            _mockUserRepository.Verify(repo => repo.UpdateUserById(It.Is<Models.User>(u =>
+            _mockUserRepository?.Verify(repo => repo.UpdateUser(It.Is<Models.User>(u =>
                 u.Id == userDto.Id &&
                 u.FamilyId == userDto.FamilyId && 
                 u.FirstName == existingUser.FirstName && 
@@ -436,10 +437,10 @@ namespace TestProject
             var userId = Guid.NewGuid();
 
             // Act
-            _userContainer.DeleteUserById(userId);
+            _userContainer?.DeleteUserById(userId);
 
             // Assert
-            _mockUserRepository.Verify(repo => repo.DeleteUserById(userId), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.DeleteUserById(userId), Times.Once);
         }
 
         [TestMethod]
@@ -449,10 +450,10 @@ namespace TestProject
             var familyId = Guid.NewGuid();
 
             // Act
-            _userContainer.DeleteUserByFamilyId(familyId);
+            _userContainer?.DeleteUserByFamilyId(familyId);
 
             // Assert
-            _mockUserRepository.Verify(repo => repo.DeleteUserByFamilyId(familyId), Times.Once);
+            _mockUserRepository?.Verify(repo => repo.DeleteUserByFamilyId(familyId), Times.Once);
         }
 
     }

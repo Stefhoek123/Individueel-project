@@ -10,8 +10,8 @@ namespace TestProject;
 public class TextPostUnitTest
 {
 
-        private Mock<ITextPostRepository> _mockTextPostRepository;
-        private TextPostContainer _textPostContainer;
+        private Mock<ITextPostRepository>? _mockTextPostRepository;
+        private TextPostContainer? _textPostContainer;
 
         [TestInitialize]
         public void SetUp()
@@ -39,16 +39,16 @@ public class TextPostUnitTest
             }).ToList();
 
             // Set up the mock repository to return the list of TextPost objects
-            _mockTextPostRepository.Setup(repo => repo.GetAllTextPosts()).Returns(textPosts);
+            _mockTextPostRepository?.Setup(repo => repo.GetAllTextPosts()).Returns(textPosts);
 
             // Act
-            var result = _textPostContainer.GetAllTextPosts().ToList();
+            var result = _textPostContainer?.GetAllTextPosts().ToList();
 
             // Assert
-            Assert.AreEqual(expectedDtos.Count, result.Count);
-            Assert.AreEqual(expectedDtos[0].Id, result[0].Id);
-            Assert.AreEqual(expectedDtos[0].TextContent, result[0].TextContent);
-            Assert.AreEqual(expectedDtos[0].UserId, result[0].UserId);
+            Assert.AreEqual(expectedDtos.Count, result?.Count);
+            Assert.AreEqual(expectedDtos[0].Id, result?[0].Id);
+            Assert.AreEqual(expectedDtos[0].TextContent, result?[0].TextContent);
+            Assert.AreEqual(expectedDtos[0].UserId, result?[0].UserId);
         }
 
         [TestMethod]
@@ -59,7 +59,6 @@ public class TextPostUnitTest
             var userId = Guid.NewGuid();
             var textPost = new TextPost(textPostId, "Sample Title", userId);
 
-            // Manually map the TextPost to TextPostDto
             var expectedDto = new TextPostDto
             {
                 Id = textPost.Id,
@@ -67,11 +66,10 @@ public class TextPostUnitTest
                 UserId = textPost.UserId
             };
 
-            // Set up the mock repository to return the TextPost object when GetTextPostById is called
-            _mockTextPostRepository.Setup(repo => repo.GetTextPostById(textPostId)).Returns(textPost);
+            _mockTextPostRepository?.Setup(repo => repo.GetTextPostById(textPostId)).Returns(textPost);
 
             // Act
-            var result = _textPostContainer.GetTextPostById(textPostId);
+            var result = _textPostContainer?.GetTextPostById(textPostId);
 
             // Assert
             Assert.IsNotNull(result);
@@ -92,13 +90,13 @@ public class TextPostUnitTest
 
             var newGuid = Guid.NewGuid();
 
-            _mockTextPostRepository.Setup(repo => repo.CreateTextPost(It.IsAny<TextPost>()));
+            _mockTextPostRepository?.Setup(repo => repo.CreateTextPost(It.IsAny<TextPost>()));
 
             // Act
-            _textPostContainer.CreateTextPost(textPostDto);
+            _textPostContainer?.CreateTextPost(textPostDto);
 
             // Assert
-            _mockTextPostRepository.Verify(repo => repo.CreateTextPost(It.Is<TextPost>(tp =>
+            _mockTextPostRepository?.Verify(repo => repo.CreateTextPost(It.Is<TextPost>(tp =>
                 tp.TextContent == textPostDto.TextContent &&
                 tp.UserId == textPostDto.UserId &&
                 tp.Id != Guid.Empty)), Times.Once);
@@ -115,13 +113,13 @@ public class TextPostUnitTest
                 UserId = Guid.NewGuid()
             };
 
-            _mockTextPostRepository.Setup(repo => repo.UpdateTextPost(It.IsAny<TextPost>()));
+            _mockTextPostRepository?.Setup(repo => repo.UpdateTextPost(It.IsAny<TextPost>()));
 
             // Act
-            _textPostContainer.UpdateTextPost(textPostDto);
+            _textPostContainer?.UpdateTextPost(textPostDto);
 
             // Assert
-            _mockTextPostRepository.Verify(repo => repo.UpdateTextPost(It.Is<TextPost>(tp =>
+            _mockTextPostRepository?.Verify(repo => repo.UpdateTextPost(It.Is<TextPost>(tp =>
                 tp.Id == textPostDto.Id &&
                 tp.TextContent == textPostDto.TextContent &&
                 tp.UserId == textPostDto.UserId)), Times.Once);
@@ -134,9 +132,9 @@ public class TextPostUnitTest
             var postId = Guid.NewGuid(); 
 
             // Act
-            _textPostContainer.DeleteTextPostById(postId);
+            _textPostContainer?.DeleteTextPostById(postId);
 
             // Assert
-            _mockTextPostRepository.Verify(repo => repo.DeleteTextPostById(postId), Times.Once);
+            _mockTextPostRepository?.Verify(repo => repo.DeleteTextPostById(postId), Times.Once);
         }
 }

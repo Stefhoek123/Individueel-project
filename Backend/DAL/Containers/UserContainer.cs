@@ -52,10 +52,10 @@ public class UserContainer : IUserContainer
     public async Task<bool> IsAccountAvailableAsync(string email)
     {
         var user = await _userRepository.GetUserByEmailAsync(email);
-        return user == null; // If null, account is not registered
+        return user == null; 
     }
 
-    private bool VerifyPassword(string plainPassword, string hashedPassword)
+    private static bool VerifyPassword(string plainPassword, string hashedPassword)
     {
         // Use a secure password hashing library, e.g., BCrypt
         return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
@@ -87,7 +87,7 @@ public class UserContainer : IUserContainer
         
         userUpdate.FamilyId = user.FamilyId;
 
-        _userRepository.UpdateUserById(Mappers.UserMapper.ToModel(userUpdate));
+        _userRepository.UpdateUser(Mappers.UserMapper.ToModel(userUpdate));
     }
 
     // DELETE of a user op basis van user ID 
