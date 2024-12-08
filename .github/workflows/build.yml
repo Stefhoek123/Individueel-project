@@ -45,9 +45,6 @@ jobs:
         run: |
           cd backend\testproject
           dotnet test .\TestProject.csproj --logger:trx --results-directory:./test-results
-      - name: List test results directory
-        run: |
-          ls ./test-results
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
