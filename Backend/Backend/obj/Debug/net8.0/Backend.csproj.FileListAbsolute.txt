@@ -170,3 +170,4 @@ C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\obj\Debug\ne
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\obj\Debug\net8.0\ref\Backend.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\obj\Debug\net8.0\Backend.sourcelink.json
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\BCrypt.Net-Next.dll

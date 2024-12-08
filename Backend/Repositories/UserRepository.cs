@@ -35,8 +35,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserByEmailAsync(string email)
     {
-        return await _backendDbContext.Users
-            .SingleOrDefaultAsync(u => u.Email == email);
+        return await _backendDbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
     }
 
     public IEnumerable<User> SearchUserByEmailOrName(string search)

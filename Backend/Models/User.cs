@@ -23,7 +23,9 @@ namespace Models
         public string Email { get; set; }
 
         [ForeignKey(nameof(FamilyId))]
-        public Guid FamilyId { get; init; }
+        public Guid FamilyId { get; set; }
+
+        public User() { }
 
         public User(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId)
         {
@@ -35,7 +37,6 @@ namespace Models
             FamilyId = familyId;
         }
 
-        // Method to verify password
         public bool VerifyPassword(string plainPassword)
         {
             return BCrypt.Net.BCrypt.Verify(plainPassword, PasswordHash);

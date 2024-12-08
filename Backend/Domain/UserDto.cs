@@ -18,13 +18,13 @@ namespace Domain
 
         public Guid FamilyId { get; set; }
 
-        public UserDto(Guid id, string firstName, string lastName, string email, string password, Guid familyId)
+        public UserDto(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
-            PasswordHash = password;
+            PasswordHash = plainPassword;
             FamilyId = familyId;
         }
 
