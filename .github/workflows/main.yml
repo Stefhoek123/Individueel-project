@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./  # Root directory as the build context
-          file: ./Backend/Backend/Dockerfile  # Specify the path to the Dockerfile
+          file: ./Backend/Dockerfile  # Specify the path to the Dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-backend:latest
 
