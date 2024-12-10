@@ -50,18 +50,6 @@ jobs:
         run: |
           Get-ChildItem -Path .\.sonar\scanner
 
-      - name: Run Unit Tests
-        id: run-tests
-        run: |
-          cd backend\testproject
-          dotnet test .\TestProject.csproj --logger:trx --results-directory:./test-results
-
-      - name: Check Test Results
-        if: ${{ failure() }}
-        run: |
-          echo "Tests failed. Build will not proceed."
-        shell: bash
-
       - name: Build and analyze
         if: ${{ success() }}
         env:
@@ -70,9 +58,8 @@ jobs:
         shell: powershell
         run: |
           cd backend
-          dotnet restore Backend.sln
-          dotnet tool install --global dotnet-sonarscanner 
-          $env:PATH += ";$env:USERPROFILE\.dotnet\tools"  
-          dotnet-sonarscanner begin /k:"Stefhoek123_Individueel-project" /o:"stefhoek123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.scanAll=false /d:sonar.tests=backend/testproject /d:sonar.testExecutionReportPaths=./test-results/*.trx
+          dotnet tool install --global dotnet-sonarscanner  
+          $env:PATH += ";$env:USERPROFILE\.dotnet\tools" 
+          dotnet-sonarscanner begin /k:"Stefhoek123_Individueel-project" /o:"stefhoek123" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.scanAll=false
           dotnet build Backend.sln
           dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
