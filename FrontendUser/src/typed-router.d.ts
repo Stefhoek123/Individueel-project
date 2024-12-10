@@ -19,12 +19,16 @@ declare module 'vue-router/auto-routes' {
    */
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
+    '/add': RouteRecordInfo<'/add', '/add', Record<never, never>, Record<never, never>>,
     '/families/[id]': RouteRecordInfo<'/families/[id]', '/families/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/families/create': RouteRecordInfo<'/families/create', '/families/create', Record<never, never>, Record<never, never>>,
     '/family': RouteRecordInfo<'/family', '/family', Record<never, never>, Record<never, never>>,
-    '/posts/create': RouteRecordInfo<'/posts/create', '/posts/create', Record<never, never>, Record<never, never>>,
+    '/imageposts/[id]': RouteRecordInfo<'/imageposts/[id]', '/imageposts/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/imageposts/create': RouteRecordInfo<'/imageposts/create', '/imageposts/create', Record<never, never>, Record<never, never>>,
+    '/imageposts/update/[id]': RouteRecordInfo<'/imageposts/update/[id]', '/imageposts/update/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/sign-up': RouteRecordInfo<'/sign-up', '/sign-up', Record<never, never>, Record<never, never>>,
     '/textposts/[id]': RouteRecordInfo<'/textposts/[id]', '/textposts/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/textposts/create': RouteRecordInfo<'/textposts/create', '/textposts/create', Record<never, never>, Record<never, never>>,
     '/textposts/update/[id]': RouteRecordInfo<'/textposts/update/[id]', '/textposts/update/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/users/[id]': RouteRecordInfo<'/users/[id]', '/users/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/users/create': RouteRecordInfo<'/users/create', '/users/create', Record<never, never>, Record<never, never>>,

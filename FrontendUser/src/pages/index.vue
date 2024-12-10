@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { TextPostDto } from "@/api/api";
-import { TextPostClient } from "@/api/api";
+import type { TextPostDto, ImagePostDto } from "@/api/api";
+import { TextPostClient, ImagePostClient } from "@/api/api";
 
 // Register components
 const textPosts = ref<TextPostDto[]>([]);
 const client = new TextPostClient();
+const imagePosts = ref<ImagePostDto[]>([]);
+const imageClient = new ImagePostClient();
 
 onMounted(() => {
   loadData();
@@ -15,8 +17,10 @@ async function loadData(){
   try {
     const textPostsData = await client.getAllTextPosts();
     textPosts.value = textPostsData;
+    const imagePostsData = await imageClient.getAllImagePosts();
+    imagePosts.value = imagePostsData;
   } catch (error) {
-    console.error("Failed to load text posts:", error);
+    console.error("Failed to load posts:", error);
   }
 }
 </script>
@@ -38,6 +42,22 @@ async function loadData(){
       </v-col>
     </v-row>
   </div>
+  <div class="d-flex justify-center">
+    <v-row justify="center">
+      <p>dfjslkjf</p>
+      <v-col cols="12" md="8" v-for="item in imagePosts" :key="item.id">
+        <v-card color="#1F7087" class="card">
+          <div class="d-flex flex-no-wrap justify-space-between"> 
+            <v-card-title class="text-h5">
+              <RouterLink :to="`/textposts/${item.id}`">
+              {{ item.description }}
+            </RouterLink>
+            </v-card-title>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </div>
 </template>
 
@@ -48,7 +68,7 @@ async function loadData(){
 }
 
 .card {
-  margin: 20px auto; /* Adds vertical spacing and ensures horizontal centering */
+  margin: 20px auto; 
   padding: 20px;
   background-color: #1F7087;
   color: white;

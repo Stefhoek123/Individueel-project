@@ -1,27 +1,30 @@
 <script setup lang="ts">
-import { FamilyClient, FamilyDto } from '@/api/api'
+import { TextPostClient, TextPostDto, UserClient, UserDto } from '@/api/api'
 
 const router = useRouter()
 
-interface Family {
-  familyName: string
+interface TextPost {
+ textContent: string
 }
 
-const client = new FamilyClient()
-
-const family = ref<Family>({
-  familyName: '',
+const textPost = ref<TextPost>({
+  textContent: '',
 })
+
+const client = new TextPostClient()
+const userClient = new UserClient()
+const user = ref<UserDto | null>(null)
 
 async function submit() {
 
-    const model = new FamilyDto({
-      familyName: family.value.familyName,
+    const model = new TextPostDto({
+      textContent: textPost.value.textContent,
+      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
     })
 
-    await client.createFamily(model)
+    await client.createTextPost(model)
 
-    await router.push('/manage-families')
+    await router.push('/')
   }
 
 
@@ -31,16 +34,16 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
-  <VCard title="Create Families" class="vcard">
+  <VCard title="Create new text post" class="vcard">
     <VForm
       validate-on="blur"
       @submit.prevent="submit"
     >
       <VCardText>
-        <VTextField
-          v-model="family.familyName"
-          label="Familyname"
-          :rules="[required('Familyname')]"
+        <VTextarea
+          v-model="textPost.textContent"
+          label="TextContent"
+          :rules="[required('TextContent')]"
           class="mb-2"
         />
       </VCardText>
