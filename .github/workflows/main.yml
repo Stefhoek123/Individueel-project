@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: Backend/Dockerfile
+          file: Backend/Backend/Dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-backend:latest
 
