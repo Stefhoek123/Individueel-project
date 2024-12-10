@@ -25,10 +25,10 @@ jobs:
       - name: Build and push Backend image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Backend/Backend/Dockerfile
-          push: true
-          tags: stefhoek/s3-dbo2t-backend:latest
+           context: ./backend
+           file: backend/backend/Dockerfile
+           push: true
+           tags: stefhoek/s3-dbo2t-backend:latest
 
       # Step 4: Build and push Frontend image
       - name: Build and push Frontend image
