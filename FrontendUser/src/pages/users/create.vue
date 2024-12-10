@@ -69,7 +69,6 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
-  <HeaderComponent />
   <VCard title="Create Users" class="vcard">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
@@ -113,7 +112,6 @@ function required(fieldName: string): (v: string) => true | string {
       </VCardActions>
     </VForm>
   </VCard>
-  <FooterComponent />
 </template>
 
 <style scoped>

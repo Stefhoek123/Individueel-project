@@ -27,9 +27,11 @@ async function loadData(){
     <v-row justify="center">
       <v-col cols="12" md="8" v-for="item in textPosts" :key="item.id">
         <v-card color="#1F7087" class="card">
-          <div class="d-flex flex-no-wrap justify-space-between">
+          <div class="d-flex flex-no-wrap justify-space-between"> 
             <v-card-title class="text-h5">
+              <RouterLink :to="`/textposts/${item.id}`">
               {{ item.textContent }}
+            </RouterLink>
             </v-card-title>
           </div>
         </v-card>
