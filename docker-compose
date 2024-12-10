@@ -3,8 +3,8 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./Backend/Backend
-      dockerfile: Dockerfile
+      context: .Backend
+      dockerfile: dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -15,7 +15,7 @@ services:
   frontend:
     build:
       context: ./Frontend
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3000:80"
     networks:
@@ -24,7 +24,7 @@ services:
   frontenduser:
     build:
       context: ./FrontendUser
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     ports:
       - "3001:80"
     networks:
