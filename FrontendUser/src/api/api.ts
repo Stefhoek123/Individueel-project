@@ -267,7 +267,7 @@ export class FamilyClient {
     }
 }
 
-export class ImagePostClient {
+export class PostClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -277,8 +277,8 @@ export class ImagePostClient {
         this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
-    getAllImagePosts(): Promise<ImagePostDto[]> {
-        let url_ = this.baseUrl + "/api/ImagePost/GetAllImagePosts";
+    getAllPosts(): Promise<PostDto[]> {
+        let url_ = this.baseUrl + "/api/Post/GetAllPosts";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -289,11 +289,11 @@ export class ImagePostClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAllImagePosts(_response);
+            return this.processGetAllPosts(_response);
         });
     }
 
-    protected processGetAllImagePosts(response: Response): Promise<ImagePostDto[]> {
+    protected processGetAllPosts(response: Response): Promise<PostDto[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -303,7 +303,7 @@ export class ImagePostClient {
             if (Array.isArray(resultData200)) {
                 result200 = [] as any;
                 for (let item of resultData200)
-                    result200!.push(ImagePostDto.fromJS(item));
+                    result200!.push(PostDto.fromJS(item));
             }
             else {
                 result200 = <any>null;
@@ -315,11 +315,11 @@ export class ImagePostClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ImagePostDto[]>(null as any);
+        return Promise.resolve<PostDto[]>(null as any);
     }
 
-    getImagePostById(id: string | undefined): Promise<ImagePostDto> {
-        let url_ = this.baseUrl + "/api/ImagePost/GetImagePostById?";
+    getPostById(id: string | undefined): Promise<PostDto> {
+        let url_ = this.baseUrl + "/api/Post/GetPostById?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
         else if (id !== undefined)
@@ -334,18 +334,18 @@ export class ImagePostClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetImagePostById(_response);
+            return this.processGetPostById(_response);
         });
     }
 
-    protected processGetImagePostById(response: Response): Promise<ImagePostDto> {
+    protected processGetPostById(response: Response): Promise<PostDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ImagePostDto.fromJS(resultData200);
+            result200 = PostDto.fromJS(resultData200);
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -353,14 +353,14 @@ export class ImagePostClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<ImagePostDto>(null as any);
+        return Promise.resolve<PostDto>(null as any);
     }
 
-    createImagePost(imagePost: ImagePostDto): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/ImagePost/CreateImagePost";
+    createPost(post: PostDto): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Post/CreatePost";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(imagePost);
+        const content_ = JSON.stringify(post);
 
         let options_: RequestInit = {
             body: content_,
@@ -372,11 +372,11 @@ export class ImagePostClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCreateImagePost(_response);
+            return this.processCreatePost(_response);
         });
     }
 
-    protected processCreateImagePost(response: Response): Promise<FileResponse> {
+    protected processCreatePost(response: Response): Promise<FileResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200 || status === 206) {
@@ -398,11 +398,11 @@ export class ImagePostClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    updateImagePost(imagePost: ImagePostDto): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/ImagePost/UpdateImagePost";
+    updatePost(post: PostDto): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Post/UpdatePost";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(imagePost);
+        const content_ = JSON.stringify(post);
 
         let options_: RequestInit = {
             body: content_,
@@ -414,11 +414,11 @@ export class ImagePostClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUpdateImagePost(_response);
+            return this.processUpdatePost(_response);
         });
     }
 
-    protected processUpdateImagePost(response: Response): Promise<FileResponse> {
+    protected processUpdatePost(response: Response): Promise<FileResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200 || status === 206) {
@@ -440,8 +440,8 @@ export class ImagePostClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    deleteImagePostById(id: string | undefined): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/ImagePost/DeleteImagePostById?";
+    deletePostById(id: string | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Post/DeletePostById?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
         else if (id !== undefined)
@@ -456,11 +456,11 @@ export class ImagePostClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDeleteImagePostById(_response);
+            return this.processDeletePostById(_response);
         });
     }
 
-    protected processDeleteImagePostById(response: Response): Promise<FileResponse> {
+    protected processDeletePostById(response: Response): Promise<FileResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200 || status === 206) {
@@ -532,222 +532,6 @@ export class SessionClient {
             });
         }
         return Promise.resolve<string[]>(null as any);
-    }
-}
-
-export class TextPostClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
-    }
-
-    getAllTextPosts(): Promise<TextPostDto[]> {
-        let url_ = this.baseUrl + "/api/TextPost/GetAllTextPosts";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetAllTextPosts(_response);
-        });
-    }
-
-    protected processGetAllTextPosts(response: Response): Promise<TextPostDto[]> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(TextPostDto.fromJS(item));
-            }
-            else {
-                result200 = <any>null;
-            }
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<TextPostDto[]>(null as any);
-    }
-
-    getTextPostById(id: string | undefined): Promise<TextPostDto> {
-        let url_ = this.baseUrl + "/api/TextPost/GetTextPostById?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetTextPostById(_response);
-        });
-    }
-
-    protected processGetTextPostById(response: Response): Promise<TextPostDto> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = TextPostDto.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<TextPostDto>(null as any);
-    }
-
-    createTextPost(textPost: TextPostDto): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/TextPost/CreateTextPost";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(textPost);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCreateTextPost(_response);
-        });
-    }
-
-    protected processCreateTextPost(response: Response): Promise<FileResponse> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
-            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
-            if (fileName) {
-                fileName = decodeURIComponent(fileName);
-            } else {
-                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            }
-            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FileResponse>(null as any);
-    }
-
-    updateTextPost(textPost: TextPostDto): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/TextPost/UpdateTextPost";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(textPost);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUpdateTextPost(_response);
-        });
-    }
-
-    protected processUpdateTextPost(response: Response): Promise<FileResponse> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
-            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
-            if (fileName) {
-                fileName = decodeURIComponent(fileName);
-            } else {
-                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            }
-            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FileResponse>(null as any);
-    }
-
-    deleteTextPostById(id: string | undefined): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/TextPost/DeleteTextPostById?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/octet-stream"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processDeleteTextPostById(_response);
-        });
-    }
-
-    protected processDeleteTextPostById(response: Response): Promise<FileResponse> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
-            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
-            if (fileName) {
-                fileName = decodeURIComponent(fileName);
-            } else {
-                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            }
-            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FileResponse>(null as any);
     }
 }
 
@@ -1305,64 +1089,13 @@ export interface IFamilyDto {
     familyName: string;
 }
 
-export class ImagePostDto implements IImagePostDto {
-    id?: string;
-    alt!: string;
-    url!: string;
-    description!: string;
-    userId?: string;
-
-    constructor(data?: IImagePostDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.alt = _data["alt"];
-            this.url = _data["url"];
-            this.description = _data["description"];
-            this.userId = _data["userId"];
-        }
-    }
-
-    static fromJS(data: any): ImagePostDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ImagePostDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["alt"] = this.alt;
-        data["url"] = this.url;
-        data["description"] = this.description;
-        data["userId"] = this.userId;
-        return data;
-    }
-}
-
-export interface IImagePostDto {
-    id?: string;
-    alt: string;
-    url: string;
-    description: string;
-    userId?: string;
-}
-
-export class TextPostDto implements ITextPostDto {
+export class PostDto implements IPostDto {
     id?: string;
     textContent!: string;
+    imageUrl?: string;
     userId?: string;
 
-    constructor(data?: ITextPostDto) {
+    constructor(data?: IPostDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1375,13 +1108,14 @@ export class TextPostDto implements ITextPostDto {
         if (_data) {
             this.id = _data["id"];
             this.textContent = _data["textContent"];
+            this.imageUrl = _data["imageUrl"];
             this.userId = _data["userId"];
         }
     }
 
-    static fromJS(data: any): TextPostDto {
+    static fromJS(data: any): PostDto {
         data = typeof data === 'object' ? data : {};
-        let result = new TextPostDto();
+        let result = new PostDto();
         result.init(data);
         return result;
     }
@@ -1390,14 +1124,16 @@ export class TextPostDto implements ITextPostDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["textContent"] = this.textContent;
+        data["imageUrl"] = this.imageUrl;
         data["userId"] = this.userId;
         return data;
     }
 }
 
-export interface ITextPostDto {
+export interface IPostDto {
     id?: string;
     textContent: string;
+    imageUrl?: string;
     userId?: string;
 }
 
