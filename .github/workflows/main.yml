@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./Frontend
-          file: Dockerfile
+          file: dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-frontend:latest
 
@@ -39,6 +39,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./FrontendUser
-          file: Dockerfile
+          file: dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-frontenduser:latest
