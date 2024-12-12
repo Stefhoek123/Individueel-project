@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { PostDto} from "@/api/api";
-import { PostClient, PostClient } from "@/api/api";
+import { PostClient } from "@/api/api";
 
 // Register components
 const posts = ref<PostDto[]>([]);

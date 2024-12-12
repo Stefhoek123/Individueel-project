@@ -22,7 +22,7 @@ interface Family {
 const client = new UserClient();
 const familyClient = new FamilyClient();
 const families = ref<Family[]>([]);
-const selectedFamilies = ref<string | null>(null);
+// const selectedFamilies = ref<string | null>(null);
 
 const user = ref<User>({
   firstName: "",
