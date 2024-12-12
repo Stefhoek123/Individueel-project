@@ -27,7 +27,7 @@ services:
       dockerfile: dockerfile
     ports:
       - "3001:80"
-    networks:
+    networks: 
       - app-network
 
 networks:
