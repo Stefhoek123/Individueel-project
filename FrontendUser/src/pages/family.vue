@@ -12,10 +12,14 @@ onMounted(() => {
   loadData();
 });
 
-async function loadData(){
+async function loadData() {
   try {
     const familyMembersData = await client.getFamilyById(props.id);
-    familyMembers.value = familyMembersData;
+    if (Array.isArray(familyMembersData)) {
+      familyMembers.value = familyMembersData;
+    } else {
+      familyMembers.value = [familyMembersData]; // Wrap it in an array
+    }
   } catch (error) {
     console.error("Failed to load family members:", error);
   }
@@ -23,23 +27,23 @@ async function loadData(){
 </script>
 
 <template>
-    <div>
-        <h1>My Family</h1>
-        <ul>
-            <li v-for="member in family" :key="member.id">{{ member.name }}</li>
-        </ul>
-    </div>
+  <div>
+    <h1>My Family</h1>
+    <ul>
+      <li v-for="member in family" :key="member.id">{{ member.name }}</li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
 h1 {
-    color: #333;
+  color: #333;
 }
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 li {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 </style>

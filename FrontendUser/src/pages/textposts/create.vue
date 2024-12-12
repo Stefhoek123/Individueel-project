@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { TextPostClient, TextPostDto, UserClient, UserDto } from '@/api/api'
+import { TextPostClient, TextPostDto } from '@/api/api'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
