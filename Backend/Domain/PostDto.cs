@@ -2,21 +2,23 @@
 
 namespace Domain;
 
-public class TextPostDto
+public class PostDto
 {
     public Guid Id { get; set; }
 
     [Required]
     public string TextContent { get; set; } = null!;
+    public string ImageUrl { get; set; } = null!;   
 
     public Guid UserId { get; init; }
 
-    public TextPostDto(Guid id, string textContent, Guid userId)
+    public PostDto(Guid id, string textContent, string imageUrl, Guid userId)
     {
         Id = id;
         TextContent = textContent;
+        ImageUrl = imageUrl;
         UserId = userId;
     }
 
-    public TextPostDto() { }
+    public PostDto() { }
 }

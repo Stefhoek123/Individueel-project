@@ -2,17 +2,19 @@
 
 namespace Models;
 
-public class TextPost : BaseModel
+public class Post : BaseModel
 {
     public string TextContent { get; set; }
+    public string ImageUrl { get; set; }    
 
     [ForeignKey(nameof(UserId))]
     public Guid UserId { get; init; }
 
-    public TextPost(Guid id, string textContent, Guid userId)
+    public Post(Guid id, string textContent, string imageUrl, Guid userId)
     {
         Id = id;
         TextContent = textContent;
+        ImageUrl = imageUrl;
         UserId = userId;
     }
 }

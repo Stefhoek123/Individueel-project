@@ -20,8 +20,7 @@ public class BackendDbContext : DbContext, IDesignTimeDbContextFactory<BackendDb
 
     public DbSet<Chat> Chats { get; set; }
     public DbSet<Family> Families { get; set; }
-    public DbSet<ImagePost> ImagePosts { get; set; }
-    public DbSet<TextPost> TextPosts { get; set; }
+    public DbSet<Post> Posts { get; set; }
     public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
