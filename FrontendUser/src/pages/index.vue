@@ -1,27 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { TextPostDto, ImagePostDto } from "@/api/api";
-import { TextPostClient, ImagePostClient } from "@/api/api";
+import type { PostDto} from "@/api/api";
+import { PostClient, PostClient } from "@/api/api";
 
 // Register components
-const textPosts = ref<TextPostDto[]>([]);
-const client = new TextPostClient();
-const imagePosts = ref<ImagePostDto[]>([]);
-const imageClient = new ImagePostClient();
+const posts = ref<PostDto[]>([]);
+const client = new PostClient();
 
 onMounted(() => {
   loadData();
 });
 
 async function loadData(){
-  try {
-    const textPostsData = await client.getAllTextPosts();
-    textPosts.value = textPostsData;
-    const imagePostsData = await imageClient.getAllImagePosts();
-    imagePosts.value = imagePostsData;
-  } catch (error) {
-    console.error("Failed to load posts:", error);
-  }
+    const postsData = await client.getAllPosts();
+    posts.value = postsData;
 }
 </script>
 
@@ -29,29 +21,14 @@ async function loadData(){
   <div class="outline">
   <div class="d-flex justify-center">
     <v-row justify="center">
-      <v-col cols="12" md="8" v-for="item in textPosts" :key="item.id">
+      <v-col cols="12" md="8" v-for="item in posts" :key="item.id">
         <v-card color="#1F7087" class="card">
           <div class="d-flex flex-no-wrap justify-space-between"> 
             <v-card-title class="text-h5">
-              <RouterLink :to="`/textposts/${item.id}`">
+              <RouterLink :to="`/posts/${item.id}`">
               {{ item.textContent }}
             </RouterLink>
-            </v-card-title>
-          </div>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
-  <div class="d-flex justify-center">
-    <v-row justify="center">
-      <p>dfjslkjf</p>
-      <v-col cols="12" md="8" v-for="item in imagePosts" :key="item.id">
-        <v-card color="#1F7087" class="card">
-          <div class="d-flex flex-no-wrap justify-space-between"> 
-            <v-card-title class="text-h5">
-              <RouterLink :to="`/textposts/${item.id}`">
-              {{ item.description }}
-            </RouterLink>
+            {{ item.imageUrl }}
             </v-card-title>
           </div>
         </v-card>

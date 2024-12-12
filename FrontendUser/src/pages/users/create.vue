@@ -34,7 +34,6 @@ const user = ref<User>({
 
 onMounted(async () => {
   families.value = await getFamilies();
-  console.log(families.value);
 });
 
 async function getFamilies() {
@@ -47,7 +46,6 @@ async function getFamilies() {
 
 async function submit(event: SubmitEventPromise) {
   const { valid } = await event;
-  console.log(selectedFamilies.value);
 
   if (valid) {
     const model = new UserDto({

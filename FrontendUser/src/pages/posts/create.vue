@@ -1,32 +1,33 @@
 <script setup lang="ts">
-import { TextPostClient, TextPostDto } from '@/api/api'
+import { PostClient, PostDto } from '@/api/api'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-interface TextPost {
+interface Post {
  textContent: string
+ imageUrl: string
 }
 
-const textPost = ref<TextPost>({
+const post = ref<Post>({
   textContent: '',
+  imageUrl: '',
 })
 
-const client = new TextPostClient()
+const client = new PostClient()
 
 async function submit() {
 
-    const model = new TextPostDto({
-      textContent: textPost.value.textContent,
+    const model = new PostDto({
+      textContent: post.value.textContent,
+      imageUrl: post.value.imageUrl,
       userId: "10000000-0000-0000-0000-000000000000", // change when you can login
     })
 
-    await client.createTextPost(model)
-
+    await client.createPost(model)
     await router.push('/')
   }
-
 
 function required(fieldName: string): (v: string) => true | string {
   return v => !!v || `${fieldName} is required`
@@ -41,9 +42,16 @@ function required(fieldName: string): (v: string) => true | string {
     >
       <VCardText>
         <VTextarea
-          v-model="textPost.textContent"
+          v-model="post.textContent"
           label="TextContent"
           :rules="[required('TextContent')]"
+          class="mb-2"
+        />
+        <!--aanpassen naar iets te kiezen-->
+        <VTextarea
+          v-model="post.imageUrl"
+          label="ImageUrl"
+          :rules="[required('ImageUrl')]"
           class="mb-2"
         />
       </VCardText>

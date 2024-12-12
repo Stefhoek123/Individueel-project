@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { TextPostDto, UserDto } from "@/api/api";
+import { PostDto, UserDto } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
-import { TextPostClient, UserClient } from "@/api/api";
+import { PostClient, UserClient } from "@/api/api";
 
-const client = new TextPostClient();
+const client = new PostClient();
 const userClient = new UserClient();
-const textPost = ref<TextPostDto | null>(null);
+const post = ref<PostDto | null>(null);
 const users = ref<UserDto[]>([]);
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
@@ -19,32 +19,30 @@ const route = useRoute();
 const routeId = (route.params as { id: string }).id;
 
 onMounted(() => {
-  getTextPostsById();
+  getPostsById();
 });
 
-async function getTextPostsById() {
-  textPost.value = await client.getTextPostById(routeId);
+async function getPostsById() {
+  post.value = await client.getPostById(routeId);
   users.value = await userClient.getUsersByFamilyId(routeId);
-  console.log("Family:", textPost.value);
-  console.log("Users:", users.value);
 }
 
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
-    title: "Delete textpost",
+    title: "Delete post",
     message:
-      "Are you sure you want to delete this textpost? It cannot be undone.",
+      "Are you sure you want to delete this post? It cannot be undone.",
     okButton: "Delete Forever",
     cancelButton: "Cancel",
   });
 
   if (confirmed) {
-    await deleteTextPostById(id);
+    await deletePostById(id);
   }
 }
 
-async function deleteTextPostById(id: string) {
-  await client.deleteTextPostById(id);
+async function deletePostById(id: string) {
+  await client.deletePostById(id);
   await router.push("/");
 }
 </script>
@@ -53,9 +51,9 @@ async function deleteTextPostById(id: string) {
   <div>
     <ConfirmDialogue ref="confirmDialogueRef" />
     <div>
-      <v-container class="text-center" v-if="textPost">
+      <v-container class="text-center" v-if="post">
         <VCardTitle class="title-achievement">
-          {{ textPost.userId }}
+          {{ post.userId }}
         </VCardTitle>
         <v-row justify="center" class="my-5">
           <v-col cols="12" sm="8">
@@ -75,7 +73,7 @@ async function deleteTextPostById(id: string) {
                   <p class="headline">&nbsp;</p>
                 </v-col>
                 <v-col cols="2">
-                  <router-link :to="`/textposts/update/${routeId}`">
+                  <router-link :to="`/posts/update/${routeId}`">
                     <VBtn
                       icon="mdi-pen"
                       variant="plain"

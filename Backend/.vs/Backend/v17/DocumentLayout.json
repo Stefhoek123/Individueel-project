@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BC3BF3CD-5AFE-4729-B9AB-9AA3690799F5}|Models\\Models.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC3BF3CD-5AFE-4729-B9AB-9AA3690799F5}|Models\\Models.csproj|solutionrelative:models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\repositories\\backenddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\backenddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{93090844-A1BE-486F-8D47-51598A208840}|TestProject\\TestProject.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\testproject\\postunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93090844-A1BE-486F-8D47-51598A208840}|TestProject\\TestProject.csproj|solutionrelative:testproject\\postunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -29,18 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\domain\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|solutionrelative:domain\\postdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BC3BF3CD-5AFE-4729-B9AB-9AA3690799F5}|Models\\Models.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC3BF3CD-5AFE-4729-B9AB-9AA3690799F5}|Models\\Models.csproj|solutionrelative:models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BC3BF3CD-5AFE-4729-B9AB-9AA3690799F5}|Models\\Models.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\models\\family.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -133,10 +137,6 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\fbc8ca9976ede8e3552c51a1e332b8d656a50f03\\UserMapper.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\repositories\\backenddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\backenddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\mappers\\chatmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\mappers\\chatmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -211,59 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IPostContainer.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IPostContainer.cs",
-              "RelativeDocumentMoniker": "DAL\\Interfaces\\IPostContainer.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IPostContainer.cs",
-              "RelativeToolTip": "DAL\\Interfaces\\IPostContainer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:45:10.427Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "PostMapper.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\PostMapper.cs",
-              "RelativeDocumentMoniker": "DAL\\Mappers\\PostMapper.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\PostMapper.cs",
-              "RelativeToolTip": "DAL\\Mappers\\PostMapper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T10:03:57.546Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PostContainer.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
-              "RelativeDocumentMoniker": "DAL\\Containers\\PostContainer.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
-              "RelativeToolTip": "DAL\\Containers\\PostContainer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:41:55.615Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PostController.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:47:02.513Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Backend\\Program.cs",
@@ -276,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "PostUnitTest.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\TestProject\\PostUnitTest.cs",
               "RelativeDocumentMoniker": "TestProject\\PostUnitTest.cs",
@@ -289,20 +237,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PostDto.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\PostDto.cs",
-              "RelativeDocumentMoniker": "Domain\\PostDto.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\PostDto.cs",
-              "RelativeToolTip": "Domain\\PostDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "IPostRepository.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IPostRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IPostRepository.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IPostRepository.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\IPostRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:59:17.527Z",
+              "WhenOpened": "2024-11-05T13:40:16.036Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
+              "Title": "PostRepository.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\PostRepository.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
+              "RelativeToolTip": "Repositories\\PostRepository.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAIwBAAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T13:37:45.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BackendDbContext.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\BackendDbContext.cs",
+              "RelativeDocumentMoniker": "Repositories\\BackendDbContext.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\BackendDbContext.cs",
+              "RelativeToolTip": "Repositories\\BackendDbContext.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAwwBQAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T08:32:34.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Post.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Models\\Post.cs",
               "RelativeDocumentMoniker": "Models\\Post.cs",
@@ -315,33 +289,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PostRepository.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\PostRepository.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
-              "RelativeToolTip": "Repositories\\PostRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "DocumentIndex": 6,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:37:45.031Z",
+              "WhenOpened": "2024-11-05T13:47:02.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PostContainer.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
+              "RelativeDocumentMoniker": "DAL\\Containers\\PostContainer.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
+              "RelativeToolTip": "DAL\\Containers\\PostContainer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T13:41:55.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IPostContainer.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IPostContainer.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IPostContainer.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IPostContainer.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IPostContainer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T13:45:10.427Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "IPostRepository.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IPostRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IPostRepository.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IPostRepository.cs",
-              "RelativeToolTip": "Repositories\\Interfaces\\IPostRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Title": "PostMapper.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\PostMapper.cs",
+              "RelativeDocumentMoniker": "DAL\\Mappers\\PostMapper.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\PostMapper.cs",
+              "RelativeToolTip": "DAL\\Mappers\\PostMapper.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T13:40:16.036Z",
+              "WhenOpened": "2024-11-05T10:03:57.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "PostDto.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\PostDto.cs",
+              "RelativeDocumentMoniker": "Domain\\PostDto.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\PostDto.cs",
+              "RelativeToolTip": "Domain\\PostDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T09:59:17.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Family.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Models\\Family.cs",
               "RelativeDocumentMoniker": "Models\\Family.cs",
@@ -353,7 +366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -365,7 +378,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "SessionController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\SessionController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\SessionController.cs",
@@ -377,7 +390,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "Backend\\appsettings.json",
@@ -389,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SessionVariables.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\SessionVariables.cs",
               "RelativeDocumentMoniker": "Backend\\SessionVariables.cs",
@@ -401,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "UserUnitTest.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\TestProject\\UserUnitTest.cs",
               "RelativeDocumentMoniker": "TestProject\\UserUnitTest.cs",
@@ -413,7 +426,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "UserContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Containers\\UserContainer.cs",
@@ -425,7 +438,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "FamilyUnitTest.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\TestProject\\FamilyUnitTest.cs",
               "RelativeDocumentMoniker": "TestProject\\FamilyUnitTest.cs",
@@ -437,7 +450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
@@ -449,7 +462,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IUserRepository.cs",
@@ -461,7 +474,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -473,7 +486,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "FamilyContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\FamilyContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Containers\\FamilyContainer.cs",
@@ -485,7 +498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "UserMapper.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Mappers\\UserMapper.cs",
               "RelativeDocumentMoniker": "DAL\\Mappers\\UserMapper.cs",
@@ -497,7 +510,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\UserDto.cs",
               "RelativeDocumentMoniker": "Domain\\UserDto.cs",
@@ -509,7 +522,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "DTOs.csproj",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\DTOs.csproj",
               "RelativeDocumentMoniker": "Domain\\DTOs.csproj",
@@ -522,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "IUserContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IUserContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IUserContainer.cs",
@@ -534,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "LoginRequestDto.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Domain\\LoginRequestDto.cs",
               "RelativeDocumentMoniker": "Domain\\LoginRequestDto.cs",
@@ -546,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "Backend.csproj",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.csproj",
               "RelativeDocumentMoniker": "Backend\\Backend.csproj",
@@ -559,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "FamilyController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\FamilyController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\FamilyController.cs",
@@ -571,7 +584,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "FamilyRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\FamilyRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FamilyRepository.cs",
@@ -583,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "TestProject.csproj",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\TestProject\\TestProject.csproj",
               "RelativeDocumentMoniker": "TestProject\\TestProject.csproj",
@@ -596,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "FamilyMapper.g.cs",
               "DocumentMoniker": "C:\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\466b0feacd5abc10ed82730e7e3e9b6a553ddda0\\FamilyMapper.g.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\466b0feacd5abc10ed82730e7e3e9b6a553ddda0\\FamilyMapper.g.cs",
@@ -608,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "UserMapper.g.cs",
               "DocumentMoniker": "C:\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\fbc8ca9976ede8e3552c51a1e332b8d656a50f03\\UserMapper.g.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\fbc8ca9976ede8e3552c51a1e332b8d656a50f03\\UserMapper.g.cs",
@@ -617,18 +630,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-03T13:35:06.284Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "BackendDbContext.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\BackendDbContext.cs",
-              "RelativeDocumentMoniker": "Repositories\\BackendDbContext.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\BackendDbContext.cs",
-              "RelativeToolTip": "Repositories\\BackendDbContext.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAqwCMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T08:32:34.466Z"
             },
             {
               "$type": "Document",

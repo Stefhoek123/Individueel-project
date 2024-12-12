@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { FamilyClient, FamilyDto } from '@/api/api'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
 
@@ -31,7 +33,6 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
-  <HeaderComponent />
   <VCard title="Create Families" class="vcard">
     <VForm
       validate-on="blur"
@@ -55,7 +56,6 @@ function required(fieldName: string): (v: string) => true | string {
       </VCardActions>
     </VForm>
   </VCard>
-  <FooterComponent />
 </template>
 
 <style scoped>

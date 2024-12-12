@@ -2,6 +2,7 @@
 import type { FamilyDto } from "@/api/api";
 import { FamilyClient } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
+import { ref, onMounted } from "vue";
 
 const families = ref<FamilyDto[]>([]);
 const client = new FamilyClient();
@@ -93,7 +94,7 @@ async function deleteFamilyById(id: string) {
                   variant="plain"
                   color="accent"
                   size="small"
-                  @click="confirmAndDelete(item.id!)"
+                  @click="() => item.id && confirmAndDelete(item.id)"
                 />
               </td>
             </tr>

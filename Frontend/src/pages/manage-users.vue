@@ -2,6 +2,7 @@
 import type { UserDto } from "@/api/api";
 import { UserClient } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
+import { ref, onMounted } from "vue";
 
 const users = ref<UserDto[]>([]);
 const client = new UserClient();
@@ -93,7 +94,7 @@ async function deleteUserById(id: string) {
                   variant="plain"
                   color="accent"
                   size="small"
-                  @click="confirmAndDelete(item.id!)"
+                  @click="() => item.id && confirmAndDelete(item.id)"
                 />
               </td>
             </tr>
