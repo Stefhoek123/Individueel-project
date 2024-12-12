@@ -9,7 +9,6 @@ const client = new FamilyClient();
 const userClient = new UserClient();
 const family = ref<FamilyDto | null>(null);
 const users = ref<UserDto[]>([]);
-const user = ref<UserDto | null>(null);
 const guid = "10000000-0000-0000-0000-000000000000";
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
