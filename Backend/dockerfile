@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the project file(s) from the correct subdirectory
-COPY Backend/*.csproj ./
+COPY src/Backend/Backend.csproj ./
 
 # Restore project dependencies
 RUN dotnet restore
