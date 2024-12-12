@@ -14,7 +14,7 @@ services:
 
   frontend:
     build:
-      context: .Frontend
+      context: ./Frontend
       dockerfile: dockerfile
     ports:
       - "3000:80"
@@ -23,7 +23,7 @@ services:
 
   frontenduser:
     build:
-      context: .FrontendUser
+      context: ./FrontendUser
       dockerfile: dockerfile
     ports:
       - "3001:80"
