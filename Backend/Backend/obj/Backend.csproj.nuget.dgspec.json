@@ -204,6 +204,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "Microsoft.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.10, )"
@@ -311,6 +315,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.10, )"
@@ -417,6 +425,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Microsoft.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.12.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -528,6 +540,10 @@
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "Microsoft.CodeCoverage": {
+              "target": "Package",
+              "version": "[17.12.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
