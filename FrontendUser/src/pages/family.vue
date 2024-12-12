@@ -30,7 +30,8 @@ async function loadData() {
   <div>
     <h1>My Family</h1>
     <ul>
-      <li v-for="member in family" :key="member.id">{{ member.name }}</li>
+       <!-- needs to be members -->
+      <li v-for="member in familyMembers" :key="member.id">{{ member.familyName }}</li> 
     </ul>
   </div>
 </template>
