@@ -17,15 +17,15 @@ const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
 );
 
 const route = useRoute();
+const routeId = (route.params as { id: string }).id;
 
 onMounted(() => {
-  console.log("Route Params:", route.params);
   getFamilyAndMembersById();
 });
 
 async function getFamilyAndMembersById() {
-  family.value = await client.getFamilyById(route.params.id);
-  users.value = await userClient.getUsersByFamilyId(route.params.id);
+  family.value = await client.getFamilyById(routeId);
+  users.value = await userClient.getUsersByFamilyId(routeId);
   console.log("Family:", family.value);
   console.log("Users:", users.value);
 }
@@ -52,7 +52,7 @@ async function deleteUserByFamilyId(id: string) {
       firstName: user.value.firstName,
       lastName: user.value.lastName,
       email: user.value.email,
-      password: user.value.password,
+      passwordHash: user.value.passwordHash,
       familyId: guid,
     });
 

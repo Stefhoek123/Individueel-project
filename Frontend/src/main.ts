@@ -11,7 +11,6 @@ import App from './App.vue'
 
 // Composables
 import { createApp } from 'vue'
-import axiosIns from './plugins/axios'
 
 const app = createApp(App)
 
