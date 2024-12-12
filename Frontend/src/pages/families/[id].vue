@@ -26,8 +26,6 @@ onMounted(() => {
 async function getFamilyAndMembersById() {
   family.value = await client.getFamilyById(routeId);
   users.value = await userClient.getUsersByFamilyId(routeId);
-  console.log("Family:", family.value);
-  console.log("Users:", users.value);
 }
 
 async function confirmAndDelete(id: string) {
@@ -45,16 +43,20 @@ async function confirmAndDelete(id: string) {
 }
 
 async function deleteUserByFamilyId(id: string) {
-  user.value = await userClient.getUserById(id);
+  const userData = await userClient.getUserById(id);
+  if (!userData) {
+    console.error("User not found");
+    return;
+  }
 
   const model = new UserDto({
-      id: user.value.id,
-      firstName: user.value.firstName,
-      lastName: user.value.lastName,
-      email: user.value.email,
-      passwordHash: user.value.passwordHash,
-      familyId: guid,
-    });
+    id: userData.id,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    email: userData.email,
+    passwordHash: userData.passwordHash,
+    familyId: guid,
+  });
 
   await userClient.updateUser(model);
   getFamilyAndMembersById();
@@ -67,7 +69,7 @@ async function deleteUserByFamilyId(id: string) {
     <div>
       <VCard v-if="family">
         <VCardTitle class="title-achievement">
-          {{ family.familyName }}
+          {{ family.familyName || "Unknown Family" }}
         </VCardTitle>
         <VTable>
           <thead>
@@ -79,8 +81,8 @@ async function deleteUserByFamilyId(id: string) {
           <tbody>
             <tr v-for="item in users" :key="item.id">
               <td>
-                {{ item.firstName }}
-                {{ item.lastName }}
+                {{ item.firstName || "Unknown" }}
+                {{ item.lastName || "Unknown" }}
               </td>
               <td class="text-right">
                 <VBtn
@@ -88,7 +90,7 @@ async function deleteUserByFamilyId(id: string) {
                   variant="plain"
                   color="accent"
                   size="small"
-                  @click="confirmAndDelete(item.id!)"
+                  @click="() => item.id && confirmAndDelete(item.id)"
                 />
               </td>
             </tr>
