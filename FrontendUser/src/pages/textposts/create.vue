@@ -12,8 +12,6 @@ const textPost = ref<TextPost>({
 })
 
 const client = new TextPostClient()
-const userClient = new UserClient()
-const user = ref<UserDto | null>(null)
 
 async function submit() {
 

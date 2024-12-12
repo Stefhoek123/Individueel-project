@@ -10,7 +10,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  passwordHash: string;
   familyId: string;
 }
 
@@ -28,7 +28,7 @@ const user = ref<User>({
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
+  passwordHash: "",
   familyId: "",
 });
 
@@ -54,7 +54,7 @@ async function submit(event: SubmitEventPromise) {
       firstName: user.value.firstName,
       lastName: user.value.lastName,
       email: user.value.email,
-      password: user.value.password,
+      passwordHash: user.value.passwordHash,
       familyId: user.value.familyId || "",
     });
 
@@ -91,7 +91,7 @@ function required(fieldName: string): (v: string) => true | string {
           class="mb-2"
         />
         <VTextField
-          v-model="user.password"
+          v-model="user.passwordHash"
           label="Password"
           type="password"
           :rules="[required('Password')]"

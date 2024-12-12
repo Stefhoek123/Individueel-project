@@ -9,8 +9,6 @@ const client = new TextPostClient();
 const userClient = new UserClient();
 const textPost = ref<TextPostDto | null>(null);
 const users = ref<UserDto[]>([]);
-const user = ref<UserDto | null>(null);
-const guid = "10000000-0000-0000-0000-000000000000";
 
 const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
   null
@@ -18,15 +16,15 @@ const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
 
 const router = useRouter();
 const route = useRoute();
+const routeId = (route.params as { id: string }).id;
 
 onMounted(() => {
-  console.log("Route Params:", route.params);
   getTextPostsById();
 });
 
 async function getTextPostsById() {
-  textPost.value = await client.getTextPostById(route.params.id);
-  users.value = await userClient.getUsersByFamilyId(route.params.id);
+  textPost.value = await client.getTextPostById(routeId);
+  users.value = await userClient.getUsersByFamilyId(routeId);
   console.log("Family:", textPost.value);
   console.log("Users:", users.value);
 }
@@ -77,7 +75,7 @@ async function deleteTextPostById(id: string) {
                   <p class="headline">&nbsp;</p>
                 </v-col>
                 <v-col cols="2">
-                  <router-link :to="`/textposts/update/${route.params.id}`">
+                  <router-link :to="`/textposts/update/${routeId}`">
                     <VBtn
                       icon="mdi-pen"
                       variant="plain"
@@ -92,7 +90,7 @@ async function deleteTextPostById(id: string) {
                     variant="plain"
                     color="accent"
                     size="small"
-                    @click="confirmAndDelete(route.params.id)"
+                    @click="confirmAndDelete(routeId)"
                   />
                 </v-col>
               </v-row>
