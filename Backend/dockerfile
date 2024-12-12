@@ -16,7 +16,7 @@ COPY Backend/. ./
 # Build the application
 RUN dotnet publish -c Release -o /publish
 
-# Use the official .NET runtime image to run the application
+# Use the official .NET runtime image to run the application 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 # Set the working directory for the runtime image

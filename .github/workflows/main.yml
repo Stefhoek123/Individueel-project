@@ -30,15 +30,15 @@ jobs:
       - name: Build and push Frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ./Frontend
-          file: Dockerfile
+          context: ./
+          file: ./Frontend/Dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-frontend:latest
 
       - name: Build and push FrontendUser image
         uses: docker/build-push-action@v5
         with:
-          context: ./FrontendUser
-          file: Dockerfile
+          context: ./
+          file: ./FrontendUser/Dockerfile
           push: true
           tags: stefhoek/s3-dbo2t-frontenduser:latest
