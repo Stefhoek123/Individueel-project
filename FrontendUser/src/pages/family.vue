@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { FamilyDto } from "@/api/api";
 import { FamilyClient } from "@/api/api";
