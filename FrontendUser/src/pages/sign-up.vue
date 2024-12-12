@@ -78,7 +78,7 @@ onMounted(() => {
         />
 
         <VTextField
-          v-model="user.password"
+          v-model="user.passwordHash"
           :rules="[('User password')]"
           label="User password"
           type="password"
