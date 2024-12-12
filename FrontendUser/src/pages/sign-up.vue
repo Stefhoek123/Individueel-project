@@ -8,7 +8,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  passwordHash: string;
 }
 
 const client = new UserClient();
@@ -18,7 +18,7 @@ const user = ref<User>({
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
+  passwordHash: '',
 });
 
 async function submit() {
@@ -27,7 +27,7 @@ async function submit() {
       firstName: user.value.firstName,
       lastName: user.value.lastName,
       email: user.value.email,
-      password: user.value.password,
+      passwordHash: user.value.passwordHash,
       familyId: '6E051EB1-A3CC-4B9D-84DD-8C11B2704190'
     });
 
