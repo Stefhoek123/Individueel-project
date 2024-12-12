@@ -4,14 +4,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the project file(s) to the working directory
+# Copy the project file(s) from the correct subdirectory
 COPY Backend/*.csproj ./
 
 # Restore project dependencies
 RUN dotnet restore
 
-# Copy the entire project to the working directory
-COPY . ./
+# Copy the entire project
+COPY Backend/. ./
 
 # Build the application
 RUN dotnet publish -c Release -o /publish
