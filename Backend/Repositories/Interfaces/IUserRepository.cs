@@ -5,11 +5,11 @@ namespace Interface
 {
     public interface IUserRepository
     {
+        Task<User?> GetUserByEmailAsync(string email);
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
         User GetUserByFamilyId(Guid id);
         List<User> GetUsersByFamilyId(Guid id);
-        Task<User?> GetUserByEmailAsync(string email);
         IEnumerable<User> SearchUserByEmailOrName(string search);
         void CreateUser(User user);
         void UpdateUser(User user);

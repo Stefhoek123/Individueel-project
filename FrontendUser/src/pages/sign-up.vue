@@ -50,7 +50,7 @@ onMounted(() => {
   <div class="signup">
   <img class="logo" src="../assets/resto-logo.png" width="35px" />
   <h1>Sign Up</h1>
-  <VCard title="Create user">
+  <VCard title="Register your account here" class="title">
     <VForm
       validate-on="blur"
       @submit.prevent="submit"
@@ -104,7 +104,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   padding-top: 70px;
 }
 </style>

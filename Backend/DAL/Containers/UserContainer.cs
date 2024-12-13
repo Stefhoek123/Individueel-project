@@ -15,6 +15,28 @@ public class UserContainer : IUserContainer
         _userRepository = userRepository;
     }
 
+    public async Task<bool> AuthenticateUserAsync(string email, string password)
+    {
+        var user = await _userRepository.GetUserByEmailAsync(email);
+        if (user == null) return false;
+
+        // Verify password (hashed comparison)
+        return VerifyPassword(password, user.PasswordHash ?? string.Empty);
+    }
+
+    public async Task<bool> IsAccountAvailableAsync(string email)
+    {
+        var user = await _userRepository.GetUserByEmailAsync(email);
+        return user == null;
+    }
+
+    private static bool VerifyPassword(string plainPassword, string hashedPassword)
+    {
+        // Use a secure password hashing library, e.g., BCrypt
+        return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
+    }
+
+
     // GET for getting all users
     public IEnumerable<UserDto> GetAllUsers()
     {
@@ -38,27 +60,6 @@ public class UserContainer : IUserContainer
         var users = _userRepository.GetUsersByFamilyId(id);
 
         return users.Select(u => Mappers.UserMapper.ToDto(u)).ToList();
-    }
-
-    public async Task<bool> AuthenticateUserAsync(string email, string password)
-    {
-        var user = await _userRepository.GetUserByEmailAsync(email);
-        if (user == null) return false;
-
-        // Verify password (hashed comparison)
-        return VerifyPassword(password, user.PasswordHash ?? string.Empty);
-    }
-
-    public async Task<bool> IsAccountAvailableAsync(string email)
-    {
-        var user = await _userRepository.GetUserByEmailAsync(email);
-        return user == null; 
-    }
-
-    private static bool VerifyPassword(string plainPassword, string hashedPassword)
-    {
-        // Use a secure password hashing library, e.g., BCrypt
-        return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
     }
 
     // GET for finding a User based on his Email or Name

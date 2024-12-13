@@ -13,6 +13,12 @@ public class UserRepository : IUserRepository
         _backendDbContext = backendDbContext;
     }
 
+    public async Task<User?> GetUserByEmailAsync(string email)
+    {
+        return await _backendDbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
+    }
+
+
     public IEnumerable<User> GetAllUsers()
     {
         return _backendDbContext.Users.ToList();
@@ -31,11 +37,6 @@ public class UserRepository : IUserRepository
     public List<User> GetUsersByFamilyId(Guid id)
     {
         return _backendDbContext.Users.Where(u => u.FamilyId == id).ToList();
-    }
-
-    public async Task<User?> GetUserByEmailAsync(string email)
-    {
-        return await _backendDbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
     }
 
     public IEnumerable<User> SearchUserByEmailOrName(string search)

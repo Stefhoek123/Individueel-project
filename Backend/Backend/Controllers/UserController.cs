@@ -16,6 +16,30 @@ namespace Backend.Controllers
             _userContainer = userContainer;
         }
 
+        [HttpPost(nameof(Login))]
+        public async Task<IActionResult> Login([FromBody] UserDto loginRequest)
+        {
+            if (await _userContainer.AuthenticateUserAsync(loginRequest.Email, loginRequest.PasswordHash))
+            {
+                return Ok(new { message = "Login successful" });
+            }
+
+            return Unauthorized(new { message = "Invalid credentials" });
+        }
+
+        [HttpPost(nameof(CheckAccount))]
+        public async Task<IActionResult> CheckAccount([FromBody] UserDto request)
+        {
+            if (await _userContainer.IsAccountAvailableAsync(request.Email))
+            {
+                return NotFound(new { message = "Account not found. Please register." });
+            }
+
+            return Ok(new { message = "Account exists" });
+        }
+
+
+
         [HttpGet(nameof(GetAllUsers))]
         public ActionResult<IEnumerable<UserDto>> GetAllUsers()
         {
@@ -43,28 +67,6 @@ namespace Backend.Controllers
                 return NotFound();
             }
             return Ok(users);
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserDto loginRequest)
-        {
-            if (await _userContainer.AuthenticateUserAsync(loginRequest.Email, loginRequest.PasswordHash))
-            {
-                return Ok(new { message = "Login successful" });
-            }
-
-            return Unauthorized(new { message = "Invalid credentials" });
-        }
-
-        [HttpPost("check-account")]
-        public async Task<IActionResult> CheckAccount([FromBody] UserDto request)
-        {
-            if (await _userContainer.IsAccountAvailableAsync(request.Email))
-            {
-                return NotFound(new { message = "Account not found. Please register." });
-            }
-
-            return Ok(new { message = "Account exists" });
         }
 
         [HttpGet(nameof(SearchUserByEmailOrName))]
