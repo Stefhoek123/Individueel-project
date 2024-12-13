@@ -31,24 +31,34 @@ async function submit() {
       familyId: " ",
     });
 
-    // Controleer of account bestaat
-    const accountCheck = await client.checkAccount(model);
-    if (accountCheck == null) {
-      // Geen account gevonden -> ga naar sign-up
-      await router.push("/sign-up");
-      return;
-    }
+    console.log("Model:", model);
 
-    // Probeer in te loggen
-    const loginResponse = await client.login(model);
-    if (loginResponse == null) {
-      // Login niet succesvol -> ga naar homepage
-      await router.push("/login");
-      return;
-    }
+    try {
+  // Probeer te controleren of het account bestaat
+  await client.checkAccount(model);
+  console.log("Account already exists");
 
-    // Login succesvol -> navigeer naar dashboard
-    await router.push("/");
+  try {
+    // Probeer in te loggen als account bestaat
+    await client.login(model);
+    console.log("Login successful");
+    await router.push("/"); // Ga naar de homepage na succesvolle login
+  } catch (loginError) {
+    console.error("Error logging in:", loginError);
+    alert("Login failed. Please try again.");
+    await router.push("/login"); // Ga naar de loginpagina bij fout
+  }
+} catch (checkAccountError) {
+  // Als account niet bestaat, check op specifieke fout
+  if (checkAccountError.response && checkAccountError.response.status === 404) {
+    console.log("Account not found. Redirecting to sign-up...");
+    await router.push("/sign-up"); // Stuur gebruiker naar de sign-up pagina
+  } else {
+    // Onverwachte fouten afhandelen
+    console.error("Unexpected error checking account:", checkAccountError);
+    alert("Something went wrong. Please try again later.");
+  }
+}
   } catch (error) {
     console.error("Er is een fout opgetreden:", error);
     alert("Er is iets misgegaan. Probeer het later opnieuw.");

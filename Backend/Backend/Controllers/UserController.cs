@@ -17,9 +17,9 @@ namespace Backend.Controllers
         }
 
         [HttpPost(nameof(Login))]
-        public async Task<IActionResult> Login([FromBody] UserDto loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            if (await _userContainer.AuthenticateUserAsync(loginRequest.Email, loginRequest.PasswordHash))
+            if (await _userContainer.AuthenticateUserAsync(loginRequest.Email, loginRequest.Password))
             {
                 return Ok(new { message = "Login successful" });
             }
@@ -28,7 +28,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost(nameof(CheckAccount))]
-        public async Task<IActionResult> CheckAccount([FromBody] UserDto request)
+        public async Task<IActionResult> CheckAccount([FromBody] LoginRequest request)
         {
             if (await _userContainer.IsAccountAvailableAsync(request.Email))
             {
