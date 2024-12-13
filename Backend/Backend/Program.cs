@@ -99,6 +99,7 @@ namespace Backend
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<IFamilyRepository, FamilyRepository>();
+            builder.Services.AddScoped<IChatRepository, ChatRepository>();
         }
 
         private static void RegisterLogics(WebApplicationBuilder builder)
@@ -106,6 +107,7 @@ namespace Backend
             builder.Services.AddScoped<IUserContainer, UserContainer>();
             builder.Services.AddScoped<IPostContainer, PostContainer>();
             builder.Services.AddScoped<IFamilyContainer, FamilyContainer>();
+            builder.Services.AddScoped<IChatContainer, ChatContainer>();
         }
     }
 }
