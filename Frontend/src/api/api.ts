@@ -545,7 +545,7 @@ export class UserClient {
         this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
-    login(loginRequest: UserDto): Promise<FileResponse> {
+    login(loginRequest: LoginRequest): Promise<FileResponse> {
         let url_ = this.baseUrl + "/api/User/Login";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -587,7 +587,7 @@ export class UserClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    checkAccount(request: UserDto): Promise<FileResponse> {
+    checkAccount(request: LoginRequest): Promise<FileResponse> {
         let url_ = this.baseUrl + "/api/User/CheckAccount";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1135,6 +1135,54 @@ export interface IPostDto {
     textContent: string;
     imageUrl?: string;
     userId?: string;
+}
+
+export class LoginRequest implements ILoginRequest {
+    email?: string;
+    password?: string;
+    twoFactorCode?: string | undefined;
+    twoFactorRecoveryCode?: string | undefined;
+
+    constructor(data?: ILoginRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.email = _data["email"];
+            this.password = _data["password"];
+            this.twoFactorCode = _data["twoFactorCode"];
+            this.twoFactorRecoveryCode = _data["twoFactorRecoveryCode"];
+        }
+    }
+
+    static fromJS(data: any): LoginRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new LoginRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["email"] = this.email;
+        data["password"] = this.password;
+        data["twoFactorCode"] = this.twoFactorCode;
+        data["twoFactorRecoveryCode"] = this.twoFactorRecoveryCode;
+        return data;
+    }
+}
+
+export interface ILoginRequest {
+    email?: string;
+    password?: string;
+    twoFactorCode?: string | undefined;
+    twoFactorRecoveryCode?: string | undefined;
 }
 
 export class UserDto implements IUserDto {

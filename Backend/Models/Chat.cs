@@ -4,21 +4,23 @@ namespace Models
 {
     public class Chat : BaseModel
     {
-        public int ReactId { get; set; }
+        public Guid PostId { get; set; }
         public DateTime Date { get; set; }
+        public string ChatContent { get; set; }
+        public Guid ReactId { get; set; }
         public string SenderName { get; set; }
-        public int ChatContent { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public Guid UserId { get; init; }
 
-        public Chat(Guid id, int reactId, DateTime date, string senderName, int chatContent, Guid userId)
+        public Chat(Guid id, Guid postId, DateTime date, string chatContent, Guid reactId, string senderName, Guid userId)
         {
             Id = id;
-            ReactId = reactId;
+            PostId = postId;
             Date = date;
-            SenderName = senderName;
             ChatContent = chatContent;
+            ReactId = reactId;
+            SenderName = senderName;
             UserId = userId;
         }
     }
