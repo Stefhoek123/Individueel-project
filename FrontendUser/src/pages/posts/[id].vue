@@ -98,6 +98,7 @@ async function deletePostById(id: string) {
                   aspect-ratio="4/3"
                   class="mb-4"
                 ></v-img>
+                <!-- {{ post.imageUrl }} -->
               </v-row>
               <v-row justify="center">
                 <v-col cols="12">
@@ -118,6 +119,6 @@ async function deletePostById(id: string) {
 
 <style scoped>
 .caption {
-  color: #555;
+  color: white;
 }
 </style>

@@ -28,7 +28,6 @@ async function loadData(){
               <RouterLink :to="`/posts/${item.id}`">
               {{ item.textContent }}
             </RouterLink>
-            {{ item.imageUrl }}
             </v-card-title>
           </div>
         </v-card>

@@ -35,23 +35,24 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
-  <VCard title="Create new text post" class="vcard">
+  <VCard title="Create a new post" class="vcard">
     <VForm
       validate-on="blur"
       @submit.prevent="submit"
     >
       <VCardText>
-        <VTextarea
-          v-model="post.textContent"
-          label="TextContent"
-          :rules="[required('TextContent')]"
-          class="mb-2"
-        />
         <!--aanpassen naar iets te kiezen-->
-        <VTextarea
+        <!-- <VTextarea
           v-model="post.imageUrl"
           label="ImageUrl"
           :rules="[required('ImageUrl')]"
+          class="mb-2"
+        /> -->
+        <v-file-input clearable label="File input"  v-model="post.imageUrl" ></v-file-input>
+        <VTextarea
+          v-model="post.textContent"
+          label="Caption"
+          :rules="[required('Caption')]"
           class="mb-2"
         />
       </VCardText>
