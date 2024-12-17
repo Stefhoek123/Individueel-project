@@ -22,6 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: Frontend
 
       - name: Run Cypress tests
         run: npx cypress run
