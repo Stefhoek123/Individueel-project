@@ -30,6 +30,11 @@ jobs:
 
       - name: Run Cypress tests
         run: npx cypress run
+        working-directory: Frontend
+
+      - name: Run Cypress tests
+        run: npx cypress run
+        working-directory: FrontendUser
 
   api-tests:
     name: Run API Tests
