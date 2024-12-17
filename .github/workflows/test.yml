@@ -38,4 +38,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman Collection
-        run: newman run ./Backend/collection.json
+        run: newman run collection.json
