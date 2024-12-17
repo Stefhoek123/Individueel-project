@@ -1,0 +1,41 @@
+name: Run Automated Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  e2e-tests:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
+  api-tests:
+    name: Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Postman Collection
+        run: newman run FamilyApp.postman_collection.json -e FamilyApp.postman_environment.json
