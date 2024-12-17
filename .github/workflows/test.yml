@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Restore dependencies
+      - name: Install dependencies
         run: |
-          cd ./backend
-          dotnet restore
+          cd ./frontend
+          npm install
 
       - name: Run Cypress tests
         run: npx cypress run
