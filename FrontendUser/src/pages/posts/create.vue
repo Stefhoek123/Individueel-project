@@ -48,7 +48,7 @@ function required(fieldName: string): (v: string) => true | string {
           :rules="[required('ImageUrl')]"
           class="mb-2"
         /> -->
-        <v-file-input clearable label="File input"  v-model="post.imageUrl" ></v-file-input>
+      <!--  <v-file-input clearable label="File input"  v-model="post.imageUrl" ></v-file-input> -->
         <VTextarea
           v-model="post.textContent"
           label="Caption"
