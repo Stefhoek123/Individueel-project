@@ -74,7 +74,7 @@ namespace Backend.Controllers
             using FileStream fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create);
             file.CopyTo(fileStream);
 
-            return Ok(fileName);
+            return Ok(new { fileName });
         }
     }
 }

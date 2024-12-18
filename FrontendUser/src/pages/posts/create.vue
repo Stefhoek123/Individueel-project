@@ -1,54 +1,70 @@
 <script setup lang="ts">
-import { PostClient, PostDto } from '@/api/api'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { PostClient, PostDto } from "@/api/api";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
 interface Post {
- textContent: string
- imageUrl: string
+  textContent: string;
+  imageUrl: string;
 }
 
 const post = ref<Post>({
-  textContent: '',
-  imageUrl: '',
-})
+  textContent: "",
+  imageUrl: "",
+});
 
-const client = new PostClient()
+const client = new PostClient();
 
 async function submit() {
+  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  const file = fileInput.files?.[0];
 
-    const model = new PostDto({
-      textContent: post.value.textContent,
-      imageUrl: post.value.imageUrl,
-      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
-    })
+  console.log(file);
 
-    await client.createPost(model)
-    await router.push('/')
+  if (file) {
+      const response = await client.getImageUrl(
+        file.type, // contentType
+        null,      // contentDisposition (optional, use null if not needed)
+        null,      // headers (optional, use null if not needed)
+        file.size, // length
+        file.name, // name
+        file.name  // fileName
+      );
+
+      console.log(response); // Assuming response is structured
+      const url = response.fileName;
+
+      console.log(url);
+
+      const model = new PostDto({
+        textContent: post.value.textContent,
+        imageUrl: url,
+        userId: "10000000-0000-0000-0000-000000000000", // change when you can login
+      });
+
+      console.log(model);
+
+      await client.createPost(model);
+      await router.push("/");
+  } else {
+    alert("Please select a file.");
   }
+}
+
+
 
 function required(fieldName: string): (v: string) => true | string {
-  return v => !!v || `${fieldName} is required`
+  return (v) => !!v || `${fieldName} is required`;
 }
 </script>
 
 <template>
   <VCard title="Create a new post" class="vcard">
-    <VForm
-      validate-on="blur"
-      @submit.prevent="submit"
-    >
+    <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
-        <!--aanpassen naar iets te kiezen-->
-        <!-- <VTextarea
-          v-model="post.imageUrl"
-          label="ImageUrl"
-          :rules="[required('ImageUrl')]"
-          class="mb-2"
-        /> -->
-      <!--  <v-file-input clearable label="File input"  v-model="post.imageUrl" ></v-file-input> -->
+        <v-file-input clearable label="File input"></v-file-input>
         <VTextarea
           v-model="post.textContent"
           label="Caption"
@@ -57,12 +73,7 @@ function required(fieldName: string): (v: string) => true | string {
         />
       </VCardText>
       <VCardActions>
-        <VBtn
-          class="me-4"
-          type="submit"
-        >
-          submit
-        </VBtn>
+        <VBtn class="me-4" type="submit"> submit </VBtn>
       </VCardActions>
     </VForm>
   </VCard>
