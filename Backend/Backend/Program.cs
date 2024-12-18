@@ -7,6 +7,7 @@ using Repositories;
 using Microsoft.AspNetCore.Builder;
 using DAL.Containers;
 using Interface;
+using Microsoft.Extensions.FileProviders;
 
 namespace Backend
 {
@@ -75,11 +76,20 @@ namespace Backend
             RegisterRepos(builder);
             RegisterLogics(builder);
 
+            builder.Services.AddDirectoryBrowser();
+
             WebApplication app = builder.Build();
 
             app.UseSession();
             
             app.UseCors("AllowSpecificOrigin"); // CORS should be applied before authorization
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+                RequestPath = "/Uploads"
+            });
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
