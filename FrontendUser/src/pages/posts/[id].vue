@@ -94,7 +94,7 @@ async function deletePostById(id: string) {
               <v-row justify="center">
                 <v-img
                   v-if="post.imageUrl"
-                  :src="`https://localhost:5190/${post.imageUrl}`"
+                  :src="`http://localhost:5190/${post.imageUrl}`"
                   aspect-ratio="4/3"
                   class="mb-4"
                   alt="Post image"
@@ -103,9 +103,7 @@ async function deletePostById(id: string) {
               <v-row justify="center">
                 <v-col cols="12">
                   <p class="caption font-italic">
-                    "While waiting in line to see Santa, this baby fell asleep.
-                    When it came time for the picture, Santa told the parents
-                    not to wake him."
+                   {{ post.textContent }}
                   </p>
                 </v-col>
               </v-row>
