@@ -39,4 +39,8 @@
     <ProjectReference Include="..\DAL\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+
 </Project>
