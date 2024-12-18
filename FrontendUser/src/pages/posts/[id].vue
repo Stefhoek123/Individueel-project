@@ -106,12 +106,11 @@ async function deletePostById(id: string) {
               <v-row justify="center">
                 <v-img
                   v-if="post.imageUrl"
-                  :src="post.imageUrl"
+                  :src="`https://localhost:5190/${post.imageUrl}`"
                   aspect-ratio="4/3"
                   class="mb-4"
                   alt="Post image"
-                >
-                </v-img>
+                />
               </v-row>
               <v-row justify="center">
                 <v-col cols="12">
