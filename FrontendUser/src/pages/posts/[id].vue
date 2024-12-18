@@ -22,16 +22,27 @@ onMounted(() => {
   getPostsById();
 });
 
+// async function getPostsById() {
+//   post.value = await client.getPostById(routeId);
+//   users.value = await userClient.getUsersByFamilyId(routeId);
+// }
+
 async function getPostsById() {
   post.value = await client.getPostById(routeId);
+
+  if (post.value?.imageUrl) {
+    console.log(post.value.imageUrl);
+    post.value.imageUrl = `https://localhost:5190/Uploads/${post.value.imageUrl}`;
+    console.log(post.value.imageUrl);
+  }
+
   users.value = await userClient.getUsersByFamilyId(routeId);
 }
 
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
     title: "Delete post",
-    message:
-      "Are you sure you want to delete this post? It cannot be undone.",
+    message: "Are you sure you want to delete this post? It cannot be undone.",
     okButton: "Delete Forever",
     cancelButton: "Cancel",
   });
@@ -94,11 +105,13 @@ async function deletePostById(id: string) {
               </v-row>
               <v-row justify="center">
                 <v-img
-                  src="https://via.placeholder.com/400x300.png?text=Santa+and+Child"
+                  v-if="post.imageUrl"
+                  :src="post.imageUrl"
                   aspect-ratio="4/3"
                   class="mb-4"
-                ></v-img>
-                <!-- {{ post.imageUrl }} -->
+                  alt="Post image"
+                >
+                </v-img>
               </v-row>
               <v-row justify="center">
                 <v-col cols="12">

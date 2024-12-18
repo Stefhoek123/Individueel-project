@@ -698,25 +698,13 @@ export class PostClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    getImageUrl(contentType: string | null | undefined, contentDisposition: string | null | undefined, headers: any[] | null | undefined, length: number | undefined, name: string | null | undefined, fileName: string | null | undefined): Promise<FileResponse> {
+    getImageUrl(file: FileParameter | null | undefined): Promise<FileResponse> {
         let url_ = this.baseUrl + "/api/Post/GetImageUrl";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = new FormData();
-        if (contentType !== null && contentType !== undefined)
-            content_.append("ContentType", contentType.toString());
-        if (contentDisposition !== null && contentDisposition !== undefined)
-            content_.append("ContentDisposition", contentDisposition.toString());
-        if (headers !== null && headers !== undefined)
-            headers.forEach(item_ => content_.append("Headers", item_.toString()));
-        if (length === null || length === undefined)
-            throw new Error("The parameter 'length' cannot be null.");
-        else
-            content_.append("Length", length.toString());
-        if (name !== null && name !== undefined)
-            content_.append("Name", name.toString());
-        if (fileName !== null && fileName !== undefined)
-            content_.append("FileName", fileName.toString());
+        if (file !== null && file !== undefined)
+            content_.append("file", file.data, file.fileName ? file.fileName : "file");
 
         let options_: RequestInit = {
             body: content_,
@@ -1570,6 +1558,11 @@ export interface IUserDto {
     email: string;
     passwordHash: string;
     familyId?: string;
+}
+
+export interface FileParameter {
+    data: any;
+    fileName: string;
 }
 
 export interface FileResponse {

@@ -18,42 +18,42 @@ const post = ref<Post>({
 const client = new PostClient();
 
 async function submit() {
-  const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+  const fileInput = document.querySelector(
+    'input[type="file"]'
+  ) as HTMLInputElement;
   const file = fileInput.files?.[0];
 
-  console.log(file);
-
   if (file) {
-      const response = await client.getImageUrl(
-        file.type, // contentType
-        null,      // contentDisposition (optional, use null if not needed)
-        null,      // headers (optional, use null if not needed)
-        file.size, // length
-        file.name, // name
-        file.name  // fileName
-      );
+    const fileParameter = { data: file, fileName: file.name };
 
-      console.log(response); // Assuming response is structured
-      const url = response.fileName;
+    const response = await client.getImageUrl(fileParameter);
 
-      console.log(url);
+    // Parse the Blob into a JSON object
+    const jsonResponse = await response.data
+      .text()
+      .then((text) => JSON.parse(text));
 
-      const model = new PostDto({
-        textContent: post.value.textContent,
-        imageUrl: url,
-        userId: "10000000-0000-0000-0000-000000000000", // change when you can login
-      });
+    const url = jsonResponse.fileName;
 
-      console.log(model);
+    const model = new PostDto({
+      textContent: post.value.textContent,
+      imageUrl: url,
+      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
+    });
 
-      await client.createPost(model);
-      await router.push("/");
+    await client.createPost(model);
+    await router.push("/");
   } else {
-    alert("Please select a file.");
+    const model = new PostDto({
+      textContent: post.value.textContent,
+      imageUrl: " ",
+      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
+    });
+
+    await client.createPost(model);
+    await router.push("/");
   }
 }
-
-
 
 function required(fieldName: string): (v: string) => true | string {
   return (v) => !!v || `${fieldName} is required`;
