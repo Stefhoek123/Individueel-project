@@ -22,20 +22,8 @@ onMounted(() => {
   getPostsById();
 });
 
-// async function getPostsById() {
-//   post.value = await client.getPostById(routeId);
-//   users.value = await userClient.getUsersByFamilyId(routeId);
-// }
-
 async function getPostsById() {
   post.value = await client.getPostById(routeId);
-
-  if (post.value?.imageUrl) {
-    console.log(post.value.imageUrl);
-    post.value.imageUrl = `https://localhost:5190/Uploads/${post.value.imageUrl}`;
-    console.log(post.value.imageUrl);
-  }
-
   users.value = await userClient.getUsersByFamilyId(routeId);
 }
 

@@ -90,7 +90,6 @@ namespace Backend
                 RequestPath = "/Uploads"
             });
 
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
