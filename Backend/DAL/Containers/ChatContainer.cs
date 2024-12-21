@@ -24,7 +24,7 @@ public class ChatContainer : IChatContainer
     {
         var chats = _chatRepository.GetChatById(id);
 
-        return chats.Select(u => Mappers.ChatMapper.ToDto(u)).ToList();
+        return chats.Select(c => Mappers.ChatMapper.ToDto(c)).ToList();
     }
 
     public void CreateChat(ChatDto chat)
