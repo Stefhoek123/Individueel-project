@@ -82,5 +82,25 @@ namespace Backend.Controllers
 
             return Ok(new { message = "Account exists" });
         }
+
+        [HttpGet("auth/check")]
+        public IActionResult CheckAuth()
+        {
+            var user = User.Identity;
+            if (user?.IsAuthenticated == true)
+            {
+                var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                if (emailClaim != null)
+                {
+                    return Ok(new { isAuthenticated = true, email = emailClaim });
+                }
+                else
+                {
+                    return Unauthorized(new { isAuthenticated = false });
+                }
+            }
+            return Unauthorized(new { isAuthenticated = false });
+        }
     }
 }

@@ -65,32 +65,6 @@ async function submit() {
   }
 }
 
-
-// Function to get the profile
-async function getProfile() {
-  try {
-    // Call the profile endpoint
-    const response = await authClient.profile();
-    console.log("Profile retrieved:", response);
-    alert(`User profile: ${JSON.stringify(response)}`);
-  } catch (error: any) {
-    console.error("Profile error:", error);
-    alert(error.message || "Not authenticated");
-  }
-}
-
-// Function to handle logout
-async function logout() {
-  try {
-    // Call the logout endpoint
-    await authClient.logout();
-    alert("Logged out successfully");
-    console.log("Logged out successfully");
-  } catch (error: any) {
-    console.error("Logout error:", error);
-    alert(error.message || "Logout failed. Please try again.");
-  }
-}
 </script>
 
 <template>
@@ -109,9 +83,7 @@ async function logout() {
           />
         </VCardText>
         <VCardActions>
-          <VBtn class="me-4" type="submit">Submit</VBtn>
-          <VBtn @click="getProfile" class="me-4">Get Profile</VBtn>
-          <VBtn @click="logout" color="error">Logout</VBtn>
+          <VBtn class="me-4" type="submit">Login</VBtn>
         </VCardActions>
       </VForm>
     </VCard>

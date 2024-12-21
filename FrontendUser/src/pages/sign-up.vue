@@ -73,7 +73,7 @@ async function submit() {
         </VCardText>
 
         <VCardActions>
-          <VBtn class="me-4" type="submit"> Submit </VBtn>
+          <VBtn class="me-4" type="submit"> Register </VBtn>
         </VCardActions>
       </VForm>
     </VCard>
