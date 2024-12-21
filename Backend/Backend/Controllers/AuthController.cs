@@ -37,10 +37,11 @@ namespace Backend.Controllers
                     new Claim(ClaimTypes.Email, request.Email)
                 };
 
-                var identity = new ClaimsIdentity(claims, "CookieAuth");
-                await HttpContext.SignInAsync("CookieAuth", new ClaimsPrincipal(identity));
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
 
-                return Ok(new { message = "Login successful" });
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                return Ok(new { Message = "Logged in successfully" });
             }
 
             return Unauthorized(new { message = "Invalid credentials" });

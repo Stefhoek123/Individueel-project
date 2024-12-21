@@ -79,12 +79,12 @@ namespace Backend
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/auth/login"; // Redirect here if not authenticated
-                    options.LogoutPath = "/auth/logout"; // Redirect here on logout
-                    options.AccessDeniedPath = "/auth/access-denied"; // Optional: handle access denial
-                    options.Cookie.HttpOnly = true; // Ensure cookies are not accessible via JavaScript
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Enforce HTTPS
-                    options.ExpireTimeSpan = TimeSpan.FromHours(1); // Set cookie expiration
+                    options.LoginPath = "/auth/login";
+                    options.LogoutPath = "/auth/logout";
+                    options.AccessDeniedPath = "/auth/access-denied";
+                    options.Cookie.HttpOnly = true; // Cookie only accessible via HTTP
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Ensure HTTPS
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1); // Cookie expiration
                 });
 
             // Add session support
