@@ -83,8 +83,9 @@ namespace Backend
                     options.LogoutPath = "/auth/logout";
                     options.AccessDeniedPath = "/auth/access-denied";
                     options.Cookie.HttpOnly = true; // Cookie only accessible via HTTP
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Ensure HTTPS
                     options.ExpireTimeSpan = TimeSpan.FromHours(1); // Cookie expiration
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // Ensure cookies are sent with HTTPS in production
+                    options.Cookie.IsEssential = true;  // Ensure cookies are always sent, even if the user is not logged in
                 });
 
             // Add session support

@@ -54,7 +54,6 @@ async function submit() {
     const loginResponseBody = await loginResponse.data.text();
     const loginData = JSON.parse(loginResponseBody);
 
-    alert(loginData.message || "Login successful");
     console.log("Login successful:", loginData);
 
     // Redirect to homepage after successful login
