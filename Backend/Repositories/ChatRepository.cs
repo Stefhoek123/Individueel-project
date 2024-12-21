@@ -17,7 +17,12 @@ public class ChatRepository : IChatRepository
         return _backendDbContext.Chats.ToList();
     }
 
-    public List<Chat> GetChatById(Guid id)
+    public Chat GetChatById(Guid id)
+    {
+        return _backendDbContext.Chats.FirstOrDefault(u => u.Id == id)!;
+    }
+
+    public List<Chat> GetChatsById(Guid id)
     {
         return _backendDbContext.Chats.Where(c => c.PostId == id).ToList();
     }

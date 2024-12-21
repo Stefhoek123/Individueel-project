@@ -23,9 +23,16 @@ namespace Backend.Controllers
         }
 
         [HttpGet(nameof(GetChatById))]
-        public ActionResult<List<ChatDto>> GetChatById(Guid id)
+        public ActionResult<ChatDto> GetChatById(Guid id)
         {
-            List<ChatDto> chats = _chatContainer.GetChatById(id);
+            ChatDto chat = _chatContainer.GetChatById(id);
+            return Ok(chat);
+        }
+
+        [HttpGet(nameof(GetChatsById))]
+        public ActionResult<List<ChatDto>> GetChatsById(Guid id)
+        {
+            List<ChatDto> chats = _chatContainer.GetChatsById(id);
             if (chats == null || chats.Count == 0)
             {
                 return NotFound();

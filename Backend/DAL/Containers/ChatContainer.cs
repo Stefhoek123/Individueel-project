@@ -20,9 +20,14 @@ public class ChatContainer : IChatContainer
             .Select(Mappers.ChatMapper.ToDto);
     }
 
-    public List<ChatDto> GetChatById(Guid id)
+    public ChatDto GetChatById(Guid id)
     {
-        var chats = _chatRepository.GetChatById(id);
+        return Mappers.ChatMapper.ToDto(_chatRepository.GetChatById(id));
+    }
+
+    public List<ChatDto> GetChatsById(Guid id)
+    {
+        var chats = _chatRepository.GetChatsById(id);
 
         return chats.Select(c => Mappers.ChatMapper.ToDto(c)).ToList();
     }

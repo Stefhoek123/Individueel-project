@@ -6,7 +6,8 @@ namespace DAL.Interfaces;
 public interface IChatContainer
 {
     IEnumerable<ChatDto> GetAllChats();
-    List<ChatDto> GetChatById(Guid id);
+    ChatDto GetChatById(Guid id);
+    List<ChatDto> GetChatsById(Guid id);
     void CreateChat(ChatDto chat);
     void UpdateChat(ChatDto chat);
     void DeleteChatById(Guid id);
