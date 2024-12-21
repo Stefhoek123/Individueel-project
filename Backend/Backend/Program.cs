@@ -42,7 +42,7 @@ namespace Backend
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             builder.Services.AddDistributedMemoryCache();
-            builder.Services.AddSession();
+            // builder.Services.AddSession();
             builder.Services.AddSignalR();
 
             // Swagger/OpenAPI Configuration
@@ -68,9 +68,30 @@ namespace Backend
                     policy =>
                     {
                         policy.WithOrigins("http://localhost:3000", "http://localhost:3001") // Add the frontend URL here
+                            .AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     });
+            });
+
+            // Add authentication with cookies
+            builder.Services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", options =>
+                {
+                    options.Cookie.Name = "AuthCookie";
+                    options.LoginPath = "/auth/login";
+                    options.AccessDeniedPath = "/auth/denied";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                });
+
+            // Add session support
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = "SessionCookie";
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
             builder.Services.AddScoped<SessionVariables>();
@@ -103,7 +124,9 @@ namespace Backend
                 app.UseSwaggerUi();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();

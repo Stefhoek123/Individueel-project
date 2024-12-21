@@ -1,67 +1,93 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { UserClient } from "@/api/api";
-import { UserDto } from "@/api/api";
 import { useRouter } from "vue-router";
 
+// Define a user interface
 interface User {
-  firstName: string;
-  lastName: string;
   email: string;
   passwordHash: string;
 }
 
-const client = new UserClient();
-const router = useRouter();
-
+// Create a reactive user object
 const user = ref<User>({
-  firstName: "",
-  lastName: "",
   email: "",
   passwordHash: "",
 });
 
+const router = useRouter();
+
+// Function to handle login
 async function submit() {
   try {
-    const model = new UserDto({
-      firstName: "",
-      lastName: "",
-      email: user.value.email,
-      passwordHash: user.value.passwordHash,
-      familyId: " ",
+    const response = await fetch("https://localhost:5190/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: user.value.email,
+        password: user.value.passwordHash,
+      }),
+      credentials: "include",
     });
 
-    console.log("Model:", model);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Login failed");
+    }
 
-    try {
-  // Probeer te controleren of het account bestaat
- // await client.checkAccount(model);
-  console.log("Account already exists");
+    const data = await response.json();
+    alert(data.message);
+    console.log("Login successful:", data);
 
-  try {
-    // Probeer in te loggen als account bestaat
-    await client.login(model);
-    console.log("Login successful");
-    await router.push("/"); // Ga naar de homepage na succesvolle login
-  } catch (loginError) {
-    console.error("Error logging in:", loginError);
-    alert("Login failed. Please try again.");
-    await router.push("/login"); // Ga naar de loginpagina bij fout
+    await router.push("/"); // Redirect to homepage after successful login
+  } catch (error: any) {
+    console.error("Login error:", error);
+    alert(error.message || "Login failed. Please try again.");
   }
-} catch (checkAccountError) {
-  // // Als account niet bestaat, check op specifieke fout
-  // if (checkAccountError.response && checkAccountError.response.status === 404) {
-  //   console.log("Account not found. Redirecting to sign-up...");
-  //   await router.push("/sign-up"); // Stuur gebruiker naar de sign-up pagina
-  // } else {
-  //   // Onverwachte fouten afhandelen
-  //   console.error("Unexpected error checking account:", checkAccountError);
-  //   alert("Something went wrong. Please try again later.");
-  // }
 }
-  } catch (error) {
-    console.error("Er is een fout opgetreden:", error);
-    alert("Er is iets misgegaan. Probeer het later opnieuw.");
+
+// Function to get the profile
+async function getProfile() {
+  try {
+    const response = await fetch("https://localhost:5190/auth/profile", {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Not authenticated");
+    }
+
+    const data = await response.json();
+    alert(`Logged in as: ${data.username}`);
+    console.log("Profile retrieved:", data);
+  } catch (error: any) {
+    console.error("Profile error:", error);
+    alert(error.message || "Not authenticated");
+  }
+}
+
+// Function to handle logout
+async function logout() {
+  try {
+    const response = await fetch("https://localhost:5190/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Logout failed");
+    }
+
+    const data = await response.json();
+    alert(data.message);
+    console.log("Logged out successfully");
+  } catch (error: any) {
+    console.error("Logout error:", error);
+    alert(error.message || "Logout failed. Please try again.");
   }
 }
 </script>
@@ -86,7 +112,9 @@ async function submit() {
           />
         </VCardText>
         <VCardActions>
-          <VBtn class="me-4" type="submit"> Submit </VBtn>
+          <VBtn class="me-4" type="submit">Submit</VBtn>
+          <VBtn @click="getProfile" class="me-4">Get Profile</VBtn>
+          <VBtn @click="logout" color="error">Logout</VBtn>
         </VCardActions>
       </VForm>
     </VCard>
