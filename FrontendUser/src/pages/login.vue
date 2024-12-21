@@ -102,7 +102,7 @@ async function logout() {
         <VCardText>
           <VTextField v-model="user.email" label="User email" class="mb-2" />
           <VTextField
-            v-model="user.password"
+            v-model="user.passwordHash"
             label="User password"
             type="password"
             class="mb-2"

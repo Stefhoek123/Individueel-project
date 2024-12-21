@@ -83,6 +83,13 @@ namespace Backend.Controllers
         [HttpPost(nameof(CreateUser))]
         public ActionResult CreateUser(UserDto user)
         {
+            // Hash the user's password before saving
+            if (!string.IsNullOrEmpty(user.PasswordHash))
+            {
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+            }
+
+            // Call the container to create the user with the hashed password
             _userContainer.CreateUser(user);
             return Ok();
         }
