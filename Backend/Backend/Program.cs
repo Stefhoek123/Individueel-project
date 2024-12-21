@@ -7,6 +7,7 @@ using Repositories;
 using Microsoft.AspNetCore.Builder;
 using DAL.Containers;
 using Interface;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 
 namespace Backend
@@ -75,13 +76,15 @@ namespace Backend
             });
 
             // Add authentication with cookies
-            builder.Services.AddAuthentication("CookieAuth")
-                .AddCookie("CookieAuth", options =>
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
                 {
-                    options.Cookie.Name = "AuthCookie";
-                    options.LoginPath = "/auth/login";
-                    options.AccessDeniedPath = "/auth/denied";
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    options.LoginPath = "/auth/login"; // Redirect here if not authenticated
+                    options.LogoutPath = "/auth/logout"; // Redirect here on logout
+                    options.AccessDeniedPath = "/auth/access-denied"; // Optional: handle access denial
+                    options.Cookie.HttpOnly = true; // Ensure cookies are not accessible via JavaScript
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Enforce HTTPS
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1); // Set cookie expiration
                 });
 
             // Add session support

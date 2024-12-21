@@ -1,68 +1,61 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { AuthClient, LoginRequest } from "@/api/api";
 
 // Define a user interface
 interface User {
   email: string;
-  passwordHash: string;
+  password: string; // Updated to match API requirements
 }
 
 // Create a reactive user object
 const user = ref<User>({
   email: "",
-  passwordHash: "",
+  password: "",
 });
 
+const authClient = new AuthClient();
 const router = useRouter();
 
 // Function to handle login
+// Function to handle login
 async function submit() {
   try {
-    const response = await fetch("https://localhost:5190/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: user.value.email,
-        password: user.value.passwordHash,
-      }),
-      credentials: "include",
+    const model = new LoginRequest({
+      email: user.value.email,
+      password: user.value.password,
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Login failed");
+    // Step 1: Check if the account exists
+    const accountCheckResponse = await authClient.checkAccount(model);
+    if (accountCheckResponse.message === "Account not found. Please register.") {
+      alert("Account does not exist. Please register first.");
+      return; // Stop further execution if the account doesn't exist
     }
 
-    const data = await response.json();
-    alert(data.message);
-    console.log("Login successful:", data);
+    // Step 2: Proceed with login
+    const loginResponse = await authClient.login(model);
 
-    await router.push("/"); // Redirect to homepage after successful login
+    alert("Login successful");
+    console.log("Login successful:", loginResponse);
+
+    // Redirect to homepage after successful login
+    await router.push("/");
   } catch (error: any) {
-    console.error("Login error:", error);
-    alert(error.message || "Login failed. Please try again.");
+    console.error("Error:", error);
+    alert(error.message || "An error occurred. Please try again.");
   }
 }
+
 
 // Function to get the profile
 async function getProfile() {
   try {
-    const response = await fetch("https://localhost:5190/auth/profile", {
-      method: "GET",
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Not authenticated");
-    }
-
-    const data = await response.json();
-    alert(`Logged in as: ${data.username}`);
-    console.log("Profile retrieved:", data);
+    // Call the profile endpoint
+    const response = await authClient.profile();
+    console.log("Profile retrieved:", response);
+    alert(`User profile: ${JSON.stringify(response)}`);
   } catch (error: any) {
     console.error("Profile error:", error);
     alert(error.message || "Not authenticated");
@@ -72,18 +65,9 @@ async function getProfile() {
 // Function to handle logout
 async function logout() {
   try {
-    const response = await fetch("https://localhost:5190/auth/logout", {
-      method: "POST",
-      credentials: "include",
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Logout failed");
-    }
-
-    const data = await response.json();
-    alert(data.message);
+    // Call the logout endpoint
+    await authClient.logout();
+    alert("Logged out successfully");
     console.log("Logged out successfully");
   } catch (error: any) {
     console.error("Logout error:", error);
@@ -99,13 +83,9 @@ async function logout() {
     <VCard title="Login into your account here">
       <VForm validate-on="blur" @submit.prevent="submit">
         <VCardText>
+          <VTextField v-model="user.email" label="User email" class="mb-2" />
           <VTextField
-            v-model="user.email"
-            label="User email"
-            class="mb-2"
-          />
-          <VTextField
-            v-model="user.passwordHash"
+            v-model="user.password"
             label="User password"
             type="password"
             class="mb-2"

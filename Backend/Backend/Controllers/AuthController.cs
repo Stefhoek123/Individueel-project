@@ -1,5 +1,7 @@
 ﻿using System.Security.Claims;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -10,32 +12,47 @@ namespace Backend.Controllers
     [Route("auth")]
     public class AuthController : ControllerBase
     {
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest request)
+        private readonly IUserContainer _userContainer;
+
+        public AuthController(IUserContainer userContainer)
         {
-            // Validate user credentials (replace with your own logic)
-            if (request.Email == "email" && request.Password == "password")
+            _userContainer = userContainer;
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            // Authenticate user using the provided IUserContainer
+            if (await _userContainer.AuthenticateUserAsync(request.Email, request.Password))
             {
+                // Create claims for the authenticated user
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Email, request.Email),
-                    new Claim("CustomClaimType", "CustomClaimValue")
+                    new Claim(ClaimTypes.Email, request.Email)
                 };
 
-                var claimsIdentity = new ClaimsIdentity(claims, "CookieAuth");
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                HttpContext.SignInAsync("CookieAuth", new ClaimsPrincipal(claimsIdentity));
+                // Sign in using CookieAuth
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = true, // Set this to true for persistent cookies
+                        ExpiresUtc = DateTime.UtcNow.AddHours(1) // Adjust expiration as needed
+                    });
 
                 return Ok(new { message = "Login successful" });
             }
 
-            return Unauthorized(new { message = "Invalid username or password" });
+            return Unauthorized(new { message = "Invalid credentials" });
         }
 
         [HttpPost("logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync("CookieAuth");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok(new { message = "Logged out" });
         }
 
@@ -44,10 +61,27 @@ namespace Backend.Controllers
         {
             if (HttpContext.User.Identity?.IsAuthenticated == true)
             {
-                return Ok(new { username = HttpContext.User.Identity.Name });
+                // Extract user information from claims
+                var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+                return Ok(new
+                {
+                    email
+                });
             }
 
-            return Unauthorized();
+            return Unauthorized(new { message = "User is not authenticated" });
+        }
+
+        [HttpPost("check-account")]
+        public async Task<IActionResult> CheckAccount([FromBody] LoginRequest request)
+        {
+            if (await _userContainer.IsAccountAvailableAsync(request.Email))
+            {
+                return NotFound(new { message = "Account not found. Please register." });
+            }
+
+            return Ok(new { message = "Account exists" });
         }
     }
 }
