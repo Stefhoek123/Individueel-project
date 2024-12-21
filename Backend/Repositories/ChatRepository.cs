@@ -17,9 +17,9 @@ public class ChatRepository : IChatRepository
         return _backendDbContext.Chats.ToList();
     }
 
-    public Chat GetChatById(Guid id)
+    public List<Chat> GetChatById(Guid id)
     {
-        return _backendDbContext.Chats.FirstOrDefault(u => u.Id == id)!;
+        return _backendDbContext.Chats.Where(u => u.PostId == id).ToList();
     }
 
     public void CreateChat(Chat chat)

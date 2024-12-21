@@ -12,9 +12,11 @@
     "axios": "^1.7.7",
     "core-js": "^3.37.1",
     "roboto-fontface": "*",
+    "signalr": "^0.0.1",
     "vue": "^3.4.31",
     "vue-axios": "^3.5.2",
-    "vuetify": "^3.6.11"
+    "vuetify": "^3.6.11",
+    "@aspnet/signalr": "^5.0.0"
   },
   "devDependencies": {
     "@babel/types": "^7.24.7",

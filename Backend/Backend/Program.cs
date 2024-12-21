@@ -43,6 +43,7 @@ namespace Backend
 
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
+            builder.Services.AddSignalR();
 
             // Swagger/OpenAPI Configuration
             builder.Services.AddEndpointsApiExplorer();
@@ -83,6 +84,11 @@ namespace Backend
             app.UseSession();
             
             app.UseCors("AllowSpecificOrigin"); // CORS should be applied before authorization
+
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<ChatHub>("/chatHub");
+            //});
 
             app.UseStaticFiles(new StaticFileOptions
             {

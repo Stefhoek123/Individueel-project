@@ -1,4 +1,5 @@
-﻿using DAL.Interfaces;
+﻿using DAL.Containers;
+using DAL.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,14 @@ namespace Backend.Controllers
         }
 
         [HttpGet(nameof(GetChatById))]
-        public ActionResult<ChatDto> GetChatById(Guid id)
+        public ActionResult<List<ChatDto>> GetChatById(Guid id)
         {
-            ChatDto chat = _chatContainer.GetChatById(id);
-            return Ok(chat);
+            List<ChatDto> chats = _chatContainer.GetChatById(id);
+            if (chats == null || chats.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(chats);
         }
 
         [HttpPost(nameof(CreateChat))]

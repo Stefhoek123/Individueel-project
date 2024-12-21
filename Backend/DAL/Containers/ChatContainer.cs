@@ -1,6 +1,7 @@
 ﻿using DAL.Interfaces;
 using Domain;
 using Interface;
+using Repositories;
 
 namespace DAL.Containers;
 
@@ -19,9 +20,11 @@ public class ChatContainer : IChatContainer
             .Select(Mappers.ChatMapper.ToDto);
     }
 
-    public ChatDto GetChatById(Guid id)
+    public List<ChatDto> GetChatById(Guid id)
     {
-        return Mappers.ChatMapper.ToDto(_chatRepository.GetChatById(id));
+        var chats = _chatRepository.GetChatById(id);
+
+        return chats.Select(u => Mappers.ChatMapper.ToDto(u)).ToList();
     }
 
     public void CreateChat(ChatDto chat)
