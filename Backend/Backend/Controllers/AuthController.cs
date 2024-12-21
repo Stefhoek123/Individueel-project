@@ -22,32 +22,30 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            // Authenticate user using the provided IUserContainer
-            if (await _userContainer.AuthenticateUserAsync(request.Email, request.Password))
+            if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
             {
-                // Create claims for the authenticated user
+                return BadRequest(new { message = "Email and password are required." });
+            }
+
+            // Replace this with actual user authentication logic
+            var isAuthenticated = await _userContainer.AuthenticateUserAsync(request.Email, request.Password);
+
+            if (isAuthenticated)
+            {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, request.Email)
                 };
 
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                // Sign in using CookieAuth
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = true, // Set this to true for persistent cookies
-                        ExpiresUtc = DateTime.UtcNow.AddHours(1) // Adjust expiration as needed
-                    });
+                var identity = new ClaimsIdentity(claims, "CookieAuth");
+                await HttpContext.SignInAsync("CookieAuth", new ClaimsPrincipal(identity));
 
                 return Ok(new { message = "Login successful" });
             }
 
             return Unauthorized(new { message = "Invalid credentials" });
         }
+
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
