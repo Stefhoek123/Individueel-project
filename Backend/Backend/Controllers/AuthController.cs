@@ -36,6 +36,7 @@ namespace Backend.Controllers
 
                 // Store userId in the session
                 HttpContext.Session.SetString("UserId", userId);
+                Console.WriteLine($"UserId stored in session: {userId}");
 
                 return Ok(new { Message = "Logged in successfully" });
             }

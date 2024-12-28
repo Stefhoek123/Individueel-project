@@ -79,10 +79,6 @@ namespace Backend
                     });
             });
 
-            // Remove Cookie Authentication and use Session-based Authentication
-            builder.Services.AddAuthentication()
-                .AddScheme<AuthenticationSchemeOptions, CustomSessionAuthenticationHandler>("SessionAuth", options => { });
-
             // Add session support
             builder.Services.AddSession(options =>
             {
@@ -91,6 +87,10 @@ namespace Backend
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            // Remove Cookie Authentication and use Session-based Authentication
+            builder.Services.AddAuthentication()
+                .AddScheme<AuthenticationSchemeOptions, CustomSessionAuthenticationHandler>("SessionAuth", options => { });
 
             builder.Services.AddScoped<SessionVariables>();
             RegisterRepos(builder);
