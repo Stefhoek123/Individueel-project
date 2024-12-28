@@ -75,21 +75,13 @@ namespace Backend.Controllers
         [HttpPost("check-account")]
         public async Task<IActionResult> CheckAccount([FromBody] LoginRequest request)
         {
-            try
-            {
+  
                 if (await _userContainer.IsAccountAvailableAsync(request.Email))
                 {
-                    return NotFound(new { message = "Account not found. Please register." });
+                    return Ok(new { accountExists = false, message = "Account not found. Please register." });
                 }
 
                 return Ok(new { message = "Account exists" });
-            }
-            catch (Exception ex)
-            {
-                // Log the error
-                Console.Error.WriteLine($"Error in CheckAccount: {ex}");
-                return StatusCode(500, new { message = "Internal server error occurred." });
-            }
         }
 
         [HttpGet("auth/check")]
