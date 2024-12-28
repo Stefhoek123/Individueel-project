@@ -7,6 +7,7 @@ public interface IUserContainer
 {
     IEnumerable<UserDto> GetAllUsers();
     UserDto GetUserById(Guid id);
+    UserDto GetUserByEmail(string email);
     UserDto GetUserByFamilyId(Guid id);
     List<UserDto> GetUsersByFamilyId(Guid id);
     Task<bool> AuthenticateUserAsync(string email, string password);

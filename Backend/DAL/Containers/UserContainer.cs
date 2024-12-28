@@ -50,6 +50,12 @@ public class UserContainer : IUserContainer
         return Mappers.UserMapper.ToDto(_userRepository.GetUserById(id));
     }
 
+    public UserDto GetUserByEmail(string email)
+    {
+        return Mappers.UserMapper.ToDto(_userRepository.GetUserByEmail(email));
+    }
+
+
     public UserDto GetUserByFamilyId(Guid id)
     {
         return Mappers.UserMapper.ToDto(_userRepository.GetUserByFamilyId(id));

@@ -8,6 +8,7 @@ namespace Interface
         Task<User?> GetUserByEmailAsync(string email);
         IEnumerable<User> GetAllUsers();
         User GetUserById(Guid id);
+        User GetUserByEmail(string email);
         User GetUserByFamilyId(Guid id);
         List<User> GetUsersByFamilyId(Guid id);
         IEnumerable<User> SearchUserByEmailOrName(string search);

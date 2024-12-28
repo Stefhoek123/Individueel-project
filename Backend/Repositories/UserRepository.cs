@@ -29,6 +29,12 @@ public class UserRepository : IUserRepository
         return _backendDbContext.Users.FirstOrDefault(u => u.Id == id)!;
     }
 
+    public User GetUserByEmail(string email)
+    {
+        return _backendDbContext.Users.FirstOrDefault(u => u.Email == email)!;
+    }
+
+
     public User GetUserByFamilyId(Guid id)
     {
         return _backendDbContext.Users.FirstOrDefault(u => u.FamilyId == id)!;

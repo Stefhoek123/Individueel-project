@@ -52,6 +52,12 @@ namespace Backend.Controllers
             return Ok(_userContainer.GetUserById(id));
         }
 
+        [HttpGet(nameof(GetUserByEmail))]
+        public ActionResult<UserDto> GetUserByEmail(string email)
+        {
+            return Ok(_userContainer.GetUserByEmail(email));
+        }
+
         [HttpGet(nameof(GetUserByFamilyId))]
         public ActionResult<UserDto> GetUserByFamilyId(Guid id)
         {
