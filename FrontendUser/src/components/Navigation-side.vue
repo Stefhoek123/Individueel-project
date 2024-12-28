@@ -1,37 +1,23 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { AuthClient } from "@/api/api";
+import { ro } from "vuetify/locale";
+import { router } from "@/router";
 
 // Simulating authentication check (replace with actual logic)
 const isLoggedIn = ref(false);
 const userEmail = ref("");
 const authClient = new AuthClient();
 
-// API check for authentication status
-const checkAuth = async () => {
-  try {
-    const response = await fetch('http://localhost:5190/auth/auth/check', {
-      method: 'GET', // Using GET method
-      credentials: 'include', // Ensure cookies are sent with the request
-    });
-    console.log("Authentication check response:", response);
+function isAuthenticated() {
+  return document.cookie.includes('AspNetCore.Cookies'); // Adjust cookie name if needed
+}
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Authentication check data:", data);
-      isLoggedIn.value = data.isAuthenticated;
-      userEmail.value = data.email || ''; // Ensure there's no undefined value
-    } else {
-      console.log('Authentication failed');
-      isLoggedIn.value = false;}
-    } catch (error) {
-    isLoggedIn.value = false;
-    console.error("Authentication check failed:", error);
-  }
-};
+console.log("Is authenticated:", isAuthenticated());
+console.log("Is logged in:", isLoggedIn.value);
 
 onMounted(() => {
-  checkAuth(); // Check authentication status on component mount
+  isLoggedIn.value = isAuthenticated();
 });
 
 async function logout() {
@@ -50,7 +36,6 @@ async function logout() {
 
 <template>
   <v-navigation-drawer>
-    <!-- Navbar content, showing user info if logged in -->
     <template v-slot:prepend>
       <v-list-item
       v-if="isLoggedIn"
@@ -64,7 +49,7 @@ async function logout() {
     <v-divider></v-divider>
     
     <!-- Show links based on authentication status -->
-    <v-list-item link to="/" prepend-icon="mdi-home-city" title="Home" value="home" v-if="isLoggedIn"></v-list-item>
+    <v-list-item link to="/home" prepend-icon="mdi-home-city" title="Home" value="home" v-if="isLoggedIn"></v-list-item>
     <v-list-item link to="/posts/create" prepend-icon="mdi-plus" title="Add" value="add" v-if="isLoggedIn"></v-list-item>
     <v-list-item to="/family" title="Family" prepend-icon="mdi-forum" v-if="isLoggedIn"></v-list-item>
     <v-list-item to="/account" prepend-icon="mdi-account" title="My Account" value="account" v-if="isLoggedIn"></v-list-item>

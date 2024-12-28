@@ -22,6 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/families/[id]': RouteRecordInfo<'/families/[id]', '/families/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/families/create': RouteRecordInfo<'/families/create', '/families/create', Record<never, never>, Record<never, never>>,
     '/family': RouteRecordInfo<'/family', '/family', Record<never, never>, Record<never, never>>,
+    '/home': RouteRecordInfo<'/home', '/home', Record<never, never>, Record<never, never>>,
     '/login': RouteRecordInfo<'/login', '/login', Record<never, never>, Record<never, never>>,
     '/posts/[id]': RouteRecordInfo<'/posts/[id]', '/posts/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/posts/create': RouteRecordInfo<'/posts/create', '/posts/create', Record<never, never>, Record<never, never>>,

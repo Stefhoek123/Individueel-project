@@ -2,6 +2,7 @@
 import { PostClient, PostDto } from "@/api/api";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { onMounted } from "vue";
 
 const router = useRouter();
 
@@ -16,6 +17,22 @@ const post = ref<Post>({
 });
 
 const client = new PostClient();
+
+const isLoggedIn = ref(false);
+
+function isAuthenticated() {
+  return document.cookie.includes('.AspNetCore.Cookies');
+}
+
+console.log("Is authenticated:", isAuthenticated());
+
+onMounted(() => {
+  isLoggedIn.value = isAuthenticated();
+  if (isLoggedIn.value === false) {
+    router.push("/login");
+  }
+});
+
 
 async function submit() {
   const fileInput = document.querySelector(
@@ -42,7 +59,7 @@ async function submit() {
     });
 
     await client.createPost(model);
-    await router.push("/");
+    await router.push("/home");
   } else {
     const model = new PostDto({
       textContent: post.value.textContent,
@@ -51,7 +68,7 @@ async function submit() {
     });
 
     await client.createPost(model);
-    await router.push("/");
+    await router.push("/home");
   }
 }
 

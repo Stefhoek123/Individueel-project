@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 async function home() {
-    await router.push('/')
+    await router.push('/home')
   }
   
   async function add() {

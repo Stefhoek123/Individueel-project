@@ -57,7 +57,8 @@ async function submit() {
     console.log("Login successful:", loginData);
 
     // Redirect to homepage after successful login
-    await router.push("/");
+    await router.push("/home");
+    window.location.reload();
   } catch (error: any) {
     console.error("Error:", error);
     alert(error.message || "An error occurred. Please try again.");
