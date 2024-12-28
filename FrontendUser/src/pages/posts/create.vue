@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PostClient, PostDto } from "@/api/api";
+import { PostClient, PostDto, AuthClient } from "@/api/api";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
@@ -17,30 +17,30 @@ const post = ref<Post>({
 });
 
 const client = new PostClient();
-
+const authClient = new AuthClient();
 const isLoggedIn = ref(false);
 
-function isAuthenticated(): boolean {
-  const match = document.cookie.match(/(?:^|;)\s*.AspNetCore.Cookies\s*=\s*([^;]*)/);
-  console.log("Cookie match:", match);
-  if (match && match[1]) {
-    const cookieValue = match[1];
-    // You can add additional checks here to ensure the cookie is valid, 
-    // e.g., verifying if the value looks like a valid JWT token or session identifier.
-    return cookieValue !== "";
+async function isAuthenticated(): Promise<boolean> {
+  try {
+    const response = await authClient.checkAuthStatus();  // Call the backend API to check session
+    console.log("Response:", response);
+    const responseData = await response.data.text();  // Read the response as text
+    console.log("Response data:", responseData);
+    const data = JSON.parse(responseData);  // Parse the response as JSON
+    console.log("Is authenticated:", data.isAuthenticated);  // Log the authentication status
+    return data.isAuthenticated;  // Access the isAuthenticated property
+  } catch (error) {
+    console.error("Error checking authentication:", error);
+    return false;
   }
-  return false;
 }
 
-console.log("Is authenticated:", isAuthenticated());
-
-onMounted(() => {
-  isLoggedIn.value = isAuthenticated();
-  if (isLoggedIn.value === false) {
-    router.push("/");
+onMounted(async () => {
+  isLoggedIn.value = await isAuthenticated();
+  if (!isLoggedIn.value) {
+    router.push("/");  // Redirect to login if not authenticated
   }
 });
-
 
 async function submit() {
   const fileInput = document.querySelector(
@@ -48,22 +48,23 @@ async function submit() {
   ) as HTMLInputElement;
   const file = fileInput.files?.[0];
 
+  const userIdResponse = await authClient.getUserIdFromSession();  // Fetch the user ID from the session
+  const userId = await userIdResponse.data.text();  // Extract the user ID from the response
+
   if (file) {
     const fileParameter = { data: file, fileName: file.name };
 
     const response = await client.getImageUrl(fileParameter);
 
     // Parse the Blob into a JSON object
-    const jsonResponse = await response.data
-      .text()
-      .then((text) => JSON.parse(text));
+    const jsonResponse = await response.data.text().then((text) => JSON.parse(text));
 
     const url = jsonResponse.fileName;
 
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: url,
-      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
+      userId: userId,
     });
 
     await client.createPost(model);
@@ -72,7 +73,7 @@ async function submit() {
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: " ",
-      userId: "10000000-0000-0000-0000-000000000000", // change when you can login
+      userId: userId,
     });
 
     await client.createPost(model);

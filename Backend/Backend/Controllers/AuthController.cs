@@ -32,8 +32,10 @@ namespace Backend.Controllers
             {
                 var user = _userContainer.GetUserByEmail(request.Email);
 
+                var userId = user.Id.ToString();
+
                 // Store userId in the session
-                HttpContext.Session.SetString("UserId", user.Id.ToString());
+                HttpContext.Session.SetString("UserId", userId);
 
                 return Ok(new { Message = "Logged in successfully" });
             }
