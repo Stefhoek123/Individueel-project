@@ -90,5 +90,31 @@ namespace Backend.Controllers
 
             return Unauthorized(new { isAuthenticated = false });
         }
+
+        // Endpoint to check if the user is authenticated via session
+        [HttpGet("auth/status")]
+        public IActionResult CheckAuthStatus()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            if (userId != null)
+            {
+                return Ok(new { isAuthenticated = true });
+            }
+
+            return Ok(new { isAuthenticated = false });
+        }
+
+        // Endpoint to fetch userId from the session
+        [HttpGet("auth/userid")]
+        public IActionResult GetUserIdFromSession()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            if (userId != null)
+            {
+                return Ok(new { userId });
+            }
+
+            return Unauthorized(new { message = "User is not authenticated" });
+        }
     }
 }

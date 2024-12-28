@@ -47,7 +47,7 @@ async function submit() {
 
   // Redirect to homepage after successful login
   await router.push("/home");
-  // window.location.reload();
+  // window.location.reload(); // Reload the page if needed, depending on your session management
 }
 
 async function signup() {
