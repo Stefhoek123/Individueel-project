@@ -155,16 +155,17 @@ namespace Backend
         }
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // Ensure that we are accessing the HttpContext correctly
-            var user = Context.Session.GetString("UserId");
-            if (string.IsNullOrEmpty(user))
+            var userId = Context.Session.GetString("UserId");
+            Console.WriteLine($"UserId from session: {userId}");  // Log session data
+
+            if (string.IsNullOrEmpty(userId))
             {
                 return Task.FromResult(AuthenticateResult.Fail("No user in session"));
             }
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user)
+                new Claim(ClaimTypes.Name, userId)
             };
 
             var identity = new ClaimsIdentity(claims, "SessionAuth");
