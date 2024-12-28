@@ -21,6 +21,7 @@ const client = new PostClient();
 const isLoggedIn = ref(false);
 
 function isAuthenticated() {
+  console.log("Checking if authenticated" + document.cookie.match(/(?<=.AspNetCore.Cookies=).*/));
   return document.cookie.includes('.AspNetCore.Cookies');
 }
 

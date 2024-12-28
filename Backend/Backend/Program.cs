@@ -18,6 +18,7 @@ namespace Backend
         {
             // Constructor logic
         }
+
         public static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -43,7 +44,6 @@ namespace Backend
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             builder.Services.AddDistributedMemoryCache();
-            // builder.Services.AddSession();
             builder.Services.AddSignalR();
 
             // Swagger/OpenAPI Configuration
@@ -84,14 +84,15 @@ namespace Backend
                     options.AccessDeniedPath = "/auth/access-denied";
                     options.Cookie.HttpOnly = true;
                     options.ExpireTimeSpan = TimeSpan.FromHours(1);
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.None; // Force HTTPS in production
-                    options.Cookie.SameSite = SameSiteMode.Lax; // Or SameSiteMode.Strict if no cross-origin is needed
+                    options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+                        ? CookieSecurePolicy.None
+                        : CookieSecurePolicy.Always;
+
+                    options.Cookie.SameSite = SameSiteMode.Lax;
                     options.Cookie.IsEssential = true;
                 });
 
-
             // Add session support
-            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
                 options.Cookie.Name = ".AspNetCore.Session";
@@ -100,7 +101,6 @@ namespace Backend
                 options.Cookie.IsEssential = true;
             });
 
-
             builder.Services.AddScoped<SessionVariables>();
             RegisterRepos(builder);
             RegisterLogics(builder);
@@ -108,13 +108,9 @@ namespace Backend
             builder.Services.AddDirectoryBrowser();
 
             WebApplication app = builder.Build();
-            
-            app.UseCors("AllowSpecificOrigin"); // CORS should be applied before authorization
 
-            //app.UseSignalR(routes =>
-            //{
-            //    routes.MapHub<ChatHub>("/chatHub");
-            //});
+            // CORS should be applied before authentication and authorization
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -129,9 +125,10 @@ namespace Backend
                 app.UseSwaggerUi();
             }
 
-            app.UseSession();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // Session, Authentication, and Authorization order
+            app.UseSession(); // Should be before authentication to store session data
+            app.UseAuthentication(); // Authentication must come before Authorization
+            app.UseAuthorization();  // Authorization must come after authentication
 
             app.MapControllers();
 
