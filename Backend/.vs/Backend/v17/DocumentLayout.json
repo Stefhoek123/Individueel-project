@@ -248,6 +248,14 @@
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "ChatDto.cs",
@@ -281,18 +289,10 @@
               "RelativeDocumentMoniker": "Backend\\Program.cs",
               "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Program.cs",
               "RelativeToolTip": "Backend\\Program.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAqwFwAAAAiAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAYwF0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T09:22:43.34Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",

@@ -9,6 +9,10 @@ using DAL.Containers;
 using Interface;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Options;
+using System.Security.Claims;
+using System.Text.Encodings.Web;
 
 namespace Backend
 {
@@ -75,22 +79,9 @@ namespace Backend
                     });
             });
 
-            // Add authentication with cookies
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/auth/login";
-                    options.LogoutPath = "/auth/logout";
-                    options.AccessDeniedPath = "/auth/access-denied";
-                    options.Cookie.HttpOnly = true;
-                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
-                    options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
-                        ? CookieSecurePolicy.None
-                        : CookieSecurePolicy.Always;
-
-                    options.Cookie.SameSite = SameSiteMode.Lax;
-                    options.Cookie.IsEssential = true;
-                });
+            // Remove Cookie Authentication and use Session-based Authentication
+            builder.Services.AddAuthentication()
+                .AddScheme<AuthenticationSchemeOptions, CustomSessionAuthenticationHandler>("SessionAuth", options => { });
 
             // Add session support
             builder.Services.AddSession(options =>
@@ -151,4 +142,37 @@ namespace Backend
             builder.Services.AddScoped<IChatContainer, ChatContainer>();
         }
     }
+
+    // Custom handler for Session-based Authentication
+    public class CustomSessionAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+    {
+        public CustomSessionAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock)
+            : base(options, logger, encoder, clock)
+        {
+        }
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        {
+            // Ensure that we are accessing the HttpContext correctly
+            var user = Context.Session.GetString("User");
+            if (string.IsNullOrEmpty(user))
+            {
+                return Task.FromResult(AuthenticateResult.Fail("No user in session"));
+            }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user)
+            };
+
+            var identity = new ClaimsIdentity(claims, "SessionAuth");
+            var principal = new ClaimsPrincipal(identity);
+            var ticket = new AuthenticationTicket(principal, "SessionAuth");
+
+            return Task.FromResult(AuthenticateResult.Success(ticket));
+        }
+    }
+
 }

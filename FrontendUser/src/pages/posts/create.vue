@@ -20,9 +20,16 @@ const client = new PostClient();
 
 const isLoggedIn = ref(false);
 
-function isAuthenticated() {
-  console.log("Checking if authenticated" + document.cookie.match(/(?<=.AspNetCore.Cookies=).*/));
-  return document.cookie.includes('.AspNetCore.Cookies');
+function isAuthenticated(): boolean {
+  const match = document.cookie.match(/(?:^|;)\s*.AspNetCore.Cookies\s*=\s*([^;]*)/);
+  console.log("Cookie match:", match);
+  if (match && match[1]) {
+    const cookieValue = match[1];
+    // You can add additional checks here to ensure the cookie is valid, 
+    // e.g., verifying if the value looks like a valid JWT token or session identifier.
+    return cookieValue !== "";
+  }
+  return false;
 }
 
 console.log("Is authenticated:", isAuthenticated());
