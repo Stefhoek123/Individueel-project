@@ -29,7 +29,7 @@ console.log("Is authenticated:", isAuthenticated());
 onMounted(() => {
   isLoggedIn.value = isAuthenticated();
   if (isLoggedIn.value === false) {
-    router.push("/login");
+    router.push("/");
   }
 });
 

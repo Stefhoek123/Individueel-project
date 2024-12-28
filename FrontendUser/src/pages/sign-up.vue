@@ -41,6 +41,11 @@ async function submit() {
     await router.push({ name: "/" });
   }
 }
+
+async function login() {
+  await router.push("/");
+}
+
 </script>
 
 <template>
@@ -73,7 +78,9 @@ async function submit() {
         </VCardText>
 
         <VCardActions>
-          <VBtn class="me-4" type="submit"> Register </VBtn>
+          <VBtn class="me-4" type="submit">Sign up</VBtn>
+          or 
+          <VBtn class="me-4" @click="login">Login</VBtn>
         </VCardActions>
       </VForm>
     </VCard>

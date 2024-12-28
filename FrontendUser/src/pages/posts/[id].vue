@@ -20,7 +20,7 @@ const chat = ref<ChatDto>({
   chatContent: "",
   reactId: "00000000-0000-0000-0000-000000000000",
   senderName: "Test", // Temporary for testing
-  userId: "10000000-0000-0000-0000-000000000000",
+  userId: { id: "10000000-0000-0000-0000-000000000000" },
 });
 
 // Router

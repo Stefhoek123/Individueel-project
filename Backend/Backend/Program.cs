@@ -82,21 +82,24 @@ namespace Backend
                     options.LoginPath = "/auth/login";
                     options.LogoutPath = "/auth/logout";
                     options.AccessDeniedPath = "/auth/access-denied";
-                    options.Cookie.HttpOnly = true; // Cookie only accessible via HTTP
-                    options.ExpireTimeSpan = TimeSpan.FromHours(1); // Cookie expiration
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // Ensure cookies are sent with HTTPS in production
-                    options.Cookie.IsEssential = true;  // Ensure cookies are always sent, even if the user is not logged in
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.None; // Force HTTPS in production
+                    options.Cookie.SameSite = SameSiteMode.Lax; // Or SameSiteMode.Strict if no cross-origin is needed
+                    options.Cookie.IsEssential = true;
                 });
+
 
             // Add session support
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
-                options.Cookie.Name = "SessionCookie";
+                options.Cookie.Name = ".AspNetCore.Session";
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
 
             builder.Services.AddScoped<SessionVariables>();
             RegisterRepos(builder);
@@ -105,8 +108,6 @@ namespace Backend
             builder.Services.AddDirectoryBrowser();
 
             WebApplication app = builder.Build();
-
-            app.UseSession();
             
             app.UseCors("AllowSpecificOrigin"); // CORS should be applied before authorization
 
@@ -128,6 +129,7 @@ namespace Backend
                 app.UseSwaggerUi();
             }
 
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 

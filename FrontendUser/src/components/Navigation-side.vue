@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { AuthClient } from "@/api/api";
-import { ro } from "vuetify/locale";
-import { router } from "@/router";
+import router from "@/router";
 
 // Simulating authentication check (replace with actual logic)
 const isLoggedIn = ref(false);
@@ -10,7 +9,7 @@ const userEmail = ref("");
 const authClient = new AuthClient();
 
 function isAuthenticated() {
-  return document.cookie.includes('AspNetCore.Cookies'); // Adjust cookie name if needed
+  return document.cookie.includes('.AspNetCore.Cookies'); // Adjust cookie name if needed
 }
 
 console.log("Is authenticated:", isAuthenticated());
@@ -25,7 +24,7 @@ async function logout() {
     await authClient.logout();
     isLoggedIn.value = false;
     userEmail.value = "";
-    alert("Logged out successfully");
+    router.push("/");
     console.log("Logged out successfully");
   } catch (error: any) {
     console.error("Logout error:", error);
@@ -49,17 +48,13 @@ async function logout() {
     <v-divider></v-divider>
     
     <!-- Show links based on authentication status -->
-    <v-list-item link to="/home" prepend-icon="mdi-home-city" title="Home" value="home" v-if="isLoggedIn"></v-list-item>
-    <v-list-item link to="/posts/create" prepend-icon="mdi-plus" title="Add" value="add" v-if="isLoggedIn"></v-list-item>
-    <v-list-item to="/family" title="Family" prepend-icon="mdi-forum" v-if="isLoggedIn"></v-list-item>
-    <v-list-item to="/account" prepend-icon="mdi-account" title="My Account" value="account" v-if="isLoggedIn"></v-list-item>
-
-    <!-- Show Login/Sign Up when not logged in -->
-    <v-list-item to="/login" prepend-icon="mdi-login" title="Login" value="login" v-if="!isLoggedIn"></v-list-item>
-    <v-list-item to="/sign-up" prepend-icon="mdi-account-plus" title="Sign Up" value="sign-up" v-if="!isLoggedIn"></v-list-item>
+    <v-list-item link to="/home" prepend-icon="mdi-home-city" title="Home" value="home" ></v-list-item>
+    <v-list-item link to="/posts/create" prepend-icon="mdi-plus" title="Add" value="add" ></v-list-item>
+    <v-list-item to="/family" title="Family" prepend-icon="mdi-forum" ></v-list-item>
+    <v-list-item to="/account" prepend-icon="mdi-account" title="My Account" value="account" ></v-list-item>
 
     <!-- Show Logout when logged in -->
-    <v-list-item prepend-icon="mdi-logout" title="Logout" value="logout" v-if="!isLoggedIn" @click="logout"></v-list-item>
+    <v-list-item prepend-icon="mdi-logout" title="Logout" value="logout"  @click="logout"></v-list-item>
   </v-navigation-drawer>
 </template>
 

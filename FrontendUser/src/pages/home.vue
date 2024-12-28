@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import NavigationSide from '@/components/Navigation-side.vue';
+import HeaderComponent from '@/components/HeaderComponent.vue';
 import { ref, onMounted } from "vue";
 import type { PostDto} from "@/api/api";
 import { PostClient } from "@/api/api";
@@ -19,6 +21,8 @@ async function loadData(){
 
 <template>
   <div class="outline">
+    <HeaderComponent />
+    <NavigationSide />
   <div class="d-flex justify-center">
     <v-row justify="center">
       <v-col cols="12" md="8" v-for="item in posts" :key="item.id">
