@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { AuthClient, LoginRequest, UserClient, UserDto } from "@/api/api";
+import { LoginRequest, UserClient, UserDto } from "@/api/api";
 
 // Define a user interface
 interface User {
@@ -23,9 +23,27 @@ const user = ref<User>({
   isActive: 0,
 });
 
-const authClient = new AuthClient();
 const userClient = new UserClient();
 const router = useRouter();
+
+// async function checkAccount() {
+//   const model = new LoginRequest({
+//     email: user.value.email,
+//     password: user.value.passwordHash,
+//   });
+
+//   const accountCheckResponse = await userClient.checkAccount(model);
+
+//   const responseBody = await accountCheckResponse.data.text();
+//   const accountData = JSON.parse(responseBody);
+
+//   if (accountData.message === "Account not found. Please register.") {
+//     await router.push("/sign-up");
+//     return;
+//   }
+
+//   console.log("Account exists. Proceed with login.");
+// }
 
 async function submit() {
   const model = new LoginRequest({
@@ -33,7 +51,6 @@ async function submit() {
     password: user.value.passwordHash,
   });
 
-  // Step 1: Check if the account exists
   const accountCheckResponse = await userClient.checkAccount(model);
 
   const responseBody = await accountCheckResponse.data.text();
@@ -54,24 +71,17 @@ async function submit() {
 
   console.log("Login successful:", loginData);
 
-  if (loginData.message === "Login successful") {
+  const modelUser = new UserDto({
+    firstName: user.value.firstName,
+    lastName: user.value.lastName,
+    email: user.value.email,
+    passwordHash: user.value.passwordHash,
+    familyId: user.value.familyId || "",
+    isActive: 1,
+  });
 
-    const model = new UserDto({
-      firstName: user.value.firstName,
-      lastName: user.value.lastName,
-      email: user.value.email,
-      passwordHash: user.value.passwordHash,
-      familyId: user.value.familyId || "",
-      isActive: 1,
-    });
+  await userClient.updateUser(modelUser);
 
-    await router.push("/sign-up");
-    return;
-  }
-
- 
-
-  // Redirect to homepage after successful login
   await router.push("/home");
   // window.location.reload(); // Reload the page if needed, depending on your session management
 }
@@ -79,7 +89,6 @@ async function submit() {
 async function signup() {
   await router.push("/sign-up");
 }
-
 </script>
 
 <template>
@@ -98,7 +107,7 @@ async function signup() {
           />
         </VCardText>
         <VCardActions>
-          <VBtn class="me-4" type="submit">Login</VBtn> or 
+          <VBtn class="me-4" type="submit">Login</VBtn> or
           <VBtn class="me-4" @click="signup">Sign up</VBtn>
         </VCardActions>
       </VForm>
