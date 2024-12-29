@@ -28,8 +28,8 @@ namespace TestProject
             // Arrange
             var users = new List<Models.User>
             {
-                new Models.User(Guid.NewGuid(), "John", "Doe", "John123", "john@doe.nl", Guid.NewGuid()),
-                new Models.User(Guid.NewGuid(), "Jane", "Doe", "Jane123", "jane@doe.nl", Guid.NewGuid())
+                new Models.User(Guid.NewGuid(), "John", "Doe", "John123", "john@doe.nl", Guid.NewGuid(), 1),
+                new Models.User(Guid.NewGuid(), "Jane", "Doe", "Jane123", "jane@doe.nl", Guid.NewGuid(), 1)
             };
 
             var expectedDtos = users.Select(u => new UserDto
@@ -73,12 +73,14 @@ namespace TestProject
                 "Doe",
                 "John@doe.nl",
                 "John123",
-                familyId);
+                familyId,
+                1);
             var userDto = new UserDto(userId, "Doe",
                 "John",
                 "John@doe.nl",
                 "Doe123",
-                familyId);
+                familyId,
+                1);
 
             _mockUserRepository?.Setup(repo => repo.GetUserById(userId)).Returns(user);
 
@@ -103,12 +105,14 @@ namespace TestProject
                 "Doe",
                 "John@doe.nl",
                 "John123",
-                familyId);
+                familyId,
+                1);
             var userDto = new UserDto(userId, "Doe",
                 "John",
                 "John@doe.nl",
                 "Doe123",
-                familyId);
+                familyId,
+                1);
 
             _mockUserRepository?.Setup(repo => repo.GetUserByFamilyId(userId)).Returns(user);
 
@@ -130,8 +134,8 @@ namespace TestProject
             var familyId = Guid.NewGuid();
             var users = new List<Models.User>
             {
-                new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", familyId),
-                new Models.User(Guid.NewGuid(), "Jane", "Doe", "jane@doe.nl", "Jane123", familyId)
+                new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", familyId, 1),
+                new Models.User(Guid.NewGuid(), "Jane", "Doe", "jane@doe.nl", "Jane123", familyId, 1)   
             };
 
             _mockUserRepository?.Setup(repo => repo.GetUsersByFamilyId(familyId)).Returns(users);
@@ -175,7 +179,7 @@ namespace TestProject
             var password = "correctPassword";
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid())
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
             {
                 PasswordHash = hashedPassword
             };
@@ -217,7 +221,7 @@ namespace TestProject
             var correctPassword = "correctPassword";
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(correctPassword);
 
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid())
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
             {
                 PasswordHash = hashedPassword
             };
@@ -254,7 +258,7 @@ namespace TestProject
             // Arrange
             var email = "existinguser@example.com";
 
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid());
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1);
             _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
 
             // Act
@@ -271,8 +275,8 @@ namespace TestProject
             // Arrange
             var users = new List<Models.User>
     {
-        new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", Guid.NewGuid()),
-        new Models.User(Guid.NewGuid(), "Jane", "Smith", "jane@smith.nl", "Jane123", Guid.NewGuid())
+        new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", Guid.NewGuid(), 1),
+        new Models.User(Guid.NewGuid(), "Jane", "Smith", "jane@smith.nl", "Jane123", Guid.NewGuid(), 1)
     };
 
             var expectedDtos = users.Select(u => new UserDto { Id = u.Id, FirstName = u.FirstName }).ToList();
@@ -301,7 +305,7 @@ namespace TestProject
             var search = "John";
             var users = new List<Models.User>
     {
-        new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", Guid.NewGuid())
+        new Models.User(Guid.NewGuid(), "John", "Doe", "john@doe.nl", "John123", Guid.NewGuid(), 1)
     };
 
             var expectedDtos = users.Select(u => new UserDto { Id = u.Id, FirstName = u.FirstName ?? string.Empty }).ToList();
@@ -334,7 +338,8 @@ namespace TestProject
                 LastName = "Doe",
                 Email = "john.doe@example.com",
                 PasswordHash = "hashed_password",
-                FamilyId = Guid.NewGuid()
+                FamilyId = Guid.NewGuid(),
+                IsActive = 1
             };
 
             var user = new Models.User(
@@ -343,7 +348,8 @@ namespace TestProject
                 userDto.LastName,
                 userDto.Email,
                 userDto.PasswordHash,
-                userDto.FamilyId
+                userDto.FamilyId,
+                userDto.IsActive
             );
 
             // Act
@@ -364,7 +370,8 @@ namespace TestProject
                 LastName = "Doe",
                 Email = "john.doe@example.com",
                 PasswordHash = "hashed_password",
-                FamilyId = Guid.NewGuid()
+                FamilyId = Guid.NewGuid(),
+                IsActive = 1
             };
 
             var user = new Models.User(
@@ -373,7 +380,8 @@ namespace TestProject
                 userDto.LastName,
                 userDto.Email,
                 userDto.PasswordHash,
-                userDto.FamilyId
+                userDto.FamilyId,
+                userDto.IsActive
             );
 
             // Act
@@ -395,7 +403,8 @@ namespace TestProject
                 LastName = "Doe",
                 Email = "john.doe@example.com",
                 PasswordHash = "hashed_password",
-                FamilyId = Guid.NewGuid()  
+                FamilyId = Guid.NewGuid()  ,
+                IsActive = 1
             };
 
             var existingUser = new Models.User(
@@ -404,7 +413,8 @@ namespace TestProject
                 "Doe",
                 "jane.doe@example.com",
                 "hashed_password",
-                Guid.NewGuid() 
+                Guid.NewGuid(),
+                1
             );
 
             var expectedUser = new Models.User(
@@ -413,7 +423,8 @@ namespace TestProject
                 existingUser.LastName ?? string.Empty,
                 existingUser.Email ?? string.Empty,
                 existingUser.PasswordHash ?? string.Empty,
-                userDto.FamilyId 
+                userDto.FamilyId,
+                userDto.IsActive
             );
 
             _mockUserRepository?.Setup(repo => repo.GetUserById(userId)).Returns(existingUser);
