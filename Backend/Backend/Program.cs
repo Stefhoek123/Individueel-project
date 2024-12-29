@@ -79,20 +79,6 @@ namespace Backend
                     });
             });
 
-            // Add session support
-            builder.Services.AddSession(options =>
-            {
-                options.Cookie.Name = ".AspNetCore.Session";
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
-
-            // Remove Cookie Authentication and use Session-based Authentication
-            builder.Services.AddAuthentication()
-                .AddScheme<AuthenticationSchemeOptions, CustomSessionAuthenticationHandler>("SessionAuth", options => { });
-
-            builder.Services.AddScoped<SessionVariables>();
             RegisterRepos(builder);
             RegisterLogics(builder);
 
@@ -142,38 +128,4 @@ namespace Backend
             builder.Services.AddScoped<IChatContainer, ChatContainer>();
         }
     }
-
-    // Custom handler for Session-based Authentication
-    public class CustomSessionAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
-    {
-        public CustomSessionAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
-            ILoggerFactory logger,
-            UrlEncoder encoder,
-            ISystemClock clock)
-            : base(options, logger, encoder, clock)
-        {
-        }
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        {
-            var userId = Context.Session.GetString("UserId");
-            Console.WriteLine($"UserId from session: {userId}");  // Log session data
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Task.FromResult(AuthenticateResult.Fail("No user in session"));
-            }
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, userId)
-            };
-
-            var identity = new ClaimsIdentity(claims, "SessionAuth");
-            var principal = new ClaimsPrincipal(identity);
-            var ticket = new AuthenticationTicket(principal, "SessionAuth");
-
-            return Task.FromResult(AuthenticateResult.Success(ticket));
-        }
-    }
-
 }
