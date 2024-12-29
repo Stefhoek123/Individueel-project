@@ -1878,6 +1878,7 @@ export class UserDto implements IUserDto {
     lastName!: string;
     email!: string;
     passwordHash!: string;
+    isActive?: number;
     familyId?: string;
 
     constructor(data?: IUserDto) {
@@ -1896,6 +1897,7 @@ export class UserDto implements IUserDto {
             this.lastName = _data["lastName"];
             this.email = _data["email"];
             this.passwordHash = _data["passwordHash"];
+            this.isActive = _data["isActive"];
             this.familyId = _data["familyId"];
         }
     }
@@ -1914,6 +1916,7 @@ export class UserDto implements IUserDto {
         data["lastName"] = this.lastName;
         data["email"] = this.email;
         data["passwordHash"] = this.passwordHash;
+        data["isActive"] = this.isActive;
         data["familyId"] = this.familyId;
         return data;
     }
@@ -1925,6 +1928,7 @@ export interface IUserDto {
     lastName: string;
     email: string;
     passwordHash: string;
+    isActive?: number;
     familyId?: string;
 }
 

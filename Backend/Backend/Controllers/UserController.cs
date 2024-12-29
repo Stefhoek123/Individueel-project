@@ -32,7 +32,7 @@ namespace Backend.Controllers
         {
             if (await _userContainer.IsAccountAvailableAsync(request.Email))
             {
-                return NotFound(new { message = "Account not found. Please register." });
+                return Ok(new { message = "Account not found. Please register." });
             }
 
             return Ok(new { message = "Account exists" });
