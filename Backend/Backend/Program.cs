@@ -103,7 +103,6 @@ namespace Backend
             }
 
             // Session, Authentication, and Authorization order
-            app.UseSession();
             app.UseAuthentication(); 
             app.UseAuthorization();
 
