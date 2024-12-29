@@ -36,7 +36,6 @@ public class UserContainer : IUserContainer
         return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);
     }
 
-
     // GET for getting all users
     public IEnumerable<UserDto> GetAllUsers()
     {

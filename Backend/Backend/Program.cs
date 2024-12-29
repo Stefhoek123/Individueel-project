@@ -117,9 +117,9 @@ namespace Backend
             }
 
             // Session, Authentication, and Authorization order
-            app.UseSession(); // Should be before authentication to store session data
-            app.UseAuthentication(); // Authentication must come before Authorization
-            app.UseAuthorization();  // Authorization must come after authentication
+            app.UseSession();
+            app.UseAuthentication(); 
+            app.UseAuthorization();
 
             app.MapControllers();
 

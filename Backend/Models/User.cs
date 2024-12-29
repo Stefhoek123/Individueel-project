@@ -20,12 +20,14 @@ namespace Models
         [Required]
         public string? Email { get; set; }
 
+        public int IsActive { get; set; }
+
         [ForeignKey(nameof(FamilyId))]
         public Guid FamilyId { get; set; }
 
         public User() { }
 
-        public User(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId)
+        public User(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId, int isActive)
         {
             Id = id;
             FirstName = firstName;
@@ -33,6 +35,7 @@ namespace Models
             Email = email;
             PasswordHash = HashPassword(plainPassword);
             FamilyId = familyId;
+            IsActive = isActive;
         }
 
         public bool VerifyPassword(string plainPassword)

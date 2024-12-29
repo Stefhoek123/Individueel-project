@@ -36,9 +36,7 @@ namespace Backend.Controllers
             }
 
             return Ok(new { message = "Account exists" });
-        }
-
-
+        } 
 
         [HttpGet(nameof(GetAllUsers))]
         public ActionResult<IEnumerable<UserDto>> GetAllUsers()

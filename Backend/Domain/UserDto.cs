@@ -15,10 +15,11 @@ namespace Domain
         public string Email { get; set; } = null!;
         [Required]
         public string PasswordHash { get; set; } = null!;
+        public int IsActive { get; set; }
 
         public Guid FamilyId { get; set; }
 
-        public UserDto(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId)
+        public UserDto(Guid id, string firstName, string lastName, string email, string plainPassword, Guid familyId, int isActive)
         {
             Id = id;
             FirstName = firstName;
@@ -26,6 +27,7 @@ namespace Domain
             Email = email;
             PasswordHash = plainPassword;
             FamilyId = familyId;
+            IsActive = isActive;
         }
 
         public UserDto() { }

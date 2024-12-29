@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("auth")]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly IUserContainer _userContainer;

@@ -1,21 +1,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { AuthClient, LoginRequest } from "@/api/api";
+import { AuthClient, LoginRequest, UserClient, UserDto } from "@/api/api";
 
 // Define a user interface
 interface User {
+  firstName: string;
+  lastName: string;
   email: string;
-  passwordHash: string; // Updated to match API requirements
+  passwordHash: string;
+  familyId: string;
+  isActive: number;
 }
 
 // Create a reactive user object
 const user = ref<User>({
+  firstName: "",
+  lastName: "",
   email: "",
   passwordHash: "",
+  familyId: "",
+  isActive: 0,
 });
 
 const authClient = new AuthClient();
+const userClient = new UserClient();
 const router = useRouter();
 
 async function submit() {
@@ -25,7 +34,7 @@ async function submit() {
   });
 
   // Step 1: Check if the account exists
-  const accountCheckResponse = await authClient.checkAccount(model);
+  const accountCheckResponse = await userClient.checkAccount(model);
 
   const responseBody = await accountCheckResponse.data.text();
   const accountData = JSON.parse(responseBody);
@@ -38,12 +47,29 @@ async function submit() {
   console.log("Account exists. Proceed with login.");
 
   // Step 2: Proceed with login
-  const loginResponse = await authClient.login(model);
+  const loginResponse = await userClient.login(model);
 
   const loginResponseBody = await loginResponse.data.text();
   const loginData = JSON.parse(loginResponseBody);
 
   console.log("Login successful:", loginData);
+
+  if (loginData.message === "Login successful") {
+
+    const model = new UserDto({
+      firstName: user.value.firstName,
+      lastName: user.value.lastName,
+      email: user.value.email,
+      passwordHash: user.value.passwordHash,
+      familyId: user.value.familyId || "",
+      isActive: 1,
+    });
+
+    await router.push("/sign-up");
+    return;
+  }
+
+ 
 
   // Redirect to homepage after successful login
   await router.push("/home");

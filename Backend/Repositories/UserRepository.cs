@@ -18,7 +18,6 @@ public class UserRepository : IUserRepository
         return await _backendDbContext.Users.SingleOrDefaultAsync(u => u.Email == email);
     }
 
-
     public IEnumerable<User> GetAllUsers()
     {
         return _backendDbContext.Users.ToList();
