@@ -6928,9 +6928,7 @@
     "net8.0": [
       "BCrypt.Net-Next >= 4.0.3",
       "Business >= 1.0.0",
-      "Microsoft.AspNetCore.Authentication.Cookies >= 2.2.0",
       "Microsoft.AspNetCore.Cors >= 2.1.1",
-      "Microsoft.AspNetCore.Session >= 2.2.0",
       "Microsoft.AspNetCore.SignalR.Common >= 9.0.0",
       "Microsoft.CodeCoverage >= 17.12.0",
       "Microsoft.EntityFrameworkCore >= 8.0.10",
@@ -7005,17 +7003,9 @@
             "target": "Package",
             "version": "[4.0.3, )"
           },
-          "Microsoft.AspNetCore.Authentication.Cookies": {
-            "target": "Package",
-            "version": "[2.2.0, )"
-          },
           "Microsoft.AspNetCore.Cors": {
             "target": "Package",
             "version": "[2.1.1, )"
-          },
-          "Microsoft.AspNetCore.Session": {
-            "target": "Package",
-            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.SignalR.Common": {
             "target": "Package",
