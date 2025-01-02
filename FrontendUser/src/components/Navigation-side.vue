@@ -1,36 +1,42 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { AuthClient } from "@/api/api";
+import { UserClient } from "@/api/api";
 import router from "@/router";
 
 // Simulating authentication check (replace with actual logic)
 const isLoggedIn = ref(false);
 const userEmail = ref("");
-const authClient = new AuthClient();
 
-function isAuthenticated() {
-  return document.cookie.includes('.AspNetCore.Cookies'); // Adjust cookie name if needed
-}
+const userClient = new UserClient();
 
-console.log("Is authenticated:", isAuthenticated());
-console.log("Is logged in:", isLoggedIn.value);
-
-onMounted(() => {
-  isLoggedIn.value = isAuthenticated();
-});
 
 async function logout() {
-  try {
-    await authClient.logout();
-    isLoggedIn.value = false;
-    userEmail.value = "";
-    router.push("/");
-    console.log("Logged out successfully");
-  } catch (error: any) {
-    console.error("Logout error:", error);
-    alert(error.message || "Logout failed. Please try again.");
-  }
-}
+//   try {
+
+//     var awaitUser = await userClient.getUserByEmail(model.email);
+
+// const modelUser = new UserDto({
+//   id: awaitUser.id,
+//   firstName: awaitUser.firstName,
+//   lastName: awaitUser.lastName,
+//   email: awaitUser.email,
+//   passwordHash: awaitUser.passwordHash,
+//   familyId: awaitUser.familyId || "",
+//   isActive: 2,
+// });
+
+// await userClient.updateUser(modelUser);
+
+
+//     isLoggedIn.value = false;
+//     userEmail.value = "";
+//     router.push("/");
+//     console.log("Logged out successfully");
+//   } catch (error: any) {
+//     console.error("Logout error:", error);
+//     alert(error.message || "Logout failed. Please try again.");
+//   }
+ }
 </script>
 
 <template>

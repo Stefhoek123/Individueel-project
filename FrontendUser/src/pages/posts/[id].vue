@@ -98,7 +98,7 @@ async function sendMessage() {
           <v-card elevation="2" class="pa-5">
             <v-row justify="center">
               <v-col cols="2">
-                <router-link :to="`/`">
+                <router-link :to="`/home`">
                   <VBtn
                     icon="mdi-arrow-left"
                     variant="plain"

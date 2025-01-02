@@ -28,28 +28,31 @@ async function submit() {
     email: user.value.email,
     passwordHash: user.value.passwordHash,
     familyId: "10000000-0000-0000-0000-000000000000",
+    isActive: 2,
   });
 
   try {
     await client.checkAccount(model);
     console.log("Account already exists");
-    await router.push("/login");
+    await router.push("/");
   } catch (error) {
     console.error("Error creating user:", error);
     const completeModel = await client.createUser(model);
     console.log("User created:", completeModel);
-    await router.push({ name: "/" });
+    await router.push({ name: "/home" });
   }
 }
 
 async function login() {
-  await router.push("/");
+  await router.push("/home");
 }
 
 </script>
 
 <template>
   <div class="signup">
+    <HeaderComponent />
+    <NavigationSide />
     <img class="logo" src="../assets/resto-logo.png" width="35px" />
     <h1>Sign Up</h1>
     <VCard title="Register your account here" class="title">

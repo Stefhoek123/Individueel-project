@@ -26,24 +26,6 @@ const user = ref<User>({
 const userClient = new UserClient();
 const router = useRouter();
 
-// async function checkAccount() {
-//   const model = new LoginRequest({
-//     email: user.value.email,
-//     password: user.value.passwordHash,
-//   });
-
-//   const accountCheckResponse = await userClient.checkAccount(model);
-
-//   const responseBody = await accountCheckResponse.data.text();
-//   const accountData = JSON.parse(responseBody);
-
-//   if (accountData.message === "Account not found. Please register.") {
-//     await router.push("/sign-up");
-//     return;
-//   }
-
-//   console.log("Account exists. Proceed with login.");
-// }
 
 async function submit() {
   const model = new LoginRequest({
@@ -71,19 +53,21 @@ async function submit() {
 
   console.log("Login successful:", loginData);
 
+ var awaitUser = await userClient.getUserByEmail(model.email);
+
   const modelUser = new UserDto({
-    firstName: user.value.firstName,
-    lastName: user.value.lastName,
-    email: user.value.email,
-    passwordHash: user.value.passwordHash,
-    familyId: user.value.familyId || "",
-    isActive: 1,
+    id: awaitUser.id,
+    firstName: awaitUser.firstName,
+    lastName: awaitUser.lastName,
+    email: awaitUser.email,
+    passwordHash: awaitUser.passwordHash,
+    familyId: awaitUser.familyId || "",
+    isActive: 2,
   });
 
   await userClient.updateUser(modelUser);
 
   await router.push("/home");
-  // window.location.reload(); // Reload the page if needed, depending on your session management
 }
 
 async function signup() {
@@ -93,6 +77,8 @@ async function signup() {
 
 <template>
   <div class="login">
+    <HeaderComponent />
+    <NavigationSide />
     <img class="logo" src="../assets/resto-logo.png" width="35px" />
     <h1>Login</h1>
     <VCard title="Login into your account here">

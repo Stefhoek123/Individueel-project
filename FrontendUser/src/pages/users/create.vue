@@ -54,6 +54,7 @@ async function submit(event: SubmitEventPromise) {
       email: user.value.email,
       passwordHash: user.value.passwordHash,
       familyId: user.value.familyId || "",
+      isActive: 1,
     });
 
     await client.createUser(model);
