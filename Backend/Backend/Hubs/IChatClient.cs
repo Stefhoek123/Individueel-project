@@ -1,6 +1,8 @@
-﻿namespace Backend.Hubs;
+﻿using Models;
+
+namespace Backend.Hubs;
 
 public interface IChatClient
 {
-    Task ReceiveMessage(string message);
+    Task ReceiveMessage(Chat message);
 }

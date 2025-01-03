@@ -190,3 +190,4 @@ C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\ne
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Threading.Channels.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
