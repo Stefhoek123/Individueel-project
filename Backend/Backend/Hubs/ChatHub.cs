@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Microsoft.AspNetCore.SignalR;
 using Models;
 
@@ -13,7 +14,7 @@ namespace Backend.Hubs
         {
             string? userEmail = Context.GetHttpContext()?.Request.Query["Email"];
             ConnectedUsers[Context.ConnectionId] = userEmail ?? "Anonymous";
-            await Clients.All.ReceiveMessage(new Chat(new Guid(), new Guid(), DateTime.Now, $"{userEmail} joined the chat", new Guid(), "System", new Guid()));
+            await Clients.All.ReceiveMessage(new Chat(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, $"{userEmail} joined the chat", Guid.NewGuid(), "System", Guid.NewGuid()));
         }
 
         public async Task SendMessage(Chat message)
@@ -26,10 +27,10 @@ namespace Backend.Hubs
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            if (ConnectedUsers.TryGetValue(Context.ConnectionId, out string userEmail))
+            if (ConnectedUsers.TryGetValue(Context.ConnectionId, out string? userEmail))
             {
                 ConnectedUsers.Remove(Context.ConnectionId);
-                await Clients.All.ReceiveMessage(new Chat(new Guid(), new Guid(), DateTime.Now, $"{userEmail} has left the chat", new Guid(), "System", new Guid()));
+                await Clients.All.ReceiveMessage(new Chat(Guid.NewGuid(), Guid.NewGuid(), DateTime.Now, $"{userEmail} has left the chat", Guid.NewGuid(), "System", Guid.NewGuid()));
             }
             await base.OnDisconnectedAsync(exception);
         }

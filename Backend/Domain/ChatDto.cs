@@ -11,7 +11,7 @@ public class ChatDto
     [Required]
     public DateTime Date { get; set; }
     [Required]
-    public string ChatContent { get; set; }
+    public string? ChatContent { get; set; }
     [Required]
     public Guid ReactId { get; set; }
     [Required]
