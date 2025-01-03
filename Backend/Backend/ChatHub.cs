@@ -1,22 +1,18 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Models;
 
 namespace Backend
 {
-    public class ChatHub : Hub
+    public sealed class ChatHub : Hub<IChatClient>
     {
-        public override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
-            return base.OnConnectedAsync();
+            await Clients.All.ReceiveMessage($"{ Context.ConnectionId} has joined");
         }
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public async Task SendMessage(string message)
         {
-            return base.OnDisconnectedAsync(exception);
-        }
-
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.ReceiveMessage($"{Context.ConnectionId} : { message } ");
         }
     }
 }

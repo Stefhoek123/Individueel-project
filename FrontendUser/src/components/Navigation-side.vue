@@ -11,9 +11,9 @@ const userClient = new UserClient();
 
 
 async function logout() {
-//   try {
+  try {
 
-//     var awaitUser = await userClient.getUserByEmail(model.email);
+   //  var awaitUser = await userClient.getUserByEmail(model.email);
 
 // const modelUser = new UserDto({
 //   id: awaitUser.id,
@@ -28,15 +28,15 @@ async function logout() {
 // await userClient.updateUser(modelUser);
 
 
-//     isLoggedIn.value = false;
-//     userEmail.value = "";
-//     router.push("/");
-//     console.log("Logged out successfully");
-//   } catch (error: any) {
-//     console.error("Logout error:", error);
-//     alert(error.message || "Logout failed. Please try again.");
-//   }
- }
+    isLoggedIn.value = false;
+    userEmail.value = "";
+    router.push("/");
+    console.log("Logged out successfully");
+  } catch (error: any) {
+    console.error("Logout error:", error);
+    alert(error.message || "Logout failed. Please try again.");
+  }
+}
 </script>
 
 <template>

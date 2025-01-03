@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Backend
 {
@@ -95,6 +96,14 @@ namespace Backend
                 RequestPath = "/Uploads"
             });
 
+            app.MapPost("broadcast",
+                async (string message, IHubContext<ChatHub, IChatClient> context) =>
+                {
+                    await context.Clients.All.ReceiveMessage(message);
+
+                    return Results.NoContent();
+                });
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -105,6 +114,8 @@ namespace Backend
             // Session, Authentication, and Authorization order
             app.UseAuthentication(); 
             app.UseAuthorization();
+
+            app.MapHub<ChatHub>("chat");
 
             app.MapControllers();
 

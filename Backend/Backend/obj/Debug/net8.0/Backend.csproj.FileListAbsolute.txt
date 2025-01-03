@@ -181,3 +181,12 @@ C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\ne
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Text.Json.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Threading.Channels.dll
