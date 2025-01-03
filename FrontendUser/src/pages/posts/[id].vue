@@ -4,23 +4,44 @@ import { useRouter, useRoute } from "vue-router";
 import { PostDto, UserDto, ChatDto } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { PostClient, UserClient, ChatClient } from "@/api/api";
+import { HubConnectionBuilder } from "@microsoft/signalr";
+import { v4 as uuidv4 } from 'uuid';
 
 // Clients
-const client = new PostClient();
+const postClient = new PostClient();
 const userClient = new UserClient();
 const chatClient = new ChatClient();
+
+// url
+const connection = new HubConnectionBuilder()
+  .withUrl("http://localhost:5190/chat")
+  .build();
+
+connection.start().then(() => {
+  console.log("Connected to SignalR Hub");
+});
 
 // Reactive Data
 const post = ref<PostDto | null>(null);
 const users = ref<UserDto[]>([]);
 const messageList = ref<ChatDto[]>([]);
-const chat = ref<ChatDto>({
+
+interface Chat {
+  postId: string;
+  date: Date;
+  chatContent: string;
+  reactId: string;
+  senderName: string;
+  userId: string;
+}
+
+const chat = ref<Chat>({
   postId: "",
   date: new Date(),
   chatContent: "",
   reactId: "00000000-0000-0000-0000-000000000000",
   senderName: "Test", // Temporary for testing
-  userId: { id: "10000000-0000-0000-0000-000000000000" },
+  userId: "00000000-0000-0000-0000-000000000000",
 });
 
 // Router
@@ -34,14 +55,26 @@ const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
 
 // Fetch Post Data
 onMounted(() => {
+  if (messageList.value.length === 0) {
+    fetchMessages();
+  }
+  connection.on("ReceiveMessage", (message) => {
+    messageList.value.push(message);
+  });
+
   fetchPostDetails();
-  fetchMessages();
 });
 
 // Fetch post details and users by family ID
 async function fetchPostDetails() {
-  post.value = await client.getPostById(routeId);
+  post.value = await postClient.getPostById(routeId);
   users.value = await userClient.getUsersByFamilyId(routeId);
+}
+
+// Fetch chat messages by post ID
+async function fetchMessages() {
+  messageList.value = await chatClient.getChatsById(routeId);
+  messageList.value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
 // Handle delete post confirmation
@@ -60,30 +93,40 @@ async function confirmAndDelete(id: string) {
 
 // Delete post by ID
 async function deletePostById(id: string) {
-  await client.deletePostById(id);
+  await postClient.deletePostById(id);
   router.push("/"); // Redirect to home
-}
-
-// Fetch chat messages by post ID
-async function fetchMessages() {
-  messageList.value = await chatClient.getChatsById(routeId);
-  messageList.value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
 // Send new chat message
 async function sendMessage() {
-  const model = new ChatDto({
-    postId: routeId,
-    date: new Date(),
-    chatContent: chat.value.chatContent,
-    reactId: "00000000-0000-0000-0000-000000000001",
-    senderName: "Test", // Replace with actual user data
-    userId: "10000000-0000-0000-0000-000000000000",
-  });
+  try {
+    if (chat.value.senderName && chat.value.chatContent) {
+      await connection.invoke("SendMessage", {
+        postId: routeId,
+        date: new Date(),
+        chatContent: chat.value.chatContent,
+        reactId: chat.value.reactId,
+        senderName: chat.value.senderName,
+        userId: chat.value.userId,
+      });
 
-  await chatClient.createChat(model);
-  chat.value.chatContent = ""; // Clear input
-  fetchMessages(); // Reload messages
+      const model = new ChatDto({
+        postId: routeId,
+        date: new Date(),
+        chatContent: chat.value.chatContent,
+        reactId: "00000000-0000-0000-0000-000000000001",
+        senderName: chat.value.senderName,
+        userId: chat.value.userId,
+      });
+      await chatClient.createChat(model);
+      chat.value.chatContent = "";
+    } else {
+      throw new Error("Chat content cannot be empty.");
+    }
+  } catch (error) {
+    console.error("Failed to send message:", error);
+    alert("Unable to send your message. Please try again.");
+  }
 }
 </script>
 

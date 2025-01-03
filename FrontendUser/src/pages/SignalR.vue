@@ -47,6 +47,9 @@ onMounted(() => {
   if (messageList.value.length === 0) {
     fetchMessages();
   }
+  connection.on("ReceiveMessage", (message) => {
+    messageList.value.push(message);
+  });
 });
 
 // Fetch chat messages by post ID
@@ -80,6 +83,9 @@ async function sendMessage() {
       });
       await chatClient.createChat(model);
       chat.value.chatContent = "";
+      connection.on("ReceiveMessage", (message) => {
+        messageList.value.push(message);
+      });
     } else {
       throw new Error("Chat content cannot be empty.");
     }
