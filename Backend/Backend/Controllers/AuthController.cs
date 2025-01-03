@@ -28,9 +28,11 @@ namespace Backend.Controllers
             {
                 var user = _userContainer.GetUserByEmail(request.Email);
                 var userId = user.Id.ToString();
+                var userEmail = user.Email;
                 // Store userId in the session
                 HttpContext.Session.SetString("UserId", userId);
-                Console.WriteLine($"UserId stored in session: {userId}");
+                HttpContext.Session.SetString("Email", userEmail);
+                Console.WriteLine($"UserId stored in session: {userId} + {userEmail}");
                 return Ok(new { Message = "Logged in successfully" });
             }
             return Unauthorized(new { message = "Invalid credentials" });

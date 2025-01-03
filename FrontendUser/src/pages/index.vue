@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { LoginRequest, UserClient, UserDto } from "@/api/api";
+import { LoginRequest, UserClient, UserDto, AuthClient } from "@/api/api";
 
 // Define a user interface
 interface User {
@@ -24,6 +24,7 @@ const user = ref<User>({
 });
 
 const userClient = new UserClient();
+const authClient = new AuthClient();
 const router = useRouter();
 
 async function submit() {
@@ -31,31 +32,25 @@ async function submit() {
     email: user.value.email,
     password: user.value.passwordHash,
   });
-  const accountCheckResponse = await userClient.checkAccount(model);
+
+  const accountCheckResponse = await authClient.checkAccount(model);
+
   const responseBody = await accountCheckResponse.data.text();
   const accountData = JSON.parse(responseBody);
+
   if (accountData.message === "Account not found. Please register.") {
     await router.push("/sign-up");
     return;
   }
   console.log("Account exists. Proceed with login.");
   // Step 2: Proceed with login
-  const loginResponse = await userClient.login(model);
+  const loginResponse = await authClient.login(model);
 
   const loginResponseBody = await loginResponse.data.text();
   const loginData = JSON.parse(loginResponseBody);
 
   console.log("Login successful:", loginData);
 
-  const modelUser = new UserDto({
-    firstName: user.value.firstName,
-    lastName: user.value.lastName,
-    email: user.value.email,
-    passwordHash: user.value.passwordHash,
-    familyId: user.value.familyId || "",
-    isActive: 2,
-  });
-  await userClient.updateUser(modelUser);
   await router.push("/home");
 }
 

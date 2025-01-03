@@ -39,12 +39,12 @@ async function submit() {
     console.error("Error creating user:", error);
     const completeModel = await client.createUser(model);
     console.log("User created:", completeModel);
-    await router.push({ name: "/home" });
+    await router.push({ name: "/" });
   }
 }
 
 async function login() {
-  await router.push("/home");
+  await router.push("/");
 }
 
 </script>
