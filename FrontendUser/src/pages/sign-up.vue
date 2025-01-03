@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { UserClient } from "@/api/api";
-import { UserDto } from "@/api/api";
+import { UserClient, AuthClient, LoginRequest, UserDto } from "@/api/api";
 import { useRouter } from "vue-router";
 
 interface User {
@@ -11,7 +10,8 @@ interface User {
   passwordHash: string;
 }
 
-const client = new UserClient();
+const userClient = new UserClient();
+const authClient = new AuthClient();
 const router = useRouter();
 
 const user = ref<User>({
@@ -22,7 +22,12 @@ const user = ref<User>({
 });
 
 async function submit() {
-  const model = new UserDto({
+  const model = new LoginRequest({
+    email: user.value.email,
+    password: user.value.passwordHash,
+  });
+
+  const modelDto = new UserDto({
     firstName: user.value.firstName,
     lastName: user.value.lastName,
     email: user.value.email,
@@ -31,22 +36,26 @@ async function submit() {
     isActive: 2,
   });
 
-  try {
-    await client.checkAccount(model);
-    console.log("Account already exists");
-    await router.push("/");
-  } catch (error) {
-    console.error("Error creating user:", error);
-    const completeModel = await client.createUser(model);
-    console.log("User created:", completeModel);
-    await router.push({ name: "/" });
+  const accountCheckResponse = await authClient.checkAccount(model);
+
+  const responseBody = await accountCheckResponse.data.text();
+  const accountData = JSON.parse(responseBody);
+
+  if (accountData.message === "Account not found. Please register.") {
+     userClient.createUser(modelDto);
   }
+
+  if (await authClient.login(model)) {
+     router.push("/home");
+     return;
+  }
+
+  await router.push("/");
 }
 
 async function login() {
   await router.push("/");
 }
-
 </script>
 
 <template>
@@ -82,7 +91,7 @@ async function login() {
 
         <VCardActions>
           <VBtn class="me-4" type="submit">Sign up</VBtn>
-          or 
+          or
           <VBtn class="me-4" @click="login">Login</VBtn>
         </VCardActions>
       </VForm>
