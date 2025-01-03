@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using System.Collections.Concurrent;
+using Microsoft.AspNetCore.SignalR;
 using Models;
 
 namespace Backend.Hubs
@@ -6,6 +7,7 @@ namespace Backend.Hubs
     public sealed class ChatHub : Hub<IChatClient>
     {
         private static readonly Dictionary<string, string> ConnectedUsers = new();
+        private static ConcurrentBag<Chat> _chats = new();
 
         public override async Task OnConnectedAsync()
         {
@@ -16,6 +18,8 @@ namespace Backend.Hubs
 
         public async Task SendMessage(Chat message)
         {
+            _chats.Add(message);    
+
             message.Date = DateTime.Now;
             await Clients.All.ReceiveMessage(message);
         }

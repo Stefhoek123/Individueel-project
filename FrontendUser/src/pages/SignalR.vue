@@ -9,7 +9,8 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 const chatClient = new ChatClient();
 
 // url
-const connection = new HubConnectionBuilder().withUrl("http://localhost:5190/chat")
+const connection = new HubConnectionBuilder()
+  .withUrl("http://localhost:5190/chat")
   .build();
 
 connection.start().then(() => {
@@ -43,9 +44,9 @@ const routeId = (route.params as { id: string }).id;
 
 // Fetch Post Data
 onMounted(() => {
-    if (messageList.value.length === 0) {
-        fetchMessages();
-    }
+  if (messageList.value.length === 0) {
+    fetchMessages();
+  }
 });
 
 // Fetch chat messages by post ID
@@ -60,11 +61,15 @@ async function fetchMessages() {
 async function sendMessage() {
   try {
     if (chat.value.senderName && chat.value.chatContent) {
-      await connection.invoke(
-        "SendMessage",
-        chat.value.senderName,
-        chat.value.chatContent
-      );
+      await connection.invoke("SendMessage", {
+        postId: routeId,
+        date: new Date(),
+        chatContent: chat.value.chatContent,
+        reactId: chat.value.reactId,
+        senderName: chat.value.senderName,
+        userId: chat.value.userId,
+      });
+
       const model = new ChatDto({
         postId: routeId,
         date: new Date(),
@@ -74,7 +79,7 @@ async function sendMessage() {
         userId: chat.value.userId,
       });
       await chatClient.createChat(model);
-      chat.value.chatContent = ""; 
+      chat.value.chatContent = "";
     } else {
       throw new Error("Chat content cannot be empty.");
     }
