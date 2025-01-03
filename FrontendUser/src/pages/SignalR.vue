@@ -5,17 +5,16 @@ import { ChatDto } from "@/api/api";
 import { ChatClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 
+// Clients
+const chatClient = new ChatClient();
+
 // url
-const connection = new HubConnectionBuilder()
-  .withUrl("http://localhost:5190/chat")
+const connection = new HubConnectionBuilder().withUrl("http://localhost:5190/chat")
   .build();
 
 connection.start().then(() => {
   console.log("Connected to SignalR Hub");
 });
-
-// Clients
-const chatClient = new ChatClient();
 
 // Reactive Data
 const messageList = ref<ChatDto[]>([]);

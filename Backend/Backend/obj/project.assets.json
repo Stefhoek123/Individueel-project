@@ -7965,6 +7965,7 @@
       "BCrypt.Net-Next >= 4.0.3",
       "Business >= 1.0.0",
       "Microsoft.AspNetCore.Cors >= 2.1.1",
+      "Microsoft.AspNetCore.Session >= 2.2.0",
       "Microsoft.AspNetCore.SignalR >= 1.1.0",
       "Microsoft.AspNetCore.SignalR.Client >= 9.0.0",
       "Microsoft.CodeCoverage >= 17.12.0",
@@ -8044,6 +8045,10 @@
           "Microsoft.AspNetCore.Cors": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "Microsoft.AspNetCore.Session": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.SignalR": {
             "target": "Package",

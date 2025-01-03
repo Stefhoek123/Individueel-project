@@ -18,17 +18,17 @@ export class Client {
         this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
-    postBroadcast(message: string): Promise<void> {
-        let url_ = this.baseUrl + "/broadcast?";
-        if (message === undefined || message === null)
-            throw new Error("The parameter 'message' must be defined and cannot be null.");
-        else
-            url_ += "message=" + encodeURIComponent("" + message) + "&";
+    postBroadcast(message: Chat): Promise<void> {
+        let url_ = this.baseUrl + "/broadcast";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(message);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
             }
         };
 
@@ -1382,6 +1382,93 @@ export class UserClient {
         }
         return Promise.resolve<FileResponse>(null as any);
     }
+}
+
+export abstract class BaseModel implements IBaseModel {
+    id?: string;
+
+    constructor(data?: IBaseModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): BaseModel {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'BaseModel' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IBaseModel {
+    id?: string;
+}
+
+export class Chat extends BaseModel implements IChat {
+    postId?: string;
+    date?: Date;
+    chatContent?: string;
+    reactId?: string;
+    senderName?: string;
+    userId?: string;
+
+    constructor(data?: IChat) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.postId = _data["postId"];
+            this.date = _data["date"] ? new Date(_data["date"].toString()) : <any>undefined;
+            this.chatContent = _data["chatContent"];
+            this.reactId = _data["reactId"];
+            this.senderName = _data["senderName"];
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): Chat {
+        data = typeof data === 'object' ? data : {};
+        let result = new Chat();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["postId"] = this.postId;
+        data["date"] = this.date ? this.date.toISOString() : <any>undefined;
+        data["chatContent"] = this.chatContent;
+        data["reactId"] = this.reactId;
+        data["senderName"] = this.senderName;
+        data["userId"] = this.userId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IChat extends IBaseModel {
+    postId?: string;
+    date?: Date;
+    chatContent?: string;
+    reactId?: string;
+    senderName?: string;
+    userId?: string;
 }
 
 export class ChatDto implements IChatDto {

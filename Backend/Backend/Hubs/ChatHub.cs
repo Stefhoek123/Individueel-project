@@ -9,7 +9,7 @@ namespace Backend.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            string username = Context.GetHttpContext()?.Request.Query["username"];
+            string? username = Context.GetHttpContext()?.Request.Query["username"];
             ConnectedUsers[Context.ConnectionId] = username ?? "Anonymous";
             await Clients.All.ReceiveMessage(new Chat(new Guid(), new Guid(), DateTime.Now, $"{username} joined the chat", new Guid(), "System", new Guid()));
         }

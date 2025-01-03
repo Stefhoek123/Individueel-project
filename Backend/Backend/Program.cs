@@ -82,6 +82,14 @@ namespace Backend
                     });
             });
 
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AspNetCore.Session";
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             RegisterRepos(builder);
             RegisterLogics(builder);
 
