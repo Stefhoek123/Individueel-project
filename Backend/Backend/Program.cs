@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.SignalR;
+using Backend.Hubs;
 
 namespace Backend
 {
@@ -114,8 +115,8 @@ namespace Backend
             // Session, Authentication, and Authorization order
             app.UseAuthentication(); 
             app.UseAuthorization();
-
-            app.MapHub<ChatHub>("chat");
+            
+            app.MapHub<ChatHub>("/chat");
 
             app.MapControllers();
 
