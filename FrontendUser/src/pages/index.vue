@@ -26,25 +26,19 @@ const user = ref<User>({
 const userClient = new UserClient();
 const router = useRouter();
 
-
 async function submit() {
   const model = new LoginRequest({
     email: user.value.email,
     password: user.value.passwordHash,
   });
-
   const accountCheckResponse = await userClient.checkAccount(model);
-
   const responseBody = await accountCheckResponse.data.text();
   const accountData = JSON.parse(responseBody);
-
   if (accountData.message === "Account not found. Please register.") {
     await router.push("/sign-up");
     return;
   }
-
   console.log("Account exists. Proceed with login.");
-
   // Step 2: Proceed with login
   const loginResponse = await userClient.login(model);
 
@@ -53,20 +47,15 @@ async function submit() {
 
   console.log("Login successful:", loginData);
 
- var awaitUser = await userClient.getUserByEmail(model.email);
-
   const modelUser = new UserDto({
-    id: awaitUser.id,
-    firstName: awaitUser.firstName,
-    lastName: awaitUser.lastName,
-    email: awaitUser.email,
-    passwordHash: awaitUser.passwordHash,
-    familyId: awaitUser.familyId || "",
+    firstName: user.value.firstName,
+    lastName: user.value.lastName,
+    email: user.value.email,
+    passwordHash: user.value.passwordHash,
+    familyId: user.value.familyId || "",
     isActive: 2,
   });
-
   await userClient.updateUser(modelUser);
-
   await router.push("/home");
 }
 
