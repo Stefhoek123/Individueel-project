@@ -75,4 +75,3 @@ jobs:
         /d:sonar.cs.opencover.reportsPaths=backend/testproject/test-results/coverage.opencover.xml
         dotnet build backend/testproject/TestProject.csproj --no-incremental
         dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-
