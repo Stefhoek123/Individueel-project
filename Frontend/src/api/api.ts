@@ -8,6 +8,51 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
+export class Client {
+    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
+        this.http = http ? http : window as any;
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
+    }
+
+    postBroadcast(message: Chat): Promise<void> {
+        let url_ = this.baseUrl + "/broadcast";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(message);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processPostBroadcast(_response);
+        });
+    }
+
+    protected processPostBroadcast(response: Response): Promise<void> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            return;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<void>(null as any);
+    }
+}
+
 export class AuthClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -15,11 +60,11 @@ export class AuthClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
     login(request: LoginRequest): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/auth/login";
+        let url_ = this.baseUrl + "/api/Auth/login";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(request);
@@ -61,7 +106,7 @@ export class AuthClient {
     }
 
     logout(): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/auth/logout";
+        let url_ = this.baseUrl + "/api/Auth/logout";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -98,8 +143,50 @@ export class AuthClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    profile(): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/auth/profile";
+    checkAccount(request: LoginRequest): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Auth/check-account";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/octet-stream"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processCheckAccount(_response);
+        });
+    }
+
+    protected processCheckAccount(response: Response): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FileResponse>(null as any);
+    }
+
+    checkAuth(): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Auth/auth/check";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -110,11 +197,87 @@ export class AuthClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processProfile(_response);
+            return this.processCheckAuth(_response);
         });
     }
 
-    protected processProfile(response: Response): Promise<FileResponse> {
+    protected processCheckAuth(response: Response): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FileResponse>(null as any);
+    }
+
+    checkAuthStatus(): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Auth/auth/status";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/octet-stream"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processCheckAuthStatus(_response);
+        });
+    }
+
+    protected processCheckAuthStatus(response: Response): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+            if (fileName) {
+                fileName = decodeURIComponent(fileName);
+            } else {
+                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            }
+            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FileResponse>(null as any);
+    }
+
+    getUserIdFromSession(): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/Auth/auth/userid";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/octet-stream"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetUserIdFromSession(_response);
+        });
+    }
+
+    protected processGetUserIdFromSession(response: Response): Promise<FileResponse> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200 || status === 206) {
@@ -144,7 +307,7 @@ export class ChatClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
     getAllChats(): Promise<ChatDto[]> {
@@ -405,7 +568,7 @@ export class FamilyClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
     getAllFamilies(): Promise<FamilyDto[]> {
@@ -664,7 +827,7 @@ export class PostClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
     getAllPosts(): Promise<PostDto[]> {
@@ -916,58 +1079,6 @@ export class PostClient {
     }
 }
 
-export class SessionClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
-    }
-
-    getSessionInfo(): Promise<string[]> {
-        let url_ = this.baseUrl + "/api/Session";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetSessionInfo(_response);
-        });
-    }
-
-    protected processGetSessionInfo(response: Response): Promise<string[]> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(item);
-            }
-            else {
-                result200 = <any>null;
-            }
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<string[]>(null as any);
-    }
-}
-
 export class UserClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
@@ -975,7 +1086,7 @@ export class UserClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "";
+        this.baseUrl = baseUrl ?? "http://localhost:5190";
     }
 
     login(loginRequest: LoginRequest): Promise<FileResponse> {
@@ -1124,6 +1235,44 @@ export class UserClient {
     }
 
     protected processGetUserById(response: Response): Promise<UserDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserDto.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<UserDto>(null as any);
+    }
+
+    getUserByEmail(email: string | undefined): Promise<UserDto> {
+        let url_ = this.baseUrl + "/api/User/GetUserByEmail?";
+        if (email === null)
+            throw new Error("The parameter 'email' cannot be null.");
+        else if (email !== undefined)
+            url_ += "email=" + encodeURIComponent("" + email) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetUserByEmail(_response);
+        });
+    }
+
+    protected processGetUserByEmail(response: Response): Promise<UserDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -1482,6 +1631,93 @@ export class UserClient {
     }
 }
 
+export abstract class BaseModel implements IBaseModel {
+    id?: string;
+
+    constructor(data?: IBaseModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+        }
+    }
+
+    static fromJS(data: any): BaseModel {
+        data = typeof data === 'object' ? data : {};
+        throw new Error("The abstract class 'BaseModel' cannot be instantiated.");
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        return data;
+    }
+}
+
+export interface IBaseModel {
+    id?: string;
+}
+
+export class Chat extends BaseModel implements IChat {
+    postId?: string;
+    date?: Date;
+    chatContent?: string;
+    reactId?: string;
+    senderName?: string;
+    userId?: string;
+
+    constructor(data?: IChat) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.postId = _data["postId"];
+            this.date = _data["date"] ? new Date(_data["date"].toString()) : <any>undefined;
+            this.chatContent = _data["chatContent"];
+            this.reactId = _data["reactId"];
+            this.senderName = _data["senderName"];
+            this.userId = _data["userId"];
+        }
+    }
+
+    static fromJS(data: any): Chat {
+        data = typeof data === 'object' ? data : {};
+        let result = new Chat();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["postId"] = this.postId;
+        data["date"] = this.date ? this.date.toISOString() : <any>undefined;
+        data["chatContent"] = this.chatContent;
+        data["reactId"] = this.reactId;
+        data["senderName"] = this.senderName;
+        data["userId"] = this.userId;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IChat extends IBaseModel {
+    postId?: string;
+    date?: Date;
+    chatContent?: string;
+    reactId?: string;
+    senderName?: string;
+    userId?: string;
+}
+
 export class LoginRequest implements ILoginRequest {
     email?: string;
     password?: string;
@@ -1684,6 +1920,7 @@ export class UserDto implements IUserDto {
     lastName!: string;
     email!: string;
     passwordHash!: string;
+    isActive?: number;
     familyId?: string;
 
     constructor(data?: IUserDto) {
@@ -1702,6 +1939,7 @@ export class UserDto implements IUserDto {
             this.lastName = _data["lastName"];
             this.email = _data["email"];
             this.passwordHash = _data["passwordHash"];
+            this.isActive = _data["isActive"];
             this.familyId = _data["familyId"];
         }
     }
@@ -1720,6 +1958,7 @@ export class UserDto implements IUserDto {
         data["lastName"] = this.lastName;
         data["email"] = this.email;
         data["passwordHash"] = this.passwordHash;
+        data["isActive"] = this.isActive;
         data["familyId"] = this.familyId;
         return data;
     }
@@ -1731,6 +1970,7 @@ export interface IUserDto {
     lastName: string;
     email: string;
     passwordHash: string;
+    isActive?: number;
     familyId?: string;
 }
 
