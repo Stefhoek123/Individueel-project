@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.SignalR;
 using Backend.Hubs;
+using Models;
 
 namespace Backend
 {
@@ -98,7 +99,7 @@ namespace Backend
             });
 
             app.MapPost("broadcast",
-                async (string message, IHubContext<ChatHub, IChatClient> context) =>
+                async (Chat message, IHubContext<ChatHub, IChatClient> context) =>
                 {
                     await context.Clients.All.ReceiveMessage(message);
 
