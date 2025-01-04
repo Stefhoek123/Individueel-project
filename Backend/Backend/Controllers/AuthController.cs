@@ -1,4 +1,6 @@
-﻿using DAL.Interfaces;
+﻿using Azure.Core;
+using DAL.Interfaces;
+using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { message = "Email and password are required." });
             }
-            // Replace this with actual user authentication logic
+
             var userBool = await _userContainer.AuthenticateUserAsync(request.Email, request.Password);
             if (userBool != null)
             {

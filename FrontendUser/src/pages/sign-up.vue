@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { UserClient, AuthClient, LoginRequest, UserDto } from "@/api/api";
 import { useRouter } from "vue-router";
+import { v4 } from "uuid";
 
 interface User {
   firstName: string;
@@ -42,19 +43,18 @@ async function submit() {
   const accountData = JSON.parse(responseBody);
 
   if (accountData.message === "Account not found. Please register.") {
-     userClient.createUser(modelDto);
+    await userClient.createUser(modelDto);
+    await authClient.login(model);
+  } else {
+    await router.push("/");
+    return;
   }
 
-  if (await authClient.login(model)) {
-     router.push("/home");
-     return;
-  }
-
-  await router.push("/");
+  await router.push("/home");
 }
 
-async function login() {
-  await router.push("/");
+function login() {
+  router.push("/");
 }
 </script>
 

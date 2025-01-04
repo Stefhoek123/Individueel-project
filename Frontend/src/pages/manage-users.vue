@@ -89,6 +89,14 @@ async function deleteUserById(id: string) {
               <td>{{ item.lastName }}</td>
               <td>{{ item.email }}</td>
               <td class="text-right">
+                <RouterLink :to="`/users/update/${item.id}`">
+                  <VBtn
+                    icon="mdi-pen"
+                    variant="plain"
+                    color="accent"
+                    size="small"
+                  />
+                </RouterLink>
                 <VBtn
                   icon="mdi-delete"
                   variant="plain"

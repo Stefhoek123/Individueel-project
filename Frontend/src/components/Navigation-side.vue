@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <v-navigation-drawer>
+  <v-navigation-drawer app permanent>
     <template v-slot:prepend>
       <v-list-item
         lines="two"
