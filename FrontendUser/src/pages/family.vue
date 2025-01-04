@@ -18,7 +18,7 @@ async function loadData() {
     if (Array.isArray(familyMembersData)) {
       familyMembers.value = familyMembersData;
     } else {
-      familyMembers.value = [familyMembersData]; // Wrap it in an array
+      familyMembers.value = [familyMembersData]; 
     }
   } catch (error) {
     console.error("Failed to load family members:", error);

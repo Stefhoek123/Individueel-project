@@ -185,48 +185,6 @@ export class AuthClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
-    register(user: UserDto): Promise<FileResponse> {
-        let url_ = this.baseUrl + "/api/Auth/register";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(user);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/octet-stream"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processRegister(_response);
-        });
-    }
-
-    protected processRegister(response: Response): Promise<FileResponse> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
-            let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
-            if (fileName) {
-                fileName = decodeURIComponent(fileName);
-            } else {
-                fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-                fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            }
-            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<FileResponse>(null as any);
-    }
-
     checkAuth(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/api/Auth/auth/check";
         url_ = url_.replace(/[?&]$/, "");
@@ -1808,66 +1766,6 @@ export interface ILoginRequest {
     twoFactorRecoveryCode?: string | undefined;
 }
 
-export class UserDto implements IUserDto {
-    id?: string;
-    firstName!: string;
-    lastName!: string;
-    email!: string;
-    passwordHash!: string;
-    isActive?: number;
-    familyId?: string;
-
-    constructor(data?: IUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.firstName = _data["firstName"];
-            this.lastName = _data["lastName"];
-            this.email = _data["email"];
-            this.passwordHash = _data["passwordHash"];
-            this.isActive = _data["isActive"];
-            this.familyId = _data["familyId"];
-        }
-    }
-
-    static fromJS(data: any): UserDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UserDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["email"] = this.email;
-        data["passwordHash"] = this.passwordHash;
-        data["isActive"] = this.isActive;
-        data["familyId"] = this.familyId;
-        return data;
-    }
-}
-
-export interface IUserDto {
-    id?: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    passwordHash: string;
-    isActive?: number;
-    familyId?: string;
-}
-
 export class ChatDto implements IChatDto {
     id?: string;
     postId!: string;
@@ -2014,6 +1912,66 @@ export interface IPostDto {
     textContent: string;
     imageUrl?: string;
     userId?: string;
+}
+
+export class UserDto implements IUserDto {
+    id?: string;
+    firstName!: string;
+    lastName!: string;
+    email!: string;
+    passwordHash!: string;
+    isActive?: number;
+    familyId?: string;
+
+    constructor(data?: IUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.email = _data["email"];
+            this.passwordHash = _data["passwordHash"];
+            this.isActive = _data["isActive"];
+            this.familyId = _data["familyId"];
+        }
+    }
+
+    static fromJS(data: any): UserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["email"] = this.email;
+        data["passwordHash"] = this.passwordHash;
+        data["isActive"] = this.isActive;
+        data["familyId"] = this.familyId;
+        return data;
+    }
+}
+
+export interface IUserDto {
+    id?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    passwordHash: string;
+    isActive?: number;
+    familyId?: string;
 }
 
 export interface FileParameter {
