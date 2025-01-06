@@ -104,6 +104,7 @@ namespace Backend
 
             // CORS should be applied before authentication and authorization
             app.UseCors("AllowSpecificOrigin");
+            app.UseSession();
 
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -127,10 +128,9 @@ namespace Backend
             }
 
             // Session, Authentication, and Authorization order
-            app.UseSession();
-            app.UseAuthentication(); 
+            app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.MapHub<ChatHub>("/chat");
 
             app.MapControllers();

@@ -35,9 +35,9 @@ namespace Backend.Controllers
                 HttpContext.Session.SetString("UserId", userId);
                 HttpContext.Session.SetString("Email", userEmail);
                 Console.WriteLine($"UserId stored in session: {userId} + {userEmail}");
-                return Ok(new { Message = "Logged in successfully" });
+                return Ok(new { Message = "Logged in successfully" , userIdSession = userId });
             }
-            return Unauthorized(new { message = "Invalid credentials" });
+            return Ok(new { message = "Invalid credentials"} );
         }
 
         [HttpPost("logout")]
@@ -58,17 +58,6 @@ namespace Backend.Controllers
             return Ok(new { message = "Account exists" });
         }
 
-        [HttpGet("auth/check")]
-        public IActionResult CheckAuth()
-        {
-            // Check if user is authenticated by verifying session
-            var userId = HttpContext.Session.GetString("UserId");
-            if (!string.IsNullOrEmpty(userId))
-            {
-                return Ok(new { isAuthenticated = true, userId });
-            }
-            return Unauthorized(new { isAuthenticated = false });
-        }
 
         // Endpoint to check if the user is authenticated via session
         [HttpGet("auth/status")]
@@ -77,21 +66,9 @@ namespace Backend.Controllers
             var userId = HttpContext.Session.GetString("UserId");
             if (userId != null)
             {
-                return Ok(new { isAuthenticated = true });
+                return Ok(new { isAuthenticated = true , userIdSession = userId });
             }
             return Ok(new { isAuthenticated = false });
-        }
-
-        // Endpoint to fetch userId from the session
-        [HttpGet("auth/userid")]
-        public IActionResult GetUserIdFromSession()
-        {
-            var userId = HttpContext.Session.GetString("UserId");
-            if (userId != null)
-            {
-                return Ok(new { userId });
-            }
-            return Unauthorized(new { message = "User is not authenticated" });
         }
     }
 }

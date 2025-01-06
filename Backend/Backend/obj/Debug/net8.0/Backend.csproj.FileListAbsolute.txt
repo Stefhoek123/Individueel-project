@@ -191,3 +191,7 @@ C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\ne
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Net.ServerSentEvents.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Threading.Channels.dll
 C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Fontys\dev\s3-db02t-individueel-stefanie-hoeksma\Backend\Backend\bin\Debug\net8.0\StackExchange.Redis.dll

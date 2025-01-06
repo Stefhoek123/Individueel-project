@@ -51,6 +51,11 @@ async function submit() {
 
   console.log("Login successful:", loginData);
 
+  const authResponse = await authClient.checkAuthStatus();
+  const authResponseBody = await authResponse.data.text();
+  const authData = JSON.parse(authResponseBody);
+  console.log("Auth status:", authData);
+
   await router.push("/home");
 }
 
