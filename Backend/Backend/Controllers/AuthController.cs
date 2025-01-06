@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
+using Backend.Services;
 using DAL.Interfaces;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -11,64 +13,21 @@ namespace Backend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserContainer _userContainer;
-        public AuthController(IUserContainer userContainer)
-        {
-            _userContainer = userContainer;
-        }
+        private readonly JwtService _jwtService;
+        public AuthController(JwtService jwtService) => _jwtService = jwtService;
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<ActionResult<LoginResponseDto>> Login( LoginRequestDto request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            var result = await _jwtService.Authenticate(request);
+            if (result is null)
             {
-                return BadRequest(new { message = "Email and password are required." });
+                return Unauthorized();
             }
 
-            var userBool = await _userContainer.AuthenticateUserAsync(request.Email, request.Password);
-            if (userBool != null)
-            {
-                var user = _userContainer.GetUserByEmail(request.Email);
-                var userId = user.Id.ToString();
-                var userEmail = user.Email;
-                // Store userId in the session
-                HttpContext.Session.SetString("UserId", userId);
-                HttpContext.Session.SetString("Email", userEmail);
-                Console.WriteLine($"UserId stored in session: {userId} + {userEmail}");
-                return Ok(new { Message = "Logged in successfully" , userIdSession = userId });
-            }
-            return Ok(new { message = "Invalid credentials"} );
+            return result;
         }
 
-        [HttpPost("logout")]
-        public IActionResult Logout()
-        {
-            // Clear the session
-            HttpContext.Session.Clear();
-            return Ok(new { message = "Logged out" });
-        }
-     
-        [HttpPost("check-account")]
-        public async Task<IActionResult> CheckAccount([FromBody] LoginRequest request)
-        {
-            if (await _userContainer.IsAccountAvailableAsync(request.Email))
-            {
-                return Ok(new { accountExists = false, message = "Account not found. Please register." });
-            }
-            return Ok(new { message = "Account exists" });
-        }
-
-
-        // Endpoint to check if the user is authenticated via session
-        [HttpGet("auth/status")]
-        public IActionResult CheckAuthStatus()
-        {
-            var userId = HttpContext.Session.GetString("UserId");
-            if (userId != null)
-            {
-                return Ok(new { isAuthenticated = true , userIdSession = userId });
-            }
-            return Ok(new { isAuthenticated = false });
-        }
     }
 }

@@ -30,7 +30,7 @@ public class UserContainer : IUserContainer
         return user == null;
     }
 
-    private static bool VerifyPassword(string plainPassword, string hashedPassword)
+    public bool VerifyPassword(string plainPassword, string hashedPassword)
     {
         // Use a secure password hashing library, e.g., BCrypt
         return BCrypt.Net.BCrypt.Verify(plainPassword, hashedPassword);

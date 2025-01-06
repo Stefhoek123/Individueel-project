@@ -12,9 +12,13 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
+using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.SignalR;
 using Backend.Hubs;
+using Backend.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Models;
 
 namespace Backend
@@ -44,6 +48,30 @@ namespace Backend
 
             builder.Services.AddDbContext<BackendDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
+                    ValidAudience = builder.Configuration["JwtConfig:Audience"],
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:Key"]!)),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+            });
+
+            builder.Services.AddAuthorization();
 
             // Add services to the container.
             builder.Services.AddControllers();
@@ -144,6 +172,7 @@ namespace Backend
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<IFamilyRepository, FamilyRepository>();
             builder.Services.AddScoped<IChatRepository, ChatRepository>();
+            builder.Services.AddScoped<JwtService>();
         }
 
         private static void RegisterLogics(WebApplicationBuilder builder)
@@ -152,6 +181,7 @@ namespace Backend
             builder.Services.AddScoped<IPostContainer, PostContainer>();
             builder.Services.AddScoped<IFamilyContainer, FamilyContainer>();
             builder.Services.AddScoped<IChatContainer, ChatContainer>();
+            builder.Services.AddScoped<JwtService>();
         }
     }
 }

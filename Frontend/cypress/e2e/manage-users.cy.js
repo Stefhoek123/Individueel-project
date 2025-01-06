@@ -7,10 +7,10 @@ describe('Manage Users Page', () => {
     });
   
     it('should display a list of users', () => {
-      cy.visit('/users');
+      cy.visit('http://localhost:3000/manage-users');
       
       // Wait for the users to load
-      cy.wait('@getUsers');
+      cy.wait('@getUsers'); 
   
       // Check that the table displays users
       cy.get('tbody tr').should('have.length.greaterThan', 0);
@@ -18,7 +18,7 @@ describe('Manage Users Page', () => {
     });
   
     it('should filter users based on search text', () => {
-      cy.visit('/users');
+      cy.visit('http://localhost:3000/manage-users');
       
       // Wait for users to load
       cy.wait('@getUsers');
@@ -35,7 +35,7 @@ describe('Manage Users Page', () => {
     });
   
     it('should show a confirmation dialogue when deleting a user', () => {
-      cy.visit('/users');
+      cy.visit('http://localhost:3000/manage-users');
       
       // Wait for users to load
       cy.wait('@getUsers');
@@ -55,7 +55,7 @@ describe('Manage Users Page', () => {
     });
     
     it('should navigate to the create user page', () => {
-      cy.visit('/users');
+      cy.visit('http://localhost:3000/manage-users');
       
       // Click the "New User" button
       cy.get('button').contains('New User').click();

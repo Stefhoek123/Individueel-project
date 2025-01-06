@@ -12,6 +12,7 @@ public interface IUserContainer
     List<UserDto> GetUsersByFamilyId(Guid id);
     Task<bool> AuthenticateUserAsync(string email, string password);
     Task<bool> IsAccountAvailableAsync(string email);
+    bool VerifyPassword(string plainPassword, string hashedPassword);
     IEnumerable<UserDto> SearchUserByEmailOrName(string search);
     void CreateUser(UserDto user);
     void UpdateUser(UserDto user);
