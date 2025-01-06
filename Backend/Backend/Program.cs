@@ -50,7 +50,6 @@ namespace Backend
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSignalR();
 
             // Swagger/OpenAPI Configuration
@@ -80,6 +79,12 @@ namespace Backend
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     });
+            });
+
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = "SessionInstance";
             });
 
             builder.Services.AddSession(options =>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YGlau5rBlKUVU5sxGB5i+ookjCEQ+D/x5C5gXRVWkHj8AJ3PZxW4/pxlRTB6EWjz0YEEztdBuX8cGimaurPEkw==",
+  "dgSpecHash": "IJlLWjfBnGPDtElQ0Z42RNeb6TXM2ugSyyRYuYj4DW4HZ5zn/nAQqWT6ogLlKpWnvSZCiNVRMkPy2CD0G7E2Cw==",
   "success": true,
   "projectFilePath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
@@ -59,8 +59,9 @@
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.10\\microsoft.entityframeworkcore.sqlserver.8.0.10.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.10\\microsoft.entityframeworkcore.tools.8.0.10.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
-    "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\9.0.0\\microsoft.extensions.caching.abstractions.9.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.1\\microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.caching.stackexchangeredis\\9.0.0\\microsoft.extensions.caching.stackexchangeredis.9.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0\\microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
@@ -110,7 +111,9 @@
     "C:\\Users\\stefa\\.nuget\\packages\\nswag.generation.aspnetcore\\14.2.0\\nswag.generation.aspnetcore.14.2.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\nswag.msbuild\\14.2.0\\nswag.msbuild.14.2.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\parlot\\1.0.2\\parlot.1.0.2.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\riok.mapperly\\4.1.0\\riok.mapperly.4.1.0.nupkg.sha512",
+    "C:\\Users\\stefa\\.nuget\\packages\\stackexchange.redis\\2.7.27\\stackexchange.redis.2.7.27.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\swashbuckle.aspnetcore\\7.0.0\\swashbuckle.aspnetcore.7.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\7.0.0\\swashbuckle.aspnetcore.swagger.7.0.0.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\7.0.0\\swashbuckle.aspnetcore.swaggergen.7.0.0.nupkg.sha512",
