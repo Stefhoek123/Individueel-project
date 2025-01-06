@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { UserClient, AuthClient, LoginRequest, UserDto } from "@/api/api";
+import { UserClient, AuthClient, LoginRequest, LoginRequestDto, UserDto } from "@/api/api";
 import { useRouter } from "vue-router";
-import { v4 } from "uuid";
 
 interface User {
   firstName: string;
@@ -23,7 +22,7 @@ const user = ref<User>({
 });
 
 async function submit() {
-  const model = new LoginRequest({
+  const model = new LoginRequestDto({
     email: user.value.email,
     password: user.value.passwordHash,
   });
@@ -37,20 +36,18 @@ async function submit() {
     isActive: 2,
   });
 
-  const accountCheckResponse = await authClient.checkAccount(model);
+  const userExists = await authClient.login(model);
 
-  const responseBody = await accountCheckResponse.data.text();
+  const responseBody = await userExists.data.text();
   const accountData = JSON.parse(responseBody);
 
-  if (accountData.message === "Account not found. Please register.") {
+  if (accountData.message === "Does not exist") {
     await userClient.createUser(modelDto);
     await authClient.login(model);
+    await router.push("/home");
   } else {
-    await router.push("/");
-    return;
+    await router.push("/home");
   }
-
-  await router.push("/home");
 }
 
 function login() {

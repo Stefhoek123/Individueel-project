@@ -23,11 +23,12 @@ namespace Backend.Controllers
             var result = await _jwtService.Authenticate(request);
             if (result is null)
             {
-                return Unauthorized();
+                return Ok(new { message = "Does not exist" });
             }
 
             return result;
         }
+
 
     }
 }

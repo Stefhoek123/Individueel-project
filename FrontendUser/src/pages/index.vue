@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { LoginRequest, UserClient, UserDto, AuthClient } from "@/api/api";
+import { LoginRequestDto, AuthClient } from "@/api/api";
 
 // Define a user interface
 interface User {
@@ -25,36 +25,15 @@ const user = ref<User>({
 
 const authClient = new AuthClient();
 const router = useRouter();
-const userId = ref("");
 
 async function submit() {
-  const model = new LoginRequest({
+
+  const modelDto = new LoginRequestDto({
     email: user.value.email,
     password: user.value.passwordHash,
   });
 
-  const accountCheckResponse = await authClient.checkAccount(model);
-
-  const responseBody = await accountCheckResponse.data.text();
-  const accountData = JSON.parse(responseBody);
-
-  if (accountData.message === "Account not found. Please register.") {
-    await router.push("/sign-up");
-    return;
-  }
-  console.log("Account exists. Proceed with login.");
-  // Step 2: Proceed with login
-  const loginResponse = await authClient.login(model);
-
-  const loginResponseBody = await loginResponse.data.text();
-  const loginData = JSON.parse(loginResponseBody);
-
-  userId.value = loginData.userIdSession;
-
-  const authResponse = await authClient.checkAuthStatus();
-  const authResponseBody = await authResponse.data.text();
-  const authData = JSON.parse(authResponseBody);
-  console.log("Auth status:", authData);
+  await authClient.login(modelDto);
 
   await router.push("/home");
 }

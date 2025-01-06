@@ -109,20 +109,6 @@ namespace Backend
                     });
             });
 
-            builder.Services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = builder.Configuration.GetConnectionString("RedisConnection");
-                options.InstanceName = "SessionInstance";
-            });
-
-            builder.Services.AddSession(options =>
-            {
-                options.Cookie.Name = ".AspNetCore.Session";
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
-
             RegisterRepos(builder);
             RegisterLogics(builder);
 
@@ -132,7 +118,6 @@ namespace Backend
 
             // CORS should be applied before authentication and authorization
             app.UseCors("AllowSpecificOrigin");
-            app.UseSession();
 
             app.UseStaticFiles(new StaticFileOptions
             {

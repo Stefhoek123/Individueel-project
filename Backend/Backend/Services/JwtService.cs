@@ -43,9 +43,12 @@ namespace Backend.Services
 
             var issuer = _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
-            var key = _configuration["JwtConfig:Secret"];
+            var key = _configuration["JwtConfig:Key"];
             var tokenValidityMins = _configuration.GetValue<int>("JwtConfig:TokenValidityMins");
             var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityMins);
+
+            var clockSkew = TimeSpan.FromSeconds(5);
+            var currentUtcTime = DateTime.UtcNow;
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -53,7 +56,8 @@ namespace Backend.Services
                 {
                     new Claim(JwtRegisteredClaimNames.Email, userAccount.Email)
                 }),
-                Expires = tokenExpiryTimeStamp,
+                NotBefore = currentUtcTime.Subtract(clockSkew),
+                Expires = currentUtcTime.AddMinutes(tokenValidityMins),
                 Issuer = issuer,
                 Audience = audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
