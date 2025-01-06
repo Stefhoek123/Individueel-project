@@ -38,10 +38,9 @@ async function submit() {
 
   const userExists = await authClient.login(model);
 
-  const responseBody = await userExists.data.text();
-  const accountData = JSON.parse(responseBody);
+console.log("User exists:", userExists);
 
-  if (accountData.message === "Does not exist") {
+  if (!userExists) {
     await userClient.createUser(modelDto);
     await authClient.login(model);
     await router.push("/home");

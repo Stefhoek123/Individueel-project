@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Backend.Services;
+using DAL.Containers;
 using DAL.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +15,13 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly JwtService _jwtService;
-        public AuthController(JwtService jwtService) => _jwtService = jwtService;
+        private readonly IUserContainer _userContainer;
+
+        public AuthController(JwtService jwtService, IUserContainer userContainer)
+        {
+            _jwtService = jwtService;
+            _userContainer = userContainer;
+        } 
 
         [AllowAnonymous]
         [HttpPost("Login")]
@@ -29,6 +36,15 @@ namespace Backend.Controllers
             return result;
         }
 
+        [HttpPost("check-account")]
+        public async Task<IActionResult> CheckAccount([FromBody] LoginRequest request)
+        {
+            if (await _userContainer.IsAccountAvailableAsync(request.Email))
+            {
+                return Ok(new { accountExists = false, message = "Account not found. Please register." });
+            }
+            return Ok(new { message = "Account exists" });
+        }
 
     }
 }
