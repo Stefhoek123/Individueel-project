@@ -8,7 +8,6 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class UserController : ControllerBase
     {
         // Dependency Injection of user container

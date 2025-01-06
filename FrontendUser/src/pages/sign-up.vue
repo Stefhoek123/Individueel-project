@@ -22,10 +22,16 @@ const user = ref<User>({
 });
 
 async function submit() {
+  const modelLogin = new LoginRequest({
+    email: user.value.email,
+    password: user.value.passwordHash,
+  });
+
   const model = new LoginRequestDto({
     email: user.value.email,
     password: user.value.passwordHash,
   });
+
 
   const modelDto = new UserDto({
     firstName: user.value.firstName,
@@ -36,17 +42,20 @@ async function submit() {
     isActive: 2,
   });
 
-  const userExists = await authClient.login(model);
+  const accountCheckResponse = await authClient.checkAccount(modelLogin);
 
-console.log("User exists:", userExists);
+  const responseBody = await accountCheckResponse.data.text();
+  const accountData = JSON.parse(responseBody);
 
-  if (!userExists) {
+  if (accountData.message === "Account not found. Please register.") {
     await userClient.createUser(modelDto);
     await authClient.login(model);
-    await router.push("/home");
   } else {
-    await router.push("/home");
+    await router.push("/");
+    return;
   }
+
+  await router.push("/home");
 }
 
 function login() {
