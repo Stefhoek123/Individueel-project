@@ -22,6 +22,104 @@ namespace TestProject
             _userContainer = new UserContainer(_mockUserRepository.Object);
         }
 
+         [TestMethod]
+        public async Task AuthenticateUserAsync_ShouldReturnTrue_WhenUserExistsAndPasswordIsCorrect()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var password = "correctPassword";
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
+            {
+                PasswordHash = hashedPassword
+            };
+
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+
+            // Act
+            var result = await _userContainer.AuthenticateUserAsync(email, password);
+
+            // Assert
+            
+            Assert.IsTrue(result);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task AuthenticateUserAsync_ShouldReturnFalse_WhenUserDoesNotExist()
+        {
+            // Arrange
+            var email = "nonexistent@example.com";
+            var password = "anyPassword";
+
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
+
+            // Act
+            var result = await _userContainer?.AuthenticateUserAsync(email, password);
+
+            // Assert
+            Assert.IsFalse(result);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task AuthenticateUserAsync_ShouldReturnFalse_WhenPasswordIsIncorrect()
+        {
+            // Arrange
+            var email = "test@example.com";
+            var password = "wrongPassword";
+            var correctPassword = "correctPassword";
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(correctPassword);
+
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
+            {
+                PasswordHash = hashedPassword
+            };
+
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+
+            // Act
+            var result = await _userContainer.AuthenticateUserAsync(email, password);
+
+            // Assert
+            Assert.IsFalse(result);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task IsAccountAvailableAsync_ShouldReturnTrue_WhenUserDoesNotExist()
+        {
+            // Arrange
+            var email = "newuser@example.com";
+
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
+
+            // Act
+            var result = await _userContainer.IsAccountAvailableAsync(email);
+
+            // Assert
+            Assert.IsTrue(result);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task IsAccountAvailableAsync_ShouldReturnFalse_WhenUserExists()
+        {
+            // Arrange
+            var email = "existinguser@example.com";
+
+            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1);
+            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
+
+            // Act
+            var result = await _userContainer.IsAccountAvailableAsync(email);
+
+            // Assert
+            Assert.IsFalse(result);
+            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
+        }
+
         [TestMethod]
         public void GetAllUsers_ShouldReturnUserDtos()
         {
@@ -171,103 +269,7 @@ namespace TestProject
             _mockUserRepository?.Verify(repo => repo.GetUsersByFamilyId(familyId), Times.Once);
         }
 
-        [TestMethod]
-        public async Task AuthenticateUserAsync_ShouldReturnTrue_WhenUserExistsAndPasswordIsCorrect()
-        {
-            // Arrange
-            var email = "test@example.com";
-            var password = "correctPassword";
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
-            {
-                PasswordHash = hashedPassword
-            };
-
-            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
-
-            // Act
-            var result = await _userContainer.AuthenticateUserAsync(email, password);
-
-            // Assert
-            
-            Assert.IsTrue(result);
-            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task AuthenticateUserAsync_ShouldReturnFalse_WhenUserDoesNotExist()
-        {
-            // Arrange
-            var email = "nonexistent@example.com";
-            var password = "anyPassword";
-
-            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
-
-            // Act
-            var result = await _userContainer?.AuthenticateUserAsync(email, password);
-
-            // Assert
-            Assert.IsFalse(result);
-            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task AuthenticateUserAsync_ShouldReturnFalse_WhenPasswordIsIncorrect()
-        {
-            // Arrange
-            var email = "test@example.com";
-            var password = "wrongPassword";
-            var correctPassword = "correctPassword";
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(correctPassword);
-
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1)
-            {
-                PasswordHash = hashedPassword
-            };
-
-            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
-
-            // Act
-            var result = await _userContainer.AuthenticateUserAsync(email, password);
-
-            // Assert
-            Assert.IsFalse(result);
-            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task IsAccountAvailableAsync_ShouldReturnTrue_WhenUserDoesNotExist()
-        {
-            // Arrange
-            var email = "newuser@example.com";
-
-            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync((Models.User)null);
-
-            // Act
-            var result = await _userContainer.IsAccountAvailableAsync(email);
-
-            // Assert
-            Assert.IsTrue(result);
-            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
-        }
-
-        [TestMethod]
-        public async Task IsAccountAvailableAsync_ShouldReturnFalse_WhenUserExists()
-        {
-            // Arrange
-            var email = "existinguser@example.com";
-
-            var user = new Models.User(Guid.NewGuid(), "John", "Doe", email, "username", Guid.NewGuid(), 1);
-            _mockUserRepository?.Setup(repo => repo.GetUserByEmailAsync(email)).ReturnsAsync(user);
-
-            // Act
-            var result = await _userContainer.IsAccountAvailableAsync(email);
-
-            // Assert
-            Assert.IsFalse(result);
-            _mockUserRepository?.Verify(repo => repo.GetUserByEmailAsync(email), Times.Once);
-        }
+       
 
         [TestMethod]
         public void SearchUserByEmailOrName_ShouldReturnAllUsers_WhenSearchIsNullOrEmpty()
