@@ -23,9 +23,9 @@ const user = ref<User>({
   isActive: 0,
 });
 
-const userClient = new UserClient();
 const authClient = new AuthClient();
 const router = useRouter();
+const userId = ref("");
 
 async function submit() {
   const model = new LoginRequest({
@@ -49,7 +49,7 @@ async function submit() {
   const loginResponseBody = await loginResponse.data.text();
   const loginData = JSON.parse(loginResponseBody);
 
-  console.log("Login successful:", loginData);
+  userId.value = loginData.userIdSession;
 
   const authResponse = await authClient.checkAuthStatus();
   const authResponseBody = await authResponse.data.text();
