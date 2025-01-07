@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace Backend.Controllers
@@ -48,23 +49,34 @@ namespace Backend.Controllers
         }
 
         [HttpGet("current")]
-        [Authorize]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        public IActionResult GetCurrentUser([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (string.IsNullOrEmpty(userId))
+            if (string.IsNullOrWhiteSpace(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
             {
-                return Ok(new { message = "User not authorized" });
+                return Unauthorized(new { message = "JWT is missing." });
             }
 
-            var user = _userContainer.GetUserById(Guid.Parse(userId));
+            var jwt = authorizationHeader.Substring("Bearer ".Length);
+ 
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(jwt);
+
+            var email = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return Unauthorized(new { message = "E-mail not found in token." });
+            }
+
+            var user = _userContainer.GetUserByEmail(email);
+
             if (user == null)
             {
-                return Ok(new { message = "User not found" });
+                return NotFound(new { message = "User not found" });
             }
 
             return Ok(user);
         }
+
     }
 }

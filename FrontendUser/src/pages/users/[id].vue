@@ -10,6 +10,7 @@ const loading = ref(true);
 // Data ophalen bij component-mount
 onMounted(async () => {
   try {
+    sessionStorage.getItem("JWT");
     user.value = await authClient.getCurrentUser();
 
     if (!user) {
