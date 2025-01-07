@@ -35,12 +35,12 @@ onMounted(async () => {
         <NavigationSide />
       <h1>Mijn Account</h1>
       <div v-if="loading">Gegevens laden...</div>
-      <div v-else-if="user">
-        <p><strong>User ID:</strong> {{ user.id }}</p>
-        <p><strong>Firstname:</strong> {{ user.firstName }}</p>
-        <p><strong>Lastname:</strong> {{ user.lastName }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Family ID:</strong> {{ user.familyId }}</p>
+      <div v-else-if="user" v-for="item in user" :key="item.id">
+        <p><strong>User ID:</strong> {{ item.id }}</p>
+        <p><strong>Firstname:</strong> {{ item.firstName }}</p>
+        <p><strong>Lastname:</strong> {{ item.lastName }}</p>
+        <p><strong>Email:</strong> {{ item.email }}</p>
+        <p><strong>Family ID:</strong> {{ item.familyId }}</p>
       </div>
       <div v-else>
         <p>Geen gegevens gevonden.</p>

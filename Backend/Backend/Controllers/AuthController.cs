@@ -67,16 +67,7 @@ namespace Backend.Controllers
                 return NotFound(new { message = "User not found" });
             }
 
-            Console.WriteLine(user.FirstName);
-
-            return Ok(new
-            {
-                user.Id,
-                user.FirstName,
-                user.LastName,
-                user.Email,
-                user.FamilyId
-            });
+            return Ok(_userContainer.GetUserByEmail(email));
         }
 
     }
