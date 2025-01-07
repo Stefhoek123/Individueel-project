@@ -67,6 +67,8 @@ namespace Backend.Controllers
                 return NotFound(new { message = "User not found" });
             }
 
+            Console.WriteLine(user.FirstName);
+
             return Ok(new
             {
                 user.Id,

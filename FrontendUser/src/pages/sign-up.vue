@@ -66,7 +66,6 @@ function login() {
 <template>
   <div class="signup">
     <HeaderComponent />
-    <NavigationSide />
     <img class="logo" src="../assets/resto-logo.png" width="35px" />
     <h1>Sign Up</h1>
     <VCard title="Register your account here" class="title">

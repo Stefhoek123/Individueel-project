@@ -3,6 +3,8 @@ import { PostClient, PostDto, UserClient } from "@/api/api";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
+import NavigationSide from "@/components/Navigation-side.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
 
 const router = useRouter();
 
@@ -87,6 +89,9 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
+  <div>
+    <NavigationSide />
+    <HeaderComponent />
   <VCard title="Create a new post" class="vcard">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
@@ -103,6 +108,7 @@ function required(fieldName: string): (v: string) => true | string {
       </VCardActions>
     </VForm>
   </VCard>
+</div>
 </template>
 
 <style scoped>

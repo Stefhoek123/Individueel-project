@@ -52,7 +52,6 @@ async function signup() {
 <template>
   <div class="login">
     <HeaderComponent />
-    <NavigationSide />
     <img class="logo" src="../assets/resto-logo.png" width="35px" />
     <h1>Login</h1>
     <VCard title="Login into your account here">

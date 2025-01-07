@@ -7,14 +7,10 @@ const isLoggedIn = ref(false);
 const userEmail = ref("");
 
 async function logout() {
-  try {
-    sessionStorage.clear();
-    router.push("/");
+
+  await sessionStorage.clear();
+  await router.push("/");
     console.log("Logged out successfully");
-  } catch (error: any) {
-    console.error("Logout error:", error);
-    alert(error.message || "Logout failed. Please try again.");
-  }
 }
 </script>
 
