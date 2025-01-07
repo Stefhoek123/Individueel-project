@@ -49,20 +49,11 @@ namespace Backend.Controllers
         }
 
         [HttpGet("current")]
-        [Authorize]
         public IActionResult GetCurrentUser([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
-            //if (string.IsNullOrWhiteSpace(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
-            //{
-            //    return Unauthorized(new { message = "JWT is missing." });
-            //}
-
-            //var jwt = authorizationHeader.Substring("Bearer ".Length);
- 
             var handler = new JwtSecurityTokenHandler();
             var token = handler.ReadJwtToken(authorizationHeader);
-
-            var email = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var email = token.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Email)?.Value;
 
             if (string.IsNullOrEmpty(email))
             {
@@ -76,7 +67,14 @@ namespace Backend.Controllers
                 return NotFound(new { message = "User not found" });
             }
 
-            return Ok(user);
+            return Ok(new
+            {
+                user.Id,
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                user.FamilyId
+            });
         }
 
     }

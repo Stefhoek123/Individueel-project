@@ -1,24 +1,19 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { AuthClient } from "@/api/api";
-import { el } from "vuetify/locale";
 
 const authClient = new AuthClient();
 const user = ref();
 const loading = ref(true);
 
-// Data ophalen bij component-mount
 onMounted(async () => {
   try {
     const token = sessionStorage.getItem("JWT");
     if (token) {
-      user.value = await authClient.getCurrentUser(token);
-      if (!user) {
-        console.error("No user data found.");
-        console.log("User data loaded:", user);
-      } else {
-        console.error("User found:", user);
-      }
+      const currentUser = await authClient.getCurrentUser(token);
+      user.value = currentUser;
+
+      console.log("User data:", user.value);
     } else {
       throw new Error("JWT token is missing");
     }
