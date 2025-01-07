@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { UserClient } from "@/api/api";
+import { ref } from "vue";
 import router from "@/router";
 
 // Simulating authentication check (replace with actual logic)
 const isLoggedIn = ref(false);
 const userEmail = ref("");
-
-const userClient = new UserClient();
-
 
 async function logout() {
   try {
@@ -39,8 +35,8 @@ async function logout() {
     <!-- Show links based on authentication status -->
     <v-list-item link to="/home" prepend-icon="mdi-home-city" title="Home" value="home" ></v-list-item>
     <v-list-item link to="/posts/create" prepend-icon="mdi-plus" title="Add" value="add" ></v-list-item>
-    <v-list-item to="/family" title="Family" prepend-icon="mdi-forum" ></v-list-item>
-    <v-list-item to="/account" prepend-icon="mdi-account" title="My Account" value="account" ></v-list-item>
+    <v-list-item link to="/family" title="Family" prepend-icon="mdi-forum" ></v-list-item>
+    <v-list-item link to="/users/:id" prepend-icon="mdi-account" title="My Account" value="account" ></v-list-item>
 
     <!-- Show Logout when logged in -->
     <v-list-item prepend-icon="mdi-logout" title="Logout" value="logout"  @click="logout"></v-list-item>

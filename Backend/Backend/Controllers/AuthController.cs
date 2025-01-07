@@ -55,13 +55,13 @@ namespace Backend.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-                return Unauthorized(new { message = "User not authorized" });
+                return Ok(new { message = "User not authorized" });
             }
 
             var user = _userContainer.GetUserById(Guid.Parse(userId));
             if (user == null)
             {
-                return NotFound(new { message = "User not found" });
+                return Ok(new { message = "User not found" });
             }
 
             return Ok(user);

@@ -142,6 +142,40 @@ export class AuthClient {
         }
         return Promise.resolve<FileResponse>(null as any);
     }
+
+    getCurrentUser(): Promise<UserDto> {
+        let url_ = this.baseUrl + "/api/Auth/current";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetCurrentUser(_response);
+        });
+    }
+
+    protected processGetCurrentUser(response: Response): Promise<UserDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = UserDto.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<UserDto>(null as any);
+    }
 }
 
 export class ChatClient {
@@ -1694,6 +1728,66 @@ export interface ILoginRequest {
     twoFactorRecoveryCode?: string | undefined;
 }
 
+export class UserDto implements IUserDto {
+    id?: string;
+    firstName!: string;
+    lastName!: string;
+    email!: string;
+    passwordHash!: string;
+    isActive?: number;
+    familyId?: string;
+
+    constructor(data?: IUserDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.email = _data["email"];
+            this.passwordHash = _data["passwordHash"];
+            this.isActive = _data["isActive"];
+            this.familyId = _data["familyId"];
+        }
+    }
+
+    static fromJS(data: any): UserDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["email"] = this.email;
+        data["passwordHash"] = this.passwordHash;
+        data["isActive"] = this.isActive;
+        data["familyId"] = this.familyId;
+        return data;
+    }
+}
+
+export interface IUserDto {
+    id?: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    passwordHash: string;
+    isActive?: number;
+    familyId?: string;
+}
+
 export class ChatDto implements IChatDto {
     id?: string;
     postId!: string;
@@ -1840,66 +1934,6 @@ export interface IPostDto {
     textContent: string;
     imageUrl?: string;
     userId?: string;
-}
-
-export class UserDto implements IUserDto {
-    id?: string;
-    firstName!: string;
-    lastName!: string;
-    email!: string;
-    passwordHash!: string;
-    isActive?: number;
-    familyId?: string;
-
-    constructor(data?: IUserDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.firstName = _data["firstName"];
-            this.lastName = _data["lastName"];
-            this.email = _data["email"];
-            this.passwordHash = _data["passwordHash"];
-            this.isActive = _data["isActive"];
-            this.familyId = _data["familyId"];
-        }
-    }
-
-    static fromJS(data: any): UserDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new UserDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["email"] = this.email;
-        data["passwordHash"] = this.passwordHash;
-        data["isActive"] = this.isActive;
-        data["familyId"] = this.familyId;
-        return data;
-    }
-}
-
-export interface IUserDto {
-    id?: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    passwordHash: string;
-    isActive?: number;
-    familyId?: string;
 }
 
 export interface FileParameter {
