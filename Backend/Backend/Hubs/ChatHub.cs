@@ -30,10 +30,10 @@ namespace Backend.Hubs
             Chat? chat = _chats.FirstOrDefault(c => c.ReactId == id);
             if (chat != null)
             {
-                _chats.TryTake(out chat);
+                _chats = new ConcurrentBag<Chat>(_chats.Where(c => c.ReactId != id));
                 await Clients.All.DeleteMessage(id);
             }
-        }   
+        }
 
         public override async Task OnDisconnectedAsync(Exception? exception)
         {

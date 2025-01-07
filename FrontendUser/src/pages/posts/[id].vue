@@ -59,9 +59,9 @@ onMounted(async () => {
   connection.on("ReceiveMessage", (message) => {
     messageList.value.push(message);
   });
-  connection.on("DeleteMessage", (message) => {
-    messageList.value.push(message);
-  });
+  connection.on("DeleteMessage", (id: string) => {
+    messageList.value = messageList.value.filter((msg) => msg.reactId !== id);
+});
 });
 
 async function fetchPostDetails() {
@@ -137,13 +137,8 @@ async function confirmAndDeleteChat(id: string) {
 }
 
 async function deleteChatById(id: string) {
-  await connection.invoke("DeleteMessage", 
-  {
-    reactId: id,
-  }
-  );
-
-  await chatClient.deleteChatById(id);
+    await connection.invoke("DeleteMessage", id);
+    messageList.value = messageList.value.filter((msg) => msg.reactId !== id);
 }
 
 async function sendMessage() {
@@ -255,7 +250,7 @@ async function sendMessage() {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in messageList" :key="item.postId">
+                <tr v-for="item in messageList" :key="item.reactId">
                   <td>
                     {{ item.senderName }}
                   </td>

@@ -1,8 +1,10 @@
-﻿using DAL.Containers;
+﻿using Backend.Hubs;
+using DAL.Containers;
 using DAL.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Backend.Controllers
 {
@@ -55,10 +57,20 @@ namespace Backend.Controllers
         }
 
         [HttpDelete(nameof(DeleteChatById))]
-        public ActionResult DeleteChatById(Guid id)
+        public async Task<ActionResult> DeleteChatById(Guid id)
         {
-            _chatContainer.DeleteChatById(id);
-            return Ok();
+            var chat = _chatContainer.GetChatById(id);
+            if (chat != null)
+            {
+                _chatContainer.DeleteChatById(id);
+                var hubContext = (IHubContext<ChatHub, IChatClient>)HttpContext.RequestServices.GetService(typeof(IHubContext<ChatHub, IChatClient>));
+                if (hubContext != null)
+                {
+                    await hubContext.Clients.All.DeleteMessage(id);
+                }
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }
