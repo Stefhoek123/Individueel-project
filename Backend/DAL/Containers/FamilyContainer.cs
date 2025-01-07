@@ -20,7 +20,7 @@ public class FamilyContainer : IFamilyContainer
             .Select(Mappers.FamilyMapper.ToDto);
     }
 
-    // GET for getting a user based on a User ID
+    // GET for getting a user based on a family ID
     public FamilyDto GetFamilyById(Guid id)
     {
         return Mappers.FamilyMapper.ToDto(_familyRepository.GetFamilyById(id));

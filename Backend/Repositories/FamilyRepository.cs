@@ -19,13 +19,13 @@ public class FamilyRepository : IFamilyRepository
 
     public Family GetFamilyById(Guid id)
     {
-        return _backendDbContext.Families.FirstOrDefault(u => u.Id == id)!;
+        return _backendDbContext.Families.FirstOrDefault(f => f.Id == id)!;
     }
 
     public IEnumerable<Family> SearchFamilyByName(string search)
     {
         IEnumerable<Family> families = _backendDbContext.Families
-            .Where(u => u.FamilyName.Contains(search))
+            .Where(f => f.FamilyName.Contains(search))
             .ToList();
         return families;
     }

@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { PostClient, PostDto, UserClient } from "@/api/api";
-import { ref } from "vue";
+import { PostClient, PostDto, AuthClient } from "@/api/api";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { onMounted } from "vue";
 import NavigationSide from "@/components/Navigation-side.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 
 const router = useRouter();
+const postClient = new PostClient();
+const authClient = new AuthClient();
+const user = ref();
 
 interface Post {
   textContent: string;
@@ -18,31 +20,31 @@ const post = ref<Post>({
   imageUrl: "",
 });
 
-const client = new PostClient();
-const userClient = new UserClient();
-const isLoggedIn = ref(false);
+onMounted(() => {
+  getUser();
+});
 
-// async function isAuthenticated(): Promise<boolean> {
-//   try {
-//     const response = await authClient.checkAuthStatus();  // Call the backend API to check session
-//     console.log("Response:", response);
-//     const responseData = await response.data.text();  // Read the response as text
-//     console.log("Response data:", responseData);
-//     const data = JSON.parse(responseData);  // Parse the response as JSON
-//     console.log("Is authenticated:", data.isAuthenticated);  // Log the authentication status
-//     return data.isAuthenticated;  // Access the isAuthenticated property
-//   } catch (error) {
-//     console.error("Error checking authentication:", error);
-//     return false;
-//   }
-// }
 
-// onMounted(async () => {
-//   isLoggedIn.value = await isAuthenticated();
-//   if (!isLoggedIn.value) {
-//     router.push("/");  // Redirect to login if not authenticated
-//   }
-// });
+async function getUser() {
+  const token = sessionStorage.getItem("JWT");
+  if (token) {
+    const currentUser = await authClient.getCurrentUser(token);
+
+    const userData = JSON.parse(await currentUser.data.text());
+
+    const slicedUser = {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      isActive: userData.isActive,
+      familyId: userData.familyId,
+    };
+
+    user.value = slicedUser;
+  }
+}
 
 async function submit() {
   const fileInput = document.querySelector(
@@ -50,35 +52,28 @@ async function submit() {
   ) as HTMLInputElement;
   const file = fileInput.files?.[0];
 
-//  const userIdResponse = await authClient.getUserIdFromSession();  // Fetch the user ID from the session
- // const userId = await userIdResponse.data.text();  // Extract the user ID from the response
-
   if (file) {
     const fileParameter = { data: file, fileName: file.name };
-
-    const response = await client.getImageUrl(fileParameter);
-
-    // Parse the Blob into a JSON object
+    const response = await postClient.getImageUrl(fileParameter);
     const jsonResponse = await response.data.text().then((text) => JSON.parse(text));
-
     const url = jsonResponse.fileName;
 
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: url,
-      userId: "userId",
+      userId: user.value.id,
     });
 
-    await client.createPost(model);
+    await postClient.createPost(model);
     await router.push("/home");
   } else {
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: " ",
-      userId: "userId",
+      userId: user.value.id,
     });
 
-    await client.createPost(model);
+    await postClient.createPost(model);
     await router.push("/home");
   }
 }

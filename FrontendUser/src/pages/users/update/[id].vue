@@ -9,8 +9,6 @@ import NavigationSide from "@/components/Navigation-side.vue";
 const route = useRoute();
 const routeId = (route.params as { id: string }).id;
 const router = useRouter();
-
-
 const userClient = new UserClient();
 const familyClient = new FamilyClient();
 const userDto = ref<UserDto>();
@@ -55,8 +53,6 @@ async function getUserbById() {
     }));
 }
 
-
-// Form submission
 async function submit(event: SubmitEventPromise) {
   const { valid } = await event;
 
@@ -72,12 +68,10 @@ async function submit(event: SubmitEventPromise) {
     });
 
     await userClient.updateUser(model);
-
     await router.push("/users/:id");
   }
 }
 
-// Validation helper
 function required(fieldName: string): (v: string) => true | string {
   return (v) => !!v || `${fieldName} is required`;
 }
@@ -87,7 +81,6 @@ function required(fieldName: string): (v: string) => true | string {
   <div>
       <NavigationSide />
   <VCard v-if="userDto" title="Edit user">
-
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VCardTitle class="title-achievement">
@@ -123,8 +116,6 @@ function required(fieldName: string): (v: string) => true | string {
           :rules="[required('Family')]"
           class="mb-2"
         />
-
-        <!-- Save Button -->
         <VCardActions>
           <VBtn class="me-4" type="submit"> Save </VBtn>
         </VCardActions>
@@ -133,6 +124,3 @@ function required(fieldName: string): (v: string) => true | string {
   </VCard>
 </div>
 </template>
-
-<style scoped>
-</style>

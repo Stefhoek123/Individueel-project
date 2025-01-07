@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { PostDto, UserDto, ChatDto } from "@/api/api";
+import { PostDto, ChatDto } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
-import { PostClient, UserClient, ChatClient } from "@/api/api";
+import { PostClient, UserClient, ChatClient, AuthClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 } from "uuid";
 
-// Clients
 const postClient = new PostClient();
 const userClient = new UserClient();
 const chatClient = new ChatClient();
+const authClient = new AuthClient();
+const user = ref();
+const userName = ref(); 
+const post = ref<PostDto | null>(null);
+const messageList = ref<ChatDto[]>([]);
+const router = useRouter();
+const route = useRoute();
+const routeId = (route.params as { id: string }).id;
 
-// url
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
+  null
+);
+
 const connection = new HubConnectionBuilder()
   .withUrl("http://localhost:5190/chat")
   .build();
@@ -20,11 +30,6 @@ const connection = new HubConnectionBuilder()
 connection.start().then(() => {
   console.log("Connected to SignalR Hub");
 });
-
-// Reactive Data
-const post = ref<PostDto | null>(null);
-const users = ref<UserDto[]>([]);
-const messageList = ref<ChatDto[]>([]);
 
 interface Chat {
   postId: string;
@@ -40,44 +45,58 @@ const chat = ref<Chat>({
   date: new Date(),
   chatContent: "",
   reactId: "00000000-0000-0000-0000-000000000000",
-  senderName: "Test", // Temporary for testing
+  senderName: "",
   userId: "00000000-0000-0000-0000-000000000000",
 });
 
-// Router
-const router = useRouter();
-const route = useRoute();
-const routeId = (route.params as { id: string }).id;
+onMounted(async () => {
+   await getUser();
+  console.log("userid: " + user.value.id);
+   await fetchPostDetails();
+  console.log("fetchPostDetails");
 
-const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
-  null
-);
-
-// Fetch Post Data
-onMounted(() => {
   if (messageList.value.length === 0) {
-    fetchMessages();
+   await fetchMessages();
   }
   connection.on("ReceiveMessage", (message) => {
     messageList.value.push(message);
   });
-
-  fetchPostDetails();
 });
 
-// Fetch post details and users by family ID
 async function fetchPostDetails() {
   post.value = await postClient.getPostById(routeId);
-  users.value = await userClient.getUsersByFamilyId(routeId);
+  console.log("post: " + post.value);
+  console.log("user:" + user.value.id);
+  userName.value = await userClient.getUserById(user.value.id);
+  console.log("username: " + userName.value);
 }
 
-// Fetch chat messages by post ID
 async function fetchMessages() {
   messageList.value = await chatClient.getChatsById(routeId);
   messageList.value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
-// Handle delete post confirmation
+async function getUser() {
+  const token = sessionStorage.getItem("JWT");
+  if (token) {
+    const currentUser = await authClient.getCurrentUser(token);
+
+    const userData = JSON.parse(await currentUser.data.text());
+
+    const slicedUser = {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      isActive: userData.isActive,
+      familyId: userData.familyId,
+    };
+
+    user.value = slicedUser;
+  }
+}
+
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
     title: "Delete post",
@@ -91,32 +110,31 @@ async function confirmAndDelete(id: string) {
   }
 }
 
-// Delete post by ID
 async function deletePostById(id: string) {
   await postClient.deletePostById(id);
-  router.push("/"); // Redirect to home
+  router.push("/home"); 
 }
 
-// Send new chat message
 async function sendMessage() {
   try {
-    if (chat.value.senderName && chat.value.chatContent) {
+    const guid = v4();
+    if (userName.value.firstName && chat.value.chatContent) {
       await connection.invoke("SendMessage", {
         postId: routeId,
         date: new Date(),
         chatContent: chat.value.chatContent,
-        reactId: chat.value.reactId,
-        senderName: chat.value.senderName,
-        userId: chat.value.userId,
+        reactId: guid,
+        senderName: userName.value.firstName,
+        userId: user.value.id,
       });
 
       const model = new ChatDto({
         postId: routeId,
         date: new Date(),
         chatContent: chat.value.chatContent,
-        reactId: "00000000-0000-0000-0000-000000000001",
-        senderName: chat.value.senderName,
-        userId: chat.value.userId,
+        reactId: guid,
+        senderName: userName.value.firstName,
+        userId: user.value.id,
       });
       await chatClient.createChat(model);
       chat.value.chatContent = "";
@@ -248,11 +266,10 @@ async function sendMessage() {
   margin-right: 10px;
 }
 
-/* Style for individual message blocks */
 .message-item {
-  margin-bottom: 10px; /* Space between messages */
+  margin-bottom: 10px;
   padding: 5px;
-  border-bottom: 1px solid #ddd; /* Optional, adds a separator between messages */
+  border-bottom: 1px solid #ddd;
 }
 
 .table {

@@ -31,7 +31,7 @@ async function logout() {
     <!-- Show links based on authentication status -->
     <v-list-item link to="/home" prepend-icon="mdi-home-city" title="Home" value="home" ></v-list-item>
     <v-list-item link to="/posts/create" prepend-icon="mdi-plus" title="Add" value="add" ></v-list-item>
-    <v-list-item link to="/family" title="Family" prepend-icon="mdi-forum" ></v-list-item>
+    <v-list-item link to="/families/:id" title="Family" prepend-icon="mdi-forum" ></v-list-item>
     <v-list-item link to="/users/:id" prepend-icon="mdi-account" title="My Account" value="account" ></v-list-item>
 
     <!-- Show Logout when logged in -->

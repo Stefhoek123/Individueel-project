@@ -5,16 +5,15 @@ import { ref, onMounted } from "vue";
 import type { PostDto} from "@/api/api";
 import { PostClient } from "@/api/api";
 
-// Register components
 const posts = ref<PostDto[]>([]);
-const client = new PostClient();
+const postClient = new PostClient();
 
 onMounted(() => {
   loadData();
 });
 
 async function loadData(){
-    const postsData = await client.getAllPosts();
+    const postsData = await postClient.getAllPosts();
     posts.value = postsData;
 }
 </script>
@@ -56,5 +55,4 @@ async function loadData(){
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
-
 </style>

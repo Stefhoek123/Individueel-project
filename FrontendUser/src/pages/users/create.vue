@@ -5,6 +5,9 @@ import { useRouter } from "vue-router";
 import { SubmitEventPromise } from "vuetify";
 
 const router = useRouter();
+const client = new UserClient();
+const familyClient = new FamilyClient();
+const families = ref<Family[]>([]);
 
 interface User {
   firstName: string;
@@ -18,11 +21,6 @@ interface Family {
   id: string;
   name: string;
 }
-
-const client = new UserClient();
-const familyClient = new FamilyClient();
-const families = ref<Family[]>([]);
-// const selectedFamilies = ref<string | null>(null);
 
 const user = ref<User>({
   firstName: "",

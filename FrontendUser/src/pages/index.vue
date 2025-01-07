@@ -3,7 +3,9 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { LoginRequestDto, AuthClient } from "@/api/api";
 
-// Define a user interface
+const authClient = new AuthClient();
+const router = useRouter();
+
 interface User {
   firstName: string;
   lastName: string;
@@ -13,7 +15,6 @@ interface User {
   isActive: number;
 }
 
-// Create a reactive user object
 const user = ref<User>({
   firstName: "",
   lastName: "",
@@ -23,9 +24,6 @@ const user = ref<User>({
   isActive: 0,
 });
 
-const authClient = new AuthClient();
-const router = useRouter();
-
 async function submit() {
 
   const modelDto = new LoginRequestDto({
@@ -34,8 +32,6 @@ async function submit() {
   });
 
  const login = await authClient.login(modelDto);
-
- console.log(login);
 
  if (login.accessToken) {
    sessionStorage.setItem("JWT", login.accessToken);

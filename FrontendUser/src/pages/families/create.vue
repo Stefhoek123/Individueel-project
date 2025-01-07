@@ -1,43 +1,36 @@
 <script setup lang="ts">
-import { FamilyClient, FamilyDto } from '@/api/api'
-import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { FamilyClient, FamilyDto } from "@/api/api";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
-const router = useRouter()
+const router = useRouter();
+const client = new FamilyClient();
 
 interface Family {
-  familyName: string
+  familyName: string;
 }
 
-const client = new FamilyClient()
-
 const family = ref<Family>({
-  familyName: '',
-})
+  familyName: "",
+});
 
 async function submit() {
+  const model = new FamilyDto({
+    familyName: family.value.familyName,
+  });
 
-    const model = new FamilyDto({
-      familyName: family.value.familyName,
-    })
-
-    await client.createFamily(model)
-
-    await router.push('/manage-families')
-  }
-
+  await client.createFamily(model);
+  await router.push("/manage-families");
+}
 
 function required(fieldName: string): (v: string) => true | string {
-  return v => !!v || `${fieldName} is required`
+  return (v) => !!v || `${fieldName} is required`;
 }
 </script>
 
 <template>
   <VCard title="Create Families" class="vcard">
-    <VForm
-      validate-on="blur"
-      @submit.prevent="submit"
-    >
+    <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
           v-model="family.familyName"
@@ -47,12 +40,7 @@ function required(fieldName: string): (v: string) => true | string {
         />
       </VCardText>
       <VCardActions>
-        <VBtn
-          class="me-4"
-          type="submit"
-        >
-          submit
-        </VBtn>
+        <VBtn class="me-4" type="submit"> submit </VBtn>
       </VCardActions>
     </VForm>
   </VCard>

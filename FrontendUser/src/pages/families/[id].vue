@@ -1,70 +1,47 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
 import { FamilyDto, UserDto } from "@/api/api";
-import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
-import { FamilyClient, UserClient } from "@/api/api";
+import NavigationSide from "@/components/Navigation-side.vue";
+import { FamilyClient, UserClient, AuthClient } from "@/api/api";
 
-const client = new FamilyClient();
+const familyClient = new FamilyClient();
 const userClient = new UserClient();
+const authClient = new AuthClient();
 const family = ref<FamilyDto | null>(null);
 const users = ref<UserDto[]>([]);
-const guid = "10000000-0000-0000-0000-000000000000";
-
-const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
-  null
-);
-
-const route = useRoute();
-const routeId = (route.params as { id: string }).id;
+const user = ref();
 
 onMounted(() => {
-  getFamilyAndMembersById();
+  getUser();
 });
 
-async function getFamilyAndMembersById() {
-  family.value = await client.getFamilyById(routeId);
-  users.value = await userClient.getUsersByFamilyId(routeId);
-}
+async function getUser() {
+  const token = sessionStorage.getItem("JWT");
+  if (token) {
+    const currentUser = await authClient.getCurrentUser(token);
 
-async function confirmAndDelete(id: string) {
-  const confirmed = await confirmDialogueRef.value?.show({
-    title: "Delete person from family",
-    message:
-      "Are you sure you want to delete this person from this family? It cannot be undone.",
-    okButton: "Delete Forever",
-    cancelButton: "Cancel",
-  });
+    const userData = JSON.parse(await currentUser.data.text());
 
-  if (confirmed) {
-    await deleteUserByFamilyId(id);
+    const slicedUser = {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      isActive: userData.isActive,
+      familyId: userData.familyId,
+    };
+
+    user.value = slicedUser;
+    family.value = await familyClient.getFamilyById(slicedUser.familyId);
+    users.value = await userClient.getUsersByFamilyId(slicedUser.familyId);
   }
-}
-
-async function deleteUserByFamilyId(id: string) {
-  const userData = await userClient.getUserById(id);
-  if (!userData) {
-    console.error("User not found");
-    return;
-  }
-
-  const model = new UserDto({
-    id: userData.id,
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    email: userData.email,
-    passwordHash: userData.passwordHash,
-    familyId: guid,
-  });
-
-  await userClient.updateUser(model);
-  getFamilyAndMembersById();
 }
 </script>
 
 <template>
   <div>
-    <ConfirmDialogue ref="confirmDialogueRef" />
+    <NavigationSide />
     <div>
       <VCard v-if="family">
         <VCardTitle class="title-achievement">
@@ -74,7 +51,6 @@ async function deleteUserByFamilyId(id: string) {
           <thead>
             <tr>
               <th class="text-left">Members</th>
-              <th class="text-right actions-column">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -83,16 +59,7 @@ async function deleteUserByFamilyId(id: string) {
                 {{ item.firstName || "Unknown" }}
                 {{ item.lastName || "Unknown" }}
               </td>
-              <td class="text-right">
-                <VBtn
-                  icon="mdi-delete"
-                  variant="plain"
-                  color="accent"
-                  size="small"
-                  @click="() => item.id && confirmAndDelete(item.id)"
-                />
-              </td>
-            </tr>
+             </tr>
           </tbody>
         </VTable>
       </VCard>

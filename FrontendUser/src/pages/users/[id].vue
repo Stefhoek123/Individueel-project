@@ -14,10 +14,8 @@ onMounted(async () => {
     if (token) {
       const currentUser = await authClient.getCurrentUser(token);
 
-      // Parse the JSON data to extract user information
       const userData = JSON.parse(await currentUser.data.text());
 
-      // Slice the required properties
       const slicedUser = {
         id: userData.id,
         firstName: userData.firstName,
@@ -28,7 +26,6 @@ onMounted(async () => {
         familyId: userData.familyId,
       };
 
-      // Assign the sliced user to `user.value`
       user.value = slicedUser;
     } else {
       throw new Error("JWT token is missing");
@@ -46,8 +43,8 @@ onMounted(async () => {
     <HeaderComponent />
     <div class="account-view">
       <NavigationSide />
-      <h1>Mijn Account</h1>
-      <div v-if="loading">Gegevens laden...</div>
+      <h1>My Account</h1>
+      <div v-if="loading">Data loading...</div>
       <div v-else-if="user">
         <p><strong>User ID:</strong> {{ user.id }}</p>
         <p><strong>Firstname:</strong> {{ user.firstName }}</p>
@@ -59,9 +56,8 @@ onMounted(async () => {
       </router-link>
       </div>
       <div v-else>
-        <p>Geen gegevens gevonden.</p>
-      </div>
-      
+        <p>No data found.</p>
+      </div> 
     </div>
   </div>
 </template>
