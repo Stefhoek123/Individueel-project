@@ -25,6 +25,16 @@ namespace Backend.Hubs
             await Clients.All.ReceiveMessage(message);
         }
 
+        public async Task DeleteMessage(Guid id)
+        {
+            Chat? chat = _chats.FirstOrDefault(c => c.ReactId == id);
+            if (chat != null)
+            {
+                _chats.TryTake(out chat);
+                await Clients.All.DeleteMessage(id);
+            }
+        }   
+
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             if (ConnectedUsers.TryGetValue(Context.ConnectionId, out string? userEmail))

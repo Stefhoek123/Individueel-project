@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { PostDto, ChatDto } from "@/api/api";
+import { ChatDto } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { PostClient, UserClient, ChatClient, AuthClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { v4 } from "uuid";
-import { fi } from "vuetify/locale";
 
 const postClient = new PostClient();
 const userClient = new UserClient();
@@ -58,6 +57,9 @@ onMounted(async () => {
    await fetchMessages();
   }
   connection.on("ReceiveMessage", (message) => {
+    messageList.value.push(message);
+  });
+  connection.on("DeleteMessage", (message) => {
     messageList.value.push(message);
   });
 });
@@ -135,6 +137,12 @@ async function confirmAndDeleteChat(id: string) {
 }
 
 async function deleteChatById(id: string) {
+  await connection.invoke("DeleteMessage", 
+  {
+    reactId: id,
+  }
+  );
+
   await chatClient.deleteChatById(id);
 }
 
