@@ -12,7 +12,7 @@ const userClient = new UserClient();
 const chatClient = new ChatClient();
 const authClient = new AuthClient();
 const user = ref();
-const userName = ref(); 
+const userName = ref();
 const post = ref();
 const messageList = ref<ChatDto[]>([]);
 const router = useRouter();
@@ -50,18 +50,18 @@ const chat = ref<Chat>({
 });
 
 onMounted(async () => {
-   await getUser();
-   await fetchPostDetails();
+  await getUser();
+  await fetchPostDetails();
 
   if (messageList.value.length === 0) {
-   await fetchMessages();
+    await fetchMessages();
   }
   connection.on("ReceiveMessage", (message) => {
     messageList.value.push(message);
   });
   connection.on("DeleteMessage", (id: string) => {
     messageList.value = messageList.value.filter((msg) => msg.reactId !== id);
-});
+  });
 });
 
 async function fetchPostDetails() {
@@ -69,19 +69,21 @@ async function fetchPostDetails() {
   userName.value = await userClient.getUserById(getPost.userId);
 
   const model = {
-        id: getPost.id,
-        textContent: getPost.textContent,
-        imageUrl: getPost.imageUrl,
-        userId: getPost.userId,
-        firstName: userName.value.firstName,
-      };
+    id: getPost.id,
+    textContent: getPost.textContent,
+    imageUrl: getPost.imageUrl,
+    userId: getPost.userId,
+    firstName: userName.value.firstName,
+  };
 
-      post.value = model;
+  post.value = model;
 }
 
 async function fetchMessages() {
   messageList.value = await chatClient.getChatsById(routeId);
-  messageList.value.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  messageList.value.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 }
 
 async function getUser() {
@@ -120,7 +122,7 @@ async function confirmAndDelete(id: string) {
 
 async function deletePostById(id: string) {
   await postClient.deletePostById(id);
-  router.push("/home"); 
+  router.push("/home");
 }
 
 async function confirmAndDeleteChat(id: string) {
@@ -137,39 +139,35 @@ async function confirmAndDeleteChat(id: string) {
 }
 
 async function deleteChatById(id: string) {
-    await connection.invoke("DeleteMessage", id);
-    messageList.value = messageList.value.filter((msg) => msg.reactId !== id);
+  await connection.invoke("DeleteMessage", id);
+  messageList.value = messageList.value.filter((msg) => msg.reactId !== id);
+  await chatClient.deleteChatById(id);
 }
 
 async function sendMessage() {
-  try {
-    const guid = v4();
-    if (userName.value.firstName && chat.value.chatContent) {
-      await connection.invoke("SendMessage", {
-        postId: routeId,
-        date: new Date(),
-        chatContent: chat.value.chatContent,
-        reactId: guid,
-        senderName: userName.value.firstName,
-        userId: user.value.id,
-      });
+  const guid = v4();
+  if (userName.value.firstName && chat.value.chatContent) {
+    await connection.invoke("SendMessage", {
+      postId: routeId,
+      date: new Date(),
+      chatContent: chat.value.chatContent,
+      reactId: guid,
+      senderName: userName.value.firstName,
+      userId: user.value.id,
+    });
 
-      const model = new ChatDto({
-        postId: routeId,
-        date: new Date(),
-        chatContent: chat.value.chatContent,
-        reactId: guid,
-        senderName: userName.value.firstName,
-        userId: user.value.id,
-      });
-      await chatClient.createChat(model);
-      chat.value.chatContent = "";
-    } else {
-      throw new Error("Chat content cannot be empty.");
-    }
-  } catch (error) {
-    console.error("Failed to send message:", error);
-    alert("Unable to send your message. Please try again.");
+    const model = new ChatDto({
+      postId: routeId,
+      date: new Date(),
+      chatContent: chat.value.chatContent,
+      reactId: guid,
+      senderName: userName.value.firstName,
+      userId: user.value.id,
+    });
+    await chatClient.createChat(model);
+    chat.value.chatContent = "";
+  } else {
+    throw new Error("Chat content cannot be empty.");
   }
 }
 </script>
@@ -246,7 +244,7 @@ async function sendMessage() {
                 <tr>
                   <th class="text-left">Sendername</th>
                   <th class="text-right">Message</th>
-                  <th class="text-right">Delete</th>
+                  <th class="text-right">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
@@ -257,15 +255,16 @@ async function sendMessage() {
                   <td class="text-right">
                     {{ item.chatContent }}
                   </td>
-                  <td class="text-right">
+                  <td class="text-right" v-if="post.userId === user.id">
                     <VBtn
-                  icon="mdi-delete"
-                  variant="plain"
-                  color="accent"
-                  size="small"
-                  @click="confirmAndDeleteChat(item.reactId)"
-                />
+                      icon="mdi-delete"
+                      variant="plain"
+                      color="accent"
+                      size="small"
+                      @click="confirmAndDeleteChat(item.reactId)"
+                    />
                   </td>
+                  <td class="text-right" v-else>&nbsp;</td>
                 </tr>
               </tbody>
             </VTable>

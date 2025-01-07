@@ -7,8 +7,16 @@
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\containers\\chatcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\chatcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\hubs\\ichatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,20 +27,12 @@
       "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\chatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\containers\\chatcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\chatcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\postrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -133,7 +133,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 1249,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -145,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "IChatClient.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Hubs\\IChatClient.cs",
               "RelativeDocumentMoniker": "Backend\\Hubs\\IChatClient.cs",
@@ -154,6 +154,45 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T14:39:50.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChatContainer.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\ChatContainer.cs",
+              "RelativeDocumentMoniker": "DAL\\Containers\\ChatContainer.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\ChatContainer.cs",
+              "RelativeToolTip": "DAL\\Containers\\ChatContainer.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAYwDIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T07:32:56.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Hubs\\ChatHub.cs",
+              "RelativeDocumentMoniker": "Backend\\Hubs\\ChatHub.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Hubs\\ChatHub.cs",
+              "RelativeToolTip": "Backend\\Hubs\\ChatHub.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBsAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T14:13:10.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\ChatController.cs",
+              "ViewState": "AQIAADQAAAAAAAAAAAA/wEkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T12:43:52.493Z",
               "EditorCaption": ""
             },
             {
@@ -179,32 +218,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ChatContainer.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\ChatContainer.cs",
-              "RelativeDocumentMoniker": "DAL\\Containers\\ChatContainer.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\ChatContainer.cs",
-              "RelativeToolTip": "DAL\\Containers\\ChatContainer.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAkwDIAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:32:56.029Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PostController.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwCEAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T10:02:21.015Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 10,
               "Title": "UserContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\UserContainer.cs",
@@ -218,20 +231,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChatHub.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Hubs\\ChatHub.cs",
-              "RelativeDocumentMoniker": "Backend\\Hubs\\ChatHub.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Hubs\\ChatHub.cs",
-              "RelativeToolTip": "Backend\\Hubs\\ChatHub.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAvwBsAAAAwAAAA",
+              "DocumentIndex": 7,
+              "Title": "PostController.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwCEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T14:13:10.541Z",
+              "WhenOpened": "2025-01-07T10:02:21.015Z",
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ChatRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\ChatRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ChatRepository.cs",
@@ -241,10 +258,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T14:34:25.547Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             },
             {
               "$type": "Document",
@@ -313,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "PostRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\PostRepository.cs",
@@ -335,19 +348,6 @@
               "ViewState": "AQIAACYAAAAAAAAAAADgvzgAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T09:22:43.34Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\ChatController.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAA3wCwAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T12:43:52.493Z",
               "EditorCaption": ""
             },
             {

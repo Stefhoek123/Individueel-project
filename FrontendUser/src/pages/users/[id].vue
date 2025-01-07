@@ -65,7 +65,7 @@ onMounted(async () => {
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Family Name:</strong> {{ user.familyName }}</p>
         <router-link :to="`/users/update/${user.id}`">
-          <VBtn class="ms-2" color="accent">Click this button</VBtn>
+          <VBtn class="ms-2" color="accent">Change data</VBtn>
         </router-link>
       </div>
       <div v-else>
