@@ -10,14 +10,17 @@ const loading = ref(true);
 // Data ophalen bij component-mount
 onMounted(async () => {
   try {
-    sessionStorage.getItem("JWT");
-    user.value = await authClient.getCurrentUser();
-
-    if (!user) {
-      console.error("No user data found.");
-      console.log("User data loaded:", user);
+    const token = sessionStorage.getItem("JWT");
+    if (token) {
+      user.value = await authClient.getCurrentUser(token);
+      if (!user) {
+        console.error("No user data found.");
+        console.log("User data loaded:", user);
+      } else {
+        console.error("User found:", user);
+      }
     } else {
-      console.error("User found:", user);
+      throw new Error("JWT token is missing");
     }
   } catch (error) {
     console.error("Error loading user data:", error);

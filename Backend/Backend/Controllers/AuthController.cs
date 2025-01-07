@@ -49,17 +49,18 @@ namespace Backend.Controllers
         }
 
         [HttpGet("current")]
+        [Authorize]
         public IActionResult GetCurrentUser([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
-            if (string.IsNullOrWhiteSpace(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
-            {
-                return Unauthorized(new { message = "JWT is missing." });
-            }
+            //if (string.IsNullOrWhiteSpace(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+            //{
+            //    return Unauthorized(new { message = "JWT is missing." });
+            //}
 
-            var jwt = authorizationHeader.Substring("Bearer ".Length);
+            //var jwt = authorizationHeader.Substring("Bearer ".Length);
  
             var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(jwt);
+            var token = handler.ReadJwtToken(authorizationHeader);
 
             var email = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
