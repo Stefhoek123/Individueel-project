@@ -6,6 +6,7 @@ import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { PostClient, UserClient, ChatClient, AuthClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { v4 } from "uuid";
+import { fi } from "vuetify/locale";
 
 const postClient = new PostClient();
 const userClient = new UserClient();
@@ -13,7 +14,7 @@ const chatClient = new ChatClient();
 const authClient = new AuthClient();
 const user = ref();
 const userName = ref(); 
-const post = ref<PostDto | null>(null);
+const post = ref();
 const messageList = ref<ChatDto[]>([]);
 const router = useRouter();
 const route = useRoute();
@@ -51,9 +52,7 @@ const chat = ref<Chat>({
 
 onMounted(async () => {
    await getUser();
-  console.log("userid: " + user.value.id);
    await fetchPostDetails();
-  console.log("fetchPostDetails");
 
   if (messageList.value.length === 0) {
    await fetchMessages();
@@ -64,11 +63,18 @@ onMounted(async () => {
 });
 
 async function fetchPostDetails() {
-  post.value = await postClient.getPostById(routeId);
-  console.log("post: " + post.value);
-  console.log("user:" + user.value.id);
-  userName.value = await userClient.getUserById(user.value.id);
-  console.log("username: " + userName.value);
+  const getPost = await postClient.getPostById(routeId);
+  userName.value = await userClient.getUserById(getPost.userId);
+
+  const model = {
+        id: getPost.id,
+        textContent: getPost.textContent,
+        imageUrl: getPost.imageUrl,
+        userId: getPost.userId,
+        firstName: userName.value.firstName,
+      };
+
+      post.value = model;
 }
 
 async function fetchMessages() {
@@ -115,6 +121,23 @@ async function deletePostById(id: string) {
   router.push("/home"); 
 }
 
+async function confirmAndDeleteChat(id: string) {
+  const confirmed = await confirmDialogueRef.value?.show({
+    title: "Delete chat",
+    message: "Are you sure you want to delete this chat? It cannot be undone.",
+    okButton: "Delete Forever",
+    cancelButton: "Cancel",
+  });
+
+  if (confirmed) {
+    await deleteChatById(id);
+  }
+}
+
+async function deleteChatById(id: string) {
+  await chatClient.deleteChatById(id);
+}
+
 async function sendMessage() {
   try {
     const guid = v4();
@@ -153,7 +176,7 @@ async function sendMessage() {
     <NavigationSide />
     <ConfirmDialogue ref="confirmDialogueRef" />
     <v-container class="text-center" v-if="post">
-      <VCardTitle class="title-achievement">{{ post.userId }}</VCardTitle>
+      <VCardTitle class="title-achievement">{{ post.firstName }}</VCardTitle>
 
       <v-row justify="center" class="my-5">
         <v-col cols="12" sm="8">
@@ -172,7 +195,7 @@ async function sendMessage() {
               <v-col cols="6">
                 <p class="headline">&nbsp;</p>
               </v-col>
-              <v-col cols="2">
+              <v-col cols="2" v-if="post.userId === user.id">
                 <router-link :to="`/posts/update/${routeId}`">
                   <VBtn
                     icon="mdi-pen"
@@ -182,7 +205,7 @@ async function sendMessage() {
                   />
                 </router-link>
               </v-col>
-              <v-col cols="2">
+              <v-col cols="2" v-if="post.userId === user.id">
                 <VBtn
                   icon="mdi-delete"
                   variant="plain"
@@ -220,6 +243,7 @@ async function sendMessage() {
                 <tr>
                   <th class="text-left">Sendername</th>
                   <th class="text-right">Message</th>
+                  <th class="text-right">Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -229,6 +253,15 @@ async function sendMessage() {
                   </td>
                   <td class="text-right">
                     {{ item.chatContent }}
+                  </td>
+                  <td class="text-right">
+                    <VBtn
+                  icon="mdi-delete"
+                  variant="plain"
+                  color="accent"
+                  size="small"
+                  @click="confirmAndDeleteChat(item.reactId)"
+                />
                   </td>
                 </tr>
               </tbody>

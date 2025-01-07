@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { AuthClient } from "@/api/api";
+import { AuthClient, FamilyClient } from "@/api/api";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import NavigationSide from "@/components/Navigation-side.vue";
 
 const authClient = new AuthClient();
+const familyClient = new FamilyClient();
 const user = ref();
 const loading = ref(true);
 
@@ -13,7 +14,6 @@ onMounted(async () => {
     const token = sessionStorage.getItem("JWT");
     if (token) {
       const currentUser = await authClient.getCurrentUser(token);
-
       const userData = JSON.parse(await currentUser.data.text());
 
       const slicedUser = {
@@ -26,7 +26,20 @@ onMounted(async () => {
         familyId: userData.familyId,
       };
 
-      user.value = slicedUser;
+      const familyUser = await familyClient.getFamilyById(slicedUser.familyId);
+
+      const model = {
+        id: slicedUser.id,
+        firstName: slicedUser.firstName,
+        lastName: slicedUser.lastName,
+        email: slicedUser.email,
+        passwordHash: slicedUser.passwordHash,
+        isActive: slicedUser.isActive,
+        familyId: slicedUser.familyId,
+        familyName: familyUser.familyName,
+      };
+
+      user.value = model;
     } else {
       throw new Error("JWT token is missing");
     }
@@ -50,14 +63,14 @@ onMounted(async () => {
         <p><strong>Firstname:</strong> {{ user.firstName }}</p>
         <p><strong>Lastname:</strong> {{ user.lastName }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Family ID:</strong> {{ user.familyId }}</p>
+        <p><strong>Family Name:</strong> {{ user.familyName }}</p>
         <router-link :to="`/users/update/${user.id}`">
-        <VBtn icon="mdi-pen" variant="plain" color="accent" size="small" />
-      </router-link>
+          <VBtn class="ms-2" color="accent">Click this button</VBtn>
+        </router-link>
       </div>
       <div v-else>
         <p>No data found.</p>
-      </div> 
+      </div>
     </div>
   </div>
 </template>

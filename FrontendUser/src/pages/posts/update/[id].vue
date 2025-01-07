@@ -12,6 +12,7 @@ const postDto = ref<PostDto>();
 const postClient = new PostClient();
 const authClient = new AuthClient();
 const user = ref();
+const imagePreviewUrl = ref<string | null>(null);
 
 onMounted(async () => {
   await getPost();
@@ -19,7 +20,10 @@ onMounted(async () => {
 });
 
 async function getPost() {
-  postDto.value = await postClient.getPostById(routeId);
+  const post = await postClient.getPostById(routeId);
+  postDto.value = post;
+
+  imagePreviewUrl.value = post.imageUrl || null;
 }
 
 async function getUser() {
@@ -45,43 +49,41 @@ async function getUser() {
 
 async function submit(event: SubmitEventPromise) {
   const { valid } = await event;
+  if (!valid) return;
 
   const fileInput = document.querySelector(
     'input[type="file"]'
   ) as HTMLInputElement;
   const file = fileInput.files?.[0];
 
-    if (!valid) {
-        return;
-    }
+  let imageUrl = imagePreviewUrl.value;
 
   if (file) {
     const fileParameter = { data: file, fileName: file.name };
     const response = await postClient.getImageUrl(fileParameter);
-    const jsonResponse = await response.data.text().then((text) => JSON.parse(text));
-    const url = jsonResponse.fileName;
-
-    const model = new PostDto({
-        id: routeId,
-        textContent: postDto.value?.textContent ?? '',
-        imageUrl: url,
-        userId: user.value.id,
-    });
-
-    await postClient.updatePost(model);
-    await router.push("/home");
-  } else {
-    const model = new PostDto({
-      id: routeId,
-      textContent:  postDto.value?.textContent ?? '',
-      imageUrl: " ",
-      userId: user.value.id,
-    });
-
-    await postClient.updatePost(model);
-    await router.push("/home");
+    const jsonResponse = await response.data
+      .text()
+      .then((text) => JSON.parse(text));
+    imageUrl = jsonResponse.fileName;
   }
 
+  if (!file && !imageUrl) {
+    imageUrl = "";
+  }
+
+  const model = new PostDto({
+    id: routeId,
+    textContent: postDto.value?.textContent ?? "",
+    imageUrl: imageUrl ?? "",
+    userId: user.value.id,
+  });
+
+  await postClient.updatePost(model);
+  await router.push("/home");
+}
+
+function deleteFile() {
+  imagePreviewUrl.value = null;
 }
 
 function required(fieldName: string): (v: string) => true | string {
@@ -97,7 +99,15 @@ function required(fieldName: string): (v: string) => true | string {
       <VCard title="Create a new post" class="vcard">
         <VForm validate-on="blur" @submit.prevent="submit">
           <VCardText>
-            <v-file-input clearable label="File input"></v-file-input>
+            <div v-if="imagePreviewUrl">
+              <p>Keep the current file: Do nothing</p>
+              <p>OR</p>
+              <p>Delete the current file: </p>
+              <VBtn class="ms-2" color="error" @click="deleteFile">Click this button</VBtn>
+              <p>OR</p>
+              <p>Chang the current file:</p>
+            </div>
+            <v-file-input clearable label="Add a file"></v-file-input>
             <VTextarea
               v-model="postDto.textContent"
               label="Caption"
