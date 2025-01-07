@@ -3,23 +3,23 @@
   "WorkspaceRootPath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\domain\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\domain\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|solutionrelative:domain\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -31,7 +31,7 @@
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -43,7 +43,7 @@
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\usercontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\dal\\interfaces\\iusercontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\interfaces\\iusercontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\interfaces\\iusercontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -51,7 +51,7 @@
       "RelativeMoniker": "D:0:0:{93090844-A1BE-486F-8D47-51598A208840}|TestProject\\TestProject.csproj|solutionrelative:testproject\\postunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\domain\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\domain\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8A02597C-5E37-44E6-AAEC-BF7091599F3C}|Domain\\DTOs.csproj|solutionrelative:domain\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -93,7 +93,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 1249,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,70 +102,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "JwtService.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Services\\JwtService.cs",
-              "RelativeDocumentMoniker": "Backend\\Services\\JwtService.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Services\\JwtService.cs",
-              "RelativeToolTip": "Backend\\Services\\JwtService.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAewB4AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:37:04.058Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAswCIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T09:35:09.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
-              "RelativeDocumentMoniker": "Backend\\appsettings.json",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
-              "RelativeToolTip": "Backend\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-06T08:40:29.572Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Backend\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:21:35.773Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
@@ -181,6 +117,64 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Services\\JwtService.cs",
+              "RelativeDocumentMoniker": "Backend\\Services\\JwtService.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Services\\JwtService.cs",
+              "RelativeToolTip": "Backend\\Services\\JwtService.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAnwE4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-06T12:37:04.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\AuthController.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAswCQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-03T09:35:09.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Backend\\appsettings.json",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\appsettings.json",
+              "RelativeToolTip": "Backend\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-06T08:40:29.572Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-04T10:21:35.773Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "BackendDbContext.cs",
@@ -190,8 +184,7 @@
               "RelativeToolTip": "Repositories\\BackendDbContext.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAA9wBUAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T08:32:34.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T08:32:34.466Z"
             },
             {
               "$type": "Document",
@@ -203,8 +196,7 @@
               "RelativeToolTip": "DAL\\Containers\\UserContainer.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAAQwCAAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:23:26.926Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-04T10:23:26.926Z"
             },
             {
               "$type": "Document",
@@ -216,8 +208,7 @@
               "RelativeToolTip": "DAL\\Interfaces\\IUserContainer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T13:42:08.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T13:42:08.406Z"
             },
             {
               "$type": "Document",
@@ -229,8 +220,7 @@
               "RelativeToolTip": "Domain\\LoginResponseDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:31:10.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T12:31:10.835Z"
             },
             {
               "$type": "Document",
@@ -242,8 +232,7 @@
               "RelativeToolTip": "Backend\\Program.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAYwEcAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:22:43.34Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T09:22:43.34Z"
             },
             {
               "$type": "Document",
@@ -255,8 +244,7 @@
               "RelativeToolTip": "Backend\\Hubs\\ChatHub.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T14:13:10.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T14:13:10.541Z"
             },
             {
               "$type": "Document",
@@ -268,8 +256,7 @@
               "RelativeToolTip": "TestProject\\PostUnitTest.cs",
               "ViewState": "AQIAADMAAAAAAAAAAAAYwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:29:20.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:29:20.136Z"
             },
             {
               "$type": "Document",
@@ -281,8 +268,7 @@
               "RelativeToolTip": "Domain\\LoginRequestDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:30:20.904Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T12:30:20.904Z"
             },
             {
               "$type": "Document",
@@ -294,8 +280,7 @@
               "RelativeToolTip": "TestProject\\UserUnitTest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:29:47.263Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:29:47.263Z"
             },
             {
               "$type": "Document",
@@ -307,8 +292,7 @@
               "RelativeToolTip": "DAL\\Containers\\PostContainer.cs",
               "ViewState": "AQIAABIAAAAAAAAAAAAYwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:29:27.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:29:27.428Z"
             },
             {
               "$type": "Document",
@@ -320,8 +304,7 @@
               "RelativeToolTip": "DAL\\Containers\\FamilyContainer.cs",
               "ViewState": "AQIAAB8AAAAAAAAAAAAkwCoAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:28:47.608Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:28:47.608Z"
             },
             {
               "$type": "Document",
@@ -333,8 +316,7 @@
               "RelativeToolTip": "TestProject\\ChatUnitTest.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwHIAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:30:28.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:30:28.104Z"
             },
             {
               "$type": "Document",
@@ -346,8 +328,7 @@
               "RelativeToolTip": "DAL\\Containers\\ChatContainer.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAQwBsAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:32:56.029Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:32:56.029Z"
             },
             {
               "$type": "Document",
@@ -359,8 +340,7 @@
               "RelativeToolTip": "TestProject\\FamilyUnitTest.cs",
               "ViewState": "AQIAALIAAAAAAAAAAAAwwMcAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:28:25.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:28:25.347Z"
             },
             {
               "$type": "Document",
@@ -372,8 +352,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\466b0feacd5abc10ed82730e7e3e9b6a553ddda0\\FamilyMapper.g.cs [Read Only]",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:53:12.488Z",
-              "EditorCaption": " [Read Only]"
+              "WhenOpened": "2025-01-04T10:53:12.488Z"
             },
             {
               "$type": "Document",
@@ -385,8 +364,7 @@
               "RelativeToolTip": "Backend\\Controllers\\ChatController.cs",
               "ViewState": "AQIAACAAAAAAAAAAAAAgwCwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T12:43:52.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T12:43:52.493Z"
             }
           ]
         },

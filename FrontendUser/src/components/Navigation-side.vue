@@ -12,24 +12,7 @@ const userClient = new UserClient();
 
 async function logout() {
   try {
-
-   //  var awaitUser = await userClient.getUserByEmail(model.email);
-
-// const modelUser = new UserDto({
-//   id: awaitUser.id,
-//   firstName: awaitUser.firstName,
-//   lastName: awaitUser.lastName,
-//   email: awaitUser.email,
-//   passwordHash: awaitUser.passwordHash,
-//   familyId: awaitUser.familyId || "",
-//   isActive: 2,
-// });
-
-// await userClient.updateUser(modelUser);
-
-
-    isLoggedIn.value = false;
-    userEmail.value = "";
+    sessionStorage.clear();
     router.push("/");
     console.log("Logged out successfully");
   } catch (error: any) {

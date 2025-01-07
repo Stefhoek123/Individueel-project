@@ -33,7 +33,13 @@ async function submit() {
     password: user.value.passwordHash,
   });
 
-  await authClient.login(modelDto);
+ const login = await authClient.login(modelDto);
+
+ console.log(login);
+
+ if (login.accessToken) {
+   sessionStorage.setItem("JWT", login.accessToken);
+ }
 
   await router.push("/home");
 }

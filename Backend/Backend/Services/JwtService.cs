@@ -54,7 +54,8 @@ namespace Backend.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Email, userAccount.Email)
+                    new Claim(JwtRegisteredClaimNames.Email, userAccount.Email),
+                    new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString())
                 }),
                 NotBefore = currentUtcTime.Subtract(clockSkew),
                 Expires = currentUtcTime.AddMinutes(tokenValidityMins),

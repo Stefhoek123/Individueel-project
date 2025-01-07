@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Backend.Controllers
 {
@@ -46,5 +47,24 @@ namespace Backend.Controllers
             return Ok(new { message = "Account exists" });
         }
 
+        [HttpGet("current")]
+        [Authorize]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized(new { message = "User not authorized" });
+            }
+
+            var user = _userContainer.GetUserById(Guid.Parse(userId));
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            return Ok(user);
+        }
     }
 }
