@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import type { SubmitEventPromise } from "vuetify/lib/framework.mjs";
 import { UserDto } from "@/api/api";
 import { UserClient, FamilyClient } from "@/api/api";
+import NavigationSide from "@/components/Navigation-side.vue";
 
 const route = useRoute();
 const routeId = (route.params as { id: string }).id;
@@ -72,7 +73,7 @@ async function submit(event: SubmitEventPromise) {
 
     await userClient.updateUser(model);
 
-    await router.push("/manage-users");
+    await router.push("/users/:id");
   }
 }
 
@@ -83,7 +84,10 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
+  <div>
+      <NavigationSide />
   <VCard v-if="userDto" title="Edit user">
+
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VCardTitle class="title-achievement">
@@ -110,13 +114,6 @@ function required(fieldName: string): (v: string) => true | string {
           :rules="[required('Email')]"
           class="mb-2"
         />
-        <VTextField
-          v-model="userDto.passwordHash"
-          auto-grow
-          label="Password"
-          :rules="[required('PasswordHash')]"
-          class="mb-2"
-        />
         <VSelect
           v-model="userDto.familyId"
           :items="families"
@@ -126,9 +123,6 @@ function required(fieldName: string): (v: string) => true | string {
           :rules="[required('Family')]"
           class="mb-2"
         />
-        <h4 > Is Active: 
-          {{ userDto.isActive }}
-        </h4>
 
         <!-- Save Button -->
         <VCardActions>
@@ -137,6 +131,7 @@ function required(fieldName: string): (v: string) => true | string {
       </VCardText>
     </VForm>
   </VCard>
+</div>
 </template>
 
 <style scoped>

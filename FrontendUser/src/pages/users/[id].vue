@@ -13,10 +13,23 @@ onMounted(async () => {
     const token = sessionStorage.getItem("JWT");
     if (token) {
       const currentUser = await authClient.getCurrentUser(token);
-      console.log("Current user:", currentUser);
-      user.value = currentUser;
 
-      console.log("User data:", user.value);
+      // Parse the JSON data to extract user information
+      const userData = JSON.parse(await currentUser.data.text());
+
+      // Slice the required properties
+      const slicedUser = {
+        id: userData.id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        passwordHash: userData.passwordHash,
+        isActive: userData.isActive,
+        familyId: userData.familyId,
+      };
+
+      // Assign the sliced user to `user.value`
+      user.value = slicedUser;
     } else {
       throw new Error("JWT token is missing");
     }
@@ -32,19 +45,23 @@ onMounted(async () => {
   <div class="clas">
     <HeaderComponent />
     <div class="account-view">
-        <NavigationSide />
+      <NavigationSide />
       <h1>Mijn Account</h1>
       <div v-if="loading">Gegevens laden...</div>
-      <div v-else-if="user" v-for="item in user" :key="item.id">
-        <p><strong>User ID:</strong> {{ item.id }}</p>
-        <p><strong>Firstname:</strong> {{ item.firstName }}</p>
-        <p><strong>Lastname:</strong> {{ item.lastName }}</p>
-        <p><strong>Email:</strong> {{ item.email }}</p>
-        <p><strong>Family ID:</strong> {{ item.familyId }}</p>
+      <div v-else-if="user">
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+        <p><strong>Firstname:</strong> {{ user.firstName }}</p>
+        <p><strong>Lastname:</strong> {{ user.lastName }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Family ID:</strong> {{ user.familyId }}</p>
+        <router-link :to="`/users/update/${user.id}`">
+        <VBtn icon="mdi-pen" variant="plain" color="accent" size="small" />
+      </router-link>
       </div>
       <div v-else>
         <p>Geen gegevens gevonden.</p>
       </div>
+      
     </div>
   </div>
 </template>
@@ -55,7 +72,7 @@ onMounted(async () => {
   margin: 0 auto;
 }
 
-.clas{
- margin-top: 65px;
-} 
+.clas {
+  margin-top: 65px;
+}
 </style>

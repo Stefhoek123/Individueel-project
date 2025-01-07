@@ -60,14 +60,14 @@ namespace Backend.Controllers
                 return Unauthorized(new { message = "E-mail not found in token." });
             }
 
-            var user = _userContainer.GetUserByEmail(email);
+            UserDto user = _userContainer.GetUserByEmail(email);
 
             if (user == null)
             {
                 return NotFound(new { message = "User not found" });
             }
 
-            return Ok(_userContainer.GetUserByEmail(email));
+            return Ok(user);
         }
 
     }

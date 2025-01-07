@@ -132,6 +132,7 @@ async function sendMessage() {
 
 <template>
   <div>
+    <NavigationSide />
     <ConfirmDialogue ref="confirmDialogueRef" />
     <v-container class="text-center" v-if="post">
       <VCardTitle class="title-achievement">{{ post.userId }}</VCardTitle>
