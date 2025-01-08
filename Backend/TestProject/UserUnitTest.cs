@@ -121,6 +121,35 @@ namespace TestProject
         }
 
         [TestMethod]
+        public void VerifyPassword_ShouldReturnTrue_WhenPasswordMatches()
+        {
+            // Arrange
+            var plainPassword = "MySecurePassword123";
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+
+            // Act
+            var result = _userContainer.VerifyPassword(plainPassword, hashedPassword);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void VerifyPassword_ShouldReturnFalse_WhenPasswordDoesNotMatch()
+        {
+            // Arrange
+            var plainPassword = "MySecurePassword123";
+            var wrongPassword = "WrongPassword123";
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+
+            // Act
+            var result = _userContainer.VerifyPassword(wrongPassword, hashedPassword);
+
+            // Assert
+            Assert.IsFalse(result); 
+        }
+
+        [TestMethod]
         public void GetAllUsers_ShouldReturnUserDtos()
         {
             // Arrange
@@ -442,6 +471,50 @@ namespace TestProject
                 u.LastName == existingUser.LastName &&
                 u.Email == existingUser.Email)), Times.Once);
         }
+
+        [TestMethod]
+        public void UpdateUserById_ShouldUpdateFamilyId()
+        {
+            // Arrange
+            var userId = Guid.NewGuid();
+            var newFamilyId = Guid.NewGuid();
+            var existingUserDto = new UserDto
+            {
+                Id = userId,
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "john.doe@example.com",
+                PasswordHash = "hashed_password",
+                FamilyId = Guid.NewGuid(),
+                IsActive = 1
+            };
+
+            var updatedUserDto = new UserDto
+            {
+                FamilyId = newFamilyId
+            };
+
+            _mockUserRepository?.Setup(repo => repo.GetUserById(userId))
+                .Returns(new Models.User(
+                    existingUserDto.Id,
+                    existingUserDto.FirstName,
+                    existingUserDto.LastName,
+                    existingUserDto.Email,
+                    existingUserDto.PasswordHash,
+                    existingUserDto.FamilyId,
+                    existingUserDto.IsActive
+                ));
+
+            // Act
+            _userContainer?.UpdateUserById(userId, updatedUserDto);
+
+            // Assert
+            _mockUserRepository?.Verify(repo => repo.UpdateUser(It.Is<Models.User>(u =>
+                u.Id == userId &&
+                u.FamilyId == newFamilyId
+            )), Times.Once);
+        }
+
 
         [TestMethod]
         public void DeleteUserById_ShouldCallDeleteUserByIdInRepository()

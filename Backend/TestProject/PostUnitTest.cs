@@ -54,6 +54,21 @@ public class PostUnitTest
         }
 
         [TestMethod]
+        public void GetAllPosts_ShouldReturnEmptyList_WhenNoPostsExist()
+        {
+            // Arrange
+            _mockPostRepository?.Setup(repo => repo.GetAllPosts()).Returns(new List<Post>());
+
+            // Act
+            var result = _postContainer?.GetAllPosts();
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count());
+        }
+
+
+    [TestMethod]
         public void GetPostById_ShouldReturnPostDto()
         {
             // Arrange
@@ -145,4 +160,20 @@ public class PostUnitTest
             // Assert
             _mockPostRepository?.Verify(repo => repo.DeletePostById(postId), Times.Once);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void DeletePostById_ShouldThrowException_WhenRepositoryThrows()
+        {
+            // Arrange
+            var postId = Guid.NewGuid();
+            _mockPostRepository?.Setup(repo => repo.DeletePostById(postId)).Throws(new Exception("Repository error"));
+
+            // Act
+            _postContainer?.DeletePostById(postId);
+
+            // Assert
+            // Exception is expected, no additional asserts are necessary
+        }
+
 }

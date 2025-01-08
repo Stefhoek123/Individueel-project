@@ -63,6 +63,21 @@ public class ChatUnitTest
     }
 
     [TestMethod]
+    public void GetAllChats_ShouldReturnEmptyList_WhenNoChatsExist()
+    {
+        // Arrange
+        _mockChatRepository?.Setup(repo => repo.GetAllChats()).Returns(new List<Chat>());
+
+        // Act
+        var result = _chatContainer?.GetAllChats();
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0, result.Count());
+    }
+
+
+    [TestMethod]
     public void GetChatById_ShouldReturnChatDto()
     {
         // Arrange
@@ -142,6 +157,22 @@ public class ChatUnitTest
     }
 
     [TestMethod]
+    public void GetChatsById_ShouldReturnEmptyList_WhenNoChatsExistForGivenId()
+    {
+        // Arrange
+        var chatId = Guid.NewGuid();
+        _mockChatRepository?.Setup(repo => repo.GetChatsById(chatId)).Returns(new List<Chat>());
+
+        // Act
+        var result = _chatContainer?.GetChatsById(chatId);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0, result.Count);
+    }
+
+
+    [TestMethod]
     public void CreateChat_ShouldCreateChatInRepository()
     {
         // Arrange
@@ -198,6 +229,32 @@ public class ChatUnitTest
             c.ChatContent == chatDto.ChatContent
         )), Times.Once);
     }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void UpdateChat_ShouldThrowException_WhenChatDoesNotExist()
+    {
+        // Arrange
+        var chatDto = new ChatDto
+        {
+            Id = Guid.NewGuid(),
+            PostId = Guid.NewGuid(),
+            Date = DateTime.Now,
+            ChatContent = "Non-existent chat content",
+            ReactId = Guid.NewGuid(),
+            SenderName = "Test sender",
+            UserId = Guid.NewGuid()
+        };
+
+        _mockChatRepository?.Setup(repo => repo.UpdateChat(It.IsAny<Chat>())).Throws<InvalidOperationException>();
+
+        // Act
+        _chatContainer?.UpdateChat(chatDto);
+
+        // Assert
+        // Exception is expected.
+    }
+
 
     [TestMethod]
     public void DeleteChatById_ShouldDeleteChatInRepository()
