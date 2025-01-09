@@ -22,6 +22,10 @@ const post = ref<Post>({
   createdAt: new Date(),
 });
 
+const errors = ref({
+  textContent: "",
+});
+
 onMounted(() => {
   getUser();
 });
@@ -49,6 +53,10 @@ async function getUser() {
 }
 
 async function submit() {
+  if (!validateFields()) {
+    return;
+  }
+
   const fileInput = document.querySelector(
     'input[type="file"]'
   ) as HTMLInputElement;
@@ -82,8 +90,10 @@ async function submit() {
   }
 }
 
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.textContent = post.value.textContent ? "" : "Caption is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -98,9 +108,9 @@ function required(fieldName: string): (v: string) => true | string {
         <VTextarea
           v-model="post.textContent"
           label="Caption"
-          :rules="[required('Caption')]"
           class="mb-2"
         />
+        <p v-if="errors.textContent" class="error">{{ errors.textContent }}</p>
       </VCardText>
       <VCardActions>
         <VBtn class="me-4" type="submit"> submit </VBtn>
@@ -117,5 +127,12 @@ function required(fieldName: string): (v: string) => true | string {
   margin-right: auto;
   margin-bottom: 70px;
   width: 70%;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

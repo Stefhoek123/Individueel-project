@@ -20,6 +20,10 @@ const family = ref<Family>({
   familyName: "",
 });
 
+const errors = ref({
+  familyName: "",
+});
+
 onMounted(() => {
   getUser();
 });
@@ -48,6 +52,10 @@ async function getUser() {
 }
 
 async function submit() {
+  if (!validateFields()) {
+    return;
+  }
+
   const model = new FamilyDto({
     familyName: family.value.familyName,
   });
@@ -69,8 +77,10 @@ async function submit() {
   await router.push("/families/:id");
 }
 
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.familyName = family.value.familyName ? "" : "Family Name is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -81,13 +91,14 @@ function required(fieldName: string): (v: string) => true | string {
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
+          v-model="family.familyName"
           label="Family Name"
-          :rules="[required('Family Name')]"
           class="mb-2"
         />
+        <p v-if="errors.familyName" class="error">{{ errors.familyName }}</p>
       </VCardText>
       <VCardActions>
-        <VBtn class="me-4" type="submit"> submit </VBtn>
+        <VBtn class="me-4" type="submit"> Submit </VBtn>
       </VCardActions>
     </VForm>
   </VCard>
@@ -101,5 +112,12 @@ function required(fieldName: string): (v: string) => true | string {
   margin-right: auto;
   margin-bottom: 70px;
   width: 70%;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

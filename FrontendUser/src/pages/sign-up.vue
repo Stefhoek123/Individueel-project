@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { UserClient, AuthClient, LoginRequest, LoginRequestDto, UserDto } from "@/api/api";
+import {
+  UserClient,
+  AuthClient,
+  LoginRequest,
+  LoginRequestDto,
+  UserDto,
+} from "@/api/api";
 import { useRouter } from "vue-router";
 
 interface User {
@@ -21,7 +27,18 @@ const user = ref<User>({
   passwordHash: "",
 });
 
+const errors = ref({
+  firstName: "",
+  lastName: "",
+  email: "",
+  passwordHash: "",
+});
+
 async function submit() {
+  if (!validateFields()) {
+    return;
+  }
+
   const modelLogin = new LoginRequest({
     email: user.value.email,
     password: user.value.passwordHash,
@@ -31,7 +48,6 @@ async function submit() {
     email: user.value.email,
     password: user.value.passwordHash,
   });
-
 
   const modelDto = new UserDto({
     firstName: user.value.firstName,
@@ -49,7 +65,12 @@ async function submit() {
 
   if (accountData.message === "Account not found. Please register.") {
     await userClient.createUser(modelDto);
-    await authClient.login(model);
+
+    const login = await authClient.login(model);
+
+    if (login.accessToken) {
+      sessionStorage.setItem("JWT", login.accessToken);
+    }
   } else {
     await router.push("/");
     return;
@@ -60,6 +81,19 @@ async function submit() {
 
 function login() {
   router.push("/");
+}
+
+function validateFields() {
+  errors.value.firstName = user.value.firstName
+    ? ""
+    : "First name is required.";
+  errors.value.lastName = user.value.lastName ? "" : "Last name is required.";
+  errors.value.email = user.value.email ? "" : "Email is required.";
+  errors.value.passwordHash = user.value.passwordHash
+    ? ""
+    : "Password is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -76,14 +110,15 @@ function login() {
             label="User firstname"
             class="mb-2"
           />
-
+          <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
           <VTextField
             v-model="user.lastName"
             label="User lastname"
             class="mb-2"
           />
-
+          <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
           <VTextField v-model="user.email" label="User email" class="mb-2" />
+          <p v-if="errors.email" class="error">{{ errors.email }}</p>
 
           <VTextField
             v-model="user.passwordHash"
@@ -91,6 +126,9 @@ function login() {
             type="password"
             class="mb-2"
           />
+          <p v-if="errors.passwordHash" class="error">
+            {{ errors.passwordHash }}
+          </p>
         </VCardText>
 
         <VCardActions>
@@ -109,5 +147,12 @@ function login() {
   flex-direction: column;
   align-items: center;
   padding-top: 70px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

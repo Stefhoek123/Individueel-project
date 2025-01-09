@@ -37,6 +37,13 @@ const user = ref<User>({
   isActive: 1,
 });
 
+const errors = ref({
+  firstName: "",
+  lastName: "",
+  email: "",
+  familyId: "",
+});
+
 onMounted(async () => {
   await getUserbById();
 });
@@ -52,6 +59,10 @@ async function getUserbById() {
 }
 
 async function submit(event: SubmitEventPromise) {
+  if (!validateFields()) {
+    return;
+  }
+
   const { valid } = await event;
 
   if (valid) {
@@ -70,8 +81,15 @@ async function submit(event: SubmitEventPromise) {
   }
 }
 
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.firstName = user.value.firstName
+    ? ""
+    : "First name is required.";
+  errors.value.lastName = userDto.value?.lastName ? "" : "Last name is required.";
+  errors.value.email = userDto.value?.email ? "" : "Email is required.";
+  errors.value.familyId = userDto.value?.familyId ? "" : "Family is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -86,34 +104,36 @@ function required(fieldName: string): (v: string) => true | string {
         </VCardTitle>
         <VTextField
           v-model="userDto.firstName"
-          :rules="[required('Firstname')]"
           label="Firstname"
           class="mb-2"
           clearable
         />
+        <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
         <VTextField
           v-model="userDto.lastName"
           auto-grow
           label="Lastname"
-          :rules="[required('Lastname')]"
           class="mb-2"
+          clearable
         />
+        <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
         <VTextField
           v-model="userDto.email"
           auto-grow
           label="Email"
-          :rules="[required('Email')]"
           class="mb-2"
+          clearable
         />
+        <p v-if="errors.email" class="error">{{ errors.email }}</p>
         <VSelect
           v-model="userDto.familyId"
           :items="families"
           item-title="name"
           item-value="id"
           label="Family"
-          :rules="[required('Family')]"
           class="mb-2"
         />
+        <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p>
         <VCardActions>
           <VBtn class="me-4" type="submit"> Save </VBtn>
         </VCardActions>
@@ -122,3 +142,12 @@ function required(fieldName: string): (v: string) => true | string {
   </VCard>
 </div>
 </template>
+
+<style scoped>
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+</style>

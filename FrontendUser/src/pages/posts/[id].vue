@@ -50,6 +50,11 @@ const chat = ref<Chat>({
   userId: "00000000-0000-0000-0000-000000000000",
 });
 
+
+const errors = ref({
+  chatContent: "",
+});
+
 onMounted(async () => {
   await getUser();
   await fetchPostDetails();
@@ -147,6 +152,10 @@ async function deleteChatById(id: string) {
 }
 
 async function sendMessage() {
+  if (!validateFields()) {
+    return;
+  }
+
   const guid = v4();
   if (userName.value.firstName && chat.value.chatContent) {
     await connection.invoke("SendMessage", {
@@ -171,6 +180,12 @@ async function sendMessage() {
   } else {
     throw new Error("Chat content cannot be empty.");
   }
+}
+
+function validateFields() {
+  errors.value.chatContent = chat.value.chatContent ? "" : "Message is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -279,6 +294,7 @@ async function sendMessage() {
               />
               <VBtn class="me-4" type="submit" @click="sendMessage">Send</VBtn>
             </div>
+            <p v-if="errors.chatContent" class="error">{{ errors.chatContent }}</p>
           </v-row>
         </v-card>
       </v-col>
@@ -311,5 +327,12 @@ async function sendMessage() {
 
 .table {
   inline-size: 100%;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

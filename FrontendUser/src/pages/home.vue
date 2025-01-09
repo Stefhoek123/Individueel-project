@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import NavigationSide from '@/components/Navigation-side.vue';
 import HeaderComponent from '@/components/HeaderComponent.vue';
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import type { PostDto } from "@/api/api";
 import { PostClient } from "@/api/api";
 

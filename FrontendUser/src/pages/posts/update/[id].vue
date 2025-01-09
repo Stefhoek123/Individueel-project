@@ -14,6 +14,10 @@ const authClient = new AuthClient();
 const user = ref();
 const imagePreviewUrl = ref<string | null>(null);
 
+const errors = ref({
+  textContent: "",
+});
+
 onMounted(async () => {
   await getPost();
   await getUser();
@@ -48,6 +52,10 @@ async function getUser() {
 }
 
 async function submit(event: SubmitEventPromise) {
+  if (!validateFields()) {
+    return;
+  }
+
   const { valid } = await event;
   if (!valid) return;
 
@@ -87,8 +95,10 @@ function deleteFile() {
   imagePreviewUrl.value = null;
 }
 
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.textContent = postDto.value?.textContent ? "" : "Caption is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
@@ -112,10 +122,10 @@ function required(fieldName: string): (v: string) => true | string {
             <VTextarea
               v-model="postDto.textContent"
               label="Caption"
-              :rules="[required('Caption')]"
               class="mb-2"
               clearable
             />
+            <p v-if="errors.textContent" class="error">{{ errors.textContent }}</p>
           </VCardText>
           <VCardActions>
             <VBtn class="me-4" type="submit"> Save </VBtn>
@@ -125,3 +135,12 @@ function required(fieldName: string): (v: string) => true | string {
     </VCard>
   </div>
 </template>
+
+<style scoped>
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+</style>
