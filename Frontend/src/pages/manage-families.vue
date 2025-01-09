@@ -76,6 +76,9 @@ async function deleteFamilyById(id: string) {
         </div>
         <VTable>
           <thead>
+            <div v-if="families.length === 0">
+              <p class="no-results">No results found for your search.</p>
+            </div>
             <tr>
               <th class="text-left">Family name</th>
               <th class="text-right actions-column">Actions</th>

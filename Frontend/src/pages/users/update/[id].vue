@@ -9,7 +9,6 @@ const route = useRoute();
 const routeId = (route.params as { id: string }).id;
 const router = useRouter();
 
-
 const userClient = new UserClient();
 const familyClient = new FamilyClient();
 const userDto = ref<UserDto>();
@@ -38,29 +37,35 @@ const user = ref<User>({
   isActive: 1,
 });
 
-onMounted(async () => {
-    console.log(routeId);
-  await getUserbById();
+const errors = ref({
+  firstName: "",
+  lastName: "",
+  email: "",
+  familyId: "",
+});
 
+onMounted(async () => {
+  await getUserbById();
 });
 
 async function getUserbById() {
   userDto.value = await userClient.getUserById(routeId);
   const fmaily = await familyClient.getAllFamilies();
 
-    families.value = fmaily.map((family) => ({
-        id: family.id || "",
-        name: family.familyName,
-    }));
+  families.value = fmaily.map((family) => ({
+    id: family.id || "",
+    name: family.familyName,
+  }));
 }
 
-
-// Form submission
 async function submit(event: SubmitEventPromise) {
+  if (!validateFields()) {
+    return;
+  }
+
   const { valid } = await event;
 
   if (valid) {
-    // Update achievement
     const model = new UserDto({
       id: userDto.value?.id,
       firstName: userDto.value?.firstName || "",
@@ -71,17 +76,24 @@ async function submit(event: SubmitEventPromise) {
       isActive: user.value.isActive,
     });
 
-    // Send updated achievement
     await userClient.updateUser(model);
-
     await router.push("/manage-users");
   }
 }
 
-// Validation helper
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.firstName = userDto.value?.firstName
+    ? ""
+    : "First name is required.";
+  errors.value.lastName = userDto.value?.lastName ? "" : "Last name is required.";
+  errors.value.email = userDto.value?.email ? "" : "Email is required.";
+  errors.value.familyId = userDto.value?.familyId
+    ? ""
+    : "Family is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
+
 </script>
 
 <template>
@@ -89,46 +101,38 @@ function required(fieldName: string): (v: string) => true | string {
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VCardTitle class="title-achievement">
-         User ID: {{ userDto.id }}
+          User ID: {{ userDto.id }}
         </VCardTitle>
         <VTextField
           v-model="userDto.firstName"
-          :rules="[required('Achievement name')]"
           label="Firstname"
           class="mb-2"
           clearable
         />
+        <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
         <VTextField
           v-model="userDto.lastName"
           auto-grow
           label="Lastname"
-          :rules="[required('Description')]"
           class="mb-2"
         />
+        <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
         <VTextField
           v-model="userDto.email"
           auto-grow
           label="Email"
-          :rules="[required('Description')]"
           class="mb-2"
         />
-        <h4 > Password: 
-          {{ userDto.passwordHash }}
-        </h4>
+        <p v-if="errors.email" class="error">{{ errors.email }}</p>
         <VSelect
           v-model="userDto.familyId"
           :items="families"
           item-title="name"
           item-value="id"
           label="Family"
-          :rules="[required('Family')]"
           class="mb-2"
-        />
-        <h4 > Is Active: 
-          {{ userDto.isActive }}
-        </h4>
-
-        <!-- Save Button -->
+        /> 
+        <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p>
         <VCardActions>
           <VBtn class="me-4" type="submit"> Save </VBtn>
         </VCardActions>
@@ -142,6 +146,13 @@ function required(fieldName: string): (v: string) => true | string {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-block-start: 10px; /* Adds space between description and date picker */
+  margin-block-start: 10px; 
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>

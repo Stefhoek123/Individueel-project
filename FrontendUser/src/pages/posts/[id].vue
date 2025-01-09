@@ -178,7 +178,7 @@ async function sendMessage() {
     await chatClient.createChat(model);
     chat.value.chatContent = "";
   } else {
-    throw new Error("Chat content cannot be empty.");
+    throw new Error("Message cannot be empty.");
   }
 }
 
@@ -289,7 +289,7 @@ function validateFields() {
             <div class="wrapper">
               <VTextField
                 v-model="chat.chatContent"
-                label="Chat Content"
+                label="Message"
                 class="mb-2"
               />
               <VBtn class="me-4" type="submit" @click="sendMessage">Send</VBtn>

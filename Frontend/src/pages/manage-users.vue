@@ -8,7 +8,9 @@ const users = ref<UserDto[]>([]);
 const client = new UserClient();
 const searchbar = ref<HTMLInputElement | null>(null);
 
-const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(null)
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
+  null
+);
 
 onMounted(() => getUserData());
 
@@ -36,21 +38,19 @@ async function getUserData() {
 
 async function confirmAndDelete(id: string) {
   const confirmed = await confirmDialogueRef.value?.show({
-    title: 'Delete user',
-    message: 'Are you sure you want to delete this user? It cannot be undone.',
-    okButton: 'Delete Forever',
-    cancelButton: 'Cancel',
-  })
+    title: "Delete user",
+    message: "Are you sure you want to delete this user? It cannot be undone.",
+    okButton: "Delete Forever",
+    cancelButton: "Cancel",
+  });
 
-  if (confirmed)
-    await deleteUserById(id)
+  if (confirmed) await deleteUserById(id);
 }
 
 async function deleteUserById(id: string) {
-  await client.deleteUserById(id)
-  getUserData()
+  await client.deleteUserById(id);
+  getUserData();
 }
-
 </script>
 
 <template>
@@ -74,6 +74,9 @@ async function deleteUserById(id: string) {
         </div>
         <VTable>
           <thead>
+            <div v-if="users.length === 0">
+              <p class="no-results">No results found for your search.</p>
+            </div>
             <tr>
               <th class="text-left">Firstname</th>
               <th class="text-left">Lastname</th>
@@ -84,7 +87,7 @@ async function deleteUserById(id: string) {
           <tbody>
             <tr v-for="item in users" :key="item.id">
               <td>
-                  {{ item.firstName }}
+                {{ item.firstName }}
               </td>
               <td>{{ item.lastName }}</td>
               <td>{{ item.email }}</td>

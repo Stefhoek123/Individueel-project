@@ -5,6 +5,10 @@ import { useRouter } from "vue-router";
 import { SubmitEventPromise } from "vuetify";
 
 const router = useRouter();
+const client = new UserClient();
+const familyClient = new FamilyClient();
+const families = ref<Family[]>([]);
+const selectedFamilies = ref<string | null>(null);
 
 interface User {
   firstName: string;
@@ -19,12 +23,15 @@ interface Family {
   name: string;
 }
 
-const client = new UserClient();
-const familyClient = new FamilyClient();
-const families = ref<Family[]>([]);
-const selectedFamilies = ref<string | null>(null);
-
 const user = ref<User>({
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  familyId: "",
+});
+
+const errors = ref({
   firstName: "",
   lastName: "",
   email: "",
@@ -34,7 +41,6 @@ const user = ref<User>({
 
 onMounted(async () => {
   families.value = await getFamilies();
-  console.log(families.value);
 });
 
 async function getFamilies() {
@@ -46,8 +52,11 @@ async function getFamilies() {
 }
 
 async function submit(event: SubmitEventPromise) {
+  if (!validateFields()) {
+    return;
+  }
+  
   const { valid } = await event;
-  console.log(selectedFamilies.value);
 
   if (valid) {
     const model = new UserDto({
@@ -63,49 +72,61 @@ async function submit(event: SubmitEventPromise) {
   }
 }
 
-function required(fieldName: string): (v: string) => true | string {
-  return (v) => !!v || `${fieldName} is required`;
+function validateFields() {
+  errors.value.firstName = user.value.firstName
+    ? ""
+    : "First name is required.";
+  errors.value.lastName = user.value.lastName ? "" : "Last name is required.";
+  errors.value.email = user.value.email ? "" : "Email is required.";
+  errors.value.password = user.value.password
+    ? ""
+    : "Password is required.";
+    errors.value.familyId = user.value.familyId
+    ? ""
+    : "Family is required.";
+
+  return !Object.values(errors.value).some((error) => error !== "");
 }
 </script>
 
 <template>
-  <VCard title="Create Users" class="vcard">
+  <VCard title="Create a user" class="vcard">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
           v-model="user.firstName"
           label="Firstname"
-          :rules="[required('Firstname')]"
           class="mb-2"
         />
+        <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
         <VTextField
           v-model="user.lastName"
           label="Lastname"
-          :rules="[required('Lastname')]"
           class="mb-2"
         />
+        <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
         <VTextField
           v-model="user.email"
           label="Email"
-          :rules="[required('Email')]"
           class="mb-2"
         />
+        <p v-if="errors.email" class="error">{{ errors.email }}</p>
         <VTextField
           v-model="user.password"
           label="Password"
           type="password"
-          :rules="[required('Password')]"
           class="mb-2"
         />
+        <p v-if="errors.password" class="error">{{ errors.password }}</p>
         <VSelect
           v-model="user.familyId"
           :items="families"
-           item-title="name"
+          item-title="name"
           item-value="id"
           label="Family"
-          :rules="[required('Family')]"
           class="mb-2"
         />
+        <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p>
       </VCardText>
       <VCardActions>
         <VBtn class="me-4" type="submit"> submit </VBtn>
@@ -121,5 +142,12 @@ function required(fieldName: string): (v: string) => true | string {
   margin-right: auto;
   margin-bottom: 70px;
   width: 70%;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 </style>
