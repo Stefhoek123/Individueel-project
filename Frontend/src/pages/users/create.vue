@@ -8,7 +8,6 @@ const router = useRouter();
 const client = new UserClient();
 const familyClient = new FamilyClient();
 const families = ref<Family[]>([]);
-const selectedFamilies = ref<string | null>(null);
 
 interface User {
   firstName: string;
