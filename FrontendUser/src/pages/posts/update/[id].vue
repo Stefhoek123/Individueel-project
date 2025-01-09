@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import type { SubmitEventPromise } from "vuetify/lib/framework.mjs";
+import { SubmitEventPromise } from "vuetify";
 import NavigationSide from "@/components/Navigation-side.vue";
 import { PostDto, PostClient, AuthClient } from "@/api/api";
 

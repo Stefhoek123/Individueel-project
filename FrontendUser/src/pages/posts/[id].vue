@@ -6,7 +6,6 @@ import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { PostClient, UserClient, ChatClient, AuthClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { v4 } from "uuid";
-import { create } from "node_modules/axios/index.cjs";
 
 const postClient = new PostClient();
 const userClient = new UserClient();
