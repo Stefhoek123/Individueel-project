@@ -38,9 +38,7 @@ const user = ref<User>({
 });
 
 onMounted(async () => {
-    console.log(routeId);
   await getUserbById();
-
 });
 
 async function getUserbById() {

@@ -43,6 +43,10 @@ async function getUser() {
 function createFamily() {
   router.push("/families/create");
 }
+
+function goToAccount() {
+  router.push("/users/:id");
+}
 </script>
 
 <template>
@@ -50,28 +54,41 @@ function createFamily() {
     <NavigationSide />
     <div>
       <VCard v-if="family">
-        <VCardTitle class="title-achievement" v-if="family.familyName != 'overig'">
-          <p>You are not connected to a family.</p>
-          <VBtn class="ms-2" color="#1F7087" @click="createFamily">Click this button to create a family</VBtn>
-        </VCardTitle>
-        <VCardTitle class="title-achievement" v-if="family.familyName == 'overig'">
-          {{ family.familyName || "Unknown Family" }}
-        </VCardTitle>
-        <VTable v-if="family.familyName == 'overig'">
-          <thead>
-            <tr>
-              <th class="text-left">Members</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in users" :key="item.id">
-              <td>
-                {{ item.firstName || "Unknown" }}
-                {{ item.lastName || "Unknown" }}
-              </td>
-             </tr>
-          </tbody>
-        </VTable>
+        <!-- Case: Family name is "overig" -->
+        <template v-if="family.familyName === 'Overig'">
+          <VCardTitle class="title-achievement">
+            <p>You are not connected to a family. Create a family:</p>
+            <VBtn class="ms-2" color="#1F7087" @click="createFamily">
+              Create family
+            </VBtn>
+            <p>When the family already exists, go to my account and change the data.</p>
+            <VBtn class="ms-2" color="#1F7087" @click="goToAccount">
+              Go to my account
+            </VBtn>
+          </VCardTitle>
+        </template>
+
+        <!-- Case: Family name is NOT "overig" -->
+        <template v-else>
+          <VCardTitle class="title-achievement">
+            {{ family.familyName || "Unknown Family" }}
+          </VCardTitle>
+          <VTable>
+            <thead>
+              <tr>
+                <th class="text-left">Members</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in users" :key="item.id">
+                <td>
+                  {{ item.firstName || "Unknown" }}
+                  {{ item.lastName || "Unknown" }}
+                </td>
+              </tr>
+            </tbody>
+          </VTable>
+        </template>
       </VCard>
     </div>
   </div>

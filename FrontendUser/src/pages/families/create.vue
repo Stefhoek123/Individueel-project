@@ -53,7 +53,7 @@ async function submit() {
   });
 
   await familyClient.createFamily(model);
-  await familyClient.getFamilyIdByName(model.familyName);
+ const familyId =  await familyClient.getFamilyIdByName(model.familyName);
 
     const modelUser = new UserDto({
       id: user.value.id,
@@ -61,7 +61,7 @@ async function submit() {
       lastName: user.value?.lastName || "",
       email: user.value?.email || "",
       passwordHash: user.value?.passwordHash || "",
-      familyId: user.value?.familyId,
+      familyId: familyId.id,
       isActive: user.value.isActive,
     });
 
@@ -81,7 +81,6 @@ function required(fieldName: string): (v: string) => true | string {
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
-          v-model="family.familyName"
           label="Family Name"
           :rules="[required('Family Name')]"
           class="mb-2"

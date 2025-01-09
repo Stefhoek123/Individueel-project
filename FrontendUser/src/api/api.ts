@@ -533,6 +533,44 @@ export class FamilyClient {
         return Promise.resolve<FamilyDto>(null as any);
     }
 
+    getFamilyIdByName(familyName: string | undefined): Promise<FamilyDto> {
+        let url_ = this.baseUrl + "/api/Family/GetFamilyIdByName?";
+        if (familyName === null)
+            throw new Error("The parameter 'familyName' cannot be null.");
+        else if (familyName !== undefined)
+            url_ += "familyName=" + encodeURIComponent("" + familyName) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetFamilyIdByName(_response);
+        });
+    }
+
+    protected processGetFamilyIdByName(response: Response): Promise<FamilyDto> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = FamilyDto.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FamilyDto>(null as any);
+    }
+
     searchFamilyByName(search: string | null | undefined): Promise<FamilyDto[]> {
         let url_ = this.baseUrl + "/api/Family/SearchFamilyByName?";
         if (search !== undefined && search !== null)
