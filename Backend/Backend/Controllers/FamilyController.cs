@@ -28,6 +28,13 @@ namespace Backend.Controllers
             return Ok(family);
         }
 
+        [HttpGet(nameof(GetFamilyIdByName))]
+        public ActionResult<FamilyDto> GetFamilyIdByName(string familyName)
+        {
+            FamilyDto family = _familyContainer.GetFamilyIdByName(familyName);
+            return Ok(family);
+        }
+
         [HttpGet(nameof(SearchFamilyByName))]
         public ActionResult<IEnumerable<FamilyDto>> SearchFamilyByName(string? search)
         {

@@ -22,6 +22,12 @@ public class FamilyRepository : IFamilyRepository
         return _backendDbContext.Families.FirstOrDefault(f => f.Id == id)!;
     }
 
+    public Family GetFamilyIdByName(string familyName)
+    {
+        return _backendDbContext.Families.FirstOrDefault(f => f.FamilyName == familyName)!;
+    }
+
+
     public IEnumerable<Family> SearchFamilyByName(string search)
     {
         IEnumerable<Family> families = _backendDbContext.Families

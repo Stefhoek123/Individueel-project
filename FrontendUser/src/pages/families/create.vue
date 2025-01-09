@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { FamilyClient, FamilyDto } from "@/api/api";
+import { FamilyClient, FamilyDto, AuthClient, UserClient, UserDto } from "@/api/api";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import NavigationSide from "@/components/Navigation-side.vue";
+import { onMounted } from "vue";
 
 const router = useRouter();
-const client = new FamilyClient();
+const familyClient = new FamilyClient();
+const authClient = new AuthClient();
+const userClient = new UserClient();	
+const user = ref();
+const users = ref<UserDto[]>([]);
 
 interface Family {
   familyName: string;
@@ -14,13 +20,53 @@ const family = ref<Family>({
   familyName: "",
 });
 
+onMounted(() => {
+  getUser();
+});
+
+async function getUser() {
+  const token = sessionStorage.getItem("JWT");
+  if (token) {
+    const currentUser = await authClient.getCurrentUser(token);
+
+    const userData = JSON.parse(await currentUser.data.text());
+
+    const slicedUser = {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      passwordHash: userData.passwordHash,
+      isActive: userData.isActive,
+      familyId: userData.familyId,
+    };
+
+    user.value = slicedUser;
+    family.value = await familyClient.getFamilyById(slicedUser.familyId);
+    users.value = await userClient.getUsersByFamilyId(slicedUser.familyId);
+  }
+}
+
 async function submit() {
   const model = new FamilyDto({
     familyName: family.value.familyName,
   });
 
-  await client.createFamily(model);
-  await router.push("/manage-families");
+  await familyClient.createFamily(model);
+  await familyClient.getFamilyIdByName(model.familyName);
+
+    const modelUser = new UserDto({
+      id: user.value.id,
+      firstName: user.value?.firstName || "",
+      lastName: user.value?.lastName || "",
+      email: user.value?.email || "",
+      passwordHash: user.value?.passwordHash || "",
+      familyId: user.value?.familyId,
+      isActive: user.value.isActive,
+    });
+
+  await userClient.updateUser(modelUser);
+  await router.push("/families/:id");
 }
 
 function required(fieldName: string): (v: string) => true | string {
@@ -29,13 +75,15 @@ function required(fieldName: string): (v: string) => true | string {
 </script>
 
 <template>
-  <VCard title="Create Families" class="vcard">
+  <div>
+    <NavigationSide />
+  <VCard title="Create a family" class="vcard">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VTextField
           v-model="family.familyName"
-          label="Familyname"
-          :rules="[required('Familyname')]"
+          label="Family Name"
+          :rules="[required('Family Name')]"
           class="mb-2"
         />
       </VCardText>
@@ -44,6 +92,7 @@ function required(fieldName: string): (v: string) => true | string {
       </VCardActions>
     </VForm>
   </VCard>
+</div>
 </template>
 
 <style scoped>

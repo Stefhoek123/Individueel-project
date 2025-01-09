@@ -26,6 +26,12 @@ public class FamilyContainer : IFamilyContainer
         return Mappers.FamilyMapper.ToDto(_familyRepository.GetFamilyById(id));
     }
 
+    public FamilyDto GetFamilyIdByName(string familyName)
+    {
+        return Mappers.FamilyMapper.ToDto(_familyRepository.GetFamilyIdByName(familyName));
+    }
+
+
     // GET for finding a User based on his Email or Name
     public IEnumerable<FamilyDto> SearchFamilyByName(string search)
     {

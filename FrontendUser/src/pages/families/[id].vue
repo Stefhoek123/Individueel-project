@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { FamilyDto, UserDto } from "@/api/api";
 import NavigationSide from "@/components/Navigation-side.vue";
 import { FamilyClient, UserClient, AuthClient } from "@/api/api";
+import { useRouter } from "vue-router";
 
 const familyClient = new FamilyClient();
 const userClient = new UserClient();
@@ -10,6 +11,7 @@ const authClient = new AuthClient();
 const family = ref<FamilyDto | null>(null);
 const users = ref<UserDto[]>([]);
 const user = ref();
+const router = useRouter();
 
 onMounted(() => {
   getUser();
@@ -37,6 +39,10 @@ async function getUser() {
     users.value = await userClient.getUsersByFamilyId(slicedUser.familyId);
   }
 }
+
+function createFamily() {
+  router.push("/families/create");
+}
 </script>
 
 <template>
@@ -44,10 +50,14 @@ async function getUser() {
     <NavigationSide />
     <div>
       <VCard v-if="family">
-        <VCardTitle class="title-achievement">
+        <VCardTitle class="title-achievement" v-if="family.familyName != 'overig'">
+          <p>You are not connected to a family.</p>
+          <VBtn class="ms-2" color="#1F7087" @click="createFamily">Click this button to create a family</VBtn>
+        </VCardTitle>
+        <VCardTitle class="title-achievement" v-if="family.familyName == 'overig'">
           {{ family.familyName || "Unknown Family" }}
         </VCardTitle>
-        <VTable>
+        <VTable v-if="family.familyName == 'overig'">
           <thead>
             <tr>
               <th class="text-left">Members</th>

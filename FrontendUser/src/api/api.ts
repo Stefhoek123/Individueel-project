@@ -1837,6 +1837,7 @@ export class PostDto implements IPostDto {
     id?: string;
     textContent!: string;
     imageUrl?: string;
+    createdAt?: Date;
     userId?: string;
 
     constructor(data?: IPostDto) {
@@ -1853,6 +1854,7 @@ export class PostDto implements IPostDto {
             this.id = _data["id"];
             this.textContent = _data["textContent"];
             this.imageUrl = _data["imageUrl"];
+            this.createdAt = _data["createdAt"] ? new Date(_data["createdAt"].toString()) : <any>undefined;
             this.userId = _data["userId"];
         }
     }
@@ -1869,6 +1871,7 @@ export class PostDto implements IPostDto {
         data["id"] = this.id;
         data["textContent"] = this.textContent;
         data["imageUrl"] = this.imageUrl;
+        data["createdAt"] = this.createdAt ? this.createdAt.toISOString() : <any>undefined;
         data["userId"] = this.userId;
         return data;
     }
@@ -1878,6 +1881,7 @@ export interface IPostDto {
     id?: string;
     textContent: string;
     imageUrl?: string;
+    createdAt?: Date;
     userId?: string;
 }
 
