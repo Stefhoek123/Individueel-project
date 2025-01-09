@@ -26,8 +26,8 @@ public class PostUnitTest
             // Arrange
             var posts = new List<Post>
             {
-                new Post(Guid.NewGuid(), "Title 1", "url", Guid.NewGuid()),
-                new Post(Guid.NewGuid(), "Title 2", "url", Guid.NewGuid())
+                new Post(Guid.NewGuid(), "Title 1", "url", DateTime.Now, Guid.NewGuid()),
+                new Post(Guid.NewGuid(), "Title 2", "url", DateTime.Now, Guid.NewGuid())
             };
 
             // Manually map the TextPost objects to TextPostDto
@@ -36,6 +36,7 @@ public class PostUnitTest
                 Id = post.Id,
                 TextContent = post.TextContent,
                 ImageUrl = post.ImageUrl,
+                CreatedAt = post.CreatedAt, 
                 UserId = post.UserId
             }).ToList();
 
@@ -50,6 +51,7 @@ public class PostUnitTest
             Assert.AreEqual(expectedDtos[0].Id, result?[0].Id);
             Assert.AreEqual(expectedDtos[0].TextContent, result?[0].TextContent);
             Assert.AreEqual(expectedDtos[0].ImageUrl, result?[0].ImageUrl);
+            Assert.AreEqual(expectedDtos[0].CreatedAt, result?[0].CreatedAt);
             Assert.AreEqual(expectedDtos[0].UserId, result?[0].UserId);
         }
 
@@ -74,13 +76,14 @@ public class PostUnitTest
             // Arrange
             var postId = Guid.NewGuid();
             var userId = Guid.NewGuid();
-            var post = new Post(postId, "Sample Title", "url",  userId);
+            var post = new Post(postId, "Sample Title", "url", DateTime.Now, userId);
 
             var expectedDto = new PostDto
             {
                 Id = post.Id,
                 TextContent = post.TextContent,
                 ImageUrl = post.ImageUrl,
+                CreatedAt = post.CreatedAt,
                 UserId = post.UserId
             };
 
@@ -94,6 +97,7 @@ public class PostUnitTest
             Assert.AreEqual(expectedDto.Id, result.Id);
             Assert.AreEqual(expectedDto.TextContent, result.TextContent);
         Assert.AreEqual(expectedDto.ImageUrl, result.ImageUrl);
+        Assert.AreEqual(expectedDto.CreatedAt, result.CreatedAt);
         Assert.AreEqual(expectedDto.UserId, result.UserId);
         }
 
@@ -105,6 +109,7 @@ public class PostUnitTest
             {
                 TextContent = "Sample Title",
                 ImageUrl = "url",
+                CreatedAt = DateTime.Now,
                 UserId = Guid.NewGuid()
             };
 
@@ -119,6 +124,7 @@ public class PostUnitTest
             _mockPostRepository?.Verify(repo => repo.CreatePost(It.Is<Post>(tp =>
                 tp.TextContent == postDto.TextContent &&
                 tp.ImageUrl == postDto.ImageUrl &&
+                tp.CreatedAt == postDto.CreatedAt &&
                 tp.UserId == postDto.UserId &&
                 tp.Id != Guid.Empty)), Times.Once);
         }
@@ -132,6 +138,7 @@ public class PostUnitTest
                 Id = Guid.NewGuid(),
                 TextContent = "Updated Title",
                 ImageUrl = "url",
+                CreatedAt = DateTime.Now,
                 UserId = Guid.NewGuid()
             };
 
@@ -145,6 +152,7 @@ public class PostUnitTest
                 tp.Id == postDto.Id &&
                 tp.TextContent == postDto.TextContent &&
                 tp.ImageUrl == postDto.ImageUrl &&
+                tp.CreatedAt == postDto.CreatedAt &&
                 tp.UserId == postDto.UserId)), Times.Once);
         }
 

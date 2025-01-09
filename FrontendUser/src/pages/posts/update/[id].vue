@@ -75,6 +75,7 @@ async function submit(event: SubmitEventPromise) {
     id: routeId,
     textContent: postDto.value?.textContent ?? "",
     imageUrl: imageUrl ?? "",
+    createdAt: new Date(),
     userId: user.value.id,
   });
 

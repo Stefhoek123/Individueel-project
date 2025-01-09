@@ -6,6 +6,7 @@ import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { PostClient, UserClient, ChatClient, AuthClient } from "@/api/api";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { v4 } from "uuid";
+import { create } from "node_modules/axios/index.cjs";
 
 const postClient = new PostClient();
 const userClient = new UserClient();
@@ -72,6 +73,7 @@ async function fetchPostDetails() {
     id: getPost.id,
     textContent: getPost.textContent,
     imageUrl: getPost.imageUrl,
+    createdAt: getPost.createdAt,
     userId: getPost.userId,
     firstName: userName.value.firstName,
   };
@@ -152,7 +154,7 @@ async function sendMessage() {
       date: new Date(),
       chatContent: chat.value.chatContent,
       reactId: guid,
-      senderName: userName.value.firstName,
+      senderName: user.value.firstName,
       userId: user.value.id,
     });
 
@@ -161,7 +163,7 @@ async function sendMessage() {
       date: new Date(),
       chatContent: chat.value.chatContent,
       reactId: guid,
-      senderName: userName.value.firstName,
+      senderName: user.value.firstName,
       userId: user.value.id,
     });
     await chatClient.createChat(model);

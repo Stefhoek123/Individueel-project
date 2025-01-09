@@ -13,11 +13,13 @@ const user = ref();
 interface Post {
   textContent: string;
   imageUrl: string;
+  createdAt?: Date;
 }
 
 const post = ref<Post>({
   textContent: "",
   imageUrl: "",
+  createdAt: new Date(),
 });
 
 onMounted(() => {
@@ -61,6 +63,7 @@ async function submit() {
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: url,
+      createdAt: new Date(),
       userId: user.value.id,
     });
 
@@ -70,6 +73,7 @@ async function submit() {
     const model = new PostDto({
       textContent: post.value.textContent,
       imageUrl: " ",
+      createdAt: new Date(),
       userId: user.value.id,
     });
 
