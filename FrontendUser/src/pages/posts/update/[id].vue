@@ -116,7 +116,7 @@ function validateFields() {
               <p>Delete the current file: </p>
               <VBtn class="ms-2" color="error" @click="deleteFile">Click this button</VBtn>
               <p>OR</p>
-              <p>Chang the current file:</p>
+              <p>Change the current file:</p>
             </div>
             <v-file-input clearable label="Add a file"></v-file-input>
             <VTextarea
