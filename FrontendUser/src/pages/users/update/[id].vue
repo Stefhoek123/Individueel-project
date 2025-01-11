@@ -82,7 +82,7 @@ async function submit(event: SubmitEventPromise) {
 }
 
 function validateFields() {
-  errors.value.firstName = user.value.firstName
+  errors.value.firstName = userDto.value?.firstName
     ? ""
     : "First name is required.";
   errors.value.lastName = userDto.value?.lastName ? "" : "Last name is required.";
