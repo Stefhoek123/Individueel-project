@@ -70,7 +70,7 @@ async function deleteUserById(id: string) {
             @input="getUsers"
           />
 
-          <VBtn to="/users/create" prepend-icon="mdi-plus"> New User </VBtn>
+          <VBtn to="/users/create" prepend-icon="mdi-plus" class="newUser"> New User </VBtn>
         </div>
         <VTable>
           <thead>

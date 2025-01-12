@@ -96,18 +96,21 @@ function validateFields() {
           v-model="user.firstName"
           label="Firstname"
           class="mb-2"
+          id="firstName"
         />
         <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
         <VTextField
           v-model="user.lastName"
           label="Lastname"
           class="mb-2"
+          id="lastName"
         />
         <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
         <VTextField
           v-model="user.email"
           label="Email"
           class="mb-2"
+          id="email"
         />
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
         <VTextField
@@ -115,6 +118,7 @@ function validateFields() {
           label="Password"
           type="password"
           class="mb-2"
+          id="password"
         />
         <p v-if="errors.password" class="error">{{ errors.password }}</p>
         <VSelect

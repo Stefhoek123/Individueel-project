@@ -50,6 +50,7 @@ function validateFields() {
           v-model="family.familyName"
           label="Family name"
           class="mb-2"
+          id="familyName"
         />
         <p v-if="errors.familyName" class="error">{{ errors.familyName }}</p>
       </VCardText>

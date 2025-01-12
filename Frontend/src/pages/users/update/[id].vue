@@ -107,6 +107,7 @@ function validateFields() {
           v-model="userDto.firstName"
           label="Firstname"
           class="mb-2"
+          id="firstName"
           clearable
         />
         <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
@@ -114,6 +115,7 @@ function validateFields() {
           v-model="userDto.lastName"
           auto-grow
           label="Lastname"
+          id="lastName"
           class="mb-2"
         />
         <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
@@ -122,6 +124,7 @@ function validateFields() {
           auto-grow
           label="Email"
           class="mb-2"
+          id="email"
         />
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
         <VSelect
