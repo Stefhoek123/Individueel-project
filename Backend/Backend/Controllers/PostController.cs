@@ -30,9 +30,14 @@ namespace Backend.Controllers
         }
 
         [HttpGet(nameof(GetPostsByFamilyId))]
-        public ActionResult<PostDto> GetPostsByFamilyId(Guid id)
+        public ActionResult<List<PostDto>> GetPostsByFamilyId(Guid id)
         {
-            return Ok(_postContainer.GetPostsByFamilyId(id));
+            List<PostDto> posts = _postContainer.GetPostsByFamilyId(id);
+            if (posts == null || posts.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(posts);
         }
 
         [HttpPost(nameof(CreatePost))]

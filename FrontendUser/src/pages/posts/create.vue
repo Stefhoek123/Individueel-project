@@ -73,6 +73,7 @@ async function submit() {
       imageUrl: url,
       createdAt: new Date(),
       userId: user.value.id,
+      familyId: user.value.familyId,
     });
 
     await postClient.createPost(model);
@@ -83,6 +84,7 @@ async function submit() {
       imageUrl: " ",
       createdAt: new Date(),
       userId: user.value.id,
+      familyId: user.value.familyId,
     });
 
     await postClient.createPost(model);

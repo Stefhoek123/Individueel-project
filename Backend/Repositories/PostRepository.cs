@@ -22,7 +22,7 @@ public class PostRepository : IPostRepository
         return _backendDbContext.Posts.FirstOrDefault(u => u.Id == id)!;
     }
 
-    public IEnumerable<Post> GetPostsByFamilyId(Guid id)
+    public List<Post> GetPostsByFamilyId(Guid id)
     {
         return _backendDbContext.Posts.Where(p => p.FamilyId == id).ToList();
     }
