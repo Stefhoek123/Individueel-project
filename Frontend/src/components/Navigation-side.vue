@@ -5,7 +5,7 @@
     <template v-slot:prepend>
       <v-list-item
         lines="two"
-        prepend-avatar="../assets/resto-logo.png"
+        prepend-avatar="../assets/families-logo.png"
         subtitle="Logged in"
         title="Jane Smith"
       ></v-list-item>
