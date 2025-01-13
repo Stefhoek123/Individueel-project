@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import type { UserDto } from "@/api/api";
+import type { UserDto as OriginalUserDto } from "@/api/api";
+
+interface UserDto extends OriginalUserDto {
+  familyName?: string;
+}
 import { UserClient, FamilyClient } from "@/api/api";
 import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 import { ref, onMounted } from "vue";
