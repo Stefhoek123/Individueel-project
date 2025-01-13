@@ -830,7 +830,7 @@ export class PostClient {
         return Promise.resolve<PostDto>(null as any);
     }
 
-    getPostsByFamilyId(id: string | undefined): Promise<PostDto> {
+    getPostsByFamilyId(id: string | undefined): Promise<PostDto[]> {
         let url_ = this.baseUrl + "/api/Post/GetPostsByFamilyId?";
         if (id === null)
             throw new Error("The parameter 'id' cannot be null.");
@@ -850,14 +850,21 @@ export class PostClient {
         });
     }
 
-    protected processGetPostsByFamilyId(response: Response): Promise<PostDto> {
+    protected processGetPostsByFamilyId(response: Response): Promise<PostDto[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = PostDto.fromJS(resultData200);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(PostDto.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -865,7 +872,7 @@ export class PostClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<PostDto>(null as any);
+        return Promise.resolve<PostDto[]>(null as any);
     }
 
     createPost(post: PostDto): Promise<FileResponse> {

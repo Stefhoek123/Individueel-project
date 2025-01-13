@@ -37,16 +37,12 @@ async function getUser() {
 }
 
 async function loadData() {
-  if (user.value && user.value.familyId) {
-    const postsData = await postClient.getPostsByFamilyId(user.value.familyId);
-    console.log(postsData.familyId);
-    posts.value = Array.isArray(postsData) ? postsData.sort((a, b) => {
-      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-      return dateB - dateA;
-    }) : [];
-    console.log(posts.value);
-  }
+  const postsData = await postClient.getPostsByFamilyId(user.value.familyId); // Update this line
+  posts.value = postsData.sort((a, b) => {
+    const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    return dateB - dateA;
+  });
 }
 </script>
 
