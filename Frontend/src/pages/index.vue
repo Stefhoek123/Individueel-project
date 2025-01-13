@@ -9,14 +9,14 @@
       <v-col cols="12" md="2">
         <v-card color="#1F7087" class="card">
           <div class="d-flex flex-no-wrap justify-space-between">
-            <a href="/manage-users">Manage users</a>
+            <a href="/manage-families">Manage families</a> 
           </div>
         </v-card>
       </v-col>
       <v-col cols="12" md="2">
         <v-card color="#1F7087" class="card">
           <div class="d-flex flex-no-wrap justify-space-between">
-            <a href="/manage-families">Manage families</a> 
+            <a href="/manage-users">Manage users</a>
           </div>
         </v-card>
       </v-col>

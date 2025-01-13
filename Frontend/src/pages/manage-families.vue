@@ -68,9 +68,10 @@ async function deleteFamilyById(id: string) {
             prepend-inner-icon="mdi-search"
             placeholder="Search"
             @input="getFamilies"
+            color="#1F7087"
           />
 
-          <VBtn to="/families/create" prepend-icon="mdi-plus">
+          <VBtn to="/families/create" prepend-icon="mdi-plus" class="card" >
             New Family
           </VBtn>
         </div>
@@ -87,11 +88,19 @@ async function deleteFamilyById(id: string) {
           <tbody>
             <tr v-for="item in families" :key="item.id">
               <td>
-                <RouterLink :to="`/families/${item.id}`">
+                <RouterLink :to="`/families/${item.id}`" class="custom-link">
                   {{ item.familyName }}
                 </RouterLink>
               </td>
               <td class="text-right">
+                <RouterLink :to="`/families/update/${item.id}`">
+                  <VBtn
+                    icon="mdi-pen"
+                    variant="plain"
+                    color="#30b8dd"
+                    size="small"
+                  />
+                </RouterLink>
                 <VBtn
                   icon="mdi-delete"
                   variant="plain"
@@ -131,5 +140,18 @@ async function deleteFamilyById(id: string) {
   margin-right: auto;
   margin-bottom: 70px;
   width: 100%;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.custom-link {
+  text-decoration: none;
+  color: #30b8dd;
 }
 </style>

@@ -67,6 +67,14 @@ async function deleteUserByFamilyId(id: string) {
     <ConfirmDialogue ref="confirmDialogueRef" />
     <div>
       <VCard v-if="family">
+        <router-link :to="`/manage-families`">
+                  <VBtn
+                    icon="mdi-arrow-left"
+                    variant="plain"
+                    color="#30b8dd"
+                    size="small"
+                  />
+                </router-link>
         <VCardTitle class="title-achievement">
           {{ family.familyName || "Unknown Family" }}
         </VCardTitle>
@@ -84,6 +92,14 @@ async function deleteUserByFamilyId(id: string) {
                 {{ item.lastName || "Unknown" }}
               </td>
               <td class="text-right">
+                <RouterLink :to="`/users/update/${item.id}`">
+                  <VBtn
+                    icon="mdi-pen"
+                    variant="plain"
+                    color="#30b8dd"
+                    size="small"
+                  />
+                </RouterLink>
                 <VBtn
                   icon="mdi-delete"
                   variant="plain"

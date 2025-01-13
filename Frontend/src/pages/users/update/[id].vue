@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { SubmitEventPromise } from "vuetify";
 import { UserDto } from "@/api/api";
 import { UserClient, FamilyClient } from "@/api/api";
+import ConfirmDialogue from "@/components/ConfirmDialogue.vue";
 
 const route = useRoute();
 const routeId = (route.params as { id: string }).id;
@@ -13,6 +14,10 @@ const userClient = new UserClient();
 const familyClient = new FamilyClient();
 const userDto = ref<UserDto>();
 const families = ref<Family[]>([]);
+
+const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
+  null
+);
 
 interface User {
   firstName: string;
@@ -81,6 +86,23 @@ async function submit(event: SubmitEventPromise) {
   }
 }
 
+async function confirmAndDelete(id: string) {
+  const confirmed = await confirmDialogueRef.value?.show({
+    title: "Delete user",
+    message: "Are you sure you want to delete this user? It cannot be undone.",
+    okButton: "Delete Forever",
+    cancelButton: "Cancel",
+  });
+
+  if (confirmed) await deleteUserById(id);
+}
+
+async function deleteUserById(id: string) {
+  await userClient.deleteUserById(id);
+  await router.push("/manage-users");
+}
+
+
 function validateFields() {
   errors.value.firstName = userDto.value?.firstName
     ? ""
@@ -97,6 +119,8 @@ function validateFields() {
 </script>
 
 <template>
+  <div>
+    <ConfirmDialogue ref="confirmDialogueRef" />
   <VCard v-if="userDto" title="Edit user">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
@@ -137,11 +161,14 @@ function validateFields() {
         /> 
         <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p>
         <VCardActions>
-          <VBtn class="me-4" type="submit"> Save </VBtn>
+          <VBtn class="card" type="submit" > Save </VBtn>
+          <p>OR</p>
+          <VBtn class="cardDelete"  @click="() => confirmAndDelete(routeId)" > Delete user </VBtn>
         </VCardActions>
       </VCardText>
     </VForm>
   </VCard>
+</div>
 </template>
 
 <style scoped>
@@ -157,5 +184,21 @@ function validateFields() {
   font-size: 0.9em;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.cardDelete {
+  background-color: #b12727;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>

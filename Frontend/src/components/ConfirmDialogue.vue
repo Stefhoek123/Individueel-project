@@ -47,10 +47,10 @@ defineExpose({ show })
     </h2>
     <p>{{ message }}</p>
     <div class="btns">
-      <VBtn @click="cancel">
+      <VBtn @click="cancel" class="cardCancel">
         {{ cancelButton }}
       </VBtn>
-      <VBtn @click="confirm">
+      <VBtn @click="confirm" class="card" >
         {{ okButton }}
       </VBtn>
     </div>
@@ -62,5 +62,20 @@ defineExpose({ show })
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.cardCancel {
+  background-color: #113e4b;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>
