@@ -204,7 +204,7 @@ function validateFields() {
                   <VBtn
                     icon="mdi-arrow-left"
                     variant="plain"
-                    color="accent"
+                    color="#30b8dd"
                     size="small"
                   />
                 </router-link>
@@ -217,7 +217,7 @@ function validateFields() {
                   <VBtn
                     icon="mdi-pen"
                     variant="plain"
-                    color="accent"
+                    color="#30b8dd"
                     size="small"
                   />
                 </router-link>
@@ -290,8 +290,9 @@ function validateFields() {
                 v-model="chat.chatContent"
                 label="Message"
                 class="mb-2"
+                @keyup.enter="sendMessage"
               />
-              <VBtn class="me-4" type="submit" @click="sendMessage">Send</VBtn>
+              <VBtn class="card" type="submit" @click="sendMessage">Send</VBtn>
             </div>
             <p v-if="errors.chatContent" class="error">{{ errors.chatContent }}</p>
           </v-row>
@@ -333,5 +334,13 @@ function validateFields() {
   font-size: 0.9em;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>

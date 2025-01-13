@@ -65,7 +65,7 @@ onMounted(async () => {
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Family Name:</strong> {{ user.familyName }}</p>
         <router-link :to="`/users/update/${user.id}`">
-          <VBtn class="ms-2" color="accent">Change data</VBtn>
+          <VBtn class="card">Change data</VBtn>
         </router-link>
       </div>
       <div v-else>
@@ -83,5 +83,13 @@ onMounted(async () => {
 
 .clas {
   margin-top: 65px;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>

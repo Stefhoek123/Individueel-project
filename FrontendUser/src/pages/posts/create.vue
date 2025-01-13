@@ -113,7 +113,7 @@ function validateFields() {
         <p v-if="errors.textContent" class="error">{{ errors.textContent }}</p>
       </VCardText>
       <VCardActions>
-        <VBtn class="me-4" type="submit"> submit </VBtn>
+        <VBtn class="card" type="submit"> submit </VBtn>
       </VCardActions>
     </VForm>
   </VCard>
@@ -134,5 +134,13 @@ function validateFields() {
   font-size: 0.9em;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>

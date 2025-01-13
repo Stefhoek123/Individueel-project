@@ -29,6 +29,12 @@ namespace Backend.Controllers
             return Ok(post);
         }
 
+        [HttpGet(nameof(GetPostsByFamilyId))]
+        public ActionResult<PostDto> GetPostsByFamilyId(Guid id)
+        {
+            return Ok(_postContainer.GetPostsByFamilyId(id));
+        }
+
         [HttpPost(nameof(CreatePost))]
         public ActionResult CreatePost(PostDto post)
         {

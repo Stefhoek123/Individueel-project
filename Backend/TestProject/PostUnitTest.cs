@@ -26,8 +26,8 @@ public class PostUnitTest
             // Arrange
             var posts = new List<Post>
             {
-                new Post(Guid.NewGuid(), "Title 1", "url", DateTime.Now, Guid.NewGuid()),
-                new Post(Guid.NewGuid(), "Title 2", "url", DateTime.Now, Guid.NewGuid())
+                new Post(Guid.NewGuid(), "Title 1", "url", DateTime.Now, Guid.NewGuid(), Guid.NewGuid()),
+                new Post(Guid.NewGuid(), "Title 2", "url", DateTime.Now, Guid.NewGuid(), Guid.NewGuid())
             };
 
             // Manually map the TextPost objects to TextPostDto
@@ -37,7 +37,8 @@ public class PostUnitTest
                 TextContent = post.TextContent,
                 ImageUrl = post.ImageUrl,
                 CreatedAt = post.CreatedAt, 
-                UserId = post.UserId
+                UserId = post.UserId,
+                FamilyId = post.FamilyId
             }).ToList();
 
             // Set up the mock repository to return the list of TextPost objects
@@ -53,6 +54,7 @@ public class PostUnitTest
             Assert.AreEqual(expectedDtos[0].ImageUrl, result?[0].ImageUrl);
             Assert.AreEqual(expectedDtos[0].CreatedAt, result?[0].CreatedAt);
             Assert.AreEqual(expectedDtos[0].UserId, result?[0].UserId);
+            Assert.AreEqual(expectedDtos[0].FamilyId, result?[0].FamilyId);
         }
 
         [TestMethod]
@@ -76,7 +78,8 @@ public class PostUnitTest
             // Arrange
             var postId = Guid.NewGuid();
             var userId = Guid.NewGuid();
-            var post = new Post(postId, "Sample Title", "url", DateTime.Now, userId);
+        var familyId = Guid.NewGuid();
+        var post = new Post(postId, "Sample Title", "url", DateTime.Now, userId, familyId);
 
             var expectedDto = new PostDto
             {
@@ -84,7 +87,8 @@ public class PostUnitTest
                 TextContent = post.TextContent,
                 ImageUrl = post.ImageUrl,
                 CreatedAt = post.CreatedAt,
-                UserId = post.UserId
+                UserId = post.UserId,
+                FamilyId = post.FamilyId
             };
 
             _mockPostRepository?.Setup(repo => repo.GetPostById(postId)).Returns(post);
@@ -99,7 +103,8 @@ public class PostUnitTest
         Assert.AreEqual(expectedDto.ImageUrl, result.ImageUrl);
         Assert.AreEqual(expectedDto.CreatedAt, result.CreatedAt);
         Assert.AreEqual(expectedDto.UserId, result.UserId);
-        }
+        Assert.AreEqual(expectedDto.FamilyId, result.FamilyId);
+    }
 
         [TestMethod]
         public void CreatePost_ShouldCreatePost()
@@ -110,7 +115,8 @@ public class PostUnitTest
                 TextContent = "Sample Title",
                 ImageUrl = "url",
                 CreatedAt = DateTime.Now,
-                UserId = Guid.NewGuid()
+                UserId = Guid.NewGuid(),
+                FamilyId = Guid.NewGuid()
             };
 
             var newGuid = Guid.NewGuid();
@@ -126,6 +132,7 @@ public class PostUnitTest
                 tp.ImageUrl == postDto.ImageUrl &&
                 tp.CreatedAt == postDto.CreatedAt &&
                 tp.UserId == postDto.UserId &&
+                tp.FamilyId == postDto.FamilyId &&
                 tp.Id != Guid.Empty)), Times.Once);
         }
 
@@ -139,7 +146,8 @@ public class PostUnitTest
                 TextContent = "Updated Title",
                 ImageUrl = "url",
                 CreatedAt = DateTime.Now,
-                UserId = Guid.NewGuid()
+                UserId = Guid.NewGuid(),
+                FamilyId = Guid.NewGuid()
             };
 
             _mockPostRepository?.Setup(repo => repo.UpdatePost(It.IsAny<Post>()));
@@ -153,7 +161,9 @@ public class PostUnitTest
                 tp.TextContent == postDto.TextContent &&
                 tp.ImageUrl == postDto.ImageUrl &&
                 tp.CreatedAt == postDto.CreatedAt &&
-                tp.UserId == postDto.UserId)), Times.Once);
+                tp.UserId == postDto.UserId &&
+                tp.FamilyId == postDto.FamilyId
+                )), Times.Once);
         }
 
         [TestMethod]

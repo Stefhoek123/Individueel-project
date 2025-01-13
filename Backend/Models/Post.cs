@@ -11,12 +11,16 @@ public class Post : BaseModel
     [ForeignKey(nameof(UserId))]
     public Guid UserId { get; init; }
 
-    public Post(Guid id, string textContent, string imageUrl, DateTime createdAt, Guid userId)
+    [ForeignKey(nameof(FamilyId))]
+    public Guid FamilyId { get; init; }
+
+    public Post(Guid id, string textContent, string imageUrl, DateTime createdAt, Guid userId, Guid familyId)
     {
         Id = id;
         TextContent = textContent;
         ImageUrl = imageUrl;
         CreatedAt = createdAt;
         UserId = userId;
+        FamilyId = familyId;
     }
 }

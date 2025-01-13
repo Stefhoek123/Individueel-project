@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { LoginRequestDto, AuthClient } from "@/api/api";
+import { LoginRequestDto, AuthClient, UserClient } from "@/api/api";
 
 const authClient = new AuthClient();
 const router = useRouter();
+const userClient = new UserClient();
 
 interface User {
   firstName: string;
@@ -32,7 +33,13 @@ const errors = ref({
 async function submit() {
   if (!validateFields()) {
     return;
-  } 
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(user.value.email)) {
+    errors.value.email = "Invalid email format.";
+    return;
+  }
 
   const modelDto = new LoginRequestDto({
     email: user.value.email,
@@ -48,12 +55,21 @@ async function submit() {
     await router.push("/sign-up");
     return;
   } else {
-    const login = await authClient.login(modelDto);
+    const loginUser = await userClient.login(modelDto);
 
-    if (login.accessToken) {
-      sessionStorage.setItem("JWT", login.accessToken);
+    const responseBodyLogin = await loginUser.data.text();
+    const loginData = JSON.parse(responseBodyLogin);
+
+    if (loginData.message === "Invalid credentials") {
+      errors.value.passwordHash = "Password is incorrect.";
+    } else {
+      const login = await authClient.login(modelDto);
+
+      if (login.accessToken) {
+        sessionStorage.setItem("JWT", login.accessToken);
+      }
+      await router.push("/home");
     }
-    await router.push("/home");
   }
 }
 
@@ -63,7 +79,9 @@ async function signup() {
 
 function validateFields() {
   errors.value.email = user.value.email ? "" : "Email is required.";
-  errors.value.passwordHash = user.value.passwordHash ? "" : "Password is required.";
+  errors.value.passwordHash = user.value.passwordHash
+    ? ""
+    : "Password is required.";
 
   return !Object.values(errors.value).some((error) => error !== "");
 }
@@ -72,24 +90,26 @@ function validateFields() {
 <template>
   <div class="login">
     <HeaderComponent />
-    <img class="logo" src="../assets/resto-logo.png" width="35px" />
+    <img class="logo" src="../assets/families-logo.png" width="35px" />
     <h1>Login</h1>
     <VCard title="Login into your account here">
       <VForm validate-on="blur" @submit.prevent="submit">
         <VCardText>
-          <VTextField v-model="user.email" label="User email" class="mb-2" />
+          <VTextField v-model="user.email" label="Email" class="mb-2" />
           <p v-if="errors.email" class="error">{{ errors.email }}</p>
           <VTextField
             v-model="user.passwordHash"
-            label="User password"
+            label="Password"
             type="password"
             class="mb-2"
           />
-          <p v-if="errors.passwordHash" class="error">{{ errors.passwordHash }}</p>
+          <p v-if="errors.passwordHash" class="error">
+            {{ errors.passwordHash }}
+          </p>
         </VCardText>
         <VCardActions>
-          <VBtn class="me-4" type="submit">Login</VBtn> or
-          <VBtn class="me-4" @click="signup">Sign up</VBtn>
+          <VBtn class="card" type="submit">Login</VBtn> or
+          <VBtn class="cardSign" @click="signup">Sign up</VBtn>
         </VCardActions>
       </VForm>
     </VCard>
@@ -110,5 +130,21 @@ function validateFields() {
   font-size: 0.9em;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+.card {
+  background-color: #1f7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.cardSign {
+  background-color: #113e4b;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>

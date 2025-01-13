@@ -25,7 +25,7 @@ namespace Backend.Controllers
                 return Ok(new { message = "Login successful" });
             }
 
-            return Unauthorized(new { message = "Invalid credentials" });
+            return Ok(new { message = "Invalid credentials" });
         }
 
         [HttpPost(nameof(CheckAccount))]

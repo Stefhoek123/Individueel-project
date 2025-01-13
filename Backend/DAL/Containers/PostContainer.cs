@@ -1,6 +1,7 @@
 ﻿using DAL.Interfaces;
 using Domain;
 using Interface;
+using Repositories;
 
 namespace DAL.Containers;
 
@@ -23,6 +24,14 @@ public class PostContainer : IPostContainer
     {
         return Mappers.PostMapper.ToDto(_postRepository.GetPostById(id));
     }
+
+    public IEnumerable<PostDto> GetPostsByFamilyId(Guid id)
+    {
+        var posts = _postRepository.GetPostsByFamilyId(id);
+
+        return posts.Select(p => Mappers.PostMapper.ToDto(p)).ToList();
+    }
+
 
     public void CreatePost(PostDto post)
     {

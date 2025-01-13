@@ -58,11 +58,11 @@ function goToAccount() {
         <template v-if="family.familyName === 'Overig'">
           <VCardTitle class="title-achievement">
             <p>You are not connected to a family. Create a family:</p>
-            <VBtn class="ms-2" color="#1F7087" @click="createFamily">
+            <VBtn class="card" @click="createFamily">
               Create family
             </VBtn>
             <p>When the family already exists, go to my account and change the data.</p>
-            <VBtn class="ms-2" color="#1F7087" @click="goToAccount">
+            <VBtn class="card" @click="goToAccount">
               Go to my account
             </VBtn>
           </VCardTitle>
@@ -93,3 +93,13 @@ function goToAccount() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+</style>

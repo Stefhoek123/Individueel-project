@@ -39,6 +39,18 @@ async function submit() {
     return;
   }
 
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(user.value.email)) {
+    errors.value.email = "Invalid email format.";
+    return;
+  }
+
+  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 characters, at least one letter and one number
+  if (!passwordPattern.test(user.value.passwordHash)) {
+    errors.value.passwordHash = "Password must be at least 8 characters long and contain at least one letter and one number.";
+    return;
+  }
+
   const modelLogin = new LoginRequest({
     email: user.value.email,
     password: user.value.passwordHash,
@@ -100,29 +112,29 @@ function validateFields() {
 <template>
   <div class="signup">
     <HeaderComponent />
-    <img class="logo" src="../assets/resto-logo.png" width="35px" />
+    <img class="logo" src="../assets/families-logo.png" width="35px" />
     <h1>Sign Up</h1>
     <VCard title="Register your account here" class="title">
       <VForm validate-on="blur" @submit.prevent="submit">
         <VCardText>
           <VTextField
             v-model="user.firstName"
-            label="User firstname"
+            label="Firstname"
             class="mb-2"
           />
           <p v-if="errors.firstName" class="error">{{ errors.firstName }}</p>
           <VTextField
             v-model="user.lastName"
-            label="User lastname"
+            label="Lastname"
             class="mb-2"
           />
           <p v-if="errors.lastName" class="error">{{ errors.lastName }}</p>
-          <VTextField v-model="user.email" label="User email" class="mb-2" />
+          <VTextField v-model="user.email" label="Email" class="mb-2" />
           <p v-if="errors.email" class="error">{{ errors.email }}</p>
 
           <VTextField
             v-model="user.passwordHash"
-            label="User password"
+            label="Password"
             type="password"
             class="mb-2"
           />
@@ -132,9 +144,9 @@ function validateFields() {
         </VCardText>
 
         <VCardActions>
-          <VBtn class="me-4" type="submit">Sign up</VBtn>
+          <VBtn class="card" type="submit">Sign up</VBtn>
           or
-          <VBtn class="me-4" @click="login">Login</VBtn>
+          <VBtn class="cardLog" @click="login">Login</VBtn>
         </VCardActions>
       </VForm>
     </VCard>
@@ -154,5 +166,21 @@ function validateFields() {
   font-size: 0.9em;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+.card {
+  background-color: #1F7087;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.cardLog {
+  background-color: #113e4b;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 </style>
