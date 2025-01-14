@@ -55,17 +55,9 @@ jobs:
         run: npm install
         working-directory: Frontend
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: FrontendUser
-
       - name: Run Cypress tests
         run: npx cypress run
         working-directory: Frontend
-
-      - name: Run Cypress tests
-        run: npx cypress run
-        working-directory: FrontendUser
 
   api-tests:
     name: Run API Tests
