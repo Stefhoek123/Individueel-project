@@ -5,7 +5,7 @@ describe('Edit User Page', () => {
         statusCode: 200,
         body: {
           id: "E8E79B32-571A-4124-9420-919D7797BEBA",
-          firstName: 'Miranda2',
+          firstName: 'Jane',
           lastName: 'NIllesen',
           email: 'miranda@gmail.com',
           familyId: 'A14ABB13-CAD1-4D57-872A-1EAF7032F6CB',
@@ -27,7 +27,7 @@ describe('Edit User Page', () => {
   
     it('should load the user data and display it in the form', () => {
       // Controleer of de gegevens correct geladen zijn
-      cy.get('#firstName').should('have.value', 'Miranda2');
+      cy.get('#firstName').should('have.value', 'Jane');
       cy.get('#lastName').should('have.value', 'NIllesen');
       cy.get('#email').should('have.value', 'miranda@gmail.com');
     });

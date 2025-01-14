@@ -56,15 +56,15 @@ async function submit(event: SubmitEventPromise) {
     return;
   }
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(user.value.email)) {
-    errors.value.email = "Invalid email format.";
-    return;
-  }
-
   const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 characters, at least one letter and one number
   if (!passwordPattern.test(user.value.password)) {
     errors.value.password = "Password must be at least 8 characters long and contain at least one letter and one number.";
+    return;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(user.value.email)) {
+    errors.value.email = "Invalid email format.";
     return;
   }
 
@@ -105,7 +105,7 @@ function validateFields() {
     : "First name is required.";
   errors.value.lastName = user.value.lastName ? "" : "Last name is required.";
   errors.value.email = user.value.email ? "" : "Email is required.";
-  errors.value.password = user.value.password ? "" : "Password is required.";
+  errors.value.password = user.value.password ? "" : "Password must be at least 8 characters long and contain at least one letter and one number.";
   errors.value.familyId = user.value.familyId ? "" : "Family is required.";
 
   return !Object.values(errors.value).some((error) => error !== "");

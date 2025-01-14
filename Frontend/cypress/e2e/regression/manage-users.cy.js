@@ -16,7 +16,8 @@ describe('Manage Users Page Regression Tests', () => {
       cy.get('th').eq(0).contains('Firstname');
       cy.get('th').eq(1).contains('Lastname');
       cy.get('th').eq(2).contains('Email');
-      cy.get('th').eq(3).contains('Actions');
+      cy.get('th').eq(3).contains('Family');
+      cy.get('th').eq(4).contains('Actions');
     });
   
     it('should show no results message when no users are found', () => {

@@ -21,7 +21,7 @@ describe('Create User Page', () => {
       cy.contains('First name is required.').should('be.visible');
       cy.contains('Last name is required.').should('be.visible');
       cy.contains('Email is required.').should('be.visible');
-      cy.contains('Password is required.').should('be.visible');
+      cy.contains('Password must be at least 8 characters long and contain at least one letter and one number.').should('be.visible');
       cy.contains('Family is required.').should('be.visible');
     });
   
@@ -43,7 +43,7 @@ describe('Create User Page', () => {
       cy.contains('First name is required.').should('not.exist');
       cy.contains('Last name is required.').should('not.exist');
       cy.contains('Email is required.').should('not.exist');
-      cy.contains('Password is required.').should('not.exist');
+      cy.contains('Password must be at least 8 characters long and contain at least one letter and one number.').should('not.exist');
       cy.contains('Family is required.').should('not.exist');
   
       // Klik op de submit-knop

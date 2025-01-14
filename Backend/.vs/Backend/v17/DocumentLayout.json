@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\containers\\postcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\postcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
@@ -11,7 +15,7 @@
       "RelativeMoniker": "D:0:0:{BCB735E8-FF99-4CFB-AB50-06C08BE6775A}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|c:\\fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\backend\\repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F46519BE-346F-4F0C-A497-8BB373116988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\interfaces\\ipostrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\interfaces\\ipostcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\interfaces\\ipostcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\containers\\postcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|solutionrelative:dal\\containers\\postcontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E1B12ADE-53A3-4B44-A829-1A26AB572F31}|DAL\\Business.csproj|C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\dal\\containers\\usercontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -159,7 +159,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 1274,
+          "DockedHeight": 1505,
           "SelectedChildIndex": 8,
           "Children": [
             {
@@ -171,8 +171,12 @@
               "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "IPostContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Interfaces\\IPostContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Interfaces\\IPostContainer.cs",
@@ -180,12 +184,11 @@
               "RelativeToolTip": "DAL\\Interfaces\\IPostContainer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:55:51.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-09T09:55:51.843Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "PostRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\PostRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\PostRepository.cs",
@@ -193,12 +196,11 @@
               "RelativeToolTip": "Repositories\\PostRepository.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAAwBgAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T14:35:31.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T14:35:31.693Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -206,12 +208,11 @@
               "RelativeToolTip": "Repositories\\UserRepository.cs",
               "ViewState": "AQIAABwAAAAAAAAAAAAkwCkAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T12:40:25.15Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T12:40:25.15Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IPostRepository.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Repositories\\Interfaces\\IPostRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IPostRepository.cs",
@@ -219,16 +220,11 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IPostRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-13T10:24:14.382Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+              "WhenOpened": "2025-01-13T10:24:14.382Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PostController.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Controllers\\PostController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\PostController.cs",
@@ -236,33 +232,32 @@
               "RelativeToolTip": "Backend\\Controllers\\PostController.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAAwB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T10:02:21.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T10:02:21.015Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Backend.http",
-              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
-              "RelativeDocumentMoniker": "Backend\\Backend.http",
-              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
-              "RelativeToolTip": "Backend\\Backend.http",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-12-13T11:26:43.429Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "PostContainer.cs",
               "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
               "RelativeDocumentMoniker": "DAL\\Containers\\PostContainer.cs",
               "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\DAL\\Containers\\PostContainer.cs",
               "RelativeToolTip": "DAL\\Containers\\PostContainer.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAYwBsAAAAYAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-06T07:29:27.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Backend.http",
+              "DocumentMoniker": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
+              "RelativeDocumentMoniker": "Backend\\Backend.http",
+              "ToolTip": "C:\\Fontys\\dev\\s3-db02t-individueel-stefanie-hoeksma\\Backend\\Backend\\Backend.http",
+              "RelativeToolTip": "Backend\\Backend.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-12-13T11:26:43.429Z",
               "EditorCaption": ""
             },
             {
@@ -275,8 +270,7 @@
               "RelativeToolTip": "DAL\\Containers\\UserContainer.cs",
               "ViewState": "AQIAAC4AAAAAAAAAAAAuwD4AAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:23:26.926Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-04T10:23:26.926Z"
             },
             {
               "$type": "Document",
@@ -288,8 +282,7 @@
               "RelativeToolTip": "Backend\\Controllers\\UserController.cs",
               "ViewState": "AQIAACsAAAAAAAAAAAAkwEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:21:35.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-04T10:21:35.773Z"
             },
             {
               "$type": "Document",
@@ -301,8 +294,7 @@
               "RelativeToolTip": "Backend\\Controllers\\FamilyController.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAxwBIAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T12:37:43.697Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T12:37:43.697Z"
             },
             {
               "$type": "Document",
@@ -314,8 +306,7 @@
               "RelativeToolTip": "TestProject\\PostUnitTest.cs",
               "ViewState": "AQIAAKQAAAAAAAAAAAAswLAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:29:20.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:29:20.136Z"
             },
             {
               "$type": "Document",
@@ -327,12 +318,7 @@
               "RelativeToolTip": "Backend\\Dockerfile",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-01-07T09:46:12.173Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+              "WhenOpened": "2025-01-07T09:46:12.173Z"
             },
             {
               "$type": "Document",
@@ -344,8 +330,7 @@
               "RelativeToolTip": "Models\\Post.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:52:21.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-09T09:52:21.2Z"
             },
             {
               "$type": "Document",
@@ -357,8 +342,7 @@
               "RelativeToolTip": "Domain\\PostDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:55:18.094Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-09T09:55:18.094Z"
             },
             {
               "$type": "Document",
@@ -370,8 +354,7 @@
               "RelativeToolTip": "Backend\\Controllers\\ChatController.cs",
               "ViewState": "AQIAAC4AAAAAAAAAAAAkwEEAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T12:43:52.493Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-13T12:43:52.493Z"
             },
             {
               "$type": "Document",
@@ -383,8 +366,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\3341e484c791f9e313f81341e20e42f5471d0a72\\UserMapper.g.cs [Read Only]",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T10:11:59.163Z",
-              "EditorCaption": " [Read Only]"
+              "WhenOpened": "2025-01-11T10:11:59.163Z"
             },
             {
               "$type": "Document",
@@ -396,8 +378,7 @@
               "RelativeToolTip": "Repositories\\FamilyRepository.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAArwBEAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T12:39:23.055Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T12:39:23.055Z"
             },
             {
               "$type": "Document",
@@ -409,8 +390,7 @@
               "RelativeToolTip": "Backend\\Controllers\\AuthController.cs",
               "ViewState": "AQIAAB4AAAAAAAAAAAAYwB8AAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T09:35:09.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-03T09:35:09.098Z"
             },
             {
               "$type": "Document",
@@ -422,8 +402,7 @@
               "RelativeToolTip": "DAL\\Containers\\FamilyContainer.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAAwBwAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:28:47.608Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:28:47.608Z"
             },
             {
               "$type": "Document",
@@ -435,8 +414,7 @@
               "RelativeToolTip": "DAL\\Interfaces\\IFamilyContainer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T12:42:48.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T12:42:48.672Z"
             },
             {
               "$type": "Document",
@@ -448,8 +426,7 @@
               "RelativeToolTip": "DAL\\Mappers\\PostMapper.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T09:55:49.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-09T09:55:49.074Z"
             },
             {
               "$type": "Document",
@@ -461,8 +438,7 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IFamilyRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T10:24:28.003Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-09T10:24:28.003Z"
             },
             {
               "$type": "Document",
@@ -474,8 +450,7 @@
               "RelativeToolTip": "Backend\\Hubs\\IChatClient.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T14:39:50.279Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T14:39:50.279Z"
             },
             {
               "$type": "Document",
@@ -487,8 +462,7 @@
               "RelativeToolTip": "Backend\\Hubs\\ChatHub.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T14:13:10.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T14:13:10.541Z"
             },
             {
               "$type": "Document",
@@ -500,8 +474,7 @@
               "RelativeToolTip": "Backend\\Program.cs",
               "ViewState": "AQIAAB8AAAAAAAAAAAAwwDEAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T09:22:43.34Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T09:22:43.34Z"
             },
             {
               "$type": "Document",
@@ -513,8 +486,7 @@
               "RelativeToolTip": "TestProject\\ChatUnitTest.cs",
               "ViewState": "AQIAAEkAAAAAAAAAAAAswFQAAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:30:28.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:30:28.104Z"
             },
             {
               "$type": "Document",
@@ -526,8 +498,7 @@
               "RelativeToolTip": "TestProject\\UserUnitTest.cs",
               "ViewState": "AQIAAG0BAAAAAAAAAAAUwHoBAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:29:47.263Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:29:47.263Z"
             },
             {
               "$type": "Document",
@@ -539,8 +510,7 @@
               "RelativeToolTip": "Repositories\\ChatRepository.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAD4vyoAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T14:34:25.547Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T14:34:25.547Z"
             },
             {
               "$type": "Document",
@@ -552,8 +522,7 @@
               "RelativeToolTip": "TestProject\\FamilyUnitTest.cs",
               "ViewState": "AQIAAKcAAAAAAAAAAAAwwMkAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:28:25.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:28:25.347Z"
             },
             {
               "$type": "Document",
@@ -565,8 +534,7 @@
               "RelativeToolTip": "DAL\\Containers\\ChatContainer.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAgwDIAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T07:32:56.029Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T07:32:56.029Z"
             },
             {
               "$type": "Document",
@@ -578,8 +546,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T09:44:35.351Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T09:44:35.351Z"
             },
             {
               "$type": "Document",
@@ -591,8 +558,7 @@
               "RelativeToolTip": "Backend\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-06T08:40:29.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T08:40:29.572Z"
             },
             {
               "$type": "Document",
@@ -604,8 +570,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\Users\\stefa\\AppData\\Local\\Temp\\.vsdbgsrc\\466b0feacd5abc10ed82730e7e3e9b6a553ddda0\\FamilyMapper.g.cs [Read Only]",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T10:53:12.488Z",
-              "EditorCaption": " [Read Only]"
+              "WhenOpened": "2025-01-04T10:53:12.488Z"
             },
             {
               "$type": "Document",
@@ -617,8 +582,7 @@
               "RelativeToolTip": "Backend\\Services\\JwtService.cs",
               "ViewState": "AQIAACcAAAAAAAAAAAAYwDUAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:37:04.058Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T12:37:04.058Z"
             },
             {
               "$type": "Document",
@@ -630,8 +594,7 @@
               "RelativeToolTip": "Repositories\\BackendDbContext.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAA9wBUAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T08:32:34.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T08:32:34.466Z"
             },
             {
               "$type": "Document",
@@ -643,8 +606,7 @@
               "RelativeToolTip": "Domain\\LoginResponseDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:31:10.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T12:31:10.835Z"
             },
             {
               "$type": "Document",
@@ -656,8 +618,7 @@
               "RelativeToolTip": "DAL\\Interfaces\\IUserContainer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T13:42:08.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T13:42:08.406Z"
             },
             {
               "$type": "Document",
@@ -669,13 +630,12 @@
               "RelativeToolTip": "Domain\\LoginRequestDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-06T12:30:20.904Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-06T12:30:20.904Z"
             }
           ]
         },
         {
-          "DockedHeight": 295,
+          "DockedHeight": 64,
           "SelectedChildIndex": -1,
           "Children": [
             {
