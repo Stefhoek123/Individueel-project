@@ -15,7 +15,7 @@ public class ChatDto
     [Required]
     public Guid ReactId { get; set; }
     [Required]
-    public string SenderName { get; set; }
+    public string? SenderName { get; set; }
 
     [Required]
     public Guid UserId { get; init; }
