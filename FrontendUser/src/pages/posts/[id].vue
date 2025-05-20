@@ -24,7 +24,7 @@ const confirmDialogueRef = ref<InstanceType<typeof ConfirmDialogue> | null>(
 );
 
 const connection = new HubConnectionBuilder()
-  .withUrl("http://localhost:5190/chat")
+  .withUrl("http://192.168.61.1:5190/chat")
   .build();
 
 connection.start().then(() => {
@@ -235,7 +235,7 @@ function validateFields() {
 
             <v-img
               v-if="post.imageUrl"
-              :src="`http://localhost:5190/${post.imageUrl}`"
+              :src="`http://192.168.61.1:5190/${post.imageUrl}`"
               aspect-ratio="4/3"
               class="mb-4"
               alt="Post image"

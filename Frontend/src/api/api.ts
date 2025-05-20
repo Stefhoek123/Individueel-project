@@ -15,7 +15,7 @@ export class Client {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     postBroadcast(message: Chat): Promise<void> {
@@ -60,7 +60,7 @@ export class AuthClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     login(request: LoginRequestDto): Promise<LoginResponseDto> {
@@ -190,7 +190,7 @@ export class ChatClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     getAllChats(): Promise<ChatDto[]> {
@@ -451,7 +451,7 @@ export class FamilyClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     getAllFamilies(): Promise<FamilyDto[]> {
@@ -748,7 +748,7 @@ export class PostClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     getAllPosts(): Promise<PostDto[]> {
@@ -1052,7 +1052,7 @@ export class UserClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "http://localhost:5190";
+        this.baseUrl = baseUrl ?? "http://192.168.61.1:5190";
     }
 
     login(loginRequest: LoginRequest): Promise<FileResponse> {

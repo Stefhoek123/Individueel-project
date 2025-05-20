@@ -102,7 +102,7 @@ namespace Backend
                 options.AddPolicy("AllowSpecificOrigin",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:3000", "http://localhost:3001") // Add the frontend URL here
+                        policy.WithOrigins("http://192.168.61.1:3000", "http://192.168.61.1:3001", "http://localhost:3000", "http://localhost:3001") // Add the frontend URL here
                             .AllowCredentials()
                             .AllowAnyMethod()
                             .AllowAnyHeader();
