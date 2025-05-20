@@ -53,7 +53,7 @@ function validateFields() {
 </script>
 
 <template>
-  <VCard v-if="familyDto" title="Edit user">
+  <VCard v-if="familyDto" title="Edit family">
     <VForm validate-on="blur" @submit.prevent="submit">
       <VCardText>
         <VCardTitle class="title-achievement">

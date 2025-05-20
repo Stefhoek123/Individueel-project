@@ -131,7 +131,10 @@ function validateFields() {
           clearable
         />
         <p v-if="errors.email" class="error">{{ errors.email }}</p>
-        <VSelect
+        <VCardTitle class="title-achievement">
+         Family ID: {{ userDto.familyId }}
+        </VCardTitle>
+        <!-- <VSelect
           v-model="userDto.familyId"
           :items="families"
           item-title="name"
@@ -139,7 +142,7 @@ function validateFields() {
           label="Family"
           class="mb-2"
         />
-        <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p>
+        <p v-if="errors.familyId" class="error">{{ errors.familyId }}</p> -->
         <VCardActions>
           <VBtn class="card" type="submit"> Save </VBtn>
         </VCardActions>

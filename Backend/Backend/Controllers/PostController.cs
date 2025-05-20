@@ -64,28 +64,54 @@ namespace Backend.Controllers
         [HttpPost(nameof(GetImageUrl))]
         public IActionResult GetImageUrl(IFormFile file)
         {
-            List<string> allowedExtensions = new List<string> { ".jpg", ".jpeg", ".png" };
-            string extension = Path.GetExtension(file.FileName);
-            if (!allowedExtensions.Contains(extension))
+            // Extensies en bijbehorende MIME-types
+            var allowedMimeTypes = new Dictionary<string, string>
             {
-                return BadRequest("Invalid file extension");
+                { ".jpg", "image/jpeg" },
+                { ".jpeg", "image/jpeg" },
+                { ".png", "image/png" }
+            };
+
+            string extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            if (!allowedMimeTypes.ContainsKey(extension))
+            {
+                return Ok(new { message = "Ongeldige bestandsextensie." });
             }
 
-            long size = file.Length;
-            if (size > (5 * 1024 * 1024))
+            if (file.Length > 5 * 1024 * 1024)
             {
-                return BadRequest("Maximum size can be 5mb");
+                return Ok(new { message = "Maximale bestandsgrootte is 5MB."});
             }
 
-            string fileName = Guid.NewGuid().ToString() + extension;
+            if (file.ContentType != allowedMimeTypes[extension])
+            {
+                return Ok(new { message = "Mismatch tussen bestandsextensie en MIME-type."});
+            }
 
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-            Directory.CreateDirectory(filePath);
+            // Optioneel: controleer of het bestand echt een afbeelding is (bijvoorbeeld via ImageSharp of System.Drawing)
+            try
+            {
+                using var image = System.Drawing.Image.FromStream(file.OpenReadStream());
+                // Indien dit mislukt, is het bestand geen echte afbeelding
+            }
+            catch
+            {
+                return Ok(new { message = "Het bestand is geen geldige afbeelding."});
+            }
 
-            using FileStream fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create);
-            file.CopyTo(fileStream);
+            string fileName = Guid.NewGuid() + extension;
+            string uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            Directory.CreateDirectory(uploadFolder);
+            string fullPath = Path.Combine(uploadFolder, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
 
             return Ok(new { fileName = $"Uploads/{fileName}" });
         }
+
     }
 }

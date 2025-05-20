@@ -57,14 +57,7 @@ function goToAccount() {
         <!-- Case: Family name is "overig" -->
         <template v-if="family.familyName === 'Overig'">
           <VCardTitle class="title-achievement">
-            <p>You are not connected to a family. Create a family:</p>
-            <VBtn class="card" @click="createFamily">
-              Create family
-            </VBtn>
-            <p>When the family already exists, go to my account and change the data.</p>
-            <VBtn class="card" @click="goToAccount">
-              Go to my account
-            </VBtn>
+            <p>You are not connected to a family. Send a request to your admin.</p>
           </VCardTitle>
         </template>
 

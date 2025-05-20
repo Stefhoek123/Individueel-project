@@ -45,9 +45,9 @@ async function submit() {
     return;
   }
 
-  const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 characters, at least one letter and one number
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
   if (!passwordPattern.test(user.value.passwordHash)) {
-    errors.value.passwordHash = "Password must be at least 8 characters long and contain at least one letter and one number.";
+    errors.value.passwordHash = "Password must be at least 12 characters long and contain at least one letter, one number and a special character. You can't use a space.";
     return;
   }
 
